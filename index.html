@@ -969,17 +969,25 @@ VIEWS.klant.watisdit = ()=>{
 };
 VIEWS.klant.regeling = ()=>{
   const list = state.regelingen.filter(r=>r.client==='Demo BV');
-  const rows = list.map(r=>{
+  const rows = state.regelingen.map((r,gi)=>({r,gi})).filter(x=>x.r.client==='Demo BV').map(({r,gi})=>{
     const st = r.status==='afgehandeld'
       ? `<span class="pill g">${LANG==='nl'?'Ingediend op '+r.afgehandeldDatum:t('wd_ja')+' · '+r.afgehandeldDatum}</span>`
       : `<span class="pill a">${r.status==='aangevraagd'?'Aangevraagd':'In behandeling'}</span>`;
-    return `<tr><td><b>${r.kenmerk}</b></td><td>${r.bedrag?'€ '+r.bedrag:'—'}</td><td>${r.termijnen}×</td><td>${r.datum}</td><td>${st}</td></tr>`;
+    return `<tr class="clickable" onclick="klantRegeling(${gi})"><td><b>${r.kenmerk}</b></td><td>${r.bedrag?'€ '+r.bedrag:'—'}</td><td>${r.termijnen}×</td><td>${r.datum}</td><td>${st}</td></tr>`;
   }).join('');
   return `<div class="row-between"><h1 class="title">${navL('regeling','Betalingsregeling')}</h1><button class="btn primary" onclick="addRegeling()">+ ${navL('regeling','Nieuwe aanvraag')}</button></div>
   <div class="sub">${t('wd_s').split('.')[0]}. Vatan stelt de officiële brief voor de Belastingdienst op.</div>
   <div class="ai-note" style="margin:0 0 18px;border-left-color:var(--green)">🔒 ${t('wd_priv')}</div>
   <div class="tablewrap"><table><thead><tr><th>Kenmerk</th><th>Bedrag</th><th>Termijnen</th><th>Aangevraagd</th><th>Status</th></tr></thead><tbody>${rows||`<tr><td colspan="5"><div class="empty"><div class="big">📭</div>Nog geen aanvragen.</div></td></tr>`}</tbody></table></div>`;
 };
+function klantRegeling(i){const r=state.regelingen[i];if(!r)return;
+  const info=r.status==='afgehandeld'
+    ? `<span class="pill g">Ingediend op ${r.afgehandeldDatum}</span>${r.ondertekenaar?' · Ondertekend door <b>'+r.ondertekenaar+'</b> namens Vatan':''}`
+    : `<span class="pill a">In behandeling bij Vatan</span>`;
+  document.getElementById('view').innerHTML=`
+  <div class="backbar"><span class="backbtn" onclick="go('regeling')">← Terug</span></div>
+  <div class="statusbar"><div class="sl">Betalingsregeling · kenmerk <b>${r.kenmerk}</b> · ${r.termijnen} termijnen · ${info}</div><div class="acts">${r.status==='afgehandeld'?`<button class="btn ghost sm" onclick="printRegeling(${i})">⬇ Download / print</button>`:''}</div></div>
+  <div style="max-width:660px"><div class="invoice" style="min-height:0;font-size:13px;line-height:1.5">${regelingBody(r)}</div></div>`;}
 VIEWS.klant.overzicht = ()=>{
   const open = state.invoices.reduce((a,i)=>a+(effStatus(i)!=='Concept'?invOpen(i):0),0);
   const inkoopOpen = state.inbox.filter(i=>i.client==='Demo BV'&&i.state!=='sent').reduce((a,i)=>a+i.amt,0);
