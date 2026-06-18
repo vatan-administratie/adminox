@@ -1777,7 +1777,8 @@ function renderClient(){
   document.getElementById('view').innerHTML=`
     <div class="backbar"><span class="backbtn" onclick="go('klanten')">← Terug naar klanten</span></div>
     <div class="emp-head"><div class="ph">${naam.split(' ').map(x=>x[0]).join('').slice(0,2)}</div><div style="flex:1"><div class="nm">${naam}</div><div class="meta">Nr ${c.nr} · ${progLogo(c.prog,`switchProgram('${naam}')`)} <span style="color:var(--grey-2)">(klik om te wijzigen)</span> · Medewerker: <b>${c.mw}</b></div></div><button class="btn dark sm" onclick="openAsKlant('${naam}')">↪ Naar klantportaal</button></div>
-    <div class="tabs">${tabBtn('overzicht','Overzicht')}${tabBtn('verwerken','Verwerken')}${tabBtn('signalen','Controle')}${tabBtn('ob','OB-aangifte')}${tabBtn('obaansl','OB-aansluiting')}${tabBtn('ib','IB & Jaarrekening')}${tabBtn('loon','Loonaangifte')}${tabBtn('personeel','Personeel')}${tabBtn('regeling','Betalingsregeling')}${tabBtn('mappen','Mappen')}${tabBtn('logins','Inloggegevens')}${tabBtn('compliance','Compliance')}</div>
+    <div class="tabs">${tabBtn('overzicht','Overzicht')}${tabBtn('verwerken','Verwerken')}${tabBtn('signalen','Controle')}<div class="tab ${['ob','obaansl','ib'].includes(clientTab)?'active':''}" onclick="openClient('${naam}','ob')">Jaarafsluiting</div>${tabBtn('loon','Loonaangifte')}${tabBtn('personeel','Personeel')}${tabBtn('regeling','Betalingsregeling')}${tabBtn('mappen','Mappen')}${tabBtn('logins','Inloggegevens')}${tabBtn('compliance','Compliance')}</div>
+    ${['ob','obaansl','ib'].includes(clientTab)?`<div class="tabs" style="margin:-10px 0 18px">${tabBtn('ob','OB-aangifte')}${tabBtn('ib','IB & Jaarrekening')}${tabBtn('obaansl','OB-aansluiting')}</div>`:''}
     <div>${content}</div>`;
   if(clientTab==='obaansl')aanslCalc();
 }
