@@ -631,6 +631,62 @@ function aanslCalc(){const naam=aanslNaam;if(!naam)return;const d=aanslGet(naam,
 function aanslSwitchJaar(naam,y){aanslCalc();aanslJaar=y;openClient(naam,'obaansl');}
 function aanslAddPost(naam){aanslCalc();const d=aanslGet(naam,aanslJaar);if(d)d.posten.push(['Openstaande post',0]);openClient(naam,'obaansl');}
 function aanslDelPost(naam,i){aanslCalc();const d=aanslGet(naam,aanslJaar);if(d)d.posten.splice(i,1);openClient(naam,'obaansl');}
+let leaseNaam='', leaseIdx=-1;
+function leaseList(naam){const w=state.werk[naam];if(!w)return[];if(!w.leases){w.leases=[];if(naam==='Demo BV'){w.leases.push({kent:'VRJ-05-H',mt:395.88,lt:60,sj:2022,sm:5,rt:3270.80,hs:20483,st:1,bj:2025,acc:{r:'4525',v:'0753',t:'1300'}});}}return w.leases;}
+function leaseOpen(naam){leaseIdx=-1;openClient(naam,'lease');}
+function openLease(naam,i){leaseIdx=i;openClient(naam,'lease');}
+function leaseRows(o){const lt=Math.max(1,Math.round(o.lt||0)),sj=Math.round(o.sj||0),sm=Math.max(1,Math.round(o.sm||1));const renteM=(o.rt||0)/lt,aflM=((o.hs||0)-(o.st||0))/lt;let rest=lt,y=sj,cum=0,rows=[];while(rest>0&&rows.length<60){const m=(y===sj)?Math.min(sm,rest):Math.min(12,rest);const r=m*renteM,a=m*aflM;cum+=a;rows.push({y,m,r,a,s:(o.hs||0)-cum});rest-=m;y++;}return {rows,renteM,aflM};}
+function leaseContent(naam){leaseNaam=naam;const arr=leaseList(naam);
+  if(leaseIdx<0||!arr[leaseIdx]){
+    const rows=arr.map((o,i)=>{const rr=leaseRows(o).rows;const cur=rr.find(x=>x.y===(new Date().getFullYear()))||rr[rr.length-1]||{s:0};return `<tr class="clickable" onclick="openLease('${naam}',${i})"><td><b>${o.kent||'—'}</b></td><td>€ ${m2(o.mt||0)}</td><td>${o.lt} mnd</td><td>vanaf ${o.sj}</td><td class="r">€ ${m2(cur.s||0)}</td></tr>`;}).join('');
+    return `<div class="row-between"><h3 style="margin:0">Lease-overeenkomsten</h3><div style="display:flex;gap:8px"><input type="file" id="lzFile" accept="image/*,.pdf" style="display:none" onchange="leaseUpload('${naam}',this)"><button class="btn ghost sm" onclick="document.getElementById('lzFile').click()">⤓ Contract uploaden (AI)</button><button class="btn primary sm" onclick="addLease('${naam}')">+ Handmatig</button></div></div>
+    <div class="sub" style="margin:6px 0 12px">Per lease wordt de maandtermijn lineair gesplitst in rente en aflossing. Jaarlijks worden rente (kosten) en aflossing (leaseverplichting) geboekt. <span style="color:var(--brand-2)">Upload een leasecontract en de AI vult de gegevens automatisch in; in de live versie komen de grootboekrekeningen uit de boekhouding.</span></div>
+    <div class="tablewrap"><table><thead><tr><th>Kenteken</th><th>Maandtermijn</th><th>Looptijd</th><th>Start</th><th class="r">Schuld huidig jaar</th></tr></thead><tbody>${rows||`<tr><td colspan="5"><div class="empty"><div class="big">🚗</div>Nog geen lease-overeenkomsten.</div></td></tr>`}</tbody></table></div>`;
+  }
+  const o=arr[leaseIdx];const ni=(k,v,w)=>`<input id="lz_${k}" class="dinp" style="width:${w||110}px;text-align:right" type="number" step="0.01" value="${v}" oninput="leaseCalc()">`;const ti=(k,v,w)=>`<input id="lz_${k}" class="dinp" style="width:${w||120}px" value="${String(v||'').replace(/"/g,'&quot;')}" oninput="leaseCalc()">`;
+  return `<div class="backbar"><span class="backbtn" onclick="leaseOpen('${naam}')">← Lease-overzicht</span></div>
+  <div class="grp-h">Gegevens lease</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px 18px;margin-bottom:14px">
+    <div class="field"><label>Kenteken</label>${ti('kent',o.kent,140)}</div>
+    <div class="field"><label>Maandtermijn €</label>${ni('mt',o.mt)}</div>
+    <div class="field"><label>Looptijd (maanden)</label>${ni('lt',o.lt,90)}</div>
+    <div class="field"><label>Startjaar</label>${ni('sj',o.sj,90)}</div>
+    <div class="field"><label>Maanden in startjaar</label>${ni('sm',o.sm,90)}</div>
+    <div class="field"><label>Totaal rente €</label>${ni('rt',o.rt)}</div>
+    <div class="field"><label>Hoofdsom (aflossing) €</label>${ni('hs',o.hs)}</div>
+    <div class="field"><label>Slottermijn €</label>${ni('st',o.st)}</div>
+    <div class="field"><label>Boekjaar (journaalpost)</label>${ni('bj',o.bj,90)}</div>
+  </div>
+  <div class="stats s3" style="margin-bottom:16px"><div class="stat"><div class="lbl">Rente per maand</div><div class="val" id="lo_rm"></div></div><div class="stat"><div class="lbl">Aflossing per maand</div><div class="val" id="lo_am"></div></div><div class="stat"><div class="lbl">Maandtermijn (controle)</div><div class="val" id="lo_tm"></div></div></div>
+  <div class="grp-h">Rente &amp; aflossing per jaar</div>
+  <div class="tablewrap" style="margin-bottom:16px"><table><thead><tr><th>Jaar</th><th class="r">Maanden</th><th class="r">Rente</th><th class="r">Aflossing</th><th class="r">Schuld per 31-12</th></tr></thead><tbody id="lo_rows"></tbody></table></div>
+  <div class="grp-h">Journaalpost boekjaar <span id="lo_bjlabel"></span></div>
+  <div class="sub" style="margin:4px 0 8px">Grootboekrekeningen komen in de live versie uit het rekeningschema van de boekhouding; hier vrij in te vullen.</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px 18px;margin-bottom:10px">
+    <div class="field"><label>Rekening rente (kosten)</label>${ti('ar',o.acc?o.acc.r:'',120)}</div>
+    <div class="field"><label>Rekening leaseverplichting</label>${ti('av',o.acc?o.acc.v:'',120)}</div>
+    <div class="field"><label>Tegenrekening (bank/kruispost)</label>${ti('at',o.acc?o.acc.t:'',120)}</div>
+  </div>
+  <div class="tablewrap"><table><thead><tr><th>Grootboek</th><th class="r">Debet</th><th class="r">Credit</th></tr></thead><tbody id="lo_jp"></tbody></table></div>
+  <div style="margin-top:14px"><button class="btn ghost sm" onclick="delLease('${naam}',${leaseIdx})">Lease verwijderen</button></div>`;
+}
+function leaseCalc(){const naam=leaseNaam;const arr=leaseList(naam);const o=arr[leaseIdx];if(!o)return;
+  const gv=id=>{const e=document.getElementById('lz_'+id);return e?parseFloat(String(e.value).replace(',','.'))||0:0;};
+  const tv=id=>{const e=document.getElementById('lz_'+id);return e?e.value:'';};
+  o.kent=tv('kent');o.mt=gv('mt');o.lt=gv('lt');o.sj=gv('sj');o.sm=gv('sm');o.rt=gv('rt');o.hs=gv('hs');o.st=gv('st');o.bj=gv('bj');o.acc={r:tv('ar'),v:tv('av'),t:tv('at')};
+  const res=leaseRows(o);const rows=res.rows;const set=(id,t)=>{const e=document.getElementById(id);if(e)e.textContent=t;};
+  set('lo_rm','€ '+m2(res.renteM));set('lo_am','€ '+m2(res.aflM));set('lo_tm','€ '+m2(res.renteM+res.aflM));
+  const tb=document.getElementById('lo_rows');if(tb)tb.innerHTML=rows.map(r=>`<tr><td>${r.y}</td><td class="r">${r.m}</td><td class="r">${m2(r.r)}</td><td class="r">${m2(r.a)}</td><td class="r">${m2(r.s)}</td></tr>`).join('')+`<tr class="sent"><td><b>Totaal</b></td><td class="r">${Math.round(o.lt)}</td><td class="r"><b>${m2(rows.reduce((a,r)=>a+r.r,0))}</b></td><td class="r"><b>${m2(rows.reduce((a,r)=>a+r.a,0))}</b></td><td></td></tr>`;
+  set('lo_bjlabel',String(o.bj||''));
+  const row=rows.find(r=>r.y===Math.round(o.bj));const jp=document.getElementById('lo_jp');
+  if(jp)jp.innerHTML=row?`<tr><td>${o.acc.r||'—'} Rente lease</td><td class="r">${m2(row.r)}</td><td class="r"></td></tr><tr><td>${o.acc.v||'—'} Leaseverplichting (aflossing)</td><td class="r">${m2(row.a)}</td><td class="r"></td></tr><tr class="sent"><td>aan ${o.acc.t||'—'}</td><td class="r"></td><td class="r"><b>${m2(row.r+row.a)}</b></td></tr>`:`<tr><td style="color:var(--grey)">Geen termijnen in dit boekjaar.</td></tr>`;
+}
+function addLease(naam){const arr=leaseList(naam);arr.push({kent:'',mt:0,lt:60,sj:new Date().getFullYear(),sm:12,rt:0,hs:0,st:0,bj:new Date().getFullYear(),acc:{r:'',v:'',t:''}});leaseIdx=arr.length-1;openClient(naam,'lease');}
+function delLease(naam,i){const arr=leaseList(naam);arr.splice(i,1);leaseIdx=-1;openClient(naam,'lease');}
+function leaseUpload(naam,inp){const f=inp.files&&inp.files[0];if(!f)return;inp.value='';toast('Leasecontract wordt gelezen door de AI…');
+  const send=(b64,mime)=>{fetch('/.netlify/functions/explain',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'lease',imageBase64:b64,mimeType:mime})}).then(r=>r.json()).then(d=>{if(d.error)throw new Error(d.error);const arr=leaseList(naam);arr.push({kent:d.kenteken||'',mt:+d.maandbedrag||0,lt:+d.looptijd||60,sj:+d.startjaar||new Date().getFullYear(),sm:+d.startmaanden||12,rt:+d.renteTotaal||0,hs:+d.hoofdsom||0,st:+d.slottermijn||0,bj:new Date().getFullYear(),acc:{r:'',v:'',t:''}});leaseIdx=arr.length-1;toast('Lease ingelezen — controleer de gegevens ✓');openClient(naam,'lease');}).catch(e=>{toast('Kon contract niet lezen: '+String(e.message||e));});};
+  if(f.type&&f.type.indexOf('image/')===0){const img=new Image();const u=URL.createObjectURL(f);img.onload=()=>{const max=1600;let w=img.width,h=img.height;if(w>max||h>max){const sc=Math.min(max/w,max/h);w=Math.round(w*sc);h=Math.round(h*sc);}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);URL.revokeObjectURL(u);send(c.toDataURL('image/jpeg',0.82).split(',')[1],'image/jpeg');};img.src=u;}
+  else{const rd=new FileReader();rd.onload=()=>send(String(rd.result).split(',')[1],f.type||'application/pdf');rd.readAsDataURL(f);}}
 
 const state = {
   clients:[
@@ -1768,6 +1824,8 @@ function renderClient(){
     </tbody></table></div>`;
   } else if(clientTab==='obaansl'){
     content=obAansluitingContent(naam);
+  } else if(clientTab==='lease'){
+    content=leaseContent(naam);
   } else {
     content=`<div class="panel"><h3>Compliance &amp; gegevens</h3>
       <div class="frow"><span class="k">KvK-nummer</span><b>${d.kvk||'—'}</b></div><div class="frow"><span class="k">BTW-nummer</span><b>${d.btw||'—'}</b></div>
@@ -1777,10 +1835,11 @@ function renderClient(){
   document.getElementById('view').innerHTML=`
     <div class="backbar"><span class="backbtn" onclick="go('klanten')">← Terug naar klanten</span></div>
     <div class="emp-head"><div class="ph">${naam.split(' ').map(x=>x[0]).join('').slice(0,2)}</div><div style="flex:1"><div class="nm">${naam}</div><div class="meta">Nr ${c.nr} · ${progLogo(c.prog,`switchProgram('${naam}')`)} <span style="color:var(--grey-2)">(klik om te wijzigen)</span> · Medewerker: <b>${c.mw}</b></div></div><button class="btn dark sm" onclick="openAsKlant('${naam}')">↪ Naar klantportaal</button></div>
-    <div class="tabs">${tabBtn('overzicht','Overzicht')}${tabBtn('verwerken','Verwerken')}${tabBtn('signalen','Controle')}<div class="tab ${['ob','obaansl','ib'].includes(clientTab)?'active':''}" onclick="openClient('${naam}','ob')">Jaarafsluiting</div>${tabBtn('loon','Loonaangifte')}${tabBtn('personeel','Personeel')}${tabBtn('regeling','Betalingsregeling')}${tabBtn('mappen','Mappen')}${tabBtn('logins','Inloggegevens')}${tabBtn('compliance','Compliance')}</div>
-    ${['ob','obaansl','ib'].includes(clientTab)?`<div class="tabs" style="margin:-10px 0 18px">${tabBtn('ob','OB-aangifte')}${tabBtn('ib','IB & Jaarrekening')}${tabBtn('obaansl','OB-aansluiting')}</div>`:''}
+    <div class="tabs">${tabBtn('overzicht','Overzicht')}${tabBtn('verwerken','Verwerken')}${tabBtn('signalen','Controle')}<div class="tab ${['ob','obaansl','ib','lease'].includes(clientTab)?'active':''}" onclick="openClient('${naam}','ob')">Jaarafsluiting</div>${tabBtn('loon','Loonaangifte')}${tabBtn('personeel','Personeel')}${tabBtn('regeling','Betalingsregeling')}${tabBtn('mappen','Mappen')}${tabBtn('logins','Inloggegevens')}${tabBtn('compliance','Compliance')}</div>
+    ${['ob','obaansl','ib','lease'].includes(clientTab)?`<div class="tabs" style="margin:-10px 0 18px">${tabBtn('ob','OB-aangifte')}${tabBtn('ib','IB & Jaarrekening')}${tabBtn('obaansl','OB-aansluiting')}<div class="tab ${clientTab==='lease'?'active':''}" onclick="leaseOpen('${naam}')">Lease</div></div>`:''}
     <div>${content}</div>`;
   if(clientTab==='obaansl')aanslCalc();
+  if(clientTab==='lease'&&leaseIdx>=0)leaseCalc();
 }
 VIEWS.kantoor.verwerken = ()=>{
   const byC={};state.inbox.filter(x=>x.state==='new').forEach(d=>{byC[d.client]=(byC[d.client]||0)+1;});
