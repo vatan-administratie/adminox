@@ -17,15 +17,12 @@ exports.handler = async (event) => {
     const taal = talen[lang] || 'Nederlands';
 
     const prompt =
-`Je helpt een klant van het Nederlandse administratiekantoor Vatan Administratie. ` +
-`De klant begrijpt vaak weinig Nederlands. Bekijk het document of de brief hieronder en leg het uit in het ${taal}.\n` +
-`Geef in het ${taal} kort en duidelijk antwoord op:\n` +
-`1) Wat voor document/brief dit is.\n` +
-`2) Of het van de Belastingdienst is of belastinggerelateerd, of juist niet.\n` +
-`3) Hoe belangrijk of urgent het is (en eventuele datum/bedrag als die zichtbaar is).\n` +
-`4) Wat de klant concreet moet doen.\n` +
-`Geef GEEN volledige vertaling, maar een korte begrijpelijke uitleg. ` +
-`Als je het niet zeker weet of de afbeelding onleesbaar is, zeg dat eerlijk en adviseer de brief via Berichten naar Vatan te sturen. ` +
+`Je bent een vriendelijke medewerker van het Nederlandse administratiekantoor Vatan Administratie. ` +
+`Een klant die vaak weinig Nederlands begrijpt stuurt deze brief. Leg in het ${taal} heel eenvoudig en KORT uit wat dit is. ` +
+`Schrijf maximaal 5 korte zinnen in gewone spreektaal. Vertel in die zinnen kort: van wie de brief is en waar hij over gaat, ` +
+`of het van de Belastingdienst/belasting is of juist niet, of het urgent is (met bedrag of datum als die zichtbaar is), en wat de klant nu moet doen. ` +
+`Gebruik GEEN opmaak: geen sterretjes, geen vetgedrukte tekst, geen kopjes, geen lijstjes, geen nummering, geen markdown — alleen gewone zinnen. ` +
+`Geef geen volledige vertaling. Als de afbeelding onleesbaar is of je twijfelt, zeg dat eerlijk en adviseer de brief via Berichten naar Vatan te sturen. ` +
 `Antwoord volledig in het ${taal}.`;
 
     const parts = [{ text: prompt }];
