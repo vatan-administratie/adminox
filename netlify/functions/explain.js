@@ -37,7 +37,7 @@ exports.handler = async (event) => {
       return { statusCode: 400, body: JSON.stringify({ error: 'Geen document of tekst meegegeven.' }) };
     }
 
-    const model = 'gemini-2.0-flash';
+    const model = 'gemini-2.5-flash';
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${KEY}`;
 
     const r = await fetch(url, {
