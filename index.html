@@ -575,7 +575,7 @@ function regelingBody(r){const sign=r.ondertekenaar||'Vatan Administratie & Advi
 <p style="margin:0 0 12px">Tevens verzoek ik u om uitstel van betaling voor de bovengenoemde aanslag(en) te verlenen totdat u op mijn verzoek heeft beslist.</p>
 <p style="margin:0 0 12px">Vertrouwende u hiermee voldoende te hebben geïnformeerd, en afwachtende op uw spoedige reactie, verblijf ik.</p>
 <p style="margin:0 0 22px">Met vriendelijke groet,</p>
-<p style="margin:0">${sign}<br>Vatan Administratie &amp; Advies</p>
+<p style="margin:0">${r.ondertekenaar?r.ondertekenaar+'<br>':''}Vatan Administratie &amp; Advies</p>
 <p style="margin-top:22px;color:#6E7681">Bijlagen: Schuldoverzicht Belastingdienst</p>`;}
 function openRegeling(i){const r=state.regelingen[i];if(!r)return;curClient=r.client;
   document.getElementById('view').innerHTML=`
