@@ -35,11 +35,24 @@ exports.handler = async (event) => {
     else if (text) parts.push({ text: 'Tekst van de brief:\n' + text });
     else return { statusCode: 400, body: JSON.stringify({ error: 'Geen document of tekst meegegeven.' }) };
 
-    const model = 'gemini-2.5-flash';
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${KEY}`;
-    const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts }] }) });
-    const data = await r.json();
-    if (!r.ok) return { statusCode: 502, body: JSON.stringify({ error: (data.error && data.error.message) || 'AI-fout' }) };
+    const reqBody = JSON.stringify({ contents: [{ parts }] });
+    const tries = [
+      { model: 'gemini-2.5-flash', wait: 0 },
+      { model: 'gemini-2.5-flash-lite', wait: 900 },
+      { model: 'gemini-2.5-flash-lite', wait: 900 }
+    ];
+    let r, data;
+    for (const tcfg of tries) {
+      if (tcfg.wait) await new Promise(res => setTimeout(res, tcfg.wait));
+      r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${tcfg.model}:generateContent?key=${KEY}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: reqBody
+      });
+      data = await r.json();
+      if (r.ok) break;
+    }
+    if (!r.ok) {
+      return { statusCode: 502, body: JSON.stringify({ error: (data && data.error && data.error.message) || 'De AI is nu erg druk. Probeer over een halve minuut opnieuw.' }) };
+    }
 
     const answer = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts || []).map(p => p.text).filter(Boolean).join('') || '';
 
