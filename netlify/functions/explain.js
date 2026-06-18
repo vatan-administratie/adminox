@@ -1,4 +1,4 @@
-// Netlify Function: legt een brief uit (mode 'uitleg') OF leest kenmerk+bedrag uit een aanslag (mode 'aanslag').
+// Netlify Function: uitleg (mode 'uitleg'), aanslag lezen (mode 'aanslag'), leasecontract lezen (mode 'lease').
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') return { statusCode: 405, body: 'Method not allowed' };
   try {
@@ -19,6 +19,14 @@ exports.handler = async (event) => {
 `Zoek daarnaast het totaal te betalen bedrag (het openstaande bedrag van de aanslag). ` +
 `Antwoord ALLEEN met geldige JSON, exact zo en zonder extra tekst of opmaak: {"kenmerk":"...","bedrag":"..."}. ` +
 `Schrijf het bedrag zonder euroteken (bijvoorbeeld 4.820,00). Als je iets niet kunt vinden, gebruik een lege string "".`;
+    } else if (mode === 'lease') {
+      prompt =
+`Je krijgt een Nederlands leasecontract (auto). Haal de gegevens eruit en antwoord ALLEEN met geldige JSON, zonder extra tekst, exact zo: ` +
+`{"kenteken":"","maandbedrag":0,"looptijd":0,"renteTotaal":0,"hoofdsom":0,"slottermijn":0,"startjaar":0,"startmaanden":0}. ` +
+`maandbedrag = maandtermijn in euro; looptijd = aantal maanden; hoofdsom = gefinancierd bedrag / totale aflossing exclusief rente; slottermijn = eventuele slottermijn (anders 0); ` +
+`renteTotaal = totale rente over de hele looptijd; als die niet expliciet vermeld staat, bereken maandbedrag*looptijd - hoofdsom; ` +
+`startjaar = jaar van de ingangsdatum; startmaanden = aantal maanden vanaf de ingangsmaand tot en met december van dat jaar (ingang augustus = 5). ` +
+`Gebruik een punt als decimaalteken en geen duizendtalscheidingsteken in de getallen. Onbekend veld: 0 of "".`;
     } else {
       prompt =
 `Je bent een vriendelijke medewerker van het Nederlandse administratiekantoor Vatan Administratie. ` +
@@ -50,9 +58,7 @@ exports.handler = async (event) => {
       data = await r.json();
       if (r.ok) break;
     }
-    if (!r.ok) {
-      return { statusCode: 502, body: JSON.stringify({ error: (data && data.error && data.error.message) || 'De AI is nu erg druk. Probeer over een halve minuut opnieuw.' }) };
-    }
+    if (!r.ok) return { statusCode: 502, body: JSON.stringify({ error: (data && data.error && data.error.message) || 'De AI is nu erg druk. Probeer over een halve minuut opnieuw.' }) };
 
     const answer = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts || []).map(p => p.text).filter(Boolean).join('') || '';
 
@@ -60,6 +66,11 @@ exports.handler = async (event) => {
       let kenmerk = '', bedrag = '';
       try { const m = answer.match(/\{[\s\S]*\}/); const obj = JSON.parse(m ? m[0] : answer); kenmerk = obj.kenmerk || ''; bedrag = obj.bedrag || ''; } catch (e) {}
       return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kenmerk, bedrag }) };
+    }
+    if (mode === 'lease') {
+      let o = {};
+      try { const m = answer.match(/\{[\s\S]*\}/); o = JSON.parse(m ? m[0] : answer); } catch (e) {}
+      return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kenteken: o.kenteken || '', maandbedrag: o.maandbedrag || 0, looptijd: o.looptijd || 0, renteTotaal: o.renteTotaal || 0, hoofdsom: o.hoofdsom || 0, slottermijn: o.slottermijn || 0, startjaar: o.startjaar || 0, startmaanden: o.startmaanden || 0 }) };
     }
     return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ answer: answer || 'Geen antwoord ontvangen.' }) };
   } catch (e) {
