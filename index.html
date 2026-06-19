@@ -437,6 +437,16 @@
   .lp-card .ic svg{width:23px;height:23px}
   .lp-card h3{font-size:16.5px;font-weight:700;color:var(--ink);margin-bottom:7px}
   .lp-card p{font-size:13.5px;color:var(--grey);line-height:1.55}
+  .lp-card.click{cursor:pointer}
+  .hub-band{background:linear-gradient(180deg,var(--brand-tint),var(--card));border:1px solid var(--line);border-radius:var(--r-card);padding:20px 22px;box-shadow:var(--sh-sm)}
+  .hub-band-h{display:flex;align-items:center;gap:13px;margin-bottom:16px}
+  .hub-band-h .ic{width:42px;height:42px;border-radius:12px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;flex-shrink:0}
+  .hub-band-h .ic svg{width:22px;height:22px}
+  .hub-band-h .hh{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.2px}
+  .hub-band-h .hs{font-size:13px;color:var(--grey);margin-top:2px}
+  .hub4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:1100px){.hub4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:680px){.hub4{grid-template-columns:1fr}}
   .lp-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
   .lp-logo{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 18px;font-weight:700;color:var(--ink-2);font-size:14px;box-shadow:var(--sh-xs)}
   .lp-logo .d{width:9px;height:9px;border-radius:50%}
@@ -1250,11 +1260,12 @@ function closeM(){document.getElementById('mOverlay').classList.remove('show');}
 /* ============ NAV ============ */
 const NAV = {
   klant:[
-    ['__g','WERKRUIMTE'],['overzicht','▦','Overzicht'],['watisdit','❓','Wat is dit?'],['facturatie','▤','Facturatie'],['offertes','▭','Offertes'],
-    ['inkoop','⤓','Inkoopfacturen'],['relaties','◑','Relaties'],['producten','◈','Producten'],
-    ['__g','FINANCIEEL'],['betalingen','€','Betalingen & aanmaningen'],['regeling','◷','Betalingsregeling'],['statistieken','▥','Cijfers & BTW'],
-    ['__g','REGISTRATIE'],['tijd','◴','Tijdregistratie'],['km','⌖','KM-registratie'],['personeel','⚇','Personeel'],
-    ['__g','OVERIG'],['documenten','▣','Documenten & rapporten'],['berichten','✉','Berichten'],['instellingen','⚙','Instellingen'],
+    ['__g','WERKRUIMTE'],['overzicht','▦','Dashboard'],
+    ['__g','FACTUREN & KLANTEN'],['facturatie','▤','Facturen'],['offertes','▭','Offertes'],['inkoop','⤓','Inkoopfacturen'],['relaties','◑','Relaties'],['producten','◈','Producten'],
+    ['__g','DOCUMENTEN & CONTACT'],['documenten','▣','Documenten'],['berichten','✉','Berichten'],['aihulp','✨','AI Assistent'],
+    ['__g','BELASTING & GELD'],['belasting','§','Belastingzaken'],['betalingen','€','Betalingen'],['statistieken','▥','Rapportages'],
+    ['__g','REGISTRATIE'],['km','⌖','Kilometerregistratie'],['tijd','◴','Tijdregistratie'],['personeel','⚇','Personeel'],
+    ['__g','OVERIG'],['instellingen','⚙','Instellingen'],
   ],
   kantoor:[
     ['__g','KANTOOR'],['overzicht','▦','Overzicht'],['klanten','◑','Klanten'],['verwerken','⤓','Documenten verwerken'],['obwerk','%','OB-werklijst'],['ibwerk','%','IB-werklijst'],
@@ -1391,14 +1402,17 @@ const ICONS={
   obwerk:'<path d="M19 5L5 19"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/>',
   ibwerk:'<path d="M19 5L5 19"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/>',
   fg:'<path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/>',
-  uren:'<circle cx="12" cy="12" r="9"/><path d="M15 9.6a4 4 0 1 0 0 4.8"/><path d="M7.5 11h5.5M7.5 13.2h4.5"/>'
+  uren:'<circle cx="12" cy="12" r="9"/><path d="M15 9.6a4 4 0 1 0 0 4.8"/><path d="M7.5 11h5.5M7.5 13.2h4.5"/>',
+  aihulp:'<path d="M11 3l1.7 4.3L17 9l-4.3 1.7L11 15l-1.7-4.3L5 9l4.3-1.7z"/><path d="M18 13.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/>',
+  belasting:'<path d="M4 10l8-5 8 5"/><path d="M3 21h18"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/>'
 };
 function icon(id){return ICONS[id]?_svg(ICONS[id]):null;}
+const NAVPARENT={watisdit:'aihulp',regeling:'belasting'};
 function renderNav(){
   const s=document.getElementById('side'); s.innerHTML='';
   NAV[ROLE].forEach(it=>{
     if(it[0]==='__g'){const d=document.createElement('div');d.className='grp';d.textContent=grpL(it[1]);s.appendChild(d);return;}
-    const d=document.createElement('div'); d.className='navitem'+(it[0]===VIEW?' active':''); d.onclick=()=>go(it[0]);
+    const d=document.createElement('div'); d.className='navitem'+((it[0]===VIEW||NAVPARENT[VIEW]===it[0])?' active':''); d.onclick=()=>go(it[0]);
     let badge='';
     if(it[0]==='verwerken'){const c=state.inbox.filter(x=>x.state==='new').length; if(c)badge=`<span class="count">${c}</span>`;}
     if(it[0]==='goedkeuren'){const c=state.inbox.filter(x=>x.state==='queue').length; if(c)badge=`<span class="count">${c}</span>`;}
@@ -1455,6 +1469,25 @@ VIEWS.klant.regeling = ()=>{
   <div class="sub">${t('wd_s').split('.')[0]}. Vatan stelt de officiële brief op; uw aanvraag en de aanslag worden bewaard en zijn later terug te zien.</div>
   <div class="tablewrap"><table><thead><tr><th>Kenmerk</th><th>Bedrag</th><th>Termijnen</th><th>Aangevraagd</th><th>Status</th></tr></thead><tbody>${rows||`<tr><td colspan="5"><div class="empty"><div class="big">📭</div>Nog geen aanvragen.</div></td></tr>`}</tbody></table></div>`;
 };
+VIEWS.klant.aihulp = ()=>`
+  <h1 class="title">AI Assistent</h1>
+  <div class="sub">Slimme hulp van Vatan Administratie &amp; Advies. Begrijpt u een brief, aanslag of factuur niet? Upload hem en krijg direct eenvoudige uitleg — of stel gewoon een vraag.</div>
+  <div class="lp-serv" style="margin-top:6px">
+    <div class="lp-card click" onclick="go('watisdit')"><div class="ic">${_svg(ICONS.watisdit)}</div><h3>Wat is dit?</h3><p>Upload een brief, aanslag, factuur of document en ontvang direct een eenvoudige uitleg in uw eigen taal.</p></div>
+    <div class="lp-card click" onclick="go('watisdit')"><div class="ic">${_svg('<path d="M20 7L10 17l-5-5"/><path d="M4 20h16"/>')}</div><h3>Wat moet ik doen?</h3><p>Laat de assistent uitleggen welke actie nodig is: betalen, bewaren, doorsturen of reageren.</p></div>
+    <div class="lp-card click" onclick="toggleChat()"><div class="ic">${_svg('<path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 12.5h5"/>')}</div><h3>Stel een vraag</h3><p>Stel een eenvoudige vraag over een document, belastingbrief, factuur of uw administratie.</p></div>
+  </div>
+  <div class="feedback" style="margin-top:18px"><span>🔒</span><div>Uw documenten in <b>Wat is dit?</b> worden alleen gebruikt voor uitleg en worden niet opgeslagen in uw administratie.</div></div>`;
+VIEWS.klant.belasting = ()=>`
+  <h1 class="title">Belastingzaken</h1>
+  <div class="sub">Alles rond de Belastingdienst op één plek. Vatan helpt u met aanslagen, betalingsregelingen, uitstel en bezwaar — u hoeft het niet alleen uit te zoeken.</div>
+  <div class="lp-serv" style="margin-top:6px">
+    <div class="lp-card click" onclick="go('documenten')"><div class="ic">${_svg('<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 16h4"/>')}</div><h3>Aanslagen</h3><p>Bekijk uw belastingaanslagen en zie in één oogopslag wat u moet betalen of terugkrijgt.</p></div>
+    <div class="lp-card click" onclick="go('regeling')"><div class="ic">${_svg(ICONS.regeling)}</div><h3>Betalingsregeling</h3><p>Kunt u niet in één keer betalen? Maak in een paar stappen een nette betalingsregeling-brief.</p></div>
+    <div class="lp-card click" onclick="go('berichten')"><div class="ic">${_svg('<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 1.8"/>')}</div><h3>Uitstel</h3><p>Meer tijd nodig voor een aangifte of betaling? Vraag uitstel aan — Vatan regelt het voor u.</p></div>
+    <div class="lp-card click" onclick="go('berichten')"><div class="ic">${_svg('<path d="M12 3l8 4v5c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V7z"/><path d="M9.5 12.5l1.8 1.8 3.2-3.6"/>')}</div><h3>Bezwaar</h3><p>Niet eens met een aanslag? Wij helpen u om op tijd en correct bezwaar te maken.</p></div>
+    <div class="lp-card click" onclick="go('watisdit')"><div class="ic">${_svg(ICONS.watisdit)}</div><h3>Belastingbrieven</h3><p>Een brief van de Belastingdienst ontvangen? Upload hem en wij leggen uit wat het betekent.</p></div>
+  </div>`;
 function klantRegeling(i){const r=state.regelingen[i];if(!r)return;
   const info=r.status==='afgehandeld'
     ? `<span class="pill g">Ingediend op ${r.afgehandeldDatum}</span>${r.ondertekenaar?' · Ondertekend door <b>'+r.ondertekenaar+'</b> namens Vatan':''}`
@@ -1480,6 +1513,15 @@ VIEWS.klant.overzicht = ()=>{
     <div class="stat"><div class="stat-top"><div class="lbl">Te betalen inkoop</div><div class="stat-ic">${icon('inkoop')}</div></div><div class="val">${money(inkoopOpen)}</div><div class="delta">${inkCount} ${inkCount===1?'factuur':'facturen'} te betalen</div></div>
     <div class="stat"><div class="stat-top"><div class="lbl">Omzet (betaald)</div><div class="stat-ic">${icon('statistieken')}</div></div><div class="val">${money(omzet)}</div><div class="delta up">${uptrend} dit jaar</div></div>
     <div class="stat"><div class="stat-top"><div class="lbl">Nog te factureren uren</div><div class="stat-ic">${icon('tijd')}</div></div><div class="val">${money(onbill)}</div><div class="delta">${uren} uur geregistreerd</div></div>
+  </div>
+  <div class="hub-band" style="margin-bottom:22px">
+    <div class="hub-band-h"><span class="ic">${_svg(ICONS.aihulp)}</span><div><div class="hh">Slimme hulp van Vatan Administratie</div><div class="hs">Meer dan een boekhoudportaal — uw accountant denkt met u mee, met AI.</div></div></div>
+    <div class="hub4">
+      <div class="lp-card click" onclick="go('watisdit')"><div class="ic">${_svg(ICONS.watisdit)}</div><h3>Document uitleggen</h3><p>Brief of aanslag niet duidelijk? Krijg directe uitleg in uw taal.</p></div>
+      <div class="lp-card click" onclick="go('regeling')"><div class="ic">${_svg(ICONS.regeling)}</div><h3>Betalingsregeling maken</h3><p>Niet in één keer kunnen betalen? Wij maken de brief.</p></div>
+      <div class="lp-card click" onclick="toggleChat()"><div class="ic">${_svg('<path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"/>')}</div><h3>Vraag stellen aan AI</h3><p>Stel een eenvoudige vraag over uw administratie.</p></div>
+      <div class="lp-card click" onclick="uploadBon()"><div class="ic">${_svg(ICONS.inkoop)}</div><h3>Bon of factuur uploaden</h3><p>Upload een bon — Vatan boekt hem automatisch in.</p></div>
+    </div>
   </div>
   <div class="grid2">
     <div class="panel"><h3>Aan de slag</h3><div class="qa">
