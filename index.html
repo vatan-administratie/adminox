@@ -573,9 +573,24 @@
   .mbox .mh{padding:19px 24px;border-bottom:1px solid var(--line);font-size:16.5px;font-weight:800;color:var(--ink);letter-spacing:-.2px}
   .mbox .mb{padding:20px 22px}
   .mbox .mf{padding:16px 22px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:10px}
-  .uploadbox{border:2px dashed #cfd6e0;border-radius:12px;padding:22px;text-align:center;color:var(--grey);font-size:13px;background:var(--brand-tint);transition:border-color .14s,background .14s}
-  .uploadbox:hover{border-color:var(--brand-2);background:var(--brand-soft)}
+  .uploadbox{border:1px solid var(--line);border-radius:13px;padding:18px;text-align:center;color:var(--grey);font-size:13px;background:var(--brand-tint);transition:border-color .14s,background .14s}
+  .uploadbox:hover{border-color:#cfd8e3;background:var(--brand-soft)}
   .uploadbox b{color:var(--ink)}
+  /* ===== Premium upload component (foto + bestand, mobile-first) ===== */
+  .upz{border:1px solid var(--line);border-radius:14px;padding:20px 18px;text-align:center;background:var(--brand-tint);transition:border-color .15s,background .15s,box-shadow .15s}
+  .upz.drag{border-color:var(--brand-2);background:var(--brand-soft);box-shadow:0 0 0 3px #16507f1a}
+  .upz-ic{width:46px;height:46px;border-radius:13px;background:var(--card);color:var(--brand-2);display:grid;place-items:center;margin:0 auto 11px;box-shadow:var(--sh-xs)}
+  .upz-ic svg{width:23px;height:23px}
+  .upz-t{font-size:14.5px;font-weight:700;color:var(--ink);letter-spacing:-.2px}
+  .upz-s{font-size:12.5px;color:var(--grey);margin:4px auto 0;line-height:1.45;max-width:330px}
+  .upz-b{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+  .upzbtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 16px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit;transition:border-color .14s,background .14s,transform .1s}
+  .upzbtn svg{width:16px;height:16px;color:var(--brand-2)}
+  .upzbtn:hover{border-color:#cfd8e3;transform:translateY(-1px)}
+  .upzbtn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .upzbtn.primary svg{color:#fff}
+  .upzbtn.primary:hover{background:var(--navy-dark)}
+  @media(max-width:600px){.upz-b{flex-direction:column}.upzbtn{width:100%;justify-content:center}}
   /* ===== Premium accounting-firm landing (merk primair, portaal secundair) ===== */
   .login{position:fixed;inset:0;z-index:200;display:block;overflow-y:auto;padding:0;background:var(--bg);color:var(--ink)}
   .login.hide{display:none}
@@ -1049,8 +1064,7 @@ function explainFree(){const v=(document.getElementById('wdFree').value||'').tri
 /* ===== Betalingsregeling ===== */
 let rgDetected=null,rgUpload=null;
 function addRegeling(){rgDetected=null;rgUpload=null;modal('Betalingsregeling aanvragen',
-  `<input type="file" id="rgFile" accept="image/*,.pdf" style="display:none" onchange="rgRead(this)">
-   <div class="uploadbox" id="rgDrop" style="cursor:pointer;padding:26px" onclick="document.getElementById('rgFile').click()">⤓ <b>Upload de aanslag (PDF/foto)</b><br><span>de AI leest automatisch het kenmerk en het bedrag. Uw aanvraag en de aanslag worden bewaard.</span></div>
+  `${uploadZone('rgm','rgRead','Maak een foto of upload de aanslag','De AI leest automatisch het kenmerk en het bedrag. Uw aanvraag en de aanslag worden bewaard.')}
    <div id="rgDet" style="margin:14px 0"></div>`
   +selectField('Aantal termijnen','rgTerm',['3','4','5','6','7','8','9','10','11','12'],'12'),
   'Aanvraag versturen naar Vatan',()=>{
@@ -1074,8 +1088,7 @@ function rgStepper(){const steps=['Upload aanslag','Controleer gegevens','Kies t
 function rgBtns(prev,next){return `<div class="wz-actions">${prev?`<button class="btn ghost" onclick="rgGo(${prev})">← Vorige</button>`:'<span></span>'}${next}</div>`;}
 function rgStepBody(){
   if(rgStep===1){return `
-    <input type="file" id="rgFile" accept="image/*,.pdf" style="display:none" onchange="rgRead(this)">
-    <div class="uploadbox" style="cursor:pointer;padding:30px" onclick="document.getElementById('rgFile').click()">⤓ <b>Upload uw aanslag (PDF of foto)</b><br><span>De assistent leest automatisch het aanslagnummer en het bedrag. Uw aanslag wordt veilig bewaard.</span></div>
+    ${uploadZone('rgw','rgRead','Maak een foto of upload uw aanslag','De assistent leest automatisch het aanslagnummer en het bedrag. Maak een foto of kies een bestand — uw aanslag wordt veilig bewaard.')}
     <div id="rgDet" style="margin-top:14px"></div>
     ${rgBtns(0,`<button class="btn primary" onclick="rgGo(2)">Volgende →</button>`)}`;}
   if(rgStep===2){const d=rgDetected||{};return `
@@ -1663,6 +1676,25 @@ const ICONS={
   belasting:'<path d="M4 10l8-5 8 5"/><path d="M3 21h18"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/>'
 };
 function icon(id){return ICONS[id]?_svg(ICONS[id]):null;}
+/* ===== Premium upload component (foto maken + bestand) ===== */
+function upzOver(e,el){e.preventDefault();el.classList.add('drag');}
+function upzLeave(el){el.classList.remove('drag');}
+function upzDrop(e,fn,el){e.preventDefault();el.classList.remove('drag');const f=e.dataTransfer&&e.dataTransfer.files;if(f&&f.length&&window[fn])window[fn]({files:f});}
+function uploadZone(id,fn,title,sub){
+  const cam=_svg('<rect x="3" y="6.5" width="18" height="13.5" rx="2.6"/><circle cx="12" cy="13.2" r="3.1"/><path d="M8.5 6.5l1-2h5l1 2"/>');
+  const up=_svg('<path d="M12 15V4M8 8l4-4 4 4"/><path d="M5 16v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3"/>');
+  return `<div class="upz" ondragover="upzOver(event,this)" ondragleave="upzLeave(this)" ondrop="upzDrop(event,'${fn}',this)">
+    <input type="file" accept="image/*" capture="environment" id="${id}Cam" style="display:none" onchange="${fn}(this)">
+    <input type="file" accept="image/*,.pdf,.png,.jpg,.jpeg,.heic" id="${id}File" style="display:none" onchange="${fn}(this)">
+    <div class="upz-ic">${cam}</div>
+    <div class="upz-t">${title}</div>
+    <div class="upz-s">${sub||'Maak een foto met uw telefoon of kies een bestand — foto, scan of PDF.'}</div>
+    <div class="upz-b">
+      <button class="upzbtn primary" onclick="document.getElementById('${id}Cam').click()">${cam} Maak foto</button>
+      <button class="upzbtn" onclick="document.getElementById('${id}File').click()">${up} Upload bestand</button>
+    </div>
+  </div>`;
+}
 const NAVPARENT={watisdit:'aihulp',regeling:'belasting'};
 function renderNav(){
   const s=document.getElementById('side'); s.innerHTML='';
@@ -1704,8 +1736,7 @@ VIEWS.klant.watisdit = ()=>{
   <div class="ai-note" style="margin:0 0 18px;border-left-color:var(--green)">🔒 ${t('wd_priv')}</div>
   <div class="grid2" style="align-items:start">
     <div>
-      <input type="file" id="wdFile" accept="image/*,.pdf" style="display:none" onchange="wdUpload(this)">
-      <div class="uploadbox" style="padding:34px;cursor:pointer" onclick="document.getElementById('wdFile').click()" title="${t('wd_drop')}">⤓ <b>${t('wd_drop')}</b></div>
+      ${uploadZone('wd','wdUpload','Maak een foto of upload uw document','Brief, aanslag, factuur of bon — maak een foto met uw telefoon of kies een bestand (foto, scan of PDF).')}
       <div style="margin:16px 0 8px;font-size:12.5px;color:var(--grey);font-weight:700">${t('wd_kies')}</div>
       <div>${samples}</div>
       <div style="margin:18px 0 8px;font-size:12.5px;color:var(--grey);font-weight:700">${t('wd_vrij')}</div>
@@ -1987,7 +2018,7 @@ function openBtw(periode){const b=state.btwReturns.find(x=>x.periode===periode);
     </div>
   </div>`;
 }
-function uploadDoc(map){modal('Document uploaden',`<div class="uploadbox">⤓ <b>Sleep een bestand hierheen</b><br><span>of selecteer een bestand</span></div><div style="height:14px"></div>`+selectField('Map','udMap',MAPPEN,map||'Overig')+field('Omschrijving','udNaam','text','Nieuw document'),'Uploaden',()=>{state.dossierDocs.unshift({client:'Demo BV',map:val('udMap'),naam:val('udNaam')||'Document',date:'17-06-2026',by:'klant'});toast('Document opgeslagen in '+val('udMap'));docMap=val('udMap');renderView();});}
+function uploadDoc(map){modal('Document uploaden',`<div class="uploadbox">📷 <b>Maak een foto of sleep een bestand hierheen</b><br><span>foto, scan of PDF — of selecteer een bestand</span></div><div style="height:14px"></div>`+selectField('Map','udMap',MAPPEN,map||'Overig')+field('Omschrijving','udNaam','text','Nieuw document'),'Uploaden',()=>{state.dossierDocs.unshift({client:'Demo BV',map:val('udMap'),naam:val('udNaam')||'Document',date:'17-06-2026',by:'klant'});toast('Document opgeslagen in '+val('udMap'));docMap=val('udMap');renderView();});}
 
 VIEWS.klant.statistieken = ()=>{
   const data=[['Jan',8200],['Feb',9100],['Mrt',7600],['Apr',10400],['Mei',9800],['Jun',6300]]; const max=Math.max(...data.map(d=>d[1]));
@@ -2354,7 +2385,7 @@ function uploadLoon(empId){modal('Loonstrook / aangifte plaatsen',`<div class="u
 function afletteren(){state.bankTx.forEach(t=>{if(t.status==='open'){t.status='matched';t.match=t.bedrag<0?'Inkoopboeking':'Verkoopfactuur';}});toast('Transacties automatisch afgeletterd ✓');renderView();}
 function matchOne(i){state.bankTx[i].status='matched';state.bankTx[i].match=state.bankTx[i].bedrag<0?'Inkoopboeking':'Verkoopfactuur';toast('Transactie gekoppeld ✓');renderView();}
 function sendMessage(){const v=val('msgInput').trim();if(!v)return;state.messages.push({from:ROLE==='klant'?'klant':'kantoor',text:v,date:'17-06-2026 nu',read:true});renderView();}
-function uploadBon(){const sup=['Albert Heijn XL','Gamma Bouwmarkt','Bol.com zakelijk','Vodafone','Greenchoice'];modal('Bon / inkoopfactuur uploaden',`<div class="uploadbox">⤓ <b>Sleep een bestand hierheen</b><br><span>of kies een voorbeeldbon</span></div><div style="height:14px"></div>`+selectField('Leverancier (voorbeeld)','bSup',sup)+field('Bedrag (incl. BTW)','bAmt','text','75,00'),'Uploaden',()=>{const id=++seqInbox;state.inbox.unshift({id,sup:val('bSup'),type:'PDF',no:'UP-'+id,date:'17-06-2026',amt:num(val('bAmt')),excl:0,btwAmt:0,client:'Demo BV',prog:KLANT.prog,gl:'4990 · Algemene kosten',btw:'21%',conf:'mid',confTxt:'64%',addr:'—',kvk:'—',lines:[[val('bSup')+' — aankoop','€ '+val('bAmt')]],note:'Nieuw geüpload door klant — AI doet eerste voorstel, controle door kantoor.',state:'new'});toast('Bon verstuurd naar Vatan Administratie ✓');renderNav();renderView();});}
+function uploadBon(){const sup=['Albert Heijn XL','Gamma Bouwmarkt','Bol.com zakelijk','Vodafone','Greenchoice'];modal('Bon / inkoopfactuur uploaden',`<div class="uploadbox">📷 <b>Maak een foto van uw bon of sleep een bestand hierheen</b><br><span>foto, scan of PDF — of kies hieronder een voorbeeldbon</span></div><div style="height:14px"></div>`+selectField('Leverancier (voorbeeld)','bSup',sup)+field('Bedrag (incl. BTW)','bAmt','text','75,00'),'Uploaden',()=>{const id=++seqInbox;state.inbox.unshift({id,sup:val('bSup'),type:'PDF',no:'UP-'+id,date:'17-06-2026',amt:num(val('bAmt')),excl:0,btwAmt:0,client:'Demo BV',prog:KLANT.prog,gl:'4990 · Algemene kosten',btw:'21%',conf:'mid',confTxt:'64%',addr:'—',kvk:'—',lines:[[val('bSup')+' — aankoop','€ '+val('bAmt')]],note:'Nieuw geüpload door klant — AI doet eerste voorstel, controle door kantoor.',state:'new'});toast('Bon verstuurd naar Vatan Administratie ✓');renderNav();renderView();});}
 
 /* ============ KANTOOR VIEWS ============ */
 VIEWS.kantoor.overzicht = ()=>{
