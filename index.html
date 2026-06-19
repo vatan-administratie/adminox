@@ -195,26 +195,29 @@
   .wl-ov-l{display:flex;align-items:baseline;gap:9px}
   .wl-big{font-size:23px;font-weight:800;color:var(--navy);letter-spacing:-.8px;line-height:1}
   .wf-list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--sh-sm)}
-  .wf-grp{display:flex;align-items:center;gap:8px;padding:13px 20px 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-2);background:var(--bg);border-bottom:1px solid var(--line-2)}
+  .wf-grp{display:flex;align-items:center;gap:8px;padding:11px 20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-2);background:var(--bg);border-bottom:1px solid var(--line-2);cursor:pointer;user-select:none;transition:color .12s}
+  .wf-grp:hover{color:var(--ink)}
+  .wf-grp .chev{width:13px;height:13px;color:var(--grey-2);transition:transform .15s;flex-shrink:0}
+  .wf-grp.closed .chev{transform:rotate(-90deg)}
   .wf-grp .n{font-weight:500;text-transform:none;letter-spacing:0}
-  .wf-row{display:grid;grid-template-columns:1fr auto 190px 30px;align-items:center;gap:20px;padding:15px 20px;border-bottom:1px solid var(--line-2);transition:background .12s,opacity .12s}
+  .wf-row{display:grid;grid-template-columns:1fr auto 30px;align-items:center;gap:18px;padding:14px 20px;border-bottom:1px solid var(--line-2);transition:background .12s,opacity .12s}
   .wf-row:last-child{border-bottom:0}
   .wf-row:hover{background:var(--hover)}
   .wf-l{display:flex;align-items:center;gap:12px;min-width:0;cursor:pointer}
   .wf-id{min-width:0}
   .wf-nm{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .wf-sub{font-size:11.5px;color:var(--grey-2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .wf-step3{display:flex;align-items:center;justify-content:center}
-  .wf-node{width:22px;height:22px;border-radius:50%;border:2px solid #d7dee7;background:var(--card);display:grid;place-items:center;cursor:pointer;padding:0;flex-shrink:0;transition:.14s;color:#fff}
+  .wf-rblock{display:flex;flex-direction:column;align-items:flex-end;gap:4px;min-width:0}
+  .wf-step3{display:flex;align-items:center;justify-content:flex-end}
+  .wf-node{width:18px;height:18px;border-radius:50%;border:2px solid #d7dee7;background:var(--card);display:grid;place-items:center;cursor:pointer;padding:0;flex-shrink:0;transition:.14s;color:#fff}
   .wf-node:hover{border-color:var(--brand-2)}
   .wf-node.on{background:#15803D;border-color:#15803D}
-  .wf-node svg{width:12px;height:12px}
-  .wf-conn{width:28px;height:2px;background:#e2e8f0;flex-shrink:0}
+  .wf-node svg{width:11px;height:11px}
+  .wf-conn{width:22px;height:2px;background:#e2e8f0;flex-shrink:0}
   .wf-conn.on{background:#15803D}
-  .wf-sb{text-align:right;min-width:0}
-  .wf-bigst{font-size:15px;font-weight:800;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-bigst{font-size:14.5px;font-weight:800;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
   .wf-bigst.red{color:var(--danger)}.wf-bigst.amber{color:#b07d18}.wf-bigst.done{color:#15803D}
-  .wf-pct2{font-size:11.5px;color:var(--grey);font-weight:600;margin-top:3px}
+  .wf-pct2{font-size:11px;color:var(--grey);font-weight:600}
   .wf-noteic{width:28px;height:28px;display:grid;place-items:center;border-radius:8px;color:var(--grey-2);cursor:pointer;opacity:0;transition:.13s}
   .wf-noteic svg{width:16px;height:16px}
   .wf-row:hover .wf-noteic{opacity:.6}
@@ -224,7 +227,7 @@
   .wf-row.amber{box-shadow:inset 3px 0 0 var(--amber)}
   .wf-row.done{opacity:.58}
   .wf-row.done:hover{opacity:1}
-  @media(max-width:900px){.wf-row{grid-template-columns:1fr auto;gap:9px 14px;padding:13px 16px}.wf-l{grid-row:1;grid-column:1}.wf-sb{grid-row:1;grid-column:2}.wf-step3{grid-row:2;grid-column:1;justify-content:flex-start}.wf-noteic{grid-row:2;grid-column:2;opacity:.6;justify-self:end}}
+  @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
   tbody tr.wl-prog{background:#FFFCF4}tbody tr.wl-prog:hover{background:#FFF7E6}
@@ -1476,7 +1479,8 @@ const DOSSIER = {
 };
 let seqF=4, seqO=22, seqInbox=7, seqEmp=3, seqTime=5;
 let monthlyDone=128;
-let draft=null, invFilter='alle', quoteFilter='alle', relFilter='Debiteur', docMap=null, mwFilter='alle', clientTab='overzicht', curClient=null, impersonate=null, obKw=null, obMw='alle', obStat='alle';
+let draft=null, invFilter='alle', quoteFilter='alle', relFilter='Debiteur', docMap=null, mwFilter='alle', clientTab='overzicht', curClient=null, impersonate=null, obKw=null, obMw='alle', obStat='alle', obGrpOpen={};
+function obToggleGrp(l){const cur=obGrpOpen[l]!==undefined?obGrpOpen[l]:(l!=='Ingediend');obGrpOpen[l]=!cur;renderView();}
 let fgTab='werkvoorraad', fgStatus='alle', fgType='alle', fgJaar='alle', fgMw='alle';
 let ibwJaar=null, ibwMw='alle', ibwStat='alle';
 const MAPPEN=['Jaarrekening','Omzetbelasting (BTW)','Inkomstenbelasting','Vennootschapsbelasting','Loonadministratie','Contracten','Verzekeringen','Overig'];
@@ -2695,8 +2699,7 @@ VIEWS.kantoor.obwerk = ()=>{
   const wfRow=c=>{const o=state.werk[c.naam].ob[kw];const st=stepsOB(o);const pct=Math.round(st/3*100);const sd=obState(o);const note=(o.opm||'').trim();
     return `<div class="wf-row ${sd.tone}">
       <div class="wf-l" onclick="openClient('${c.naam}','ob')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}</div></div></div>
-      <div class="wf-step3">${wfNode(o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`,'Ingeleverd')}<span class="wf-conn ${o.ingeleverd?'on':''}"></span>${wfNode(o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`,'Ingevoerd')}<span class="wf-conn ${o.ingelezen?'on':''}"></span>${wfNode(o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`,'Ingediend')}</div>
-      <div class="wf-sb"><div class="wf-bigst ${sd.tone}">${sd.t}</div><div class="wf-pct2">${pct}% voltooid</div></div>
+      <div class="wf-rblock"><div class="wf-step3">${wfNode(o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`,'Ingeleverd')}<span class="wf-conn ${o.ingeleverd?'on':''}"></span>${wfNode(o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`,'Ingevoerd')}<span class="wf-conn ${o.ingelezen?'on':''}"></span>${wfNode(o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`,'Ingediend')}</div><div class="wf-bigst ${sd.tone}">${sd.t}</div><div class="wf-pct2">${pct}% voltooid</div></div>
       <span class="wf-noteic ${note?'has':''}" title="${note?note.replace(/"/g,'&quot;'):'Notitie toevoegen'}" onclick="event.stopPropagation();obNote('${c.naam}','${kw}')">${_svg('<path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3M8 12h8M8 15.5h5"/>')}</span>
     </div>`;};
   const obBuckets=[{l:'Actie nodig',f:c=>!state.werk[c.naam].ob[kw].ingeleverd},{l:'In behandeling',f:c=>{const o=state.werk[c.naam].ob[kw];return o.ingeleverd&&!o.ingediend;}},{l:'Ingediend',f:c=>state.werk[c.naam].ob[kw].ingediend}];
@@ -2712,7 +2715,7 @@ VIEWS.kantoor.obwerk = ()=>{
     <div class="wh"><div class="wl-ov-l"><span class="wl-big">${overallOB}%</span><span class="wt">voltooid · ${kw}</span></div><div class="wl-legend"><span class="wl-lg done"><span class="d"></span>${ingediend} ingediend</span><span class="wl-lg prog"><span class="d"></span>${cntProgOB} bezig</span><span class="wl-lg todo"><span class="d"></span>${cntTodoOB} actie nodig</span></div></div>
     <div class="wl-obar"><span style="width:${overallOB}%"></span></div>
   </div>
-  ${cs.length?`<div class="wf-list">${obBuckets.map(b=>{const rows=cs.filter(b.f);return rows.length?`<div class="wf-grp">${b.l} <span class="n">· ${rows.length}</span></div>`+rows.map(wfRow).join(''):'';}).join('')}</div>`:`<div class="empty" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:40px 20px"><div class="big">✅</div>Geen klanten in deze selectie.</div>`}`;
+  ${cs.length?`<div class="wf-list">${obBuckets.map(b=>{const rows=cs.filter(b.f);if(!rows.length)return '';const op=obGrpOpen[b.l]!==undefined?obGrpOpen[b.l]:(b.l!=='Ingediend');return `<div class="wf-grp ${op?'':'closed'}" onclick="obToggleGrp('${b.l}')"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>${b.l} <span class="n">· ${rows.length}</span></div>`+(op?rows.map(wfRow).join(''):'');}).join('')}</div>`:`<div class="empty" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:40px 20px"><div class="big">✅</div>Geen klanten in deze selectie.</div>`}`;
 };
 function obToggle(naam,kw,f){const o=state.werk[naam].ob[kw];o[f]=o[f]?'':TODAY;renderView();}
 function obNote(naam,kw){const o=state.werk[naam].ob[kw];modal('Notitie · '+naam+' ('+kw+')',field('Notitie','obNoteV','text',(o.opm||'').replace(/"/g,'&quot;')),'Opslaan',()=>{o.opm=val('obNoteV');renderView();});}
