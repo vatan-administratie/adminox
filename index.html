@@ -310,6 +310,19 @@
   .lz-edit>summary::before{content:'▸';color:var(--grey-2);transition:.15s}
   .lz-edit[open]>summary::before{transform:rotate(90deg)}
   .lz-edit .lz-body{padding:4px 16px 16px}
+  .tablewrap.fin td,.tablewrap.fin th{font-variant-numeric:tabular-nums}
+  .tablewrap.fin tr.sent td{font-size:13px;background:var(--brand-tint)}
+  .dpill{display:inline-block;padding:2px 9px;border-radius:6px;font-weight:700;font-size:11.5px;font-variant-numeric:tabular-nums}
+  .dpill.g{background:#DCFCE7;color:#166534}.dpill.a{background:#FEF3C7;color:#92400E}.dpill.r{background:#FEE2E2;color:#991B1B}
+  /* loon month matrix */
+  .lmx{display:grid;grid-template-columns:repeat(12,1fr);gap:6px}
+  @media(max-width:760px){.lmx{grid-template-columns:repeat(6,1fr)}}
+  .lmc{border:1px solid var(--line);border-radius:9px;padding:8px 4px;text-align:center;cursor:pointer;background:var(--card);transition:.12s}
+  .lmc:hover{box-shadow:var(--sh-sm)}
+  .lmc-m{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--grey)}
+  .lmc-i{font-size:14px;font-weight:800;margin-top:3px;color:var(--grey-2)}
+  .lmc.done{background:#DCFCE7;border-color:#bbf7d0}.lmc.done .lmc-m{color:#166534}.lmc.done .lmc-i{color:#166534}
+  .lmc.due{background:#FEF3C7;border-color:#fde68a}.lmc.due .lmc-m{color:#92400E}.lmc.due .lmc-i{color:#92400E}
   .cc-sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:16px}
   .cc-side .cc-sec{padding:14px 16px}
   .cc-h{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey);margin:0 0 12px}
@@ -1350,11 +1363,21 @@ function obAansluitingContent(naam){aanslNaam=naam;const d=aanslGet(naam,aanslJa
   <div class="ai-note" id="obh_insight" style="margin-bottom:20px">—</div>
   <div class="mod-sub">Detailgegevens — balans, aangiften &amp; balanspositie</div>
   <div class="grp-h">Balans — jaarcijfers</div>
-  <div class="tablewrap" style="margin-bottom:16px"><table><thead><tr><th>Post</th><th class="r">Bedrag</th><th class="r">Btw</th></tr></thead><tbody>${balansRows}<tr class="sent"><td><b>Saldo jaar (te betalen btw)</b></td><td></td><td class="r"><b id="ao_saldojaar"></b></td></tr></tbody></table></div>
+  <div class="tablewrap fin" style="margin-bottom:18px"><table><thead><tr><th>Post</th><th class="r">Bedrag</th><th class="r">Btw</th></tr></thead><tbody>${balansRows}<tr class="sent"><td><b>Saldo jaar (te betalen btw)</b></td><td></td><td class="r"><b id="ao_saldojaar"></b></td></tr></tbody></table></div>
   <div class="grp-h">Aangiften per kwartaal</div>
-  <div class="tablewrap" style="margin-bottom:16px;overflow-x:auto"><table><thead><tr><th>Kwartaal</th><th class="r">Omzet hoog</th><th class="r">Omzet laag</th><th class="r">Omzet 0%</th><th class="r">Onderaann.</th><th class="r">Voorbel.</th><th class="r">Aangegeven</th><th class="r">Saldo</th><th class="r">Verschil</th></tr></thead><tbody>${qrows}<tr class="sent"><td><b>Som</b></td><td class="r" id="ao_soh"></td><td class="r" id="ao_sol"></td><td class="r" id="ao_son"></td><td class="r" id="ao_soa"></td><td class="r" id="ao_svb"></td><td class="r" id="ao_sbt"></td><td class="r"><b id="ao_ssaldo"></b></td><td class="r" id="ao_sm"></td></tr></tbody></table></div>
+  <div class="tablewrap fin" style="margin-bottom:18px;overflow-x:auto"><table><thead><tr><th>Kwartaal</th><th class="r">Omzet hoog</th><th class="r">Omzet laag</th><th class="r">Omzet 0%</th><th class="r">Onderaann.</th><th class="r">Voorbel.</th><th class="r">Aangegeven</th><th class="r">Saldo</th><th class="r">Verschil</th></tr></thead><tbody>${qrows}<tr class="sent"><td><b>Som</b></td><td class="r" id="ao_soh"></td><td class="r" id="ao_sol"></td><td class="r" id="ao_son"></td><td class="r" id="ao_soa"></td><td class="r" id="ao_svb"></td><td class="r" id="ao_sbt"></td><td class="r"><b id="ao_ssaldo"></b></td><td class="r" id="ao_sm"></td></tr></tbody></table></div>
   <div class="grp-h">Balanspositie OB per 31-12-${aanslJaar}</div>
-  <div class="tablewrap"><table><thead><tr><th>Omschrijving</th><th class="r">Bedrag</th><th></th></tr></thead><tbody>${postRows}<tr><td><button class="btn ghost sm" onclick="aanslAddPost('${naam}')">+ openstaande post</button></td><td></td><td></td></tr><tr><td>4e kw ${aanslJaar} (onbetaald)</td><td class="r" id="ao_q4auto"></td><td style="color:var(--grey);font-size:11px">auto</td></tr><tr><td>Suppletie ${aanslJaar}</td><td class="r" id="ao_supauto"></td><td style="color:var(--grey);font-size:11px">auto</td></tr><tr class="sent"><td><b>Balanspositie OB</b></td><td class="r"><b id="ao_balanspos"></b></td><td></td></tr></tbody></table></div>`;
+  <div class="grid2" style="align-items:start;gap:16px">
+    <div><div class="row-between" style="margin-bottom:8px"><div class="mod-sub" style="margin:0">Openstaande balansposten</div><button class="btn ghost sm" onclick="aanslAddPost('${naam}')">+ post</button></div>
+      <div class="tablewrap fin"><table><thead><tr><th>Omschrijving</th><th class="r">Bedrag</th><th></th></tr></thead><tbody>${postRows||`<tr><td colspan="3" style="color:var(--grey)">Geen openstaande posten — voeg toe met "+ post".</td></tr>`}</tbody></table></div></div>
+    <div><div class="mod-sub">Opbouw balanspositie</div>
+      <div class="jcard">
+        <div class="jline"><div class="jg">Openstaande posten</div><div class="jc" id="obc_posten">—</div></div>
+        <div class="jline"><div class="jg">4e kw ${aanslJaar} (onbetaald)</div><div class="jc" id="obc_q4">—</div></div>
+        <div class="jline"><div class="jg">Suppletie ${aanslJaar}</div><div class="jc" id="obc_sup">—</div></div>
+        <div class="jline tot"><div class="jg">Balanspositie OB</div><div class="jc" id="obc_total">—</div></div>
+      </div></div>
+  </div>`;
 }
 function aanslCalc(){const naam=aanslNaam;if(!naam)return;const d=aanslGet(naam,aanslJaar);if(!d)return;
   const gv=id=>{const e=document.getElementById(id);return e?parseFloat(String(e.value).replace(',','.'))||0:0;};
@@ -1364,13 +1387,14 @@ function aanslCalc(){const naam=aanslNaam;if(!naam)return;const d=aanslGet(naam,
   set('ao_b_oh',m2(bh));set('ao_b_ol',m2(bl));set('ao_b_on',m2(0));set('ao_b_oa',m2(bo));set('ao_b_vbl','−'+m2(d.b.vbl));set('ao_b_vbh','−'+m2(d.b.vbh));
   const saldoJaar=bh+bl+bo-vb;set('ao_saldojaar',m2(saldoJaar));
   let sumS=0,sumM=0,s={oh:0,ol:0,on:0,oa:0,vb:0,bt:0},q4s=0;
-  d.q.forEach((q,i)=>{['oh','ol','on','oa','vb','bt'].forEach(k=>q[k]=gv('a_q'+i+'_'+k));const sa=q.oh*0.21+q.ol*0.09+q.oa*0.21-q.vb;const m=q.bt-sa;set('ao_q'+i+'_s',m2(sa));const me=document.getElementById('ao_q'+i+'_m');if(me){me.textContent=m2(m);me.style.color=m<0?'var(--red-dark)':'var(--green)';}sumS+=sa;sumM+=m;['oh','ol','on','oa','vb','bt'].forEach(k=>s[k]+=q[k]);if(i===3)q4s=sa;});
-  set('ao_soh',m2(s.oh));set('ao_sol',m2(s.ol));set('ao_son',m2(s.on));set('ao_soa',m2(s.oa));set('ao_svb',m2(s.vb));set('ao_sbt',m2(s.bt));set('ao_ssaldo',m2(sumS));set('ao_sm',m2(sumM));
+  d.q.forEach((q,i)=>{['oh','ol','on','oa','vb','bt'].forEach(k=>q[k]=gv('a_q'+i+'_'+k));const sa=q.oh*0.21+q.ol*0.09+q.oa*0.21-q.vb;const m=q.bt-sa;set('ao_q'+i+'_s',m2(sa));const me=document.getElementById('ao_q'+i+'_m');if(me){const tn=Math.abs(m)<1?'g':(m<0?'r':'a');me.innerHTML='<span class="dpill '+tn+'">'+(m>0?'+':'')+m2(m)+'</span>';}sumS+=sa;sumM+=m;['oh','ol','on','oa','vb','bt'].forEach(k=>s[k]+=q[k]);if(i===3)q4s=sa;});
+  set('ao_soh',m2(s.oh));set('ao_sol',m2(s.ol));set('ao_son',m2(s.on));set('ao_soa',m2(s.oa));set('ao_svb',m2(s.vb));set('ao_sbt',m2(s.bt));set('ao_ssaldo',m2(sumS));{const sme=document.getElementById('ao_sm');if(sme){const tn=Math.abs(sumM)<1?'g':(sumM<0?'r':'a');sme.innerHTML='<span class="dpill '+tn+'">'+(sumM>0?'+':'')+m2(sumM)+'</span>';}}
   const sup=saldoJaar-sumS;
   set('ak_saldo','€ '+m2(saldoJaar));set('ak_som','€ '+m2(sumS));set('ak_sup','€ '+m2(sup));
   d.posten=d.posten.map((p,i)=>{const le=document.getElementById('a_pl'+i);return [le?le.value:p[0],gv('a_pa'+i)];});
   let pos=0;d.posten.forEach(p=>pos+=p[1]);
   set('ao_q4auto',m2(q4s));set('ao_supauto',m2(sup));set('ao_balanspos','€ '+m2(pos+q4s+sup));
+  set('obc_posten','€ '+m2(pos));set('obc_q4','€ '+m2(q4s));set('obc_sup','€ '+m2(sup));set('obc_total','€ '+m2(pos+q4s+sup));
   // dashboard header
   const aSup=Math.abs(sup);const tone=aSup<1?'g':(aSup<1000?'a':'r');
   const dot=document.getElementById('obh_dot');if(dot)dot.className='mh-dot '+tone;
@@ -1403,6 +1427,7 @@ function leaseContent(naam){leaseNaam=naam;const arr=leaseList(naam);
   }
   const o=arr[leaseIdx];const ni=(k,v,w)=>`<input id="lz_${k}" class="dinp" style="width:${w||110}px;text-align:right" type="number" step="0.01" value="${v}" oninput="leaseCalc()">`;const ti=(k,v,w)=>`<input id="lz_${k}" class="dinp" style="width:${w||120}px" value="${String(v||'').replace(/"/g,'&quot;')}" oninput="leaseCalc()">`;
   return `<div class="backbar"><span class="backbtn" onclick="leaseOpen('${naam}')">← Lease-overzicht</span></div>
+  <div class="row-between" style="margin-bottom:12px"><h3 style="margin:0">Lease-overeenkomst</h3><div style="display:flex;gap:8px"><button class="btn ghost sm" onclick="printLease('${naam}',${leaseIdx})">⬇ Print / PDF</button><button class="btn ghost sm" onclick="lzEditOpen()">✎ Bewerken</button><button class="btn ghost sm" onclick="delLease('${naam}',${leaseIdx})">🗑 Verwijderen</button></div></div>
   <div class="mh"><div class="mh-row"><div class="mh-status"><span class="mh-dot" id="lz_dot"></span><span id="lz_status">—</span><span style="color:var(--grey-2);font-weight:600;margin:0 2px">·</span><span id="lz_k_kent" style="font-weight:800">—</span></div>
     <div class="mh-kpis">
       <div class="mh-kpi"><div class="mh-kl">Maandtermijn</div><div class="mh-kv" id="lz_k_mt">—</div></div>
@@ -1422,7 +1447,7 @@ function leaseContent(naam){leaseNaam=naam;const arr=leaseList(naam);
       <div class="jcard"><div class="jline" style="padding-top:0;border-bottom:1px solid var(--line)"><div class="jg" style="font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2);font-weight:700">Grootboek</div><div class="jd" style="font-size:10px;color:var(--grey-2);font-weight:700">Debet</div><div class="jc" style="font-size:10px;color:var(--grey-2);font-weight:700">Credit</div></div><div id="lo_jp"></div></div>
       <div class="sub" style="margin-top:8px;font-size:11px">Grootboekrekeningen komen in de live versie uit het rekeningschema; hier vrij in te vullen via Leasegegevens.</div></div>
   </div>
-  <details class="lz-edit" style="margin-top:16px"><summary>Leasegegevens bewerken</summary><div class="lz-body">
+  <details class="lz-edit" id="lzEdit" style="margin-top:16px"><summary>Leasegegevens bewerken</summary><div class="lz-body">
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px 18px;margin-bottom:14px">
       <div class="field"><label>Kenteken</label>${ti('kent',o.kent,140)}</div>
       <div class="field"><label>Maandtermijn €</label>${ni('mt',o.mt)}</div>
@@ -1440,9 +1465,9 @@ function leaseContent(naam){leaseNaam=naam;const arr=leaseList(naam);
       <div class="field"><label>Rekening leaseverplichting</label>${ti('av',o.acc?o.acc.v:'',120)}</div>
       <div class="field"><label>Tegenrekening (bank/kruispost)</label>${ti('at',o.acc?o.acc.t:'',120)}</div>
     </div>
-  </div></details>
-  <div style="margin-top:14px;display:flex;gap:10px"><button class="btn ghost sm" onclick="printLease('${naam}',${leaseIdx})">⬇ Print / PDF</button><button class="btn ghost sm" onclick="delLease('${naam}',${leaseIdx})">Lease verwijderen</button></div>`;
+  </div></details>`;
 }
+function lzEditOpen(){const d=document.getElementById('lzEdit');if(d){d.open=true;d.scrollIntoView({behavior:'smooth',block:'center'});}}
 function leaseCalc(){const naam=leaseNaam;const arr=leaseList(naam);const o=arr[leaseIdx];if(!o)return;
   const gv=id=>{const e=document.getElementById('lz_'+id);return e?parseFloat(String(e.value).replace(',','.'))||0:0;};
   const tv=id=>{const e=document.getElementById('lz_'+id);return e?e.value:'';};
@@ -1503,7 +1528,9 @@ function printOB(naam){const d=aanslGet(naam,aanslJaar);if(!d)return;const jaar=
  const qrows=d.q.map((q,i)=>{const s=q.oh*0.21+q.ol*0.09+q.oa*0.21-q.vb;sumS+=s;if(i===3)q4s=s;return `<tr><td class="l">${qn[i]}</td><td>${m2(q.oh)}</td><td>${m2(q.ol)}</td><td>${m2(q.oa)}</td><td>${m2(q.vb)}</td><td>${m2(s)}</td></tr>`;}).join('');
  const sup=saldoJaar-sumS;let pos=0;d.posten.forEach(p=>pos+=(parseFloat(String(p[1]).replace(',','.'))||0));
  const postRows=d.posten.map(p=>`<tr><td class="l">${String(p[0]).replace(/[<>]/g,'')}</td><td>${m2(parseFloat(String(p[1]).replace(',','.'))||0)}</td></tr>`).join('');
+ const aSup=Math.abs(sup);const stat=aSup<1?'Geen verschil':(aSup<1000?'Controle vereist':'Suppletie vereist');const risk=aSup<1?'Laag':(aSup<1000?'Midden':'Hoog');
  const body=`<h2>OB-aansluiting ${jaar} — ${naam}</h2>
+ <h3>Samenvatting</h3><table><tr><td class="l">Status</td><td>${stat}</td></tr><tr><td class="l">Saldo jaar (balans)</td><td>EUR ${m2(saldoJaar)}</td></tr><tr><td class="l">Som aangiften</td><td>EUR ${m2(sumS)}</td></tr><tr><td class="l">Suppletie ${jaar}</td><td>EUR ${m2(sup)}</td></tr><tr><td class="l">Risico</td><td>${risk}</td></tr></table>
  <h3>Balans (jaarcijfers)</h3><table>
  <tr><td class="l">1A Verkoop hoog (21%)</td><td>${m2(d.b.oh)}</td><td>btw ${m2(bh)}</td></tr>
  <tr><td class="l">1B Verkoop laag (9%)</td><td>${m2(d.b.ol)}</td><td>btw ${m2(bl)}</td></tr>
@@ -1515,6 +1542,12 @@ function printOB(naam){const d=aanslGet(naam,aanslJaar);if(!d)return;const jaar=
  <p style="font-size:15px"><b>Suppletie ${jaar}: EUR ${m2(sup)}</b></p>
  <h3>Balanspositie OB per 31-12-${jaar}</h3><table>${postRows}<tr><td class="l">4e kw ${jaar} (onbetaald)</td><td>${m2(q4s)}</td></tr><tr><td class="l">Suppletie ${jaar}</td><td>${m2(sup)}</td></tr><tr class="tot"><td class="l">Balanspositie OB</td><td>${m2(pos+q4s+sup)}</td></tr></table>`;
  printDoc('OB-aansluiting '+jaar+' '+naam, body);}
+function printLoon(naam){const w=state.werk[naam];if(!w)return;const lm=w.loon['2026'];const done=Object.values(lm).filter(Boolean).length;const pct=Math.round(done/12*100);
+ const rows=MAANDEN.map(m=>`<tr><td class="l">${m.charAt(0).toUpperCase()+m.slice(1)} 2026</td><td>${lm[m]?'Ingediend':'Open'}</td></tr>`).join('');
+ const body=`<h2>Loonaangifte 2026 — ${naam}</h2>
+ <h3>Samenvatting</h3><table><tr><td class="l">Verwerkte maanden</td><td>${done} / 12</td></tr><tr><td class="l">Resterende maanden</td><td>${12-done}</td></tr><tr class="tot"><td class="l">Voltooiing</td><td>${pct}%</td></tr></table>
+ <h3>Status per maand — boekjaar 2026</h3><table><tr><th class="l">Maand</th><th>Status</th></tr>${rows}</table>`;
+ printDoc('Loonaangifte 2026 '+naam, body);}
 function printLease(naam,i){const o=leaseList(naam)[i];if(!o)return;const res=leaseRows(o);
  const rows=res.rows.map(r=>`<tr><td class="l">${r.y}</td><td>${r.m}</td><td>${m2(r.r)}</td><td>${m2(r.a)}</td><td>${m2(r.s)}</td></tr>`).join('');
  const curY=new Date().getFullYear();const cur=res.rows.find(r=>r.y===curY)||res.rows[res.rows.length-1]||{s:0};
@@ -2865,13 +2898,22 @@ function renderClient(){
     const nowM=parseInt(TODAY.split('-')[1],10);
     const due=MAANDEN.slice(0,nowM).filter(m=>!lm[m]);
     const filed=MAANDEN.filter(m=>lm[m]);const lastFiled=filed.length?filed[filed.length-1].replace(/^./,x=>x.toUpperCase())+' 2026':'—';
-    const onSchedule=due.length===0;const lTone=onSchedule?'g':(lDone>0?'a':'r');
-    content=modHead({tone:lTone,status:onSchedule?'Op schema':`Achter op schema — ${due.length} maand(en)`,
+    const onSchedule=due.length===0;const lTone=onSchedule?'g':(lDone>0?'a':'r');const lpct=Math.round(lDone/12*100);
+    content=`<div class="row-between" style="margin-bottom:12px"><h3 style="margin:0">Loonaangifte 2026</h3><button class="btn ghost sm" onclick="printLoon('${naam}')">⬇ Print / PDF</button></div>`
+    +modHead({tone:lTone,status:onSchedule?'Op schema':`Achter op schema — ${due.length} maand(en)`,
       kpis:[['Verwerkte maanden',lDone+'/12'],['Laatste aangifte',lastFiled],['Volgende deadline','30-06-2026'],['Status',onSchedule?'Op schema':'Achter']],
       pct:nowM?Math.round((nowM-due.length)/nowM*100):100,
       missing:due.length?`Nog in te dienen: <b>${due.join(', ')}</b>.`:'Alle maanden tot nu toe zijn ingediend.',action:due.length>0})
-    +`<div class="panel"><div class="mod-sub">Maandstatus · jan–dec 2026</div><div class="sub" style="margin:-4px 0 12px">Klik op een maand om de aangifte als gedaan/niet-gedaan te markeren.</div>
-      <div class="loon-grid">${MAANDEN.map(m=>`<div class="loon-cell ${lm[m]?'on':''}" onclick="toggleLoon('${naam}','${m}')"><div style="text-transform:capitalize">${m}</div><div style="font-size:15px;margin-top:3px">${lm[m]?'✓':'—'}</div></div>`).join('')}</div></div>`;
+    +`<div class="panel"><div class="row-between" style="margin-bottom:6px"><div class="mod-sub" style="margin:0">Maandstatus 2026</div><div style="font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums">${lDone}/12 verwerkt · ${lpct}%</div></div>
+      <div class="mh-bar" style="margin:0 0 14px"><div class="mh-fill ${lTone}" style="width:${lpct}%"></div></div>
+      <div class="lmx">${MAANDEN.map((m,idx)=>{const done=lm[m];const isPast=idx<nowM;const tn=done?'done':(isPast?'due':'');return `<div class="lmc ${tn}" onclick="toggleLoon('${naam}','${m}')" title="${m} 2026 — ${done?'ingediend':'open'}"><div class="lmc-m">${m}</div><div class="lmc-i">${done?'✓':(isPast?'!':'·')}</div></div>`;}).join('')}</div>
+      <div class="sgrid c4" style="margin:16px 0 0">
+        <div class="scard"><div class="sl">Voltooid</div><div class="sv g">${lDone} mnd</div></div>
+        <div class="scard"><div class="sl">Resterend</div><div class="sv">${12-lDone} mnd</div></div>
+        <div class="scard"><div class="sl">Voltooiing</div><div class="sv">${lpct}%</div></div>
+        <div class="scard"><div class="sl">Laatste maand</div><div class="sv">${lastFiled}</div></div>
+      </div>
+      <div class="ai-note" style="margin-top:14px;font-size:11.5px">Klik op een maand om de aangifte als gedaan/niet-gedaan te markeren. Groen = ingediend · amber = openstaand (verstreken) · grijs = toekomstig.</div></div>`;
   } else if(clientTab==='mappen'){
     const counts={};MAPPEN.forEach(m=>counts[m]=state.dossierDocs.filter(x=>x.client===naam&&x.map===m).length);
     content=`<div class="row-between"><h3 style="margin:0">Documentmappen</h3><button class="btn primary sm" onclick="uploadDocKantoor('${naam}')">+ Document</button></div>
