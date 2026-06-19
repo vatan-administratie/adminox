@@ -447,6 +447,44 @@
   .hub4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   @media(max-width:1100px){.hub4{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:680px){.hub4{grid-template-columns:1fr}}
+  /* ===== Betalingsregeling wizard ===== */
+  .wz-steps{display:flex;align-items:flex-start;margin:8px 0 24px}
+  .wz-step{display:flex;flex-direction:column;align-items:center;gap:7px;flex-shrink:0;width:118px;text-align:center}
+  .wz-num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;background:var(--card);border:2px solid var(--line);color:var(--grey-2);transition:.18s}
+  .wz-lbl{font-size:11.5px;font-weight:600;color:var(--grey-2);line-height:1.25}
+  .wz-step.active .wz-num{background:var(--navy);border-color:var(--navy);color:#fff}
+  .wz-step.active .wz-lbl{color:var(--ink);font-weight:700}
+  .wz-step.done .wz-num{background:#15803D;border-color:#15803D;color:#fff}
+  .wz-step.done .wz-lbl{color:var(--ink-2)}
+  .wz-line{flex:1;height:2px;background:var(--line);margin:16px -8px 0;min-width:16px}
+  .wz-line.done{background:#15803D}
+  .wz-actions{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:12px}
+  .wz-terms{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .wz-term{border:1.5px solid var(--line);border-radius:12px;padding:13px 6px;text-align:center;cursor:pointer;transition:.13s;background:var(--card)}
+  .wz-term:hover{border-color:var(--brand-2)}
+  .wz-term.on{border-color:var(--navy);background:var(--brand-soft)}
+  .wz-term .n{font-size:17px;font-weight:800;color:var(--ink)}
+  .wz-term.on .n{color:var(--navy)}
+  .wz-term .m{font-size:11px;color:var(--grey);margin-top:3px}
+  @media(max-width:760px){.wz-step{width:58px}.wz-lbl{display:none}.wz-terms{grid-template-columns:repeat(3,1fr)}}
+  /* ===== Sticky klant-contextbalk (CRM) ===== */
+  .cl-sticky{position:sticky;top:0;z-index:20;background:var(--bg);padding-top:4px}
+  .cl-bar{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:13px 18px;box-shadow:var(--sh-sm);margin-bottom:14px}
+  .cl-ava{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:17px;flex-shrink:0;box-shadow:inset 0 1px 0 #ffffff33}
+  .cl-id{flex:1;min-width:0}
+  .cl-name{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
+  .cl-sub{font-size:12.5px;color:var(--grey);margin-top:4px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .cl-kpis{display:flex;gap:9px;flex-shrink:0}
+  .cl-kpi{text-align:center;min-width:66px;padding:7px 12px;border-radius:11px;background:var(--bg);border:1px solid var(--line)}
+  .cl-kpi .kn{font-size:19px;font-weight:800;color:var(--ink);line-height:1}
+  .cl-kpi .kl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--grey-2);margin-top:4px}
+  .cl-kpi.red{background:var(--danger-soft);border-color:#f3c9c9}.cl-kpi.red .kn{color:var(--danger)}
+  .cl-kpi.amber{background:var(--amber-soft);border-color:#f3e0b0}.cl-kpi.amber .kn{color:var(--amber)}
+  .cl-kpi.navy{background:var(--brand-soft);border-color:#cfe0f2}.cl-kpi.navy .kn{color:var(--navy)}
+  .cl-sticky .tabs{margin-bottom:0;background:var(--bg)}
+  .cl-sticky .tabs.subtabs{margin-top:8px;padding-bottom:2px}
+  @media(max-width:1040px){.cl-kpis{display:none}}
+  @media(max-width:680px){.cl-imp{display:none}.cl-name{font-size:17px}}
   .lp-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
   .lp-logo{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 18px;font-weight:700;color:var(--ink-2);font-size:14px;box-shadow:var(--sh-xs)}
   .lp-logo .d{width:9px;height:9px;border-radius:50%}
@@ -858,6 +896,54 @@ function rgRead(inp){const f=inp.files&&inp.files[0];if(!f)return;const det=docu
   const send=(b64,mime)=>{fetch('/.netlify/functions/explain',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'aanslag',imageBase64:b64,mimeType:mime})}).then(r=>r.json()).then(d=>{if(d.error)throw new Error(d.error);ok(d.kenmerk,d.bedrag);}).catch(e=>{rgDetected={kenmerk:'—',bedrag:''};det.innerHTML=`<div class="panel"><div class="ai-note" style="border-left-color:var(--amber)">⚠️ Kon de aanslag niet automatisch lezen (${String(e.message||e)}). U kunt de aanvraag toch versturen; Vatan vult de gegevens aan.</div></div>`;});};
   if(f.type&&f.type.indexOf('image/')===0){const img=new Image();const u=URL.createObjectURL(f);img.onload=()=>{const max=1600;let w=img.width,h=img.height;if(w>max||h>max){const sc=Math.min(max/w,max/h);w=Math.round(w*sc);h=Math.round(h*sc);}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);URL.revokeObjectURL(u);const durl=c.toDataURL('image/jpeg',0.82);rgUpload={url:durl,name:f.name};send(durl.split(',')[1],'image/jpeg');};img.src=u;}
   else{const rd=new FileReader();rd.onload=()=>{rgUpload={url:String(rd.result),name:f.name};send(String(rd.result).split(',')[1],f.type||'application/pdf');};rd.readAsDataURL(f);}}
+let rgStep=1, rgTerm='12';
+function rgStart(){rgDetected=null;rgUpload=null;rgStep=1;rgTerm='12';rgRender();}
+function rgGo(n){if(n>=2&&!rgDetected){toast('Upload eerst de aanslag — de AI leest het aanslagnummer en het bedrag');return;}rgStep=n;rgRender();}
+function rgSetTerm(t){rgTerm=t;rgRender();}
+function rgParseBedrag(b){if(!b)return 0;const s=String(b).replace(/[^0-9.,]/g,'').replace(/\./g,'').replace(',','.');const n=parseFloat(s);return isNaN(n)?0:n;}
+function rgFinish(){if(!rgDetected){toast('Upload eerst de aanslag');rgStep=1;rgRender();return;}state.regelingen.unshift({client:'Demo BV',kenmerk:rgDetected.kenmerk,bedrag:rgDetected.bedrag,termijnen:rgTerm,datum:TODAY,status:'aangevraagd',afgehandeldDatum:'',ondertekenaar:'',aanslagBestand:rgUpload});toast('Aanvraag verstuurd — Vatan stelt de brief op ✓');go('regeling');}
+function rgStepper(){const steps=['Upload aanslag','Controleer gegevens','Kies termijnen','Genereer brief','Klaar voor verzending'];
+  return `<div class="wz-steps">`+steps.map((s,i)=>{const n=i+1,cls=n<rgStep?'done':(n===rgStep?'active':'');return `<div class="wz-step ${cls}"><div class="wz-num">${n<rgStep?'✓':n}</div><div class="wz-lbl">${s}</div></div>`+(n<steps.length?`<div class="wz-line ${n<rgStep?'done':''}"></div>`:'');}).join('')+`</div>`;}
+function rgBtns(prev,next){return `<div class="wz-actions">${prev?`<button class="btn ghost" onclick="rgGo(${prev})">← Vorige</button>`:'<span></span>'}${next}</div>`;}
+function rgStepBody(){
+  if(rgStep===1){return `
+    <input type="file" id="rgFile" accept="image/*,.pdf" style="display:none" onchange="rgRead(this)">
+    <div class="uploadbox" style="cursor:pointer;padding:30px" onclick="document.getElementById('rgFile').click()">⤓ <b>Upload uw aanslag (PDF of foto)</b><br><span>De assistent leest automatisch het aanslagnummer en het bedrag. Uw aanslag wordt veilig bewaard.</span></div>
+    <div id="rgDet" style="margin-top:14px"></div>
+    ${rgBtns(0,`<button class="btn primary" onclick="rgGo(2)">Volgende →</button>`)}`;}
+  if(rgStep===2){const d=rgDetected||{};return `
+    <div class="panel"><h3>Controleer de gegevens</h3>
+      <p style="color:var(--grey);font-size:13.5px;margin-bottom:14px">Dit heeft de assistent uit uw aanslag gelezen. Klopt het niet? Ga terug en upload opnieuw — of stuur de aanvraag toch door, dan vult Vatan het aan.</p>
+      <div class="frow"><span class="k">Bestand</span><b>${rgUpload?rgUpload.name:'—'}</b></div>
+      <div class="frow"><span class="k">Aanslagnummer</span><b>${d.kenmerk||'—'}</b></div>
+      <div class="frow"><span class="k">Totaalbedrag</span><b>${d.bedrag?'€ '+d.bedrag:'—'}</b></div>
+    </div>
+    ${rgBtns(1,`<button class="btn primary" onclick="rgGo(3)">Volgende →</button>`)}`;}
+  if(rgStep===3){const tot=rgParseBedrag((rgDetected||{}).bedrag);const opts=['3','4','5','6','7','8','9','10','11','12'];
+    return `<div class="panel"><h3>In hoeveel termijnen wilt u betalen?</h3>
+      <p style="color:var(--grey);font-size:13.5px;margin-bottom:14px">Kies het aantal maandtermijnen.${tot?' U ziet direct het maandbedrag bij benadering.':''}</p>
+      <div class="wz-terms">${opts.map(o=>`<div class="wz-term ${rgTerm===o?'on':''}" onclick="rgSetTerm('${o}')"><div class="n">${o}×</div><div class="m">${tot?'± € '+(tot/parseInt(o)).toLocaleString('nl-NL',{minimumFractionDigits:2,maximumFractionDigits:2}):'p/mnd'}</div></div>`).join('')}</div>
+    </div>
+    ${rgBtns(2,`<button class="btn primary" onclick="rgGo(4)">Volgende →</button>`)}`;}
+  if(rgStep===4){const temp={client:'Demo BV',kenmerk:(rgDetected||{}).kenmerk||'—',bedrag:(rgDetected||{}).bedrag||'',termijnen:rgTerm,datum:TODAY};
+    return `<div class="panel" style="padding:16px"><div class="ai-note" style="margin:0 0 12px;border-left-color:#15803D">✓ Dit is de brief die Vatan voor u opstelt. U hoeft niets te typen.</div>
+      <div class="invoice" style="min-height:0;font-size:13px;line-height:1.5">${regelingBody(temp)}</div></div>
+    ${rgBtns(3,`<button class="btn primary" onclick="rgGo(5)">Volgende →</button>`)}`;}
+  const d=rgDetected||{};
+  return `<div class="panel"><h3>Klaar voor controle &amp; verzending</h3>
+    <p style="color:var(--grey);font-size:13.5px;margin-bottom:14px">Uw aanvraag gaat naar Vatan. Een medewerker controleert en ondertekent de brief en dient deze in bij de Belastingdienst. U kunt de status later volgen.</p>
+    <div class="frow"><span class="k">Aanslagnummer</span><b>${d.kenmerk||'—'}</b></div>
+    <div class="frow"><span class="k">Totaalbedrag</span><b>${d.bedrag?'€ '+d.bedrag:'—'}</b></div>
+    <div class="frow"><span class="k">Aantal termijnen</span><b>${rgTerm}×</b></div>
+    <div class="frow"><span class="k">Status na verzenden</span><span class="pill a">In behandeling bij Vatan</span></div>
+   </div>
+   ${rgBtns(4,`<button class="btn primary" onclick="rgFinish()">Aanvraag versturen naar Vatan ✓</button>`)}`;
+}
+function rgRender(){document.getElementById('view').innerHTML=`
+  <div class="backbar"><span class="backbtn" onclick="go('regeling')">← Betalingsregelingen</span></div>
+  <h1 class="title">Nieuwe betalingsregeling</h1>
+  <div class="sub">Vatan stelt op basis van uw aanslag een nette brief op voor de Belastingdienst. Volg de stappen hieronder.</div>
+  <div class="wz">${rgStepper()}<div class="wz-body">${rgStepBody()}</div></div>`;}
 function regelingBody(r){if(r.briefHtml)return r.briefHtml;return `
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:22px"><span style="display:inline-grid;place-items:center;width:34px;height:34px;border-radius:9px;background:#C8102E;color:#fff;font-weight:900;font-size:18px">V</span><div><div style="font-weight:900;font-size:18px;color:#15171A;letter-spacing:.5px">VATAN</div><div style="font-size:9px;color:#6E7681;letter-spacing:2px">ADMINISTRATIE &amp; ADVIES</div></div></div>
 <div style="margin-bottom:18px"><b>Belastingdienst</b><br>T.a.v. Invordering afdeling<br>Postbus 100<br>6400 AC Heerlen</div>
@@ -1465,7 +1551,7 @@ VIEWS.klant.regeling = ()=>{
       : `<span class="pill a">${r.status==='aangevraagd'?'Aangevraagd':'In behandeling'}</span>`;
     return `<tr class="clickable" onclick="klantRegeling(${gi})"><td><b>${r.kenmerk}</b></td><td>${r.bedrag?'€ '+r.bedrag:'—'}</td><td>${r.termijnen}×</td><td>${r.datum}</td><td>${st}</td></tr>`;
   }).join('');
-  return `<div class="row-between"><h1 class="title">${navL('regeling','Betalingsregeling')}</h1><button class="btn primary" onclick="addRegeling()">+ ${navL('regeling','Nieuwe aanvraag')}</button></div>
+  return `<div class="row-between"><h1 class="title">${navL('regeling','Betalingsregeling')}</h1><button class="btn primary" onclick="rgStart()">+ ${navL('regeling','Nieuwe aanvraag')}</button></div>
   <div class="sub">${t('wd_s').split('.')[0]}. Vatan stelt de officiële brief op; uw aanvraag en de aanslag worden bewaard en zijn later terug te zien.</div>
   <div class="tablewrap"><table><thead><tr><th>Kenmerk</th><th>Bedrag</th><th>Termijnen</th><th>Aangevraagd</th><th>Status</th></tr></thead><tbody>${rows||`<tr><td colspan="5"><div class="empty"><div class="big">📭</div>Nog geen aanvragen.</div></td></tr>`}</tbody></table></div>`;
 };
@@ -2253,12 +2339,30 @@ function renderClient(){
       <div class="frow"><span class="k">Machtiging</span><b>${d.machtiging||'—'}</b></div><div class="frow"><span class="k">WWFT-onderzoek</span><b>${d.wwft||'—'}</b></div>
       <div class="frow"><span class="k">UBO-registratie</span><b>${d.ubo||'—'}</b></div><div class="frow"><span class="k">Contactpersoon</span><b>${d.contact||'—'}</b></div></div>`;
   }
+  const clDocs=state.inbox.filter(x=>x.client===naam&&x.state!=='sent').length;
+  const clSig=(state.signals||[]).filter(s=>s.client===naam&&s.state!=='resolved').length;
+  const clLoon=Object.values(w.loon['2026']).filter(Boolean).length;
+  const clTaken=(12-clLoon)+(w.ob[KWARTALEN[0]].ingediend?0:1)+(w.ib[IBYEAR].ingediend?0:1);
   document.getElementById('view').innerHTML=`
     <div class="backbar"><span class="backbtn" onclick="go('klanten')">← Terug naar klanten</span></div>
-    <div class="emp-head"><div class="ph">${naam.split(' ').map(x=>x[0]).join('').slice(0,2)}</div><div style="flex:1"><div class="nm">${naam}</div><div class="meta">Nr ${c.nr} · ${progLogo(c.prog,`switchProgram('${naam}')`)} <span style="color:var(--grey-2)">(klik om te wijzigen)</span> · Medewerker: <b>${c.mw}</b></div></div><button class="btn dark sm" onclick="openAsKlant('${naam}')">↪ Naar klantportaal</button></div>
-    <div class="tabs">${tabBtn('overzicht','Overzicht')}${tabBtn('verwerken','Verwerken')}${tabBtn('signalen','Controle')}<div class="tab ${['ob','obaansl','ib','lease'].includes(clientTab)?'active':''}" onclick="openClient('${naam}','ob')">Jaarafsluiting</div>${tabBtn('loon','Loonaangifte')}${tabBtn('personeel','Personeel')}${tabBtn('regeling','Betalingsregeling')}${tabBtn('mappen','Mappen')}${tabBtn('logins','Inloggegevens')}${tabBtn('compliance','Compliance')}</div>
-    ${['ob','obaansl','ib','lease'].includes(clientTab)?`<div class="tabs" style="margin:-10px 0 18px">${tabBtn('ob','OB-aangifte')}${tabBtn('ib','IB & Jaarrekening')}${tabBtn('obaansl','OB-aansluiting')}<div class="tab ${clientTab==='lease'?'active':''}" onclick="leaseOpen('${naam}')">Lease</div></div>`:''}
-    <div>${content}</div>`;
+    <div class="cl-sticky">
+      <div class="cl-bar">
+        <div class="cl-ava" style="background:${cpAvColor(c)}">${cpInitials(naam)}</div>
+        <div class="cl-id">
+          <div class="cl-name">${naam} ${c.actief!==false?'<span class="pill g">● Actief</span>':'<span class="pill n">● Niet-actief</span>'}</div>
+          <div class="cl-sub"><span class="ptag ${c.prog}" style="cursor:pointer" title="Programma wijzigen" onclick="switchProgram('${naam}')"><span class="pdot"></span>${PROG[c.prog]}</span> · Nr ${c.nr}${d.kvk?` · KvK ${d.kvk}`:''} · Beheerder: <b>${c.mw}</b></div>
+        </div>
+        <div class="cl-kpis">
+          <div class="cl-kpi ${clDocs?'red':''}"><div class="kn">${clDocs}</div><div class="kl">Te verwerken</div></div>
+          <div class="cl-kpi ${clSig?'amber':''}"><div class="kn">${clSig}</div><div class="kl">Signalen</div></div>
+          <div class="cl-kpi ${clTaken?'navy':''}"><div class="kn">${clTaken}</div><div class="kl">Open taken</div></div>
+        </div>
+        <button class="btn dark sm cl-imp" onclick="openAsKlant('${naam}')">↪ Klantportaal</button>
+      </div>
+      <div class="tabs">${tabBtn('overzicht','Overzicht')}${tabBtn('verwerken','Verwerken')}${tabBtn('signalen','Controle')}<div class="tab ${['ob','obaansl','ib','lease'].includes(clientTab)?'active':''}" onclick="openClient('${naam}','ob')">Jaarafsluiting</div>${tabBtn('loon','Loonaangifte')}${tabBtn('personeel','Personeel')}${tabBtn('regeling','Betalingsregeling')}${tabBtn('mappen','Mappen')}${tabBtn('logins','Inloggegevens')}${tabBtn('compliance','Compliance')}</div>
+      ${['ob','obaansl','ib','lease'].includes(clientTab)?`<div class="tabs subtabs">${tabBtn('ob','OB-aangifte')}${tabBtn('ib','IB & Jaarrekening')}${tabBtn('obaansl','OB-aansluiting')}<div class="tab ${clientTab==='lease'?'active':''}" onclick="leaseOpen('${naam}')">Lease</div></div>`:''}
+    </div>
+    <div style="padding-top:16px">${content}</div>`;
   if(clientTab==='obaansl')aanslCalc();
   if(clientTab==='lease'&&leaseIdx>=0)leaseCalc();
 }
