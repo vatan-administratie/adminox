@@ -195,41 +195,36 @@
   .wl-ov-l{display:flex;align-items:baseline;gap:9px}
   .wl-big{font-size:23px;font-weight:800;color:var(--navy);letter-spacing:-.8px;line-height:1}
   .wf-list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--sh-sm)}
-  .wf-grp{display:flex;align-items:center;gap:8px;padding:10px 18px 7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-2);background:var(--bg);border-bottom:1px solid var(--line-2)}
+  .wf-grp{display:flex;align-items:center;gap:8px;padding:13px 20px 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-2);background:var(--bg);border-bottom:1px solid var(--line-2)}
   .wf-grp .n{font-weight:500;text-transform:none;letter-spacing:0}
-  .wf-row{display:grid;grid-template-columns:1.5fr 140px 1.4fr 150px;align-items:center;gap:16px;padding:12px 18px;border-bottom:1px solid var(--line-2);transition:background .12s}
+  .wf-row{display:grid;grid-template-columns:1fr auto 190px 30px;align-items:center;gap:20px;padding:15px 20px;border-bottom:1px solid var(--line-2);transition:background .12s,opacity .12s}
   .wf-row:last-child{border-bottom:0}
   .wf-row:hover{background:var(--hover)}
   .wf-l{display:flex;align-items:center;gap:12px;min-width:0;cursor:pointer}
   .wf-id{min-width:0}
   .wf-nm{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .wf-sub{font-size:11.5px;color:var(--grey-2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .wf-c{display:flex;flex-direction:column;gap:5px}
-  .wf-bar{height:6px;border-radius:5px;background:#EBEFF5;overflow:hidden}
-  .wf-bar span{display:block;height:100%;border-radius:5px;transition:width .3s}
-  .wf-pct{font-size:11px;font-weight:700;color:var(--grey)}
-  .wf-r{display:flex;flex-direction:column;gap:8px;min-width:0}
-  .wf-st{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;letter-spacing:-.1px}
-  .wf-st .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-  .wf-st.red{color:var(--danger)}.wf-st.red .dot{background:var(--red)}
-  .wf-st.amber{color:#a9781a}.wf-st.amber .dot{background:var(--amber)}
-  .wf-st.done{color:#15803D}.wf-st.done .dot{background:#15803D}
-  .wf-steps{display:flex;gap:13px}
-  .wf-step{display:inline-flex;align-items:center;gap:5px}
-  .wf-step .vink{width:22px;height:22px}
-  .wf-step .vink svg{width:13px;height:13px}
-  .wf-step-l{font-size:10px;color:var(--grey-2);font-weight:600}
-  .wf-note{border:0;border-bottom:1px solid transparent;background:transparent;font-size:12px;color:var(--grey);font-family:inherit;padding:3px 0;outline:none;width:100%;transition:border-color .14s,color .14s}
-  .wf-note:hover{border-bottom-color:var(--line)}
-  .wf-note:focus{border-bottom-color:var(--brand-2);color:var(--ink)}
-  .wf-note::placeholder{color:#c4ccd6}
-  .wf-row.done{background:#fbfcfe}
-  .wf-row.done .wf-nm{color:var(--ink-2);font-weight:600}
-  .wf-row.done .mono{opacity:.8}
+  .wf-step3{display:flex;align-items:center;justify-content:center}
+  .wf-node{width:22px;height:22px;border-radius:50%;border:2px solid #d7dee7;background:var(--card);display:grid;place-items:center;cursor:pointer;padding:0;flex-shrink:0;transition:.14s;color:#fff}
+  .wf-node:hover{border-color:var(--brand-2)}
+  .wf-node.on{background:#15803D;border-color:#15803D}
+  .wf-node svg{width:12px;height:12px}
+  .wf-conn{width:28px;height:2px;background:#e2e8f0;flex-shrink:0}
+  .wf-conn.on{background:#15803D}
+  .wf-sb{text-align:right;min-width:0}
+  .wf-bigst{font-size:15px;font-weight:800;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-bigst.red{color:var(--danger)}.wf-bigst.amber{color:#b07d18}.wf-bigst.done{color:#15803D}
+  .wf-pct2{font-size:11.5px;color:var(--grey);font-weight:600;margin-top:3px}
+  .wf-noteic{width:28px;height:28px;display:grid;place-items:center;border-radius:8px;color:var(--grey-2);cursor:pointer;opacity:0;transition:.13s}
+  .wf-noteic svg{width:16px;height:16px}
+  .wf-row:hover .wf-noteic{opacity:.6}
+  .wf-noteic:hover{background:var(--hover);color:var(--ink);opacity:1}
+  .wf-noteic.has{opacity:1;color:#c08a1c}
   .wf-row.red{box-shadow:inset 3px 0 0 var(--red)}
   .wf-row.amber{box-shadow:inset 3px 0 0 var(--amber)}
-  @media(max-width:1000px){.wf-row{grid-template-columns:1fr 1fr;gap:10px}.wf-l{grid-column:1/3}.wf-note{grid-column:1/3;order:5}}
-  @media(max-width:620px){.wf-row{grid-template-columns:1fr}.wf-l,.wf-note{grid-column:auto}}
+  .wf-row.done{opacity:.58}
+  .wf-row.done:hover{opacity:1}
+  @media(max-width:900px){.wf-row{grid-template-columns:1fr auto;gap:9px 14px;padding:13px 16px}.wf-l{grid-row:1;grid-column:1}.wf-sb{grid-row:1;grid-column:2}.wf-step3{grid-row:2;grid-column:1;justify-content:flex-start}.wf-noteic{grid-row:2;grid-column:2;opacity:.6;justify-self:end}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
   tbody tr.wl-prog{background:#FFFCF4}tbody tr.wl-prog:hover{background:#FFF7E6}
@@ -2695,10 +2690,15 @@ VIEWS.kantoor.obwerk = ()=>{
   const cntTodoOB=base.filter(c=>stepsOB(state.werk[c.naam].ob[kw])===0).length;
   const cntProgOB=base.length-ingediend-cntTodoOB;
   const sel=(opts,cur,fn)=>`<select class="gl" style="width:auto" onchange="${fn}">${opts.map(o=>`<option value="${o[0]}" ${o[0]===cur?'selected':''}>${o[1]}</option>`).join('')}</select>`;
-  const obState=o=>o.ingediend?{t:'Ingediend',tone:'done'}:(o.ingelezen?{t:'Klaar voor indiening',tone:'amber'}:(o.ingeleverd?{t:'Wacht op invoer',tone:'amber'}:{t:'Nog niet gestart',tone:'red'}));
-  const stepCell=(lbl,v,fn)=>`<span class="wf-step" title="${lbl}">${dateCell(v,fn,'')}<span class="wf-step-l">${lbl}</span></span>`;
-  const wfRow=c=>{const o=state.werk[c.naam].ob[kw];const st=stepsOB(o);const pct=Math.round(st/3*100);const sd=obState(o);const col=sd.tone==='done'?'#15803D':(sd.tone==='red'?'var(--red)':'var(--amber)');
-    return `<div class="wf-row ${sd.tone}"><div class="wf-l" onclick="openClient('${c.naam}','ob')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}</div></div></div><div class="wf-c"><div class="wf-bar"><span style="width:${pct}%;background:${col}"></span></div><span class="wf-pct">${pct}% voltooid</span></div><div class="wf-r"><span class="wf-st ${sd.tone}"><span class="dot"></span>${sd.t}</span><div class="wf-steps">${stepCell('Ingeleverd',o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`)}${stepCell('Ingevoerd',o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`)}${stepCell('Ingediend',o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`)}</div></div><input class="wf-note" value="${(o.opm||'').replace(/"/g,'&quot;')}" oninput="state.werk['${c.naam}'].ob['${kw}'].opm=this.value" placeholder="notitie…"></div>`;};
+  const obState=o=>o.ingediend?{t:'Ingediend',tone:'done'}:(o.ingelezen?{t:'Klaar voor indiening',tone:'amber'}:(o.ingeleverd?{t:'Wacht op invoer',tone:'amber'}:{t:'Wacht op documenten',tone:'red'}));
+  const wfNode=(v,fn,lbl)=>`<button class="wf-node ${v?'on':''}" title="${lbl}: ${v?'gedaan':'open'}" onclick="event.stopPropagation();${fn}">${v?`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>`:''}</button>`;
+  const wfRow=c=>{const o=state.werk[c.naam].ob[kw];const st=stepsOB(o);const pct=Math.round(st/3*100);const sd=obState(o);const note=(o.opm||'').trim();
+    return `<div class="wf-row ${sd.tone}">
+      <div class="wf-l" onclick="openClient('${c.naam}','ob')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}</div></div></div>
+      <div class="wf-step3">${wfNode(o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`,'Ingeleverd')}<span class="wf-conn ${o.ingeleverd?'on':''}"></span>${wfNode(o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`,'Ingevoerd')}<span class="wf-conn ${o.ingelezen?'on':''}"></span>${wfNode(o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`,'Ingediend')}</div>
+      <div class="wf-sb"><div class="wf-bigst ${sd.tone}">${sd.t}</div><div class="wf-pct2">${pct}% voltooid</div></div>
+      <span class="wf-noteic ${note?'has':''}" title="${note?note.replace(/"/g,'&quot;'):'Notitie toevoegen'}" onclick="event.stopPropagation();obNote('${c.naam}','${kw}')">${_svg('<path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3M8 12h8M8 15.5h5"/>')}</span>
+    </div>`;};
   const obBuckets=[{l:'Actie nodig',f:c=>!state.werk[c.naam].ob[kw].ingeleverd},{l:'In behandeling',f:c=>{const o=state.werk[c.naam].ob[kw];return o.ingeleverd&&!o.ingediend;}},{l:'Ingediend',f:c=>state.werk[c.naam].ob[kw].ingediend}];
   return `<h1 class="title">OB-werklijst</h1>
   <div class="sub">Per kwartaal en medewerker in één oogopslag zien wat nog moet gebeuren — kleur en voortgang per klant, zonder elke cel te lezen.</div>
@@ -2715,6 +2715,7 @@ VIEWS.kantoor.obwerk = ()=>{
   ${cs.length?`<div class="wf-list">${obBuckets.map(b=>{const rows=cs.filter(b.f);return rows.length?`<div class="wf-grp">${b.l} <span class="n">· ${rows.length}</span></div>`+rows.map(wfRow).join(''):'';}).join('')}</div>`:`<div class="empty" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:40px 20px"><div class="big">✅</div>Geen klanten in deze selectie.</div>`}`;
 };
 function obToggle(naam,kw,f){const o=state.werk[naam].ob[kw];o[f]=o[f]?'':TODAY;renderView();}
+function obNote(naam,kw){const o=state.werk[naam].ob[kw];modal('Notitie · '+naam+' ('+kw+')',field('Notitie','obNoteV','text',(o.opm||'').replace(/"/g,'&quot;')),'Opslaan',()=>{o.opm=val('obNoteV');renderView();});}
 VIEWS.kantoor.ibwerk = ()=>{
   const y=ibwJaar||IBJAREN[0];
   const base=state.clients.filter(c=>c.actief&&(ibwMw==='alle'||c.mw===ibwMw));
