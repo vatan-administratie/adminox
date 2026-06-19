@@ -9,23 +9,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --red:#C8102E; --red-dark:#A20C24; --red-soft:#FBE7EA; --red-tint:#FDF3F5;
-    --brand:#163A5E; --brand-2:#1F5C90; --brand-soft:#E8F1F9; --brand-tint:#F3F8FC; --brand-ink:#0E2942;
-    --ink:#111826; --ink-2:#243044; --grey:#5C6675; --grey-2:#95A0AF;
-    --line:#E6E9EF; --line-2:#F0F2F6; --bg:#F4F6F9; --card:#FFFFFF;
-    --green:#2F8F4E; --green-soft:#E4F4E9; --amber:#B8860B; --amber-soft:#FBF1D6;
+    /* ===== VATAN BoekAI Design System · tokens ===== */
+    /* Brand · navy */
+    --navy:#103B63; --navy-dark:#082742;
+    --brand:#103B63; --brand-2:#16507F; --brand-ink:#082742;
+    --brand-soft:#EAF2FA; --brand-tint:#F4F8FC;
+    /* Brand accent · red (restricted: logo, primary CTA, error, overdue, critical) */
+    --red:#D71941; --red-dark:#B01334; --red-soft:#FEE2E2; --red-tint:#FDF2F4;
+    /* Text */
+    --ink:#0F172A; --ink-2:#1E293B; --grey:#64748B; --grey-2:#94A3B8;
+    /* Surfaces */
+    --line:#E2E8F0; --line-2:#EEF2F7; --bg:#F7F9FC; --card:#FFFFFF; --hover:#F1F5F9;
+    /* Status */
+    --green:#166534; --green-soft:#DCFCE7; --amber:#92400E; --amber-soft:#FEF3C7;
+    --danger:#991B1B; --danger-soft:#FEE2E2; --info:#1E40AF; --info-soft:#DBEAFE;
+    /* Program tints */
     --ex:#2E6FB5; --ex-soft:#E4EEF8; --sn:#1F8A5B; --sn-soft:#E2F3EB;
-    --sh-xs:0 1px 2px #10131908;
-    --sh-sm:0 1px 2px #1013190a, 0 1px 3px #10131910;
-    --sh-md:0 2px 4px #1013190a, 0 6px 16px #10131914;
-    --sh-lg:0 8px 24px #10131914, 0 18px 44px #1013191a;
-    --radius:14px;
+    /* Shadows · subtle only */
+    --sh-xs:0 1px 2px rgba(15,23,42,.04);
+    --sh-sm:0 1px 2px rgba(15,23,42,.05);
+    --sh-md:0 4px 12px rgba(15,23,42,.06);
+    --sh-lg:0 10px 30px rgba(15,23,42,.08);
+    /* Radius */
+    --radius:18px; --r-btn:12px; --r-input:12px; --r-card:18px; --r-modal:24px; --r-pill:8px;
+    /* Spacing scale */
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s10:40px; --s12:48px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:14px;background:var(--bg);color:#1c1f24;height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"cv02","cv03","cv04","cv11"}
   .app{display:none;grid-template-columns:262px 1fr;grid-template-rows:64px 1fr;height:100vh}
   .app.show{display:grid}
-  .topbar{grid-column:1/3;background:linear-gradient(180deg,#1B466F 0%,#143A5E 55%,#102C49 100%);color:#fff;display:flex;align-items:center;padding:0 22px;gap:16px;border-bottom:1px solid #ffffff1f;box-shadow:0 2px 0 var(--red),0 4px 18px #0e294233}
+  .topbar{grid-column:1/3;background:var(--navy-dark);color:#fff;display:flex;align-items:center;padding:0 24px;gap:20px;border-bottom:1px solid #ffffff14;box-shadow:0 1px 0 #00000026}
   .brand{display:flex;align-items:center;gap:13px}
   .vlogo{display:block;flex-shrink:0}
   .wm{display:flex;flex-direction:column;line-height:1}
@@ -55,10 +69,10 @@
   .side{background:#fff;border-right:1px solid var(--line);padding:9px 11px;display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0;scrollbar-width:none}
   .side::-webkit-scrollbar{display:none}
   .side .grp{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--grey-2);padding:9px 11px 3px}
-  .navitem{position:relative;display:flex;align-items:center;gap:11px;padding:7px 12px;border-radius:9px;cursor:pointer;color:#404650;font-size:12.5px;font-weight:600;transition:background .14s,color .14s}
-  .navitem:hover{background:var(--line-2);color:var(--ink)}
-  .navitem.active{background:var(--brand-soft);color:var(--brand);font-weight:700}
-  .navitem.active::before{content:"";position:absolute;left:-11px;top:8px;bottom:8px;width:3px;border-radius:0 3px 3px 0;background:var(--brand-2)}
+  .navitem{position:relative;display:flex;align-items:center;gap:12px;padding:0 12px;min-height:44px;border-radius:10px;cursor:pointer;color:var(--ink-2);font-size:13px;font-weight:500;transition:background .14s,color .14s}
+  .navitem:hover{background:var(--hover);color:var(--ink)}
+  .navitem.active{background:var(--brand-soft);color:var(--navy);font-weight:600}
+  .navitem.active::before{content:"";position:absolute;left:-11px;top:9px;bottom:9px;width:3px;border-radius:0 3px 3px 0;background:var(--navy)}
   .navitem.active .ic{color:var(--brand-2)}
   .navitem .ic{width:19px;height:19px;display:inline-flex;align-items:center;justify-content:center;text-align:center;color:var(--grey-2);font-size:15px;transition:color .14s;flex-shrink:0}
   .navitem .ic svg{width:19px;height:19px;display:block}
@@ -68,20 +82,20 @@
   .side .uinfo .av{width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:12px}
   .side .uinfo .nm{font-size:13px;font-weight:700;color:var(--ink)}
   .side .uinfo .sm{font-size:11px;color:var(--grey)}
-  .main{overflow-y:auto;padding:34px 44px;max-width:1500px}
-  h1.title{font-size:25px;color:var(--ink);font-weight:800;letter-spacing:-.4px;display:inline-flex;align-items:center;gap:11px;line-height:1.15}
-  h1.title::before{content:"";width:5px;height:23px;border-radius:3px;background:linear-gradient(180deg,#1F5C90,#143A5E)}
+  .main{overflow-y:auto;overflow-x:hidden;padding:28px 36px;max-width:1480px;min-height:0;min-width:0}
+  h1.title{font-size:30px;color:var(--ink);font-weight:700;letter-spacing:-.5px;display:inline-flex;align-items:center;gap:12px;line-height:1.15}
+  h1.title::before{content:"";width:5px;height:26px;border-radius:3px;background:var(--navy)}
   .sub{color:var(--grey);font-size:14px;margin:11px 0 22px;line-height:1.5}
   .row-between{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 19px;position:relative;overflow:hidden;box-shadow:var(--sh-sm);transition:box-shadow .16s,transform .16s}
-  .stat:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}
-  .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#1F5C90,#143A5E)}
-  .stat .lbl{font-size:11.5px;color:var(--grey);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-  .stat .val{font-size:27px;font-weight:800;color:var(--ink);margin-top:8px;letter-spacing:-.5px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:20px 22px;position:relative;overflow:hidden;box-shadow:var(--sh-sm);transition:box-shadow .18s,transform .18s,border-color .18s}
+  .stat:hover{box-shadow:var(--sh-md);transform:translateY(-2px);border-color:#D7E0EC}
+  .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--navy)}
+  .stat .lbl{font-size:11.5px;color:var(--grey);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+  .stat .val{font-size:30px;font-weight:700;color:var(--ink);margin-top:10px;letter-spacing:-.8px;line-height:1.05}
   .stat .val small{font-size:13px;color:var(--green);font-weight:700}
   .stat-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-  .stat-ic{width:36px;height:36px;border-radius:10px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;flex-shrink:0}
+  .stat-ic{width:38px;height:38px;border-radius:11px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;flex-shrink:0}
   .stat-ic svg{width:19px;height:19px}
   .stat .delta{font-size:11.5px;font-weight:600;margin-top:9px;color:var(--grey);display:flex;align-items:center;gap:5px}
   .stat .delta svg{width:13px;height:13px;flex-shrink:0}
@@ -89,8 +103,8 @@
   .qic svg{width:19px;height:19px}
   .qbtn .arr svg{width:17px;height:17px;display:block}
   .grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--sh-sm)}
-  .panel h3{font-size:15.5px;color:var(--ink);margin-bottom:15px;font-weight:700;letter-spacing:-.2px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:24px;box-shadow:var(--sh-sm)}
+  .panel h3{font-size:16px;color:var(--ink);margin-bottom:16px;font-weight:700;letter-spacing:-.2px}
   .qa{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .qbtn{display:flex;align-items:center;gap:11px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:14px 15px;cursor:pointer;font-size:13.5px;font-weight:700;color:var(--ink);font-family:inherit;text-align:left;box-shadow:var(--sh-xs);transition:transform .14s,box-shadow .14s,border-color .14s}
   .qbtn:hover{border-color:var(--brand-2);background:var(--brand-tint);transform:translateY(-2px);box-shadow:var(--sh-md)}
@@ -100,31 +114,41 @@
   .actrow:last-child{border-bottom:0}
   .actrow .dot{width:9px;height:9px;border-radius:50%;margin-top:4px;flex-shrink:0}
   .actrow .t{color:var(--grey);font-size:11.5px;margin-top:2px}
-  .pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;line-height:1.4}
+  /* ===== Badge system (one shape for all statuses) ===== */
+  .pill{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:22px;font-size:11.5px;font-weight:700;padding:0 10px;border-radius:var(--r-pill);white-space:nowrap;line-height:1}
   .pill.ex{background:var(--ex-soft);color:var(--ex)}.pill.sn{background:var(--sn-soft);color:var(--sn)}
   .pill.g{background:var(--green-soft);color:var(--green)}.pill.a{background:var(--amber-soft);color:var(--amber)}
-  .pill.r{background:var(--red-soft);color:var(--red-dark)}.pill.n{background:#EEF0F3;color:var(--grey)}
-  .btn{border:0;border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .12s,box-shadow .14s,background .14s;display:inline-flex;align-items:center;gap:7px}
+  .pill.r{background:var(--danger-soft);color:var(--danger)}.pill.n{background:#EEF2F7;color:var(--grey)}
+  .pill.i{background:var(--info-soft);color:var(--info)}
+  /* ===== Button system (one global set) ===== */
+  .btn{border:1px solid transparent;border-radius:var(--r-btn);padding:11px 18px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .14s,border-color .14s,box-shadow .14s,transform .1s;display:inline-flex;align-items:center;justify-content:center;gap:8px;line-height:1;position:relative}
   .btn:active{transform:translateY(1px)}
-  .btn.primary{background:linear-gradient(180deg,#205F94,#15436B);color:#fff;box-shadow:0 1px 2px #0e294238,0 4px 12px #16436b30}.btn.primary:hover{background:linear-gradient(180deg,#1B5183,#103a5c);box-shadow:0 2px 4px #0e294246,0 9px 22px #16436b40}
-  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--sh-xs)}.btn.ghost:hover{background:var(--line-2);border-color:#dcdfe5}
-  .btn.dark{background:var(--ink);color:#fff}.btn.dark:hover{background:var(--ink-2)}
-  .btn.green{background:var(--green);color:#fff;box-shadow:0 4px 12px #2f8f4e2e}.btn.green:hover{background:#266f3e}
-  .btn:disabled{opacity:.45;cursor:default;box-shadow:none}
+  .btn.primary{background:var(--navy);color:#fff;box-shadow:var(--sh-sm)}.btn.primary:hover{background:var(--navy-dark)}
+  .btn.ghost,.btn.secondary{background:#fff;color:var(--ink);border-color:var(--line);box-shadow:var(--sh-xs)}.btn.ghost:hover,.btn.secondary:hover{background:var(--hover);border-color:#D7E0EC}
+  .btn.text{background:transparent;color:var(--navy);padding-left:8px;padding-right:8px}.btn.text:hover{background:var(--brand-soft)}
+  .btn.danger{background:var(--red);color:#fff;box-shadow:var(--sh-sm)}.btn.danger:hover{background:var(--red-dark)}
+  .btn.dark{background:var(--navy-dark);color:#fff}.btn.dark:hover{background:#06223a}
+  .btn.green{background:#15803D;color:#fff;box-shadow:var(--sh-sm)}.btn.green:hover{background:#126B33}
+  .btn:disabled{opacity:.45;cursor:default;box-shadow:none;pointer-events:none}
+  .btn.loading{color:transparent !important;pointer-events:none}
+  .btn.loading::after{content:"";position:absolute;width:15px;height:15px;border:2px solid #ffffff66;border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+  .btn.ghost.loading::after,.btn.secondary.loading::after,.btn.text.loading::after{border-color:#94a3b855;border-top-color:var(--navy)}
   .btn:focus-visible{outline:2px solid var(--brand-2);outline-offset:2px}
-  .btn.sm{padding:7px 12px;font-size:12px}
-  .tablewrap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--sh-sm)}
-  table{width:100%;border-collapse:collapse;font-size:13px}
-  thead th{background:#FBFCFD;text-align:left;padding:14px 18px;color:var(--grey);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--line)}
-  thead th.r{text-align:right}
-  tbody td{padding:15px 18px;border-bottom:1px solid var(--line-2);vertical-align:middle}
-  tbody td.r{text-align:right}
+  .btn.sm{padding:8px 13px;font-size:12.5px;border-radius:10px}
+  /* ===== Table system (first-class, Stripe/Linear quality) ===== */
+  .tablewrap{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;box-shadow:var(--sh-sm)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  thead th{position:sticky;top:0;z-index:2;background:#FBFCFE;text-align:left;padding:0 18px;height:44px;color:var(--grey);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid var(--line)}
+  thead th.r{text-align:right}thead th.c{text-align:center}
+  tbody td{padding:0 18px;height:60px;border-bottom:1px solid var(--line-2);vertical-align:middle;color:var(--ink-2)}
+  tbody td.r{text-align:right}tbody td.c{text-align:center}
   tbody tr:last-child td{border-bottom:0}
-  tbody tr.sent{background:var(--green-soft)}
-  tbody tr.clickable{cursor:pointer;transition:background .12s}
-  tbody tr.clickable:hover{background:var(--brand-tint)}
-  .gl{border:1px solid var(--line);border-radius:8px;padding:9px 10px;font-size:13px;font-family:inherit;background:#fff;color:#1c1f24;width:100%}
-  .gl:focus{outline:2px solid var(--brand-soft);border-color:var(--brand-2)}
+  tbody tr{transition:background .12s}
+  tbody tr:hover{background:var(--hover)}
+  tbody tr.sent{background:var(--green-soft)}tbody tr.sent:hover{background:#CFF6DD}
+  tbody tr.clickable{cursor:pointer}
+  .gl{border:1px solid var(--line);border-radius:var(--r-input);padding:0 12px;height:42px;font-size:13.5px;font-family:inherit;background:#fff;color:var(--ink);width:100%}
+  .gl:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #16507f26}
   .empty{text-align:center;color:var(--grey);padding:48px 20px;font-size:14px}
   .empty .big{font-size:40px;margin-bottom:10px}
   .feedback{margin-top:18px;background:var(--brand-tint);border:1px solid var(--line);border-left:3px solid var(--brand-2);border-radius:11px;padding:14px 16px;font-size:13px;color:#42505f;display:flex;gap:11px;align-items:flex-start}
@@ -167,22 +191,27 @@
   .step{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--grey);opacity:.45;transition:.3s}
   .step.active{opacity:1;color:#1c1f24;font-weight:600}.step.done{opacity:1;color:#1c1f24}
   .step .sic{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:13px;flex-shrink:0}
-  .step.active .sic{border-color:var(--red);color:var(--red)}
-  .step.done .sic{background:var(--green);border-color:var(--green);color:#fff}
-  .spin{width:14px;height:14px;border:2px solid #ffffff00;border-top-color:var(--red);border-right-color:var(--red);border-radius:50%;animation:sp .7s linear infinite}
+  .step.active .sic{border-color:var(--brand-2);color:var(--brand-2)}
+  .step.done .sic{background:#15803D;border-color:#15803D;color:#fff}
+  .spin{width:14px;height:14px;border:2px solid #ffffff00;border-top-color:var(--brand-2);border-right-color:var(--brand-2);border-radius:50%;animation:sp .7s linear infinite}
   @keyframes sp{to{transform:rotate(360deg)}}
   .bk-form{display:none}.bk-form.show{display:block;animation:fade .3s}
   @keyframes fade{from{opacity:0}to{opacity:1}}
-  .bk-head{padding:15px 19px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--red-tint)}
+  .bk-head{padding:15px 19px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--brand-tint)}
   .bk-head .t{font-weight:800;color:var(--ink);font-size:15px}
   .bk-sec{padding:15px 19px;border-bottom:1px solid var(--line)}
   .bk-sec .sh{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--grey);margin-bottom:10px}
   .frow{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:13.5px}
   .frow .k{color:var(--grey)}
-  .field{margin-bottom:12px}.field:last-child{margin-bottom:0}
-  .field label{display:block;font-size:11.5px;color:var(--grey);font-weight:700;margin-bottom:5px}
-  .field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 10px;font-size:13px;font-family:inherit;color:#1c1f24;background:#fff}
-  .field input:focus,.field select:focus{outline:2px solid var(--brand-soft);border-color:var(--brand-2)}
+  /* ===== Form system ===== */
+  .field{margin-bottom:14px}.field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:12px;color:var(--grey);font-weight:700;margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:var(--r-input);padding:0 13px;height:44px;font-size:14px;font-family:inherit;color:var(--ink);background:#fff;transition:border-color .14s,box-shadow .14s}
+  .field textarea{height:auto;min-height:96px;padding:11px 13px;resize:vertical;line-height:1.5}
+  .field input::placeholder,.field textarea::placeholder{color:var(--grey-2)}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px #16507f26}
+  .field.error input,.field.error select,.field.error textarea,.field input.error{border-color:var(--red);box-shadow:0 0 0 3px #d7194122}
+  .field .err{color:var(--danger);font-size:11.5px;font-weight:600;margin-top:5px}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .ai-note{background:var(--brand-tint);border:1px solid var(--line);border-left:3px solid var(--brand-2);border-radius:9px;padding:10px 12px;font-size:12px;color:#46505d;margin-top:4px}
   .bk-actions{padding:15px 19px;display:flex;gap:10px;justify-content:flex-end;align-items:center}
@@ -242,7 +271,7 @@
   .grp-h{font-size:15px;font-weight:800;color:var(--ink);margin:8px 0 10px;display:flex;align-items:center;gap:8px;padding-bottom:6px;border-bottom:2px solid var(--brand-soft)}
   .loon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}
   .loon-cell{border:1px solid var(--line);border-radius:10px;padding:11px 6px;text-align:center;font-size:12px;font-weight:700;cursor:pointer;color:var(--grey);transition:.12s}
-  .loon-cell:hover{border-color:var(--red)}
+  .loon-cell:hover{border-color:var(--brand-2)}
   .loon-cell.on{background:var(--green-soft);border-color:var(--green);color:var(--green)}
   @media(max-width:760px){.loon-grid{grid-template-columns:repeat(4,1fr)}}
   .imp-bar{display:flex;align-items:center;gap:10px;background:#FFF6E5;border:1px solid #F0D48A;color:#6b5310;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:13px}
@@ -255,6 +284,27 @@
   .pfill{height:100%;background:var(--green);border-radius:5px;transition:width .3s}
   .pmini{font-size:11.5px;color:var(--red-dark);font-weight:700;margin-top:7px}
   @media(max-width:1000px){.psum{grid-template-columns:repeat(2,1fr)}}
+  /* ===== Kleine schermen / kleine laptops: layout blijft scrollbaar ===== */
+  @media(max-width:1180px){.app{grid-template-columns:216px 1fr}.main{padding:24px 26px}}
+  @media(max-width:880px){
+    .app{grid-template-columns:184px 1fr}
+    .topbar{padding:0 12px;gap:9px}.cpick input{width:150px}
+    .wm-sub{display:none}.main{padding:18px 16px}
+    .stats,.psum{grid-template-columns:repeat(2,1fr)!important}
+    .tabs{flex-wrap:nowrap}
+  }
+  @media(max-width:620px){
+    .app{grid-template-columns:1fr;grid-template-rows:56px auto 1fr}
+    .topbar{grid-column:1/2}
+    .side{grid-row:2;flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--line);padding:6px 8px;gap:4px;max-height:120px}
+    .side .grp,.side .uinfo{display:none}
+    .navitem{padding:6px 9px;font-size:12px}
+    .main{grid-row:3;padding:16px 12px}
+    .stats,.psum{grid-template-columns:1fr!important}
+    .topbar .who{display:none}.cpick input{width:120px}
+  }
+  /* Korte schermen: zorg dat content altijd kan scrollen i.p.v. afgekapt te worden */
+  @media(max-height:640px){.main{padding-top:18px;padding-bottom:18px}}
   .plogo{position:relative;display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:8px;font-family:"Inter",sans-serif;font-size:14px;font-weight:700;color:#fff;vertical-align:middle;line-height:1;box-shadow:inset 0 1px 0 #ffffff5e,0 2px 6px #00000033}
   .plogo::after{content:"";position:absolute;inset:0;border-radius:8px;box-shadow:inset 0 0 0 1px #ffffff24;pointer-events:none}
   .plogo.ex{background:linear-gradient(155deg,#EF394A,#CC1023)}
@@ -287,9 +337,9 @@
   .vink .dash{width:9px;height:2px;border-radius:2px;background:var(--grey-2)}
   .dinp{width:96px;border:1px solid var(--line);border-radius:6px;padding:3px 6px;font-size:11.5px;font-family:inherit;margin-left:6px;color:#1c1f24}
   .dinp:focus{outline:2px solid var(--brand-soft);border-color:var(--brand-2)}
-  .mOverlay{position:fixed;inset:0;background:#15171acc;display:none;place-items:center;z-index:120;padding:20px}
+  .mOverlay{position:fixed;inset:0;background:rgba(8,23,42,.55);display:none;place-items:center;z-index:120;padding:20px;backdrop-filter:blur(2px)}
   .mOverlay.show{display:grid;animation:fade .2s}
-  .mbox{background:#fff;border-radius:18px;width:480px;max-width:94vw;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px #0008,0 0 0 1px #ffffff10}
+  .mbox{background:#fff;border-radius:var(--r-modal);width:480px;max-width:94vw;max-height:90vh;overflow-y:auto;box-shadow:var(--sh-lg)}
   .mbox .mh{padding:19px 24px;border-bottom:1px solid var(--line);font-size:16.5px;font-weight:800;color:var(--ink);letter-spacing:-.2px}
   .mbox .mb{padding:20px 22px}
   .mbox .mf{padding:16px 22px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:10px}
@@ -358,7 +408,7 @@
   .chatin input{flex:1;border:1px solid var(--line);border-radius:9px;padding:9px 10px;font-size:13px;font-family:inherit;background:#fff;color:#1c1f24}
   .chatin input:focus{outline:2px solid var(--brand-soft);border-color:var(--brand-2)}
   /* ===== DARK MODE ===== */
-  body.dark{--ink:#E8EAED;--ink-2:#c9cdd3;--grey:#9aa2ab;--grey-2:#727a85;--line:#2a2f37;--bg:#0e1014;--card:#171a20;--red-soft:#3a1420;--red-tint:#211218;--green-soft:#13261b;--amber-soft:#262011;--ex-soft:#13212e;--sn-soft:#0f2420;background:#0e1014;color:#E8EAED}
+  body.dark{--ink:#E8EAED;--ink-2:#c9cdd3;--grey:#9aa2ab;--grey-2:#727a85;--line:#2a2f37;--line-2:#23272f;--bg:#0e1014;--card:#171a20;--hover:#1e232c;--brand-soft:#15273b;--brand-tint:#121b27;--red-soft:#3a1420;--red-tint:#211218;--danger-soft:#3a1420;--green-soft:#13261b;--amber-soft:#262011;--info-soft:#12243a;--ex-soft:#13212e;--sn-soft:#0f2420;background:#0e1014;color:#E8EAED}
   body.dark .topbar{background:#0a0c0f}
   body.dark .side{background:#12151b}
   body.dark .btn.dark{background:#2a2f37;color:#fff}
@@ -527,6 +577,26 @@ function navL(id,fb){return LANG==='nl'?fb:((NAVT[LANG]&&NAVT[LANG][id])||fb);}
 function grpL(g){return LANG==='nl'?g:((GRPT[LANG]&&GRPT[LANG][g])||g);}
 function setLang(l){LANG=l;document.documentElement.lang=l;document.body.dir=(l==='ar')?'rtl':'ltr';try{localStorage.setItem('vatanLang',l);}catch(e){}renderLangUI();renderNav();if(document.getElementById('app').classList.contains('show'))renderView();}
 function renderLangUI(){['langSel','loginLangSel'].forEach(id=>{const s=document.getElementById(id);if(s)s.value=LANG;});const sb=document.getElementById('switchBtn');if(sb)sb.textContent=t('wissel');}
+/* ===== Volledige paginavertaling (woordenboek over de hele DOM) ===== */
+const I18N={
+ en:{"In ontwikkeling":"In development","Inkoopfactuur — AI-herkenning":"Purchase invoice — AI recognition","Facturatie":"Invoicing","Offertes":"Quotes","Relaties":"Contacts","Tijdregistratie":"Time tracking","KM-registratie":"Mileage tracking","Documenten & rapporten":"Documents & reports","Cijfers & BTW":"Figures & VAT","Berichten":"Messages","Bankkoppeling":"Bank link","Betalingen & aanmaningen":"Payments & reminders","Instellingen":"Settings","Uren factureren":"Invoice hours","Kantooroverzicht":"Office overview","Klanten":"Clients","Goedkeuren · Boekingen":"Approve · Entries","OB-werklijst":"VAT worklist","IB-werklijst":"Income-tax worklist","Deadlines & taken":"Deadlines & tasks","Loonadministratie":"Payroll","Rapporten & documenten":"Reports & documents","Abonnementen & facturatie":"Subscriptions & billing","Statistieken":"Statistics","Post":"Item","Bedrag":"Amount","Btw":"VAT","BTW":"VAT","Kwartaal":"Quarter","Omzet hoog":"Turnover high","Omzet laag":"Turnover low","Omzet 0%":"Turnover 0%","Onderaann.":"Subcontr.","Voorbel.":"Input VAT","Aangegeven":"Declared","Saldo":"Balance","Verschil":"Difference","Omschrijving":"Description","Kenteken":"Plate","Maandtermijn":"Monthly term","Looptijd":"Term","Start":"Start","Schuld huidig jaar":"Debt this year","Jaar":"Year","Maanden":"Months","Rente":"Interest","Aflossing":"Repayment","Schuld per 31-12":"Debt at 31-12","Grootboek":"Ledger","Debet":"Debit","Credit":"Credit","Kenmerk":"Reference","Termijnen":"Instalments","Aangevraagd":"Requested","Status":"Status","Nummer":"Number","Relatie":"Contact","Datum":"Date","Vervaldatum":"Due date","Openstaand":"Outstanding","Geldig tot":"Valid until","Leverancier":"Supplier","Programma":"Program","Naam":"Name","Plaats":"City","E-mail":"E-mail","Prijs":"Price","Project":"Project","Uren":"Hours","Km":"Km","Vergoeding":"Allowance","Doel":"Purpose","Boeking":"Entry","Functie":"Role","Contractvorm":"Contract type","Loon":"Salary","Verlof/Ziek":"Leave/Sick","Rubriek":"Category","Omzetbelasting":"VAT","Periode":"Period","Te betalen":"To pay","Gekoppeld aan":"Linked to","Factuur":"Invoice","Aantal":"Qty","Totaal":"Total","Wijze":"Method","Eenheid":"Unit","Datum / week":"Date / week","Route":"Route","Betaald":"Paid","Concept":"Draft","Verzonden":"Sent","Verlopen":"Expired","Open":"Open","Goedgekeurd":"Approved","Te laat":"Overdue","Nieuw":"New","Opslaan":"Save","Annuleren":"Cancel","Verzenden":"Send","Downloaden":"Download","Bewerken":"Edit","Verwijderen":"Delete","Toevoegen":"Add","Sluiten":"Close","Afhandelen":"Handle","Goedkeuren":"Approve","Terug":"Back"},
+ tr:{"In ontwikkeling":"Geliştiriliyor","Inkoopfactuur — AI-herkenning":"Alış faturası — AI tanıma","Facturatie":"Faturalama","Offertes":"Teklifler","Relaties":"Cariler","Tijdregistratie":"Zaman kaydı","KM-registratie":"KM kaydı","Documenten & rapporten":"Belgeler & raporlar","Cijfers & BTW":"Rakamlar & KDV","Berichten":"Mesajlar","Bankkoppeling":"Banka bağlantısı","Betalingen & aanmaningen":"Ödemeler & hatırlatmalar","Instellingen":"Ayarlar","Uren factureren":"Saatleri faturala","Kantooroverzicht":"Ofis genel bakış","Klanten":"Müşteriler","Goedkeuren · Boekingen":"Onayla · Kayıtlar","OB-werklijst":"KDV iş listesi","IB-werklijst":"Gelir vergisi iş listesi","Deadlines & taken":"Son tarihler & görevler","Loonadministratie":"Bordro","Rapporten & documenten":"Raporlar & belgeler","Abonnementen & facturatie":"Abonelikler & faturalama","Statistieken":"İstatistikler","Post":"Kalem","Bedrag":"Tutar","Btw":"KDV","BTW":"KDV","Kwartaal":"Çeyrek","Omzet hoog":"Ciro yüksek","Omzet laag":"Ciro düşük","Omzet 0%":"Ciro %0","Onderaann.":"Taşeron","Voorbel.":"İndirilecek KDV","Aangegeven":"Beyan edilen","Saldo":"Bakiye","Verschil":"Fark","Omschrijving":"Açıklama","Kenteken":"Plaka","Maandtermijn":"Aylık taksit","Looptijd":"Vade","Start":"Başlangıç","Schuld huidig jaar":"Bu yıl borç","Jaar":"Yıl","Maanden":"Ay","Rente":"Faiz","Aflossing":"Anapara","Schuld per 31-12":"31-12 borç","Grootboek":"Defter","Debet":"Borç","Credit":"Alacak","Kenmerk":"Referans","Termijnen":"Taksitler","Aangevraagd":"Talep edildi","Status":"Durum","Nummer":"Numara","Relatie":"Cari","Datum":"Tarih","Vervaldatum":"Vade tarihi","Openstaand":"Açık","Geldig tot":"Geçerlilik","Leverancier":"Tedarikçi","Programma":"Program","Naam":"Ad","Plaats":"Şehir","E-mail":"E-posta","Prijs":"Fiyat","Project":"Proje","Uren":"Saat","Km":"Km","Vergoeding":"Ödeme","Doel":"Amaç","Boeking":"Kayıt","Functie":"Görev","Contractvorm":"Sözleşme türü","Loon":"Maaş","Verlof/Ziek":"İzin/Hasta","Rubriek":"Kategori","Omzetbelasting":"KDV","Periode":"Dönem","Te betalen":"Ödenecek","Gekoppeld aan":"Bağlı","Factuur":"Fatura","Aantal":"Adet","Totaal":"Toplam","Wijze":"Yöntem","Eenheid":"Birim","Datum / week":"Tarih / hafta","Route":"Güzergah","Betaald":"Ödendi","Concept":"Taslak","Verzonden":"Gönderildi","Verlopen":"Süresi doldu","Open":"Açık","Goedgekeurd":"Onaylandı","Te laat":"Gecikti","Nieuw":"Yeni","Opslaan":"Kaydet","Annuleren":"İptal","Verzenden":"Gönder","Downloaden":"İndir","Bewerken":"Düzenle","Verwijderen":"Sil","Toevoegen":"Ekle","Sluiten":"Kapat","Afhandelen":"İşle","Goedkeuren":"Onayla","Terug":"Geri"},
+ bg:{"In ontwikkeling":"В разработка","Inkoopfactuur — AI-herkenning":"Фактура за покупка — AI разпознаване","Facturatie":"Фактуриране","Offertes":"Оферти","Relaties":"Контакти","Tijdregistratie":"Отчитане на часове","KM-registratie":"Километри","Documenten & rapporten":"Документи и отчети","Cijfers & BTW":"Числа и ДДС","Berichten":"Съобщения","Bankkoppeling":"Банкова връзка","Betalingen & aanmaningen":"Плащания и напомняния","Instellingen":"Настройки","Uren factureren":"Фактуриране на часове","Kantooroverzicht":"Офис преглед","Klanten":"Клиенти","Goedkeuren · Boekingen":"Одобряване · Записи","OB-werklijst":"ДДС списък","IB-werklijst":"Списък данък доход","Deadlines & taken":"Срокове и задачи","Loonadministratie":"Заплати","Rapporten & documenten":"Отчети и документи","Abonnementen & facturatie":"Абонаменти и фактуриране","Statistieken":"Статистика","Post":"Позиция","Bedrag":"Сума","Btw":"ДДС","BTW":"ДДС","Kwartaal":"Тримесечие","Omzet hoog":"Оборот висок","Omzet laag":"Оборот нисък","Omzet 0%":"Оборот 0%","Onderaann.":"Подизпълн.","Voorbel.":"Входящо ДДС","Aangegeven":"Деклариран","Saldo":"Салдо","Verschil":"Разлика","Omschrijving":"Описание","Kenteken":"Рег. номер","Maandtermijn":"Месечна вноска","Looptijd":"Срок","Start":"Начало","Schuld huidig jaar":"Дълг тази година","Jaar":"Година","Maanden":"Месеци","Rente":"Лихва","Aflossing":"Главница","Schuld per 31-12":"Дълг към 31-12","Grootboek":"Главна книга","Debet":"Дебит","Credit":"Кредит","Kenmerk":"Референция","Termijnen":"Вноски","Aangevraagd":"Заявено","Status":"Статус","Nummer":"Номер","Relatie":"Контакт","Datum":"Дата","Vervaldatum":"Падеж","Openstaand":"Дължимо","Geldig tot":"Валидно до","Leverancier":"Доставчик","Programma":"Програма","Naam":"Име","Plaats":"Град","E-mail":"Имейл","Prijs":"Цена","Project":"Проект","Uren":"Часове","Km":"Км","Vergoeding":"Възнаграждение","Doel":"Цел","Boeking":"Запис","Functie":"Длъжност","Contractvorm":"Вид договор","Loon":"Заплата","Verlof/Ziek":"Отпуск/Болен","Rubriek":"Категория","Omzetbelasting":"ДДС","Periode":"Период","Te betalen":"За плащане","Gekoppeld aan":"Свързано с","Factuur":"Фактура","Aantal":"Брой","Totaal":"Общо","Wijze":"Начин","Eenheid":"Единица","Datum / week":"Дата / седмица","Route":"Маршрут","Betaald":"Платено","Concept":"Чернова","Verzonden":"Изпратено","Verlopen":"Изтекло","Open":"Отворено","Goedgekeurd":"Одобрено","Te laat":"Просрочено","Nieuw":"Ново","Opslaan":"Запази","Annuleren":"Отказ","Verzenden":"Изпрати","Downloaden":"Изтегли","Bewerken":"Редактирай","Verwijderen":"Изтрий","Toevoegen":"Добави","Sluiten":"Затвори","Afhandelen":"Обработи","Goedkeuren":"Одобри","Terug":"Назад"},
+ ar:{"In ontwikkeling":"قيد التطوير","Inkoopfactuur — AI-herkenning":"فاتورة شراء — تعرّف AI","Facturatie":"الفوترة","Offertes":"عروض الأسعار","Relaties":"جهات الاتصال","Tijdregistratie":"تسجيل الوقت","KM-registratie":"تسجيل الكيلومترات","Documenten & rapporten":"المستندات والتقارير","Cijfers & BTW":"الأرقام وضريبة القيمة المضافة","Berichten":"الرسائل","Bankkoppeling":"ربط البنك","Betalingen & aanmaningen":"المدفوعات والتذكيرات","Instellingen":"الإعدادات","Uren factureren":"فوترة الساعات","Kantooroverzicht":"نظرة عامة على المكتب","Klanten":"العملاء","Goedkeuren · Boekingen":"موافقة · قيود","OB-werklijst":"قائمة عمل ض.ق.م","IB-werklijst":"قائمة عمل ضريبة الدخل","Deadlines & taken":"المواعيد والمهام","Loonadministratie":"الرواتب","Rapporten & documenten":"التقارير والمستندات","Abonnementen & facturatie":"الاشتراكات والفوترة","Statistieken":"الإحصاءات","Post":"بند","Bedrag":"المبلغ","Btw":"ض.ق.م","BTW":"ض.ق.م","Kwartaal":"الربع","Omzet hoog":"إيراد مرتفع","Omzet laag":"إيراد منخفض","Omzet 0%":"إيراد 0%","Onderaann.":"مقاول باطن","Voorbel.":"ض.ق.م المدخلات","Aangegeven":"مُصرّح","Saldo":"الرصيد","Verschil":"الفرق","Omschrijving":"الوصف","Kenteken":"اللوحة","Maandtermijn":"القسط الشهري","Looptijd":"المدة","Start":"البداية","Schuld huidig jaar":"دين هذه السنة","Jaar":"السنة","Maanden":"أشهر","Rente":"الفائدة","Aflossing":"السداد","Schuld per 31-12":"الدين في 31-12","Grootboek":"دفتر الأستاذ","Debet":"مدين","Credit":"دائن","Kenmerk":"المرجع","Termijnen":"الأقساط","Aangevraagd":"مطلوب","Status":"الحالة","Nummer":"الرقم","Relatie":"جهة الاتصال","Datum":"التاريخ","Vervaldatum":"تاريخ الاستحقاق","Openstaand":"مستحق","Geldig tot":"صالح حتى","Leverancier":"المورّد","Programma":"البرنامج","Naam":"الاسم","Plaats":"المدينة","E-mail":"البريد الإلكتروني","Prijs":"السعر","Project":"المشروع","Uren":"ساعات","Km":"كم","Vergoeding":"البدل","Doel":"الغرض","Boeking":"القيد","Functie":"الوظيفة","Contractvorm":"نوع العقد","Loon":"الراتب","Verlof/Ziek":"إجازة/مرض","Rubriek":"الفئة","Omzetbelasting":"ض.ق.م","Periode":"الفترة","Te betalen":"للدفع","Gekoppeld aan":"مرتبط بـ","Factuur":"فاتورة","Aantal":"الكمية","Totaal":"الإجمالي","Wijze":"الطريقة","Eenheid":"الوحدة","Datum / week":"التاريخ / الأسبوع","Route":"المسار","Betaald":"مدفوع","Concept":"مسودة","Verzonden":"مُرسل","Verlopen":"منتهٍ","Open":"مفتوح","Goedgekeurd":"موافَق","Te laat":"متأخر","Nieuw":"جديد","Opslaan":"حفظ","Annuleren":"إلغاء","Verzenden":"إرسال","Downloaden":"تنزيل","Bewerken":"تعديل","Verwijderen":"حذف","Toevoegen":"إضافة","Sluiten":"إغلاق","Afhandelen":"معالجة","Goedkeuren":"موافقة","Terug":"رجوع"}
+};
+function translateDOM(root){
+  if(LANG==='nl'||!root)return;const map=I18N[LANG];if(!map)return;
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);const ns=[];let nn;while(nn=w.nextNode())ns.push(nn);
+  ns.forEach(node=>{
+    if(node.parentElement&&node.parentElement.closest('[contenteditable=true],[contenteditable=""]'))return;
+    const raw=node.nodeValue,k=raw.trim();
+    if(k&&map[k]!==undefined&&map[k]!==k){node.nodeValue=raw.replace(k,map[k]);}
+  });
+  root.querySelectorAll('[placeholder]').forEach(el=>{const k=(el.getAttribute('placeholder')||'').trim();if(k&&map[k]!==undefined)el.setAttribute('placeholder',map[k]);});
+}
+let _i18nBusy=false,_i18nObs=null;
+function applyI18n(){if(LANG==='nl'||_i18nBusy)return;const el=document.getElementById('view');if(!el)return;_i18nBusy=true;try{translateDOM(el);}catch(e){}_i18nBusy=false;}
+function startI18nObserver(){if(_i18nObs)return;const el=document.getElementById('view');if(!el)return;_i18nObs=new MutationObserver(()=>{if(_i18nBusy)return;applyI18n();});_i18nObs.observe(el,{childList:true,subtree:true});}
 /* ===== Wat is dit (uitlegger, niets opgeslagen) ===== */
 function showExplain(id){const d=DOCS_EXPLAIN.find(x=>x.id===id);if(!d)return;const r=document.getElementById('wdResult');r.innerHTML=`<div class="boeking"><div class="bk-proc"><div class="steps"><div class="step active"><div class="sic"><span class="spin"></span></div>${t('wd_lees')}</div></div></div></div>`;setTimeout(()=>{r.innerHTML=explainCard(d);},900);}
 function explainCard(d){const u=(d.u[LANG]||d.u.nl);const urg=d.urg==='hoog'?t('wd_hoog'):d.urg==='midden'?t('wd_mid'):t('wd_laag');const up=d.urg==='hoog'?'r':d.urg==='midden'?'a':'g';
@@ -1092,7 +1162,7 @@ function renderNav(){
   s.appendChild(u);
 }
 function go(v){VIEW=v;docMap=null;const ci=document.getElementById('cpickInput');if(ci)ci.value='';renderNav();renderView();}
-function renderView(){let html=(VIEWS[ROLE][VIEW]?VIEWS[ROLE][VIEW]():'<h1 class="title">In ontwikkeling</h1>');if(impersonate&&ROLE==='klant'){html=`<div class="imp-bar">👁 U bekijkt het klantportaal als <b>${impersonate}</b> — precies wat de klant ziet (facturen, geüploade bonnen, etc.). <span class="backbtn" style="margin-left:auto" onclick="backToKantoor()">← Terug naar kantoor</span></div>`+html;}document.getElementById('view').innerHTML=html;}
+function renderView(){let html=(VIEWS[ROLE][VIEW]?VIEWS[ROLE][VIEW]():'<h1 class="title">In ontwikkeling</h1>');if(impersonate&&ROLE==='klant'){html=`<div class="imp-bar">👁 U bekijkt het klantportaal als <b>${impersonate}</b> — precies wat de klant ziet (facturen, geüploade bonnen, etc.). <span class="backbtn" style="margin-left:auto" onclick="backToKantoor()">← Terug naar kantoor</span></div>`+html;}document.getElementById('view').innerHTML=html;startI18nObserver();applyI18n();}
 function listView(title, sub, btnLabel, btnFn, head, rows){
   return `<div class="row-between"><h1 class="title">${title}</h1>${btnLabel?`<button class="btn primary" onclick="${btnFn}">+ ${btnLabel}</button>`:''}</div>
   <div class="sub">${sub}</div>
@@ -1516,7 +1586,7 @@ function setInvStatus(nr,st){findInv(nr).status=st;toast('Factuur '+nr+' → '+s
 function setQuoteStatus(nr,st){findQuote(nr).status=st;toast('Offerte '+nr+' → '+st);openQuote(nr);}
 function printDoc(nr){const inv=findInv(nr);if(inv){printInvoice(inv,'FACTUUR');return;}const q=findQuote(nr);if(q)printInvoice(q,'OFFERTE');}
 function printInvoice(doc,label){
-  const css=`:root{--red:#C8102E;--ink:#15171A;--grey:#6E7681;--line:#E6E8EC;--bg:#F5F6F8;--green:#2F8F4E;--amber:#B8860B;}
+  const css=`:root{--red:#D71941;--ink:#0F172A;--grey:#64748B;--line:#E2E8F0;--bg:#F7F9FC;--green:#166534;--amber:#92400E;}
   *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
   body{padding:34px;color:#1c1f24}
   .invoice{font-size:13px;line-height:1.5}
