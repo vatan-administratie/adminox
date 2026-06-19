@@ -198,6 +198,32 @@
   .ck.amber{background:var(--amber-soft);color:var(--amber)}
   .ck.red{background:var(--danger-soft);color:var(--danger)}
   @media(max-width:940px){.clx{flex-wrap:wrap}.clx .id{width:auto;flex:1}.clx .chips{flex-basis:100%;justify-content:flex-start;margin-top:7px}.clx .chev{display:none}}
+  /* ===== Kantooroverzicht command-center ===== */
+  .attn-band.slim{padding:9px 15px;margin-bottom:14px}
+  .attn-band.slim .ab-ic{width:30px;height:30px}.attn-band.slim .ab-ic svg{width:16px;height:16px}
+  .dash-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:14px;align-items:start}
+  @media(max-width:980px){.dash-grid{grid-template-columns:1fr}}
+  .wkrow{display:flex;align-items:center;gap:11px;padding:8px 5px;border-bottom:1px solid var(--line-2);cursor:pointer;transition:background .12s;border-radius:8px}
+  .wkrow:last-of-type{border-bottom:0}
+  .wkrow:hover{background:var(--hover)}
+  .wkrow .av{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:11px;flex-shrink:0;box-shadow:inset 0 1px 0 #ffffff33}
+  .wkrow .id{flex:1;min-width:0}
+  .wkrow .id b{font-size:13px;color:var(--ink)}
+  .wkrow .id .t{font-size:11px;color:var(--grey-2);margin-top:1px}
+  .dl-row{display:flex;align-items:center;gap:11px;padding:9px 2px;border-bottom:1px solid var(--line-2)}
+  .dl-row:last-child{border-bottom:0}
+  .dl-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+  .dl-dot.red{background:var(--red)}.dl-dot.amber{background:var(--amber)}.dl-dot.green{background:#15803D}.dl-dot.blue{background:var(--info)}
+  .dl-row .l{font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+  .dl-row .s{font-size:11px;color:var(--grey);margin-top:2px}
+  .dl-row .when{margin-left:auto;text-align:right;flex-shrink:0;font-size:12px;font-weight:800;color:var(--ink-2);white-space:nowrap}
+  .dl-row.red .when{color:var(--danger)}.dl-row.amber .when{color:var(--amber)}
+  .ai-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .ai-tile{background:var(--brand-tint);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .ai-tile .n{font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-.6px;font-variant-numeric:tabular-nums;line-height:1}
+  .ai-tile .l{font-size:11px;color:var(--grey);font-weight:600;margin-top:4px;line-height:1.3}
+  .ai-tile.green .n{color:#15803D}
+  @media(max-width:900px){.ai-grid{grid-template-columns:repeat(2,1fr)}}
   .qic svg{width:19px;height:19px}
   .qbtn .arr svg{width:17px;height:17px;display:block}
   .grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
@@ -2247,36 +2273,55 @@ function uploadBon(){const sup=['Albert Heijn XL','Gamma Bouwmarkt','Bol.com zak
 
 /* ============ KANTOOR VIEWS ============ */
 VIEWS.kantoor.overzicht = ()=>{
+  const base=state.clients.filter(c=>c.actief);
   const teVerwerken=state.inbox.filter(x=>x.state==='new').length, inQueue=state.inbox.filter(x=>x.state==='queue').length;
   const openSig=state.signals.filter(s=>s.state!=='resolved').length;
-  return `<h1 class="title">Kantooroverzicht</h1><div class="sub">Vatan Administratie &amp; Advies — ${state.clients.length} actieve klanten.</div>
-  ${(teVerwerken||inQueue||openSig)?`<div class="attn-band ${teVerwerken||openSig?'danger':'warn'}">
+  const obOpen=base.filter(c=>!state.werk[c.naam].ob[KWARTALEN[0]].ingediend).length;
+  const ibOpen=base.filter(c=>!state.werk[c.naam].ib[IBYEAR].ingediend).length;
+  const loonOpenTot=base.reduce((a,c)=>a+(12-Object.values(state.werk[c.naam].loon['2026']).filter(Boolean).length),0);
+  const regOpen=state.regelingen.filter(r=>r.status!=='afgehandeld').length;
+  const dls=[
+    {l:'OB-aangifte '+KWARTALEN[0], d:'30 apr', sub:obOpen?obOpen+' klanten nog open':'alle ingediend', tone:obOpen?'red':'green', urg:obOpen>0},
+    {l:'IB '+IBYEAR, d:'1 mei', sub:ibOpen?ibOpen+' aangiften open':'alle ingediend', tone:ibOpen?'amber':'green', urg:ibOpen>0},
+    {l:'Loonaangifte juni 2026', d:'31 jul', sub:'tijdvak juni · binnen 7 dagen', tone:'amber', urg:true},
+    {l:'Betalingsregelingen', d:'doorlopend', sub:regOpen?regOpen+' in behandeling bij Vatan':'geen open verzoeken', tone:regOpen?'blue':'green', urg:false}
+  ];
+  const dl7=dls.filter(x=>x.tone==='red'||x.tone==='amber').length;
+  return `<h1 class="title">Kantooroverzicht</h1><div class="sub">Vatan Administratie &amp; Advies — ${base.length} actieve klanten · ${MEDEWERKERS.length} medewerkers.</div>
+  ${(teVerwerken||openSig||obOpen||dl7)?`<div class="attn-band slim ${teVerwerken||openSig||obOpen?'danger':'warn'}">
     <div class="ab-ic">${_svg('<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>')}</div>
-    <div class="ab-txt"><div class="ab-h">Vraagt vandaag aandacht</div><div class="ab-s">Open werk verdeeld over uw klanten.</div></div>
-    <div class="attn-chips">${teVerwerken?`<span class="attn-chip red" onclick="go('verwerken')">${teVerwerken} te verwerken</span>`:''}${inQueue?`<span class="attn-chip amber" onclick="go('goedkeuren')">${inQueue} in goedkeuring</span>`:''}${openSig?`<span class="attn-chip red" onclick="setMwFilter('alle');go('klanten')">${openSig} signalen</span>`:''}</div>
+    <div class="ab-txt"><div class="ab-h">Vraagt vandaag aandacht</div><div class="ab-s">Open werk, signalen en naderende deadlines.</div></div>
+    <div class="attn-chips">${teVerwerken?`<span class="attn-chip red" onclick="go('verwerken')">${teVerwerken} te verwerken</span>`:''}${openSig?`<span class="attn-chip red" onclick="setMwFilter('alle');go('klanten')">${openSig} signalen</span>`:''}${dl7?`<span class="attn-chip amber" onclick="go('obwerk')">${dl7} deadlines deze week</span>`:''}${obOpen?`<span class="attn-chip red" onclick="go('obwerk')">${obOpen} OB te laat</span>`:''}</div>
   </div>`:''}
   <div class="stats">
     <div class="stat ${teVerwerken?'t-red':''}" onclick="go('verwerken')" style="cursor:pointer" title="Open verwerkingswachtrij per klant"><div class="stat-top"><div class="lbl">Te verwerken</div><div class="stat-ic">${icon('verwerken')}</div></div><div class="val">${teVerwerken}</div><div class="delta">klik voor wachtrij per klant →</div></div>
-    <div class="stat ${inQueue?'t-amber':''}"><div class="stat-top"><div class="lbl">In goedkeuring</div><div class="stat-ic">${icon('offertes')}</div></div><div class="val">${inQueue}</div><div class="delta">klaar voor controle</div></div>
+    <div class="stat ${openSig?'t-red':''}" onclick="setMwFilter('alle');go('klanten')" style="cursor:pointer"><div class="stat-top"><div class="lbl">Open signalen</div><div class="stat-ic">${icon('watisdit')}</div></div><div class="val">${openSig}</div><div class="delta">aandachtspunten</div></div>
+    <div class="stat ${dl7?'t-amber':''}" onclick="go('obwerk')" style="cursor:pointer"><div class="stat-top"><div class="lbl">Deadline binnen 7 dagen</div><div class="stat-ic">${icon('regeling')}</div></div><div class="val">${dl7}</div><div class="delta">OB · IB · loon</div></div>
     <div class="stat t-green"><div class="stat-top"><div class="lbl">Geboekt deze maand</div><div class="stat-ic">${icon('statistieken')}</div></div><div class="val">${monthlyDone}</div><div class="delta up">verwerkt door AI + controle</div></div>
-    <div class="stat ${openSig?'t-red':''}"><div class="stat-top"><div class="lbl">Open signalen</div><div class="stat-ic">${icon('watisdit')}</div></div><div class="val">${openSig}</div><div class="delta">aandachtspunten</div></div>
   </div>
-  <div class="grid2">
-    <div class="panel"><h3>Te verwerken per klant</h3>
-      ${(()=>{const byC={};state.inbox.filter(x=>x.state==='new').forEach(d=>{byC[d.client]=(byC[d.client]||0)+1;});const ks=Object.keys(byC);return ks.length?ks.map(cn=>{const c=state.clients.find(x=>x.naam===cn)||{};return `<div class="actrow" style="cursor:pointer" onclick="openClient('${cn}','verwerken')"><span class="dot" style="background:var(--red)"></span><div style="flex:1"><b>${cn}</b><div class="t">${c.mw?'Medewerker: '+c.mw:''}</div></div><span class="pill r">${byC[cn]} document(en)</span></div>`;}).join(''):'<div class="empty">Alles verwerkt 🎉</div>';})()}
-      <div style="margin-top:12px"><button class="btn primary sm" onclick="go('verwerken')">Volledige wachtrij openen →</button></div></div>
-    <div class="panel"><h3>Gekoppelde programma's</h3>
-      <div class="intg"><div class="ico ex"><span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span></div><div><div class="nm">Exact Online</div><div class="ds">${state.clients.filter(c=>c.actief&&c.prog==='ex').length} klanten · OAuth2-koppeling</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
-      <div class="intg"><div class="ico sn"><span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span></div><div><div class="nm">SnelStart</div><div class="ds">${state.clients.filter(c=>c.actief&&c.prog==='sn').length} klanten · B2B API</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
-      <div class="intg"><div class="ico fg">FG</div><div><div class="nm">Fiscaal Gemak</div><div class="ds">Aangiften &amp; jaarwerk · kantoorbreed</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
-      <div style="font-size:11.5px;color:var(--grey);margin:8px 2px 0;line-height:1.5">Elke klant is aan precies één boekhoudprogramma gekoppeld; Fiscaal Gemak is kantoorbreed gekoppeld voor IB/VPB/jaarwerk en uitstel.</div>
-      <div class="feedback" style="margin-top:14px"><span style="font-size:18px">↻</span><div><b>Leercyclus actief.</b> 41 correcties deze maand verwerkt; nauwkeurigheid <b>+6%</b>.</div></div></div>
+  <div class="dash-grid">
+    <div class="panel"><div class="row-between"><h3 style="margin:0">Te verwerken per klant</h3><button class="btn ghost sm" onclick="go('verwerken')">Volledige wachtrij →</button></div>
+      <div style="margin-top:10px">${(()=>{const byC={};state.inbox.filter(x=>x.state==='new').forEach(d=>{byC[d.client]=(byC[d.client]||0)+1;});const ks=Object.keys(byC).sort((a,b)=>byC[b]-byC[a]);if(!ks.length)return '<div class="empty" style="padding:22px">Alles verwerkt 🎉</div>';return ks.slice(0,6).map(cn=>{const c=state.clients.find(x=>x.naam===cn)||{};const urgent=byC[cn]>=3;return `<div class="wkrow" onclick="openClient('${cn}','verwerken')"><span class="av" style="background:${c.prog?cpAvColor(c):'#94a3b8'}">${cpInitials(cn)}</span><div class="id"><b>${cn}</b><div class="t">${c.mw||'—'}</div></div><span class="ck ${urgent?'red':'amber'}">${byC[cn]} doc${byC[cn]>1?'en':''}</span></div>`;}).join('')+(ks.length>6?`<div style="text-align:center;margin-top:8px;font-size:11.5px;color:var(--grey)">+ ${ks.length-6} meer klanten in de wachtrij</div>`:'');})()}</div></div>
+    <div class="panel"><h3>Aankomende deadlines</h3>
+      <div>${dls.map(x=>`<div class="dl-row ${x.tone}"><span class="dl-dot ${x.tone}"></span><div style="min-width:0"><div class="l">${x.l}</div><div class="s">${x.sub}</div></div><div class="when">${x.d}</div></div>`).join('')}</div>
+      <div style="font-size:11px;color:var(--grey-2);margin-top:10px;line-height:1.5">Status: <b style="color:var(--danger)">rood</b> te laat · <b style="color:var(--amber)">oranje</b> binnenkort · <b style="color:#15803D">groen</b> op schema.</div></div>
   </div>
-  <div class="panel" style="margin-top:18px"><h3>Werklast per medewerker</h3>
-    <div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Medewerker</th><th>Actieve klanten</th><th>Te verwerken</th><th>Loonaangiften open</th><th></th></tr></thead><tbody>
-    ${MEDEWERKERS.map(mw=>{const cs=state.clients.filter(c=>c.actief&&c.mw===mw);const tv=cs.reduce((a,c)=>a+state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length,0);const loonOpen=cs.reduce((a,c)=>a+(12-Object.values(state.werk[c.naam].loon['2026']).filter(Boolean).length),0);return `<tr class="clickable" onclick="mwFilter='${mw}';go('klanten')"><td><b>${mw}</b></td><td>${cs.length}</td><td>${tv?'<span class="pill r">'+tv+'</span>':'<span class="pill g">0</span>'}</td><td>${loonOpen?'<span class="pill a">'+loonOpen+'</span>':'<span class="pill g">0</span>'}</td><td class="r" style="color:var(--grey)">bekijk →</td></tr>`;}).join('')}
-    </tbody></table></div>
-  </div>`;
+  <div class="panel" style="margin-bottom:14px"><h3>Werklast per medewerker</h3>
+    ${(()=>{const md=MEDEWERKERS.map(mw=>{const cs=base.filter(c=>c.mw===mw);const tv=cs.reduce((a,c)=>a+state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length,0);const lo=cs.reduce((a,c)=>a+(12-Object.values(state.werk[c.naam].loon['2026']).filter(Boolean).length),0);return {mw,n:cs.length,tv,lo,load:tv+lo};});const mx=Math.max(1,...md.map(x=>x.load));return md.map(x=>{const pct=Math.round(x.load/mx*100);const col=x.tv?'var(--red)':(x.lo?'var(--amber)':'#15803D');return `<div class="wkrow" onclick="mwFilter='${x.mw}';go('klanten')"><span class="av" style="background:${x.tv?'linear-gradient(150deg,#E0233C,#A20C24)':'linear-gradient(150deg,#1F5C90,#103B63)'}">${x.mw[0]}</span><div class="id"><b>${x.mw}</b><div class="t">${x.n} klanten · werklast</div><div class="pbar" style="margin-top:5px;height:5px"><div class="pfill" style="width:${pct}%;background:${col}"></div></div></div><div style="display:flex;gap:6px;flex-shrink:0">${x.tv?`<span class="ck red">${x.tv} te verwerken</span>`:'<span class="ck done">0 te verwerken</span>'}${x.lo?`<span class="ck amber">${x.lo} loon open</span>`:'<span class="ck done">loon bij</span>'}</div></div>`;}).join('');})()}
+  </div>
+  <div class="panel" style="margin-bottom:14px"><h3>AI &amp; automatisering</h3>
+    <div class="ai-grid">
+      <div class="ai-tile"><div class="n">${monthlyDone}</div><div class="l">Verwerkt deze maand</div></div>
+      <div class="ai-tile"><div class="n">${Math.round(monthlyDone*0.88)}</div><div class="l">Automatisch door AI (~88%)</div></div>
+      <div class="ai-tile"><div class="n">41</div><div class="l">Correcties · leercyclus</div></div>
+      <div class="ai-tile green"><div class="n">+6%</div><div class="l">Nauwkeurigheid deze maand</div></div>
+    </div>
+    <div class="feedback" style="margin-top:12px"><span style="font-size:18px">↻</span><div><b>Leercyclus actief.</b> Elke goedkeuring en correctie traint de voorspelmodule; het grootboekvoorstel wordt per leverancier nauwkeuriger.</div></div></div>
+  <div class="panel"><h3>Gekoppelde programma's</h3>
+    <div class="intg"><div class="ico ex"><span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span></div><div><div class="nm">Exact Online</div><div class="ds">${base.filter(c=>c.prog==='ex').length} klanten · OAuth2-koppeling</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
+    <div class="intg"><div class="ico sn"><span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span></div><div><div class="nm">SnelStart</div><div class="ds">${base.filter(c=>c.prog==='sn').length} klanten · B2B API</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
+    <div class="intg"><div class="ico fg">FG</div><div><div class="nm">Fiscaal Gemak</div><div class="ds">Aangiften &amp; jaarwerk · kantoorbreed</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
+    <div style="font-size:11.5px;color:var(--grey);margin:8px 2px 0;line-height:1.5">Elke klant is aan precies één boekhoudprogramma gekoppeld; Fiscaal Gemak is kantoorbreed gekoppeld voor IB/VPB/jaarwerk en uitstel.</div></div>`;
 };
 VIEWS.kantoor.klanten = ()=>{
   const tab=(k,l,n)=>`<div class="ftab ${mwFilter===k?'active':''}" onclick="setMwFilter('${k}')">${l}<span class="c">${n}</span></div>`;
