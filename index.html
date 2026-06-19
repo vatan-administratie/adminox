@@ -227,11 +227,55 @@
   .wf-row.amber{box-shadow:inset 3px 0 0 var(--amber)}
   .wf-row.done{opacity:.58}
   .wf-row.done:hover{opacity:1}
-  .ib-flags{display:flex;gap:6px;margin-top:6px}
-  .ib-flag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--grey-2);cursor:pointer;background:var(--card);transition:.12s;white-space:nowrap}
-  .ib-flag:hover{border-color:var(--brand-2);color:var(--ink)}
-  .ib-flag.on{background:var(--amber-soft);color:var(--amber);border-color:#f3e0b0}
-  .ib-flag.on.uitstel{background:var(--info-soft);color:var(--info);border-color:#bcd3f0}
+  .ib-ic{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:0;background:transparent;color:#cdd5df;cursor:pointer;padding:0;border-radius:5px;vertical-align:-3px;margin-left:1px;transition:.12s}
+  .ib-ic svg{width:13px;height:13px}
+  .ib-ic:hover{background:var(--hover);color:var(--grey)}
+  .ib-ic.on{color:var(--amber)}
+  .ib-ic.on.uitstel{color:var(--info)}
+  /* client command center */
+  .cc-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;align-items:start}
+  @media(max-width:980px){.cc-grid{grid-template-columns:1fr}}
+  .cc-ops{display:flex;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+  .cc-op{flex:1;padding:11px 16px;border-right:1px solid var(--line-2)}
+  .cc-op:last-child{border-right:0}
+  .cc-opl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2)}
+  .cc-opv{font-size:13.5px;font-weight:700;color:var(--ink);margin-top:3px}
+  .cc-opx{font-size:11px;font-weight:600;color:var(--grey);margin-left:4px}
+  .cc-cad{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2);background:var(--bg);border:1px solid var(--line);padding:1px 6px;border-radius:5px;margin-left:7px;vertical-align:1px}
+  .cc-sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:16px}
+  .cc-side .cc-sec{padding:14px 16px}
+  .cc-h{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey);margin:0 0 12px}
+  .cc-acts{display:flex;flex-direction:column;gap:8px}
+  .cc-actrow{display:flex;align-items:center;gap:12px;padding:11px 13px 11px 15px;border:1px solid var(--line);border-radius:12px;cursor:pointer;background:var(--bg);transition:.12s;position:relative;overflow:hidden}
+  .cc-actrow:hover{background:var(--card);box-shadow:var(--sh-sm)}
+  .cc-actrow .cc-bar{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grey-2)}
+  .cc-actrow.red .cc-bar{background:var(--red)}.cc-actrow.amber .cc-bar{background:var(--amber)}.cc-actrow.grey .cc-bar{background:var(--grey-2)}
+  .cc-actrow .cc-atxt{flex:1;min-width:0}
+  .cc-at{font-size:13.5px;font-weight:700;color:var(--ink)}
+  .cc-as{font-size:11.5px;color:var(--grey);margin-top:2px}
+  .cc-arrow{color:var(--grey-2);font-size:15px}
+  .cc-clear{display:flex;align-items:center;gap:10px;padding:15px;color:var(--grey);font-size:13px;background:var(--bg);border-radius:12px}
+  .cc-ok{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#DCFCE7;color:#166534;font-weight:800;flex-shrink:0}
+  .cc-comp{display:flex;flex-direction:column}
+  .cc-crow{display:flex;align-items:center;gap:11px;padding:10px 4px;border-bottom:1px solid var(--line-2);cursor:pointer}
+  .cc-crow:last-child{border-bottom:0}
+  .cc-cdot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+  .cc-cdot.g{background:#22A565}.cc-cdot.a{background:var(--amber)}.cc-cdot.r{background:var(--red)}
+  .cc-cl{flex:1;min-width:0}
+  .cc-cn{font-size:13px;font-weight:700;color:var(--ink)}
+  .cc-cs{font-size:11px;color:var(--grey-2)}
+  .cc-feed{display:flex;flex-direction:column}
+  .cc-fglbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--grey-2);margin:11px 0 3px}
+  .cc-fglbl:first-child{margin-top:0}
+  .cc-frow{padding:7px 0 7px 16px;position:relative;border-bottom:1px solid var(--line-2)}
+  .cc-frow:last-child{border-bottom:0}
+  .cc-fdot{position:absolute;left:2px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
+  .cc-ft{font-size:12.5px;font-weight:600;color:var(--ink)}
+  .cc-fs{font-size:11px;color:var(--grey-2);margin-top:1px}
+  .cc-empty{font-size:12px;color:var(--grey-2);padding:6px 0}
+  .cc-meta .cc-mrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line-2);font-size:12.5px}
+  .cc-meta .cc-mrow:last-child{border-bottom:0}
+  .cc-meta .cc-mrow span{color:var(--grey)}.cc-meta .cc-mrow b{color:var(--ink);text-align:right}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
@@ -2579,18 +2623,77 @@ function renderClient(){
     <div class="sub" style="margin:-2px 0 12px">Intern = alleen kantoor. Gedeeld = ook zichtbaar voor de klant in het klantportaal.</div>
     <div>${docs.length?docs.map(x=>{const idx=state.dossierDocs.indexOf(x);const shared=(x.gedeeld||x.by==='klant');return `<div class="doc-item"><div class="di">📄</div><div style="flex:1"><div class="dn">${x.naam}</div><div class="dm">door ${x.by==='kantoor'?'kantoor':'klant'} · ${x.date}</div></div>${shared?'<span class="pill g">Gedeeld</span>':'<span class="pill n">Intern</span>'} ${x.by==='kantoor'?`<button class="btn ghost sm" onclick="toggleShare(${idx},'${naam}')">${x.gedeeld?'Niet delen':'Delen'}</button>`:''} <button class="btn ghost sm" onclick="toast('Download (demo)')">⬇</button></div>`;}).join(''):'<div class="empty"><div class="big">📂</div>Lege map.</div>'}</div>`;
   } else if(clientTab==='overzicht'){
-    const tv=state.inbox.filter(x=>x.client===naam&&x.state!=='sent').length;const loonDone=Object.values(w.loon['2026']).filter(Boolean).length;
-    content=`<div class="statusbar"><div class="sl">Status: ${c.actief?'<span class="pill g">● Actief</span>':'<span class="pill r">● Niet-actief</span>'+(c.eindDatum?' · laatst actief '+c.eindDatum:'')}</div><div class="acts">${c.actief?`<button class="btn ghost sm" onclick="setClientActief('${naam}',false)">Op niet-actief zetten (exit)</button>`:`<button class="btn green sm" onclick="setClientActief('${naam}',true)">Heractiveren</button>`}</div></div>
-    <div class="stats"><div class="stat"><div class="lbl">Te verwerken</div><div class="val">${tv}</div></div>
-      <div class="stat"><div class="lbl">OB Q1 2026</div><div class="val" style="font-size:18px">${w.ob['Q1 2026'].ingediend?'<span class="pill g">Ingediend</span>':'<span class="pill a">Open</span>'}</div></div>
-      <div class="stat"><div class="lbl">IB ${IBYEAR}</div><div class="val" style="font-size:18px">${w.ib[IBYEAR].ingediend?'<span class="pill g">Ingediend</span>':'<span class="pill a">Open</span>'}</div></div>
-      <div class="stat"><div class="lbl">Loon 2026</div><div class="val">${loonDone}<small> /12</small></div></div></div>
-    <div class="panel"><h3>Klantgegevens</h3>
-      <div class="frow"><span class="k">Klantnummer</span><b>${c.nr}</b></div>
-      <div class="frow"><span class="k">Programma</span><span>${progPill(c.prog)} <b style="margin-left:6px">${PROG[c.prog]}</b></span></div>
-      <div class="frow"><span class="k">Medewerker</span><b>${c.mw}</b></div>
-      <div class="frow"><span class="k">BTW automatisch</span><b>${c.btwAuto?'Ja':'Nee'}</b></div>
-      <div class="frow"><span class="k">Opmerking</span><b>${c.opmerking||'—'}</b></div></div>`;
+    const tv=state.inbox.filter(x=>x.client===naam&&x.state!=='sent').length;
+    const loonDone=Object.values(w.loon['2026']).filter(Boolean).length;
+    const sg=(state.signals||[]).filter(s=>s.client===naam&&s.state!=='resolved');
+    const obc=w.ob['Q1 2026'],ibc=w.ib[IBYEAR];
+    const obOpen=!obc.ingediend,ibOpen=!ibc.ingediend;
+    const nowM=parseInt(TODAY.split('-')[1],10);
+    const loonPending=Math.max(0,nowM-loonDone);
+    const fiscalOpen=(obOpen?1:0)+(ibOpen?1:0);
+    const sevRank={red:0,amber:1,grey:2};
+    const acts=[];
+    if(tv>0)acts.push({g:0,sev:'red',t:`${tv} document(en) te verwerken`,s:'Inkoopfacturen wachten op boeking',tab:'verwerken'});
+    if(obOpen)acts.push({g:0,sev:(obc.ingelezen||obc.ingeleverd)?'amber':'red',t:'OB Q1 2026 nog niet ingediend',s:(obc.ingelezen||obc.ingeleverd)?'In behandeling — afronden en indienen':'Administratie nog te verwerken',tab:'ob'});
+    if(ibOpen)acts.push({g:0,sev:(ibc.ib||ibc.jaarrekening)?'amber':'red',t:`IB ${IBYEAR} nog niet ingediend`,s:(ibc.ib||ibc.jaarrekening)?'In behandeling — afronden':'Jaarrekening nog op te stellen',tab:'ib'});
+    if(loonPending>0)acts.push({g:0,sev:'amber',t:`${loonPending} loonaangifte(n) openstaand`,s:'Loonheffing 2026',tab:'loon'});
+    sg.forEach(s=>acts.push({g:1,sev:s.ernst==='hoog'?'red':s.ernst==='midden'?'amber':'grey',t:s.type,s:s.oms,tab:'signalen'}));
+    acts.sort((a,b)=>a.g-b.g||sevRank[a.sev]-sevRank[b.sev]);
+    const comp=[
+      {l:'Documentverwerking',cad:'Dagelijks',sub:tv>0?`${tv} document(en) open`:'Niets openstaand',tab:'verwerken',tone:tv>0?'r':'g',st:tv>0?`${tv} open`:'Bij'},
+      {l:'Loonaangifte',cad:'Maandelijks',sub:`2026 · ${loonDone}/12 verwerkt`,tab:'loon',...(loonPending===0?{tone:'g',st:'Bij'}:(loonDone>0?{tone:'a',st:loonPending+' open'}:{tone:'r',st:'Actie vereist'}))},
+      {l:'OB / BTW',cad:'Per kwartaal',sub:'Q1 2026',tab:'ob',...(obc.ingediend?{tone:'g',st:'Ingediend'}:((obc.ingelezen||obc.ingeleverd)?{tone:'a',st:'In behandeling'}:{tone:'r',st:'Actie vereist'}))},
+      {l:'IB &amp; Jaarrekening',cad:'Jaarlijks',sub:IBYEAR,tab:'ib',...(ibc.ingediend?{tone:'g',st:'Ingediend'}:((ibc.ib||ibc.jaarrekening)?{tone:'a',st:'In behandeling'}:{tone:'r',st:'Actie vereist'}))}
+    ];
+    const pk=s=>{const p=(s||'01-01-2000').split('-');return p[2]+p[1]+p[0];};
+    const tdy=pk(TODAY),ydk=pk('16-06-2026');
+    const feed=[];
+    state.inbox.filter(x=>x.client===naam).forEach(x=>feed.push({d:x.date,k:pk(x.date),t:`Document ${x.state==='sent'?'verwerkt':'ontvangen'}: ${x.sup}`,s:money(x.amt)}));
+    state.regelingen.filter(r=>r.client===naam).forEach(r=>feed.push({d:r.datum,k:pk(r.datum),t:`Betalingsregeling ${r.status==='afgehandeld'?'ingediend':'aangevraagd'}`,s:r.kenmerk||''}));
+    feed.sort((a,b)=>b.k.localeCompare(a.k));
+    const gT=feed.filter(f=>f.k===tdy),gY=feed.filter(f=>f.k===ydk),gE=feed.filter(f=>f.k!==tdy&&f.k!==ydk).slice(0,5);
+    const fRows=arr=>arr.map(f=>`<div class="cc-frow"><span class="cc-fdot"></span><div class="cc-ft">${f.t}</div><div class="cc-fs">${f.s?f.s+' · ':''}${f.d}</div></div>`).join('');
+    const fGrp=(lbl,arr)=>arr.length?`<div class="cc-fglbl">${lbl}</div>${fRows(arr)}`:'';
+    const lastAct=feed.length?feed[0].d:'—';
+    const dls=[];
+    if(loonPending>0)dls.push({l:'Loonaangifte',d:'30-06-2026'});
+    if(obOpen)dls.push({l:'OB-aangifte',d:'31-07-2026'});
+    if(ibOpen)dls.push({l:'Aangifte IB',d:ibc.uitstel?'01-05-2027':'01-05-2026'});
+    dls.sort((a,b)=>pk(a.d).localeCompare(pk(b.d)));
+    const nextDl=dls[0];
+    content=`
+    <div class="cc-grid">
+      <div class="cc-main">
+        <div class="cc-ops">
+          <div class="cc-op"><div class="cc-opl">Verantwoordelijke</div><div class="cc-opv">${c.mw}</div></div>
+          <div class="cc-op"><div class="cc-opl">Laatste activiteit</div><div class="cc-opv">${lastAct}</div></div>
+          <div class="cc-op"><div class="cc-opl">Volgende deadline</div><div class="cc-opv">${nextDl?nextDl.d:'—'}${nextDl?` <span class="cc-opx">${nextDl.l}</span>`:''}</div></div>
+        </div>
+        <div class="cc-sec">
+          <div class="cc-h">Wat vraagt vandaag aandacht?</div>
+          ${acts.length?`<div class="cc-acts">${acts.map(a=>`<div class="cc-actrow ${a.sev}" onclick="openClient('${naam}','${a.tab}')"><span class="cc-bar"></span><div class="cc-atxt"><div class="cc-at">${a.t}</div><div class="cc-as">${a.s}</div></div><span class="cc-arrow">→</span></div>`).join('')}</div>`:`<div class="cc-clear"><span class="cc-ok">✓</span> Geen openstaande acties — alles is bij.</div>`}
+        </div>
+      </div>
+      <div class="cc-side">
+        <div class="cc-sec">
+          <div class="cc-h">Statusoverzicht</div>
+          <div class="cc-comp">${comp.map(r=>`<div class="cc-crow" onclick="openClient('${naam}','${r.tab}')"><span class="cc-cdot ${r.tone}"></span><div class="cc-cl"><div class="cc-cn">${r.l}<span class="cc-cad">${r.cad}</span></div><div class="cc-cs">${r.sub}</div></div><span class="pill ${r.tone}">${r.st}</span></div>`).join('')}</div>
+        </div>
+        <div class="cc-sec">
+          <div class="cc-h">Recente activiteit</div>
+          <div class="cc-feed">${(gT.length||gY.length||gE.length)?`${fGrp('Vandaag',gT)}${fGrp('Gisteren',gY)}${fGrp('Eerder',gE)}`:'<div class="cc-empty">Nog geen recente activiteit.</div>'}</div>
+        </div>
+        <div class="cc-sec cc-meta">
+          <div class="cc-h">Klantgegevens</div>
+          <div class="cc-mrow"><span>Klantnummer</span><b>${c.nr}</b></div>
+          <div class="cc-mrow"><span>Programma</span><b>${PROG[c.prog]}</b></div>
+          <div class="cc-mrow"><span>Medewerker</span><b>${c.mw}</b></div>
+          <div class="cc-mrow"><span>BTW automatisch</span><b>${c.btwAuto?'Ja':'Nee'}</b></div>
+          ${c.opmerking?`<div class="cc-mrow"><span>Opmerking</span><b>${c.opmerking}</b></div>`:''}
+          <div class="cc-mrow"><span>Status</span>${c.actief?`<button class="btn ghost sm" onclick="setClientActief('${naam}',false)">Op niet-actief zetten</button>`:`<button class="btn green sm" onclick="setClientActief('${naam}',true)">Heractiveren</button>`}</div>
+        </div>
+      </div>
+    </div>`;
   } else if(clientTab==='verwerken'){
     const items=state.inbox.filter(x=>x.client===naam);
     content=`<div class="panel"><h3>Documenten van ${naam}</h3>${items.length?`<div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Leverancier</th><th>Datum</th><th class="r">Bedrag</th><th>Zekerheid</th><th>Status</th></tr></thead><tbody>${items.map(dd=>{const st=dd.state==='sent'?'Verwerkt':dd.state==='queue'?'In verwerking':'Nieuw';return `<tr class="clickable" onclick="openBoeking(${dd.id})"><td><b>${dd.sup}</b></td><td>${dd.date}</td><td class="r">${money(dd.amt)}</td><td>${dd.conf==='hi'?'<span class="conf hi">● '+dd.confTxt+'</span>':'<span class="conf mid">● '+dd.confTxt+'</span>'}</td><td>${statusPill(st)}</td></tr>`;}).join('')}</tbody></table></div>`:'<div class="empty"><div class="big">🎉</div>Geen documenten te verwerken.</div>'}</div>`;
@@ -2738,10 +2841,11 @@ VIEWS.kantoor.ibwerk = ()=>{
   const sel=(opts,cur,fn)=>`<select class="gl" style="width:auto" onchange="${fn}">${opts.map(o=>`<option value="${o[0]}" ${o[0]===cur?'selected':''}>${o[1]}</option>`).join('')}</select>`;
   const ibState=o=>o.ingediend?{t:'Ingediend',tone:'done'}:(o.ib?{t:'Klaar voor indiening',tone:'amber'}:(o.jaarrekening?{t:'Aangifte opstellen',tone:'amber'}:{t:'Jaarrekening nodig',tone:'red'}));
   const ibwNode=(v,fn,lbl)=>`<button class="wf-node ${v?'on':''}" title="${lbl}: ${v?'gedaan':'open'}" onclick="event.stopPropagation();${fn}">${v?`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>`:''}</button>`;
-  const ibFlag=(lbl,v,fn,cls)=>`<span class="ib-flag ${v?'on':''} ${cls||''}" title="${lbl} ${v?'(aan)':'(uit)'}" onclick="event.stopPropagation();${fn}">${v?'✓ ':''}${lbl}</span>`;
+  const ibSupIc=_svg('<path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 3.5v4h4"/>'),ibUitIc=_svg('<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 1.8"/>');
+  const ibIc=(cls,icon,v,fn,title)=>`<button class="ib-ic ${v?'on':''} ${cls}" title="${title}${v?' (aan)':' — uit'}" onclick="event.stopPropagation();${fn}">${icon}</button>`;
   const ibwRow=c=>{const o=state.werk[c.naam].ib[y];const st=stepsIB(o);const pct=Math.round(st/3*100);const sd=ibState(o);const note=(o.opm||'').trim();
     return `<div class="wf-row ${sd.tone}">
-      <div class="wf-l" onclick="openClient('${c.naam}','ib')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}</div><div class="ib-flags">${ibFlag('Suppletie',o.suppletie,`ibToggle('${c.naam}','${y}','suppletie')`)}${ibFlag('Uitstel',o.uitstel,`ibToggle('${c.naam}','${y}','uitstel')`,'uitstel')}</div></div></div>
+      <div class="wf-l" onclick="openClient('${c.naam}','ib')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}${ibIc('',ibSupIc,o.suppletie,`ibToggle('${c.naam}','${y}','suppletie')`,'Suppletie (correctie)')}${ibIc('uitstel',ibUitIc,o.uitstel,`ibToggle('${c.naam}','${y}','uitstel')`,'Uitstel')}</div></div></div>
       <div class="wf-rblock"><div class="wf-step3">${ibwNode(o.jaarrekening,`ibToggle('${c.naam}','${y}','jaarrekening')`,'Jaarrekening')}<span class="wf-conn ${o.jaarrekening?'on':''}"></span>${ibwNode(o.ib,`ibToggle('${c.naam}','${y}','ib')`,'IB-aangifte')}<span class="wf-conn ${o.ib?'on':''}"></span>${ibwNode(o.ingediend,`ibToggle('${c.naam}','${y}','ingediend')`,'Ingediend')}</div><div class="wf-bigst ${sd.tone}">${sd.t}</div><div class="wf-pct2">${pct}% voltooid</div></div>
       <span class="wf-noteic ${note?'has':''}" title="${note?note.replace(/"/g,'&quot;'):'Notitie toevoegen'}" onclick="event.stopPropagation();ibNote('${c.naam}','${y}')">${_svg('<path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3M8 12h8M8 15.5h5"/>')}</span>
     </div>`;};
