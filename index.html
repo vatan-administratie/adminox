@@ -227,6 +227,11 @@
   .wf-row.amber{box-shadow:inset 3px 0 0 var(--amber)}
   .wf-row.done{opacity:.58}
   .wf-row.done:hover{opacity:1}
+  .ib-flags{display:flex;gap:6px;margin-top:6px}
+  .ib-flag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--grey-2);cursor:pointer;background:var(--card);transition:.12s;white-space:nowrap}
+  .ib-flag:hover{border-color:var(--brand-2);color:var(--ink)}
+  .ib-flag.on{background:var(--amber-soft);color:var(--amber);border-color:#f3e0b0}
+  .ib-flag.on.uitstel{background:var(--info-soft);color:var(--info);border-color:#bcd3f0}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
@@ -1479,8 +1484,9 @@ const DOSSIER = {
 };
 let seqF=4, seqO=22, seqInbox=7, seqEmp=3, seqTime=5;
 let monthlyDone=128;
-let draft=null, invFilter='alle', quoteFilter='alle', relFilter='Debiteur', docMap=null, mwFilter='alle', clientTab='overzicht', curClient=null, impersonate=null, obKw=null, obMw='alle', obStat='alle', obGrpOpen={};
+let draft=null, invFilter='alle', quoteFilter='alle', relFilter='Debiteur', docMap=null, mwFilter='alle', clientTab='overzicht', curClient=null, impersonate=null, obKw=null, obMw='alle', obStat='alle', obGrpOpen={}, ibGrpOpen={};
 function obToggleGrp(l){const cur=obGrpOpen[l]!==undefined?obGrpOpen[l]:(l!=='Ingediend');obGrpOpen[l]=!cur;renderView();}
+function ibToggleGrp(l){const cur=ibGrpOpen[l]!==undefined?ibGrpOpen[l]:(l!=='Ingediend');ibGrpOpen[l]=!cur;renderView();}
 let fgTab='werkvoorraad', fgStatus='alle', fgType='alle', fgJaar='alle', fgMw='alle';
 let ibwJaar=null, ibwMw='alle', ibwStat='alle';
 const MAPPEN=['Jaarrekening','Omzetbelasting (BTW)','Inkomstenbelasting','Vennootschapsbelasting','Loonadministratie','Contracten','Verzekeringen','Overig'];
@@ -2730,6 +2736,16 @@ VIEWS.kantoor.ibwerk = ()=>{
   const cntTodoIB=base.filter(c=>stepsIB(state.werk[c.naam].ib[y])===0).length;
   const cntProgIB=base.length-ingediend-cntTodoIB;
   const sel=(opts,cur,fn)=>`<select class="gl" style="width:auto" onchange="${fn}">${opts.map(o=>`<option value="${o[0]}" ${o[0]===cur?'selected':''}>${o[1]}</option>`).join('')}</select>`;
+  const ibState=o=>o.ingediend?{t:'Ingediend',tone:'done'}:(o.ib?{t:'Klaar voor indiening',tone:'amber'}:(o.jaarrekening?{t:'Aangifte opstellen',tone:'amber'}:{t:'Jaarrekening nodig',tone:'red'}));
+  const ibwNode=(v,fn,lbl)=>`<button class="wf-node ${v?'on':''}" title="${lbl}: ${v?'gedaan':'open'}" onclick="event.stopPropagation();${fn}">${v?`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>`:''}</button>`;
+  const ibFlag=(lbl,v,fn,cls)=>`<span class="ib-flag ${v?'on':''} ${cls||''}" title="${lbl} ${v?'(aan)':'(uit)'}" onclick="event.stopPropagation();${fn}">${v?'✓ ':''}${lbl}</span>`;
+  const ibwRow=c=>{const o=state.werk[c.naam].ib[y];const st=stepsIB(o);const pct=Math.round(st/3*100);const sd=ibState(o);const note=(o.opm||'').trim();
+    return `<div class="wf-row ${sd.tone}">
+      <div class="wf-l" onclick="openClient('${c.naam}','ib')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}</div><div class="ib-flags">${ibFlag('Suppletie',o.suppletie,`ibToggle('${c.naam}','${y}','suppletie')`)}${ibFlag('Uitstel',o.uitstel,`ibToggle('${c.naam}','${y}','uitstel')`,'uitstel')}</div></div></div>
+      <div class="wf-rblock"><div class="wf-step3">${ibwNode(o.jaarrekening,`ibToggle('${c.naam}','${y}','jaarrekening')`,'Jaarrekening')}<span class="wf-conn ${o.jaarrekening?'on':''}"></span>${ibwNode(o.ib,`ibToggle('${c.naam}','${y}','ib')`,'IB-aangifte')}<span class="wf-conn ${o.ib?'on':''}"></span>${ibwNode(o.ingediend,`ibToggle('${c.naam}','${y}','ingediend')`,'Ingediend')}</div><div class="wf-bigst ${sd.tone}">${sd.t}</div><div class="wf-pct2">${pct}% voltooid</div></div>
+      <span class="wf-noteic ${note?'has':''}" title="${note?note.replace(/"/g,'&quot;'):'Notitie toevoegen'}" onclick="event.stopPropagation();ibNote('${c.naam}','${y}')">${_svg('<path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3M8 12h8M8 15.5h5"/>')}</span>
+    </div>`;};
+  const ibBuckets=[{l:'Actie nodig',f:c=>!state.werk[c.naam].ib[y].jaarrekening},{l:'In behandeling',f:c=>{const o=state.werk[c.naam].ib[y];return o.jaarrekening&&!o.ingediend;}},{l:'Ingediend',f:c=>state.werk[c.naam].ib[y].ingediend}];
   return `<h1 class="title">IB-werklijst</h1>
   <div class="sub">Inkomstenbelasting &amp; jaarrekening per jaar — kleur en voortgang per klant maken direct zichtbaar wat nog moet. Filter op jaar, medewerker en status.</div>
   <div class="ftabs" style="align-items:center;flex-wrap:wrap">
@@ -2739,14 +2755,13 @@ VIEWS.kantoor.ibwerk = ()=>{
     <span class="ftab ${ibwStat==='ingediend'?'active':''}" style="margin-left:auto" title="Filter op ingediend" onclick="ibwStat=(ibwStat==='ingediend'?'alle':'ingediend');renderView()">Ingediend: ${ingediend}/${base.length} · ${base.length?Math.round(ingediend/base.length*100):0}%</span>
   </div>
   <div class="wl-overall">
-    <div class="wh"><span class="wt">Voortgang ${y} — ${overallIB}% afgerond</span><div class="wl-legend"><span class="wl-lg done"><span class="d"></span>${ingediend} ingediend</span><span class="wl-lg prog"><span class="d"></span>${cntProgIB} mee bezig</span><span class="wl-lg todo"><span class="d"></span>${cntTodoIB} nog te starten</span></div></div>
+    <div class="wh"><div class="wl-ov-l"><span class="wl-big">${overallIB}%</span><span class="wt">voltooid · ${y}</span></div><div class="wl-legend"><span class="wl-lg done"><span class="d"></span>${ingediend} ingediend</span><span class="wl-lg prog"><span class="d"></span>${cntProgIB} bezig</span><span class="wl-lg todo"><span class="d"></span>${cntTodoIB} actie nodig</span></div></div>
     <div class="wl-obar"><span style="width:${overallIB}%"></span></div>
   </div>
-  <div class="tablewrap"><table><thead><tr><th>Nr</th><th>Klant &amp; voortgang</th><th>Mw.</th><th>Jaarrekening</th><th>IB</th><th>Suppletie</th><th>Uitstel</th><th>Ingediend</th><th style="width:16%">Opmerking</th></tr></thead><tbody>
-  ${cs.length?cs.map(c=>{const o=state.werk[c.naam].ib[y];const st=stepsIB(o);const cls=o.ingediend?'wl-done':(st>0?'wl-prog':'wl-todo');const pct=Math.round(st/3*100);const bc=o.ingediend?'#15803D':(st>0?'var(--amber)':'var(--red)');return `<tr class="${cls}"><td>${c.nr} ${progLogo(c.prog)}</td><td class="clickable" onclick="openClient('${c.naam}','ib')"><b>${c.naam}</b><div class="wl-mini"><div class="wl-bar"><span style="width:${pct}%;background:${bc}"></span></div><span class="wl-pct">${pct}%</span></div></td><td>${c.mw}</td><td>${dateCell(o.jaarrekening,`ibToggle('${c.naam}','${y}','jaarrekening')`,`setIbDate('${c.naam}','${y}','jaarrekening',this.value)`)}</td><td>${dateCell(o.ib,`ibToggle('${c.naam}','${y}','ib')`,`setIbDate('${c.naam}','${y}','ib',this.value)`)}</td><td>${dateCell(o.suppletie,`ibToggle('${c.naam}','${y}','suppletie')`,`setIbDate('${c.naam}','${y}','suppletie',this.value)`)}</td><td>${dateCell(o.uitstel,`ibToggle('${c.naam}','${y}','uitstel')`,`setIbDate('${c.naam}','${y}','uitstel',this.value)`)}</td><td>${dateCell(o.ingediend,`ibToggle('${c.naam}','${y}','ingediend')`,`setIbDate('${c.naam}','${y}','ingediend',this.value)`)}</td><td><input class="gl" value="${(o.opm||'').replace(/"/g,'&quot;')}" oninput="state.werk['${c.naam}'].ib['${y}'].opm=this.value" placeholder="opmerking"></td></tr>`;}).join(''):'<tr><td colspan="9"><div class="empty"><div class="big">✅</div>Geen klanten in deze selectie.</div></td></tr>'}
-  </tbody></table></div>`;
+  ${cs.length?`<div class="wf-list">${ibBuckets.map(b=>{const rows=cs.filter(b.f);if(!rows.length)return '';const op=ibGrpOpen[b.l]!==undefined?ibGrpOpen[b.l]:(b.l!=='Ingediend');return `<div class="wf-grp ${op?'':'closed'}" onclick="ibToggleGrp('${b.l}')"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>${b.l} <span class="n">· ${rows.length}</span></div>`+(op?rows.map(ibwRow).join(''):'');}).join('')}</div>`:`<div class="empty" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:40px 20px"><div class="big">✅</div>Geen klanten in deze selectie.</div>`}`;
 };
 function ibToggle(naam,y,f){const o=state.werk[naam].ib[y];o[f]=o[f]?'':TODAY;renderView();}
+function ibNote(naam,y){const o=state.werk[naam].ib[y];modal('Notitie · '+naam+' ('+y+')',field('Notitie','ibNoteV','text',(o.opm||'').replace(/"/g,'&quot;')),'Opslaan',()=>{o.opm=val('ibNoteV');renderView();});}
 VIEWS.kantoor.fg = ()=>{
   const tab=(k,l)=>`<div class="ftab ${fgTab===k?'active':''}" onclick="fgTab='${k}';renderView()">${l}</div>`;
   return `<div class="row-between"><h1 class="title"><span class="plogo fg" style="width:22px;height:22px;font-size:9px;vertical-align:middle">FG</span> Fiscaal Gemak</h1><div style="display:flex;gap:9px"><button class="btn ghost sm" onclick="toast('Exporteren (demo)')">⬇ Exporteren</button><button class="btn ghost sm" onclick="toast('Importeren (demo)')">⬆ Importeren</button></div></div>
