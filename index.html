@@ -51,46 +51,60 @@
   .role-chip.kantoor{background:#ffffff1f;border-color:#ffffff3d;color:#eaf1f8}
   .topbar .who{font-size:13px;color:#cfd4da;display:flex;align-items:center;gap:10px}
   .avatar{width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px}
-  /* ===== Klant-switcher (in sidebar, command-palette dropdown) ===== */
-  .cpick{position:relative;margin:2px 4px 9px;padding-bottom:9px;border-bottom:1px solid var(--line)}
-  .cp-trigger{display:flex;align-items:center;gap:9px;width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:6px 9px;cursor:pointer;font-family:inherit;color:var(--ink);transition:background .14s,border-color .14s,box-shadow .14s}
-  .cp-trigger:hover{background:#fff;border-color:#cfd8e3;box-shadow:var(--sh-xs)}
-  .cpick.open .cp-trigger{background:#fff;border-color:var(--brand-2);box-shadow:0 0 0 3px #16507f1f}
-  .cp-av{width:28px;height:28px;border-radius:7px;display:grid;place-items:center;font-size:10.5px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:inset 0 1px 0 #ffffff40}
-  .cp-tx{display:flex;flex-direction:column;align-items:flex-start;line-height:1.25;min-width:0;flex:1}
-  .cp-nm{font-size:12.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
-  .cp-meta{font-size:10px;color:var(--grey);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:135px}
+  /* ===== Klant-switcher — minimal command palette (Linear/Attio) ===== */
+  .cpick{position:relative;margin:2px 6px 12px;padding-bottom:11px;border-bottom:1px solid var(--line)}
+  .cp-trigger{display:flex;align-items:center;gap:10px;width:100%;background:transparent;border:0;border-radius:9px;padding:7px 8px;cursor:pointer;font-family:inherit;color:var(--ink);transition:background .14s}
+  .cp-trigger:hover{background:var(--hover)}
+  .cpick.open .cp-trigger{background:var(--hover)}
+  .cp-tx{display:flex;flex-direction:column;align-items:flex-start;line-height:1.3;min-width:0;flex:1}
+  .cp-nm{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:126px;letter-spacing:-.2px}
+  .cp-meta{font-size:10.5px;color:var(--grey-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:128px}
   .cp-chev{width:14px;height:14px;color:var(--grey-2);flex-shrink:0;transition:transform .18s}
   .cpick.open .cp-chev{transform:rotate(180deg)}
-  .cp-stat{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-  .cp-stat.ok{background:#39B57D}.cp-stat.warn{background:#E0A422}.cp-stat.act{background:var(--red)}
-  .cp-menu{position:fixed;top:0;left:0;width:308px;max-width:94vw;max-height:70vh;overflow:hidden;display:none;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--sh-lg);z-index:130}
+  .cp-menu{position:fixed;top:0;left:0;width:332px;max-width:94vw;max-height:72vh;overflow:hidden;display:none;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh-lg);z-index:130}
   .cpick.open .cp-menu{display:flex}
-  .cp-search{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line-2)}
-  .cp-search svg{width:15px;height:15px;color:var(--grey-2);flex-shrink:0}
-  .cp-search input{flex:1;border:0;outline:none;font-size:13px;font-family:inherit;color:var(--ink);background:transparent}
-  .cp-mwf{display:flex;gap:5px;padding:7px 10px;border-bottom:1px solid var(--line-2);overflow-x:auto;scrollbar-width:none}
+  .cp-search{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line-2)}
+  .cp-search svg{width:16px;height:16px;color:var(--grey-2);flex-shrink:0}
+  .cp-search input{flex:1;border:0;outline:none;font-size:14.5px;font-family:inherit;color:var(--ink);background:transparent;letter-spacing:-.2px}
+  .cp-mwf{display:flex;gap:3px;padding:6px 13px;border-bottom:1px solid var(--line-2);overflow-x:auto;scrollbar-width:none}
   .cp-mwf::-webkit-scrollbar{display:none}
-  .cp-mwf .chip{font-size:11px;font-weight:600;color:var(--grey);background:transparent;border:0;border-radius:7px;padding:4px 9px;cursor:pointer;white-space:nowrap;transition:.13s}
-  .cp-mwf .chip:hover{background:var(--hover);color:var(--ink)}
-  .cp-mwf .chip.on{background:var(--brand-soft);color:var(--navy);font-weight:700}
-  .cp-list{overflow-y:auto;padding:5px;flex:1}
-  .cp-sec{font-size:9.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--grey-2);padding:9px 9px 4px}
-  .cp-row{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:9px;cursor:pointer;transition:background .12s}
+  .cp-mwf .chip{font-size:11.5px;font-weight:600;color:var(--grey-2);background:transparent;border:0;border-radius:6px;padding:4px 8px;cursor:pointer;white-space:nowrap;transition:.13s}
+  .cp-mwf .chip:hover{color:var(--ink)}
+  .cp-mwf .chip.on{color:var(--navy);font-weight:700}
+  .cp-list{overflow-y:auto;padding:7px;flex:1}
+  .cp-sec{font-size:10px;font-weight:600;letter-spacing:.2px;color:var(--grey-2);padding:11px 10px 5px}
+  .cp-row{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:9px;cursor:pointer;transition:background .12s}
   .cp-row:hover{background:var(--hover)}
   .cp-row.active{background:var(--brand-soft)}
-  .cp-row .av{width:27px;height:27px;border-radius:7px;display:grid;place-items:center;font-size:10.5px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:inset 0 1px 0 #ffffff33}
   .cp-row .info{flex:1;min-width:0}
-  .cp-row .nm{font-size:12.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .cp-row .sub{font-size:11px;color:var(--grey);display:flex;align-items:center;gap:6px;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .cp-row .ptag{height:15px;font-size:9.5px;padding:0 5px;border-radius:5px;gap:4px}
-  .cp-row .ptag .pdot{width:5px;height:5px}
-  .cp-row .badges{display:flex;align-items:center;gap:7px;flex-shrink:0}
-  .cp-kpi{display:inline-flex;align-items:center;justify-content:center;min-width:18px;font-size:10px;font-weight:800;border-radius:6px;padding:1px 5px;background:var(--brand-soft);color:var(--navy)}
+  .cp-row .nm{font-size:13.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.2px}
+  .cp-row .sub{font-size:11.5px;color:var(--grey-2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cp-row .dotn{flex-shrink:0;width:6px;height:6px;border-radius:50%;background:var(--amber)}
   .cp-star{color:var(--grey-2);width:15px;height:15px;cursor:pointer;flex-shrink:0;opacity:0;transition:color .13s,opacity .13s}
   .cp-row:hover .cp-star,.cp-star.on{opacity:1}
   .cp-star.on{color:#E0A422}
-  .cp-empty{text-align:center;color:var(--grey);padding:26px 16px;font-size:13px}
+  .cp-empty{text-align:center;color:var(--grey);padding:30px 16px;font-size:13.5px}
+  /* gedeelde zachte monogram (selector + lijst) */
+  .mono{width:28px;height:28px;border-radius:8px;background:#EDF1F7;color:var(--ink-2);font-weight:700;font-size:11px;display:grid;place-items:center;flex-shrink:0;letter-spacing:.2px}
+  /* gedeelde workspace-lijst (Notion/Attio) */
+  .ws-list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:var(--sh-sm)}
+  .wsrow{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line-2);cursor:pointer;transition:background .12s}
+  .wsrow:last-child{border-bottom:0}
+  .wsrow:hover{background:var(--hover)}
+  .wsrow .mono{width:32px;height:32px;font-size:11.5px}
+  .wsr-id{flex:1;min-width:0}
+  .wsr-nm{font-size:14.5px;font-weight:700;color:var(--ink);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wsr-sub{font-size:12px;color:var(--grey-2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ws-act{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;white-space:nowrap;flex-shrink:0}
+  .ws-act .d{width:7px;height:7px;border-radius:50%}
+  .ws-act.red{color:var(--danger)}.ws-act.red .d{background:var(--red)}
+  .ws-act.amber{color:#a9781a}.ws-act.amber .d{background:var(--amber)}
+  .ws-act .more{color:var(--grey-2);font-weight:600;margin-left:2px}
+  .wsrow.quiet .mono{background:#f4f6f9;color:#aeb7c3}
+  .wsrow.quiet .wsr-nm{color:var(--ink-2);font-weight:600}
+  .ws-grp{font-size:12px;font-weight:700;color:var(--grey);margin:20px 2px 9px;letter-spacing:.2px;display:flex;align-items:baseline;gap:8px}
+  .ws-grp .n{font-size:11px;color:var(--grey-2);font-weight:500}
+  .ws-grp:first-of-type{margin-top:4px}
   .langsel{background:#ffffff14;border:1px solid #ffffff33;color:#fff;border-radius:8px;padding:6px 8px;font-size:12px;font-family:inherit;cursor:pointer}
   .langsel option{color:#1c1f24}
   .login .langsel{background:#ffffff1a;border-color:#ffffff44;padding:8px 12px;font-size:13px}
@@ -1511,10 +1525,10 @@ function cpFavToggle(naam){if(cpFav.includes(naam))cpFav=cpFav.filter(n=>n!==naa
 function cpGo(naam){cpRecent=[naam,...cpRecent.filter(n=>n!==naam)].slice(0,8);cpClose();openClient(naam);}
 function cpRow(c){const od=cpOpenDocs(c.naam),act=(c.naam===curClient),fav=cpFav.includes(c.naam),e=cpEsc(c.naam);
   return `<div class="cp-row ${act?'active':''}" onclick="cpGo('${e}')">
-    <span class="av" style="background:${cpAvColor(c)}">${cpInitials(c.naam)}</span>
-    <div class="info"><div class="nm">${c.naam}</div>
-      <div class="sub"><span class="ptag ${c.prog}"><span class="pdot"></span>${PROG[c.prog]}</span> · nr ${c.nr} · ${c.mw||'—'}</div></div>
-    <div class="badges">${od?`<span class="cp-kpi">${od}</span>`:''}<svg class="cp-star ${fav?'on':''}" onclick="event.stopPropagation();cpFavToggle('${e}')" viewBox="0 0 24 24" fill="${fav?'currentColor':'none'}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.7 1-5.8L3.5 9.2l5.9-.9z"/></svg></div>
+    <span class="mono">${cpInitials(c.naam)}</span>
+    <div class="info"><div class="nm">${c.naam}</div><div class="sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw||'—'}</div></div>
+    ${od?`<span class="dotn" title="${od} te verwerken"></span>`:''}
+    <svg class="cp-star ${fav?'on':''}" onclick="event.stopPropagation();cpFavToggle('${e}')" viewBox="0 0 24 24" fill="${fav?'currentColor':'none'}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.7 1-5.8L3.5 9.2l5.9-.9z"/></svg>
   </div>`;}
 function cpRender(){
   const res=document.getElementById('cpList');if(!res)return;
@@ -1540,8 +1554,8 @@ function cpRender(){
 function cpUpdateTrigger(){
   const av=document.getElementById('cpAv'),nm=document.getElementById('cpNm'),meta=document.getElementById('cpMeta');if(!av||!nm||!meta)return;
   const c=state.clients.find(x=>x.naam===curClient);
-  if(c){av.textContent=cpInitials(c.naam);av.style.background=cpAvColor(c);nm.textContent=c.naam;meta.innerHTML=`<span class="cp-stat ${cpStatusClass(c)}"></span> ${PROG[c.prog]} · nr ${c.nr}`;}
-  else{av.textContent='＋';av.style.background='#cdd8e3';nm.textContent='Selecteer klant';meta.textContent='Klant kiezen';}
+  if(c){av.textContent=cpInitials(c.naam);nm.textContent=c.naam;meta.textContent=`${PROG[c.prog]} · nr ${c.nr}`;}
+  else{av.textContent='–';nm.textContent='Selecteer klant';meta.textContent='Klant kiezen';}
 }
 document.addEventListener('mousedown',function(e){const w=document.getElementById('cpickWrap');if(w&&w.classList.contains('open')&&!w.contains(e.target))cpClose();});
 function logout(){impersonate=null;document.getElementById('app').classList.remove('show');document.getElementById('login').classList.remove('hide');document.getElementById('chatFab').style.display='none';document.getElementById('chatBox').style.display='none';chatOpen=false;}
@@ -1619,7 +1633,7 @@ function icon(id){return ICONS[id]?_svg(ICONS[id]):null;}
 const NAVPARENT={watisdit:'aihulp',regeling:'belasting'};
 function renderNav(){
   const s=document.getElementById('side'); s.innerHTML='';
-  if(ROLE==='kantoor'){const sw=document.createElement('div');sw.className='cpick';sw.id='cpickWrap';sw.innerHTML=`<button class="cp-trigger" id="cpTrigger" onclick="cpToggle()" aria-label="Klant wisselen"><span class="cp-av" id="cpAv">＋</span><span class="cp-tx"><span class="cp-nm" id="cpNm">Selecteer klant</span><span class="cp-meta" id="cpMeta">Klant kiezen</span></span><svg class="cp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="cp-menu" id="cpMenu"><div class="cp-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input id="cpSearchInp" placeholder="Zoek klant…" autocomplete="off" oninput="cpRender()"></div><div class="cp-mwf" id="cpMwFilter"></div><div class="cp-list" id="cpList"></div></div>`;s.appendChild(sw);}
+  if(ROLE==='kantoor'){const sw=document.createElement('div');sw.className='cpick';sw.id='cpickWrap';sw.innerHTML=`<button class="cp-trigger" id="cpTrigger" onclick="cpToggle()" aria-label="Klant wisselen"><span class="mono" id="cpAv">–</span><span class="cp-tx"><span class="cp-nm" id="cpNm">Selecteer klant</span><span class="cp-meta" id="cpMeta">Klant kiezen</span></span><svg class="cp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="cp-menu" id="cpMenu"><div class="cp-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input id="cpSearchInp" placeholder="Zoek klant…" autocomplete="off" oninput="cpRender()"></div><div class="cp-mwf" id="cpMwFilter"></div><div class="cp-list" id="cpList"></div></div>`;s.appendChild(sw);}
   NAV[ROLE].forEach(it=>{
     if(it[0]==='__g'){const d=document.createElement('div');d.className='grp';d.textContent=grpL(it[1]);s.appendChild(d);return;}
     const d=document.createElement('div'); d.className='navitem'+((it[0]===VIEW||NAVPARENT[VIEW]===it[0])?' active':''); d.onclick=()=>go(it[0]);
@@ -2367,34 +2381,29 @@ VIEWS.kantoor.klanten = ()=>{
     const tv=exitMode?0:state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;
     const ob1=w.ob['Q1 2026'].ingediend, ib24=w.ib[IBYEAR].ingediend, loonDone=Object.values(w.loon['2026']).filter(Boolean).length;
     const sc=state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length;
-    const chips=[];
-    if(tv) chips.push(`<span class="ck red">${tv} te verwerken</span>`);
-    if(sc) chips.push(`<span class="ck red" style="cursor:pointer" onclick="event.stopPropagation();openClient('${c.naam}','signalen')">⚠ ${sc} signaal${sc>1?'en':''}</span>`);
-    if(!ob1) chips.push('<span class="ck amber">OB open</span>');
-    if(!ib24) chips.push('<span class="ck amber">IB open</span>');
-    if(loonDone<6) chips.push(`<span class="ck amber">Loon ${loonDone}/12</span>`);
-    const quiet=chips.length===0;
-    const right=quiet?'<span class="cl-ok">✓ geen open werk</span>':`<div class="chips">${chips.join('')}</div>`;
-    const meta=exitMode?`nr ${c.nr} · ${c.mw} · laatst actief ${c.eindDatum||'—'}`:`nr ${c.nr} · ${c.mw}`;
-    return `<div class="clx ${quiet?'quiet':''}" onclick="openClient('${c.naam}')">
-      <span class="av" style="background:${cpAvColor(c)}">${cpInitials(c.naam)}</span>
-      <div class="id"><div class="nm">${c.naam} <span class="ptag ${c.prog}" style="cursor:pointer" title="Programma wijzigen" onclick="event.stopPropagation();switchProgram('${c.naam}')"><span class="pdot"></span>${PROG[c.prog]}</span></div><div class="meta">${meta}</div></div>
-      ${right}
-      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-    </div>`;
+    const acts=[];
+    if(tv) acts.push({t:`${tv} te verwerken`,c:'red'});
+    if(sc) acts.push({t:`${sc} signaal${sc>1?'en':''}`,c:'red'});
+    if(!ob1) acts.push({t:'OB-aangifte open',c:'amber'});
+    if(!ib24) acts.push({t:`IB ${IBYEAR} open`,c:'amber'});
+    if(loonDone<6) acts.push({t:`Loon ${loonDone}/12`,c:'amber'});
+    const quiet=acts.length===0;
+    const right=quiet?'':`<span class="ws-act ${acts[0].c}"><span class="d"></span>${acts[0].t}${acts.length>1?`<span class="more">+${acts.length-1}</span>`:''}</span>`;
+    const sub=exitMode?`${PROG[c.prog]} · ${c.mw} · tot ${c.eindDatum||'—'}`:`${PROG[c.prog]} · ${c.mw}`;
+    return `<div class="wsrow ${quiet?'quiet':''}" onclick="openClient('${c.naam}')"><span class="mono">${cpInitials(c.naam)}</span><div class="wsr-id"><div class="wsr-nm">${c.naam}</div><div class="wsr-sub">${sub}</div></div>${right}</div>`;
   };
   const sortWork=(a,b)=>(hasWork(b)?1:0)-(hasWork(a)?1:0);
   let body='';
   if(mwFilter==='exit'){
-    body=`<div class="cl-grp">Exit klanten <span>· ${exit.length}</span></div>
-    <div class="sub" style="margin:-2px 0 10px">Niet-actieve klanten. Open taken (laatste aangiften, jaarrekening) blijven zichtbaar zodat u ze kunt afronden — klik voor het dossier.</div>
-    <div class="cl-list">${exit.length?exit.slice().sort(sortWork).map(c=>clRow(c,true)).join(''):'<div class="empty"><div class="big">🗄️</div>Geen exit-klanten.</div>'}</div>`;
+    body=`<div class="ws-grp">Exit klanten <span class="n">${exit.length}</span></div>
+    <div class="sub" style="margin:-4px 0 10px">Niet-actieve klanten — open taken blijven zichtbaar. Klik voor het dossier.</div>
+    <div class="ws-list">${exit.length?exit.slice().sort(sortWork).map(c=>clRow(c,true)).join(''):'<div class="cp-empty">Geen exit-klanten.</div>'}</div>`;
   } else {
     const groups = mwFilter==='alle'?MEDEWERKERS:[mwFilter];
     groups.forEach(mw=>{
       const cs=actief.filter(c=>c.mw===mw), open=cs.filter(hasWork).length;
-      body+=`<div class="cl-grp"><span class="av">${mw[0]}</span>${mw} <span>· ${cs.length} klanten${open?` · ${open} met werk`:''}</span></div>
-      <div class="cl-list">${cs.length?cs.slice().sort(sortWork).map(c=>clRow(c,false)).join(''):'<div class="empty">Geen actieve klanten in deze groep.</div>'}</div>`;
+      body+=`<div class="ws-grp">${mw} <span class="n">${cs.length} klanten${open?` · ${open} met werk`:''}</span></div>
+      <div class="ws-list">${cs.length?cs.slice().sort(sortWork).map(c=>clRow(c,false)).join(''):'<div class="cp-empty">Geen actieve klanten in deze groep.</div>'}</div>`;
     });
   }
   let summaryHTML='';
