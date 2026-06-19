@@ -98,8 +98,8 @@
   /* gedeelde zachte monogram (selector + lijst) */
   .mono{width:28px;height:28px;border-radius:8px;background:#EDF1F7;color:var(--ink-2);font-weight:700;font-size:11px;display:grid;place-items:center;flex-shrink:0;letter-spacing:.2px}
   /* gedeelde workspace-lijst (Notion/Attio) */
-  .ws-list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:var(--sh-sm)}
-  .wsrow{display:flex;align-items:center;gap:13px;padding:11px 16px;border-bottom:1px solid var(--line-2);cursor:pointer;transition:background .12s}
+  .ws-list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:var(--sh-sm)}
+  .wsrow{display:flex;align-items:center;gap:13px;padding:10px 16px;border-bottom:1px solid var(--line-2);cursor:pointer;transition:background .12s}
   .wsrow:last-child{border-bottom:0}
   .wsrow:hover{background:var(--hover)}
   .wsrow .mono{width:32px;height:32px;font-size:11.5px}
@@ -113,10 +113,9 @@
   .ws-act .more{color:var(--grey-2);font-weight:600;margin-left:2px}
   .wsrow.quiet .mono{background:#f4f6f9;color:#aeb7c3}
   .wsrow.quiet .wsr-nm{color:var(--ink-2);font-weight:600}
-  .ws-grp{display:flex;align-items:center;gap:9px;margin:24px 2px 10px;font-size:13px;font-weight:700;color:var(--ink);letter-spacing:-.1px}
-  .ws-grp .ic{width:22px;height:22px;border-radius:7px;background:#EDF1F7;color:var(--ink-2);display:grid;place-items:center;font-size:10px;font-weight:700;flex-shrink:0}
-  .ws-grp .n{font-size:11.5px;color:var(--grey-2);font-weight:500}
-  .ws-grp:first-of-type{margin-top:6px}
+  .ws-grp{display:flex;align-items:center;gap:7px;margin:16px 4px 7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-2)}
+  .ws-grp .n{font-size:11px;color:var(--grey-2);font-weight:500;text-transform:none;letter-spacing:0}
+  .ws-grp:first-of-type{margin-top:2px}
   .langsel{background:#ffffff14;border:1px solid #ffffff33;color:#fff;border-radius:8px;padding:6px 8px;font-size:12px;font-family:inherit;cursor:pointer}
   .langsel option{color:#1c1f24}
   .login .langsel{background:#ffffff1a;border-color:#ffffff44;padding:8px 12px;font-size:13px}
@@ -200,20 +199,21 @@
   tbody tr.wl-todo td:first-child{box-shadow:inset 3px 0 0 var(--red)}
   tbody tr.wl-done td:first-child{box-shadow:inset 3px 0 0 #d4dde7}
   /* ===== Klantenportfolio (kaartrijen i.p.v. tabel) ===== */
-  .psum{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
-  .pcard{padding:10px 13px;border-radius:11px}
-  .pcard .pl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--grey-2)}
-  .pcard .pv{font-size:13px;font-weight:700;margin:5px 0;color:var(--ink);display:flex;align-items:baseline;gap:6px}
-  .pcard .pp{font-size:11.5px;color:var(--grey);font-weight:700;margin-left:auto}
-  .pbar{height:4px}
+  .psum{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:14px}
+  .pcard{padding:9px 12px;border-radius:10px}
+  .pcard .pl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--grey-2)}
+  .pcard .pv{font-size:12.5px;font-weight:700;margin:4px 0;color:var(--ink);display:flex;align-items:baseline;gap:6px}
+  .pcard .pp{font-size:11px;color:var(--grey);font-weight:700;margin-left:auto}
+  .pbar{height:3px}
   .pmini{display:none}
-  .hx{display:flex;align-items:center;gap:9px;flex-shrink:0}
-  .hx-w{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:800;color:var(--danger)}
-  .hx-w .d{width:6px;height:6px;border-radius:50%;background:var(--red)}
-  .hx-sep{width:1px;height:13px;background:var(--line);flex-shrink:0}
-  .hx-d{font-size:11px;font-weight:700;letter-spacing:.2px;color:#c4ccd6}
-  .hx-d.open{color:var(--amber)}
-  .hx-d.urgent{color:var(--danger)}
+  /* unified work-status (rechterzijde klantrij) */
+  .wsr-st{display:flex;align-items:center;gap:10px;flex-shrink:0}
+  .wsr-st-t{font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+  .wsr-st-t::before{content:"";width:7px;height:7px;border-radius:50%;flex-shrink:0}
+  .wsr-st.red .wsr-st-t{color:var(--danger)}.wsr-st.red .wsr-st-t::before{background:var(--red)}
+  .wsr-st.amber .wsr-st-t{color:#a9781a}.wsr-st.amber .wsr-st-t::before{background:var(--amber)}
+  .wsr-st.quiet .wsr-st-t{color:var(--grey-2);font-weight:500}.wsr-st.quiet .wsr-st-t::before{background:#ccd4de}
+  .wsr-st .chev{color:var(--grey-2);width:16px;height:16px;flex-shrink:0}
   .grp-h .grp-c{color:var(--grey-2);font-weight:600;font-size:12px}
   .cl-list{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
   .clx{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 14px;cursor:pointer;transition:border-color .14s,box-shadow .14s,transform .1s}
@@ -2469,23 +2469,29 @@ VIEWS.kantoor.klanten = ()=>{
     const tv=exitMode?0:state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;
     const ob1=w.ob['Q1 2026'].ingediend, ib24=w.ib[IBYEAR].ingediend, loonDone=Object.values(w.loon['2026']).filter(Boolean).length;
     const sc=state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length;
-    const quiet=!(tv||sc||!ob1||!ib24||loonDone<6);
-    const lead=(tv||sc)?`${tv?`<span class="hx-w" title="${tv} te verwerken"><span class="d"></span>${tv}</span>`:''}${sc?`<span class="hx-w" title="${sc} open signaal${sc>1?'en':''}"><span class="d"></span>⚠</span>`:''}<span class="hx-sep"></span>`:'';
-    const hx=`<div class="hx">${lead}<span class="hx-d ${ob1?'':'open'}">OB</span><span class="hx-d ${ib24?'':'open'}">IB</span><span class="hx-d ${loonDone>=12?'':(loonDone<6?'urgent':'open')}">Loon</span></div>`;
-    const sub=exitMode?`nr ${c.nr} · ${PROG[c.prog]} · ${c.mw} · tot ${c.eindDatum||'—'}`:`nr ${c.nr} · ${PROG[c.prog]} · ${c.mw}`;
-    return `<div class="wsrow ${quiet?'quiet':''}" onclick="openClient('${c.naam}')"><span class="mono">${cpInitials(c.naam)}</span><div class="wsr-id"><div class="wsr-nm">${c.naam}</div><div class="wsr-sub">${sub}</div></div>${hx}</div>`;
+    const items=[];
+    if(tv) items.push({u:1,m:`${tv} document${tv>1?'en':''} te verwerken`});
+    if(sc) items.push({u:1,m:`${sc} signaal${sc>1?'en':''} open`});
+    if(!ob1) items.push({u:0,m:'OB-aangifte open'});
+    if(!ib24) items.push({u:0,m:'IB-controle nodig'});
+    if(loonDone<6) items.push({u:0,m:`Loonaangifte (${loonDone}/12)`});
+    const cnt=items.length, quiet=cnt===0, urgent=items.some(i=>i.u);
+    const tone=quiet?'quiet':(urgent?'red':'amber');
+    const msg=quiet?'Geen open werk':(cnt===1?items[0].m:`${cnt} punten vragen aandacht`);
+    const sub=exitMode?`${PROG[c.prog]} · nr ${c.nr} · ${c.mw} · tot ${c.eindDatum||'—'}`:`${PROG[c.prog]} · nr ${c.nr} · ${c.mw}`;
+    return `<div class="wsrow ${quiet?'quiet':''}" onclick="openClient('${c.naam}')"><span class="mono">${cpInitials(c.naam)}</span><div class="wsr-id"><div class="wsr-nm">${c.naam}</div><div class="wsr-sub">${sub}</div></div><div class="wsr-st ${tone}"><span class="wsr-st-t">${msg}</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>`;
   };
   const sortWork=(a,b)=>(hasWork(b)?1:0)-(hasWork(a)?1:0);
   let body='';
   if(mwFilter==='exit'){
-    body=`<div class="ws-grp"><span class="ic">↩</span>Exit klanten <span class="n">${exit.length}</span></div>
+    body=`<div class="ws-grp">Exit klanten <span class="n">· ${exit.length}</span></div>
     <div class="sub" style="margin:-4px 0 10px">Niet-actieve klanten — open taken blijven zichtbaar. Klik voor het dossier.</div>
     <div class="ws-list">${exit.length?exit.slice().sort(sortWork).map(c=>clRow(c,true)).join(''):'<div class="cp-empty">Geen exit-klanten.</div>'}</div>`;
   } else {
     const groups = mwFilter==='alle'?MEDEWERKERS:[mwFilter];
     groups.forEach(mw=>{
       const cs=actief.filter(c=>c.mw===mw), open=cs.filter(hasWork).length;
-      body+=`<div class="ws-grp"><span class="ic">${mw[0]}</span>${mw} <span class="n">${cs.length} klanten${open?` · ${open} met werk`:''}</span></div>
+      body+=`<div class="ws-grp">${mw} <span class="n">· ${cs.length} klanten${open?` · ${open} met werk`:''}</span></div>
       <div class="ws-list">${cs.length?cs.slice().sort(sortWork).map(c=>clRow(c,false)).join(''):'<div class="cp-empty">Geen actieve klanten in deze groep.</div>'}</div>`;
     });
   }
