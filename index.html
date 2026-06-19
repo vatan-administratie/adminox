@@ -263,6 +263,53 @@
   .mh-act{font-size:11px;font-weight:700;color:#991B1B;background:#FEE2E2;border:1px solid #fecaca;padding:4px 11px;border-radius:7px;white-space:nowrap}
   .mh-ok{font-size:11px;font-weight:700;color:#166534;background:#DCFCE7;border:1px solid #bbf7d0;padding:4px 11px;border-radius:7px;white-space:nowrap}
   .mod-sub{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--grey-2);margin:0 0 11px}
+  .mh-act.amber{color:#92400E;background:#FEF3C7;border-color:#fde68a}
+  /* OB quarter difference bars */
+  .obq{display:flex;align-items:center;gap:12px;margin-bottom:7px}
+  .obq-l{font-size:11.5px;font-weight:700;color:var(--grey);width:46px;flex-shrink:0}
+  .obq-track{flex:1;height:8px;background:var(--line-2);border-radius:5px;overflow:hidden}
+  .obq-fill{height:100%;border-radius:5px}
+  .obq-fill.g{background:#22A565}.obq-fill.a{background:var(--amber)}.obq-fill.r{background:var(--red)}
+  .obq-v{font-size:12px;font-weight:700;width:96px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
+  .obq-v.g{color:#166534}.obq-v.a{color:var(--amber)}.obq-v.r{color:var(--red)}
+  /* mini stat cards (summary) */
+  .sgrid{display:grid;gap:10px;margin-bottom:16px}
+  .sgrid.c4{grid-template-columns:repeat(4,1fr)}.sgrid.c3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:760px){.sgrid.c4,.sgrid.c3{grid-template-columns:repeat(2,1fr)}}
+  .scard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 14px}
+  .scard .sl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2)}
+  .scard .sv{font-size:16px;font-weight:800;color:var(--ink);margin-top:4px;font-variant-numeric:tabular-nums}
+  .scard .sv.g{color:#166534}.scard .sv.a{color:var(--amber)}.scard .sv.r{color:var(--red)}
+  /* employee cards */
+  .emp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:760px){.emp-grid{grid-template-columns:1fr}}
+  .emp-card{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px;cursor:pointer;transition:.12s}
+  .emp-card:hover{box-shadow:var(--sh-md);transform:translateY(-1px)}
+  .emp-av{width:40px;height:40px;border-radius:11px;background:var(--brand-soft);color:var(--navy);font-weight:800;font-size:14px;display:grid;place-items:center;flex-shrink:0}
+  .emp-main{flex:1;min-width:0}
+  .emp-nm{font-size:14px;font-weight:700;color:var(--ink)}
+  .emp-fn{font-size:12px;color:var(--grey);margin-top:1px}
+  .emp-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;align-items:center}
+  .emp-chip{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--grey)}
+  .emp-chip.g{background:#DCFCE7;color:#166534;border-color:#bbf7d0}
+  .emp-chip.a{background:#FEF3C7;color:#92400E;border-color:#fde68a}
+  .emp-sub{font-size:11.5px;color:var(--grey-2);margin-top:7px;font-variant-numeric:tabular-nums}
+  /* journal entry card */
+  .jcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+  .jcard-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .jcard-t{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey)}
+  .jline{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line-2)}
+  .jline:last-child{border-bottom:0}
+  .jline .jg{flex:1;font-size:12.5px;color:var(--ink)}
+  .jline .jd,.jline .jc{width:96px;text-align:right;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums}
+  .jline.tot{border-top:2px solid var(--line);margin-top:2px;padding-top:10px}
+  .jline.tot .jg{font-weight:800}
+  .lz-edit{border:1px solid var(--line);border-radius:14px;background:var(--card);margin-bottom:14px;overflow:hidden}
+  .lz-edit>summary{cursor:pointer;padding:13px 16px;font-size:12.5px;font-weight:700;color:var(--ink);list-style:none;display:flex;align-items:center;gap:8px;user-select:none}
+  .lz-edit>summary::-webkit-details-marker{display:none}
+  .lz-edit>summary::before{content:'▸';color:var(--grey-2);transition:.15s}
+  .lz-edit[open]>summary::before{transform:rotate(90deg)}
+  .lz-edit .lz-body{padding:4px 16px 16px}
   .cc-sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:16px}
   .cc-side .cc-sec{padding:14px 16px}
   .cc-h{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey);margin:0 0 12px}
@@ -1287,12 +1334,25 @@ function obAansluitingContent(naam){aanslNaam=naam;const d=aanslGet(naam,aanslJa
   const qrows=d.q.map((q,i)=>`<tr><td>${qn[i]}</td><td class="r">${ni('a_q'+i+'_oh',q.oh)}</td><td class="r">${ni('a_q'+i+'_ol',q.ol)}</td><td class="r">${ni('a_q'+i+'_on',q.on)}</td><td class="r">${ni('a_q'+i+'_oa',q.oa)}</td><td class="r">${ni('a_q'+i+'_vb',q.vb)}</td><td class="r">${ni('a_q'+i+'_bt',q.bt)}</td><td class="r" id="ao_q${i}_s"></td><td class="r" id="ao_q${i}_m"></td></tr>`).join('');
   const postRows=d.posten.map((p,i)=>`<tr><td><input id="a_pl${i}" class="dinp" style="width:180px" value="${String(p[0]).replace(/"/g,'&quot;')}" oninput="aanslCalc()"></td><td class="r">${ni('a_pa'+i,p[1])}</td><td class="r"><span style="cursor:pointer;color:var(--red);font-weight:800" onclick="aanslDelPost('${naam}',${i})">✕</span></td></tr>`).join('');
   return `<div class="row-between"><h3 style="margin:0">OB-aansluiting &amp; suppletie</h3><div style="display:flex;gap:8px;align-items:center"><div class="ftabs" style="margin:0">${tabs}</div><button class="btn ghost sm" onclick="printOB('${naam}')">⬇ Print / PDF</button></div></div>
-  <div class="sub" style="margin:6px 0 14px">Jaarcijfers uit de boekhouding tegenover de kwartaalaangiften. Het verschil is de suppletie; samen met openstaande posten vormt dit de balanspositie OB. <span style="color:var(--brand-2)">In de live versie worden deze cijfers automatisch uit Exact/SnelStart gehaald.</span></div>
+  <div class="sub" style="margin:6px 0 14px">VAT-aansluiting boekjaar ${aanslJaar}: jaarcijfers tegenover de ingediende kwartaalaangiften. <span style="color:var(--brand-2)">In de live versie komen deze cijfers automatisch uit Exact/SnelStart.</span></div>
+  <div class="mh"><div class="mh-row"><div class="mh-status"><span class="mh-dot" id="obh_dot"></span><span id="obh_status">—</span></div>
+    <div class="mh-kpis">
+      <div class="mh-kpi"><div class="mh-kl">Suppletie ${aanslJaar}</div><div class="mh-kv" id="obh_sup">—</div></div>
+      <div class="mh-kpi"><div class="mh-kl">Verschil jaar ↔ aangiften</div><div class="mh-kv" id="obh_diff">—</div></div>
+      <div class="mh-kpi"><div class="mh-kl">Open balansposten</div><div class="mh-kv" id="obh_open">—</div></div>
+      <div class="mh-kpi"><div class="mh-kl">Risico</div><div class="mh-kv" id="obh_risk">—</div></div>
+    </div></div>
+    <div class="mh-foot"><div class="mh-missing" id="obh_msg">—</div><span id="obh_act" class="mh-ok">—</span></div>
+  </div>
+  <div class="grp-h">Grootste verschillen per kwartaal</div>
+  <div id="obh_qbars" style="margin-bottom:16px"></div>
+  <div class="stats s3" style="margin-bottom:14px"><div class="stat"><div class="lbl">Saldo jaar (balans)</div><div class="val" id="ak_saldo"></div></div><div class="stat"><div class="lbl">Som aangiften</div><div class="val" id="ak_som"></div></div><div class="stat"><div class="lbl">Suppletie ${aanslJaar}</div><div class="val" id="ak_sup" style="color:var(--amber)"></div></div></div>
+  <div class="ai-note" id="obh_insight" style="margin-bottom:20px">—</div>
+  <div class="mod-sub">Detailgegevens — balans, aangiften &amp; balanspositie</div>
   <div class="grp-h">Balans — jaarcijfers</div>
   <div class="tablewrap" style="margin-bottom:16px"><table><thead><tr><th>Post</th><th class="r">Bedrag</th><th class="r">Btw</th></tr></thead><tbody>${balansRows}<tr class="sent"><td><b>Saldo jaar (te betalen btw)</b></td><td></td><td class="r"><b id="ao_saldojaar"></b></td></tr></tbody></table></div>
   <div class="grp-h">Aangiften per kwartaal</div>
   <div class="tablewrap" style="margin-bottom:16px;overflow-x:auto"><table><thead><tr><th>Kwartaal</th><th class="r">Omzet hoog</th><th class="r">Omzet laag</th><th class="r">Omzet 0%</th><th class="r">Onderaann.</th><th class="r">Voorbel.</th><th class="r">Aangegeven</th><th class="r">Saldo</th><th class="r">Verschil</th></tr></thead><tbody>${qrows}<tr class="sent"><td><b>Som</b></td><td class="r" id="ao_soh"></td><td class="r" id="ao_sol"></td><td class="r" id="ao_son"></td><td class="r" id="ao_soa"></td><td class="r" id="ao_svb"></td><td class="r" id="ao_sbt"></td><td class="r"><b id="ao_ssaldo"></b></td><td class="r" id="ao_sm"></td></tr></tbody></table></div>
-  <div class="stats s3" style="margin-bottom:16px"><div class="stat"><div class="lbl">Saldo jaar (balans)</div><div class="val" id="ak_saldo"></div></div><div class="stat"><div class="lbl">Som aangiften</div><div class="val" id="ak_som"></div></div><div class="stat"><div class="lbl">Suppletie ${aanslJaar}</div><div class="val" id="ak_sup" style="color:var(--amber)"></div></div></div>
   <div class="grp-h">Balanspositie OB per 31-12-${aanslJaar}</div>
   <div class="tablewrap"><table><thead><tr><th>Omschrijving</th><th class="r">Bedrag</th><th></th></tr></thead><tbody>${postRows}<tr><td><button class="btn ghost sm" onclick="aanslAddPost('${naam}')">+ openstaande post</button></td><td></td><td></td></tr><tr><td>4e kw ${aanslJaar} (onbetaald)</td><td class="r" id="ao_q4auto"></td><td style="color:var(--grey);font-size:11px">auto</td></tr><tr><td>Suppletie ${aanslJaar}</td><td class="r" id="ao_supauto"></td><td style="color:var(--grey);font-size:11px">auto</td></tr><tr class="sent"><td><b>Balanspositie OB</b></td><td class="r"><b id="ao_balanspos"></b></td><td></td></tr></tbody></table></div>`;
 }
@@ -1310,7 +1370,17 @@ function aanslCalc(){const naam=aanslNaam;if(!naam)return;const d=aanslGet(naam,
   set('ak_saldo','€ '+m2(saldoJaar));set('ak_som','€ '+m2(sumS));set('ak_sup','€ '+m2(sup));
   d.posten=d.posten.map((p,i)=>{const le=document.getElementById('a_pl'+i);return [le?le.value:p[0],gv('a_pa'+i)];});
   let pos=0;d.posten.forEach(p=>pos+=p[1]);
-  set('ao_q4auto',m2(q4s));set('ao_supauto',m2(sup));set('ao_balanspos','€ '+m2(pos+q4s+sup));}
+  set('ao_q4auto',m2(q4s));set('ao_supauto',m2(sup));set('ao_balanspos','€ '+m2(pos+q4s+sup));
+  // dashboard header
+  const aSup=Math.abs(sup);const tone=aSup<1?'g':(aSup<1000?'a':'r');
+  const dot=document.getElementById('obh_dot');if(dot)dot.className='mh-dot '+tone;
+  set('obh_status',aSup<1?'Geen verschil — aansluiting akkoord':(aSup<1000?'Controle vereist — klein verschil':'Suppletie vereist'));
+  set('obh_sup','€ '+m2(sup));set('obh_diff','€ '+m2(saldoJaar-sumS));set('obh_open',String(d.posten.length));set('obh_risk',aSup<1?'Laag':(aSup<1000?'Midden':'Hoog'));
+  const act=document.getElementById('obh_act');if(act){act.className=tone==='r'?'mh-act':(tone==='a'?'mh-act amber':'mh-ok');act.textContent=tone==='r'?'● Suppletie indienen':(tone==='a'?'● Controleren':'● Geen actie nodig');}
+  set('obh_msg',aSup<1?'Jaarcijfers sluiten aan op de ingediende aangiften.':(aSup<1000?`Verschil van € ${m2(sup)} — corrigeer in de eerstvolgende aangifte (onder de €1.000-grens).`:`Verschil € ${m2(sup)} overschrijdt de €1.000-grens — suppletie ${aanslJaar} vereist.`));
+  const qn2=['1e kw','2e kw','3e kw','4e kw'];const diffs=d.q.map(q=>q.bt-(q.oh*0.21+q.ol*0.09+q.oa*0.21-q.vb));const maxAbs=Math.max(1,...diffs.map(x=>Math.abs(x)));
+  const qb=document.getElementById('obh_qbars');if(qb)qb.innerHTML=diffs.map((m,i)=>{const wd=Math.round(Math.abs(m)/maxAbs*100);const tn=Math.abs(m)<1?'g':(Math.abs(m)<1000?'a':'r');return `<div class="obq"><div class="obq-l">${qn2[i]}</div><div class="obq-track"><div class="obq-fill ${tn}" style="width:${wd}%"></div></div><div class="obq-v ${tn}">€ ${m2(m)}</div></div>`;}).join('');
+  const ins=document.getElementById('obh_insight');if(ins){const mi=diffs.map((m,i)=>[Math.abs(m),i]).sort((x,y)=>y[0]-x[0])[0];ins.innerHTML=`Grootste afwijking: <b>${qn2[mi[1]]}</b> (€ ${m2(diffs[mi[1]])}). Balanspositie OB per 31-12-${aanslJaar}: <b>€ ${m2(pos+q4s+sup)}</b> · ${d.posten.length} openstaande balanspost(en).`;}}
 function aanslSwitchJaar(naam,y){aanslCalc();aanslJaar=y;openClient(naam,'obaansl');}
 function aanslAddPost(naam){aanslCalc();const d=aanslGet(naam,aanslJaar);if(d)d.posten.push(['Openstaande post',0]);openClient(naam,'obaansl');}
 function aanslDelPost(naam,i){aanslCalc();const d=aanslGet(naam,aanslJaar);if(d)d.posten.splice(i,1);openClient(naam,'obaansl');}
@@ -1333,29 +1403,44 @@ function leaseContent(naam){leaseNaam=naam;const arr=leaseList(naam);
   }
   const o=arr[leaseIdx];const ni=(k,v,w)=>`<input id="lz_${k}" class="dinp" style="width:${w||110}px;text-align:right" type="number" step="0.01" value="${v}" oninput="leaseCalc()">`;const ti=(k,v,w)=>`<input id="lz_${k}" class="dinp" style="width:${w||120}px" value="${String(v||'').replace(/"/g,'&quot;')}" oninput="leaseCalc()">`;
   return `<div class="backbar"><span class="backbtn" onclick="leaseOpen('${naam}')">← Lease-overzicht</span></div>
-  <div class="grp-h">Gegevens lease</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px 18px;margin-bottom:14px">
-    <div class="field"><label>Kenteken</label>${ti('kent',o.kent,140)}</div>
-    <div class="field"><label>Maandtermijn €</label>${ni('mt',o.mt)}</div>
-    <div class="field"><label>Looptijd (maanden)</label>${ni('lt',o.lt,90)}</div>
-    <div class="field"><label>Startjaar</label>${ni('sj',o.sj,90)}</div>
-    <div class="field"><label>Maanden in startjaar</label>${ni('sm',o.sm,90)}</div>
-    <div class="field"><label>Totaal rente €</label>${ni('rt',o.rt)}</div>
-    <div class="field"><label>Hoofdsom (aflossing) €</label>${ni('hs',o.hs)}</div>
-    <div class="field"><label>Slottermijn €</label>${ni('st',o.st)}</div>
-    <div class="field"><label>Boekjaar (journaalpost)</label>${ni('bj',o.bj,90)}</div>
+  <div class="mh"><div class="mh-row"><div class="mh-status"><span class="mh-dot" id="lz_dot"></span><span id="lz_status">—</span><span style="color:var(--grey-2);font-weight:600;margin:0 2px">·</span><span id="lz_k_kent" style="font-weight:800">—</span></div>
+    <div class="mh-kpis">
+      <div class="mh-kpi"><div class="mh-kl">Maandtermijn</div><div class="mh-kv" id="lz_k_mt">—</div></div>
+      <div class="mh-kpi"><div class="mh-kl">Looptijd</div><div class="mh-kv" id="lz_k_lt">—</div></div>
+      <div class="mh-kpi"><div class="mh-kl">Startjaar</div><div class="mh-kv" id="lz_k_sj">—</div></div>
+    </div></div></div>
+  <div class="sgrid c4">
+    <div class="scard"><div class="sl">Huidige schuld</div><div class="sv" id="lz_k_schuld">—</div></div>
+    <div class="scard"><div class="sl">Rente / maand</div><div class="sv" id="lz_k_rm">—</div></div>
+    <div class="scard"><div class="sl">Aflossing / maand</div><div class="sv" id="lz_k_am">—</div></div>
+    <div class="scard"><div class="sl">Boekjaar journaalpost</div><div class="sv" id="lz_k_bj">—</div></div>
   </div>
-  <div class="stats s3" style="margin-bottom:16px"><div class="stat"><div class="lbl">Rente per maand</div><div class="val" id="lo_rm"></div></div><div class="stat"><div class="lbl">Aflossing per maand</div><div class="val" id="lo_am"></div></div><div class="stat"><div class="lbl">Maandtermijn (controle)</div><div class="val" id="lo_tm"></div></div></div>
-  <div class="grp-h">Rente &amp; aflossing per jaar</div>
-  <div class="tablewrap" style="margin-bottom:16px"><table><thead><tr><th>Jaar</th><th class="r">Maanden</th><th class="r">Rente</th><th class="r">Aflossing</th><th class="r">Schuld per 31-12</th></tr></thead><tbody id="lo_rows"></tbody></table></div>
-  <div class="grp-h">Journaalpost boekjaar <span id="lo_bjlabel"></span></div>
-  <div class="sub" style="margin:4px 0 8px">Grootboekrekeningen komen in de live versie uit het rekeningschema van de boekhouding; hier vrij in te vullen.</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px 18px;margin-bottom:10px">
-    <div class="field"><label>Rekening rente (kosten)</label>${ti('ar',o.acc?o.acc.r:'',120)}</div>
-    <div class="field"><label>Rekening leaseverplichting</label>${ti('av',o.acc?o.acc.v:'',120)}</div>
-    <div class="field"><label>Tegenrekening (bank/kruispost)</label>${ti('at',o.acc?o.acc.t:'',120)}</div>
+  <div class="grid2" style="align-items:start;gap:16px">
+    <div><div class="mod-sub">Rente &amp; aflossing per jaar</div>
+      <div class="tablewrap"><table><thead><tr><th>Jaar</th><th class="r">Mnd</th><th class="r">Rente</th><th class="r">Aflossing</th><th class="r">Schuld 31-12</th></tr></thead><tbody id="lo_rows"></tbody></table></div></div>
+    <div><div class="mod-sub">Journaalpost boekjaar <span id="lo_bjlabel"></span></div>
+      <div class="jcard"><div class="jline" style="padding-top:0;border-bottom:1px solid var(--line)"><div class="jg" style="font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2);font-weight:700">Grootboek</div><div class="jd" style="font-size:10px;color:var(--grey-2);font-weight:700">Debet</div><div class="jc" style="font-size:10px;color:var(--grey-2);font-weight:700">Credit</div></div><div id="lo_jp"></div></div>
+      <div class="sub" style="margin-top:8px;font-size:11px">Grootboekrekeningen komen in de live versie uit het rekeningschema; hier vrij in te vullen via Leasegegevens.</div></div>
   </div>
-  <div class="tablewrap"><table><thead><tr><th>Grootboek</th><th class="r">Debet</th><th class="r">Credit</th></tr></thead><tbody id="lo_jp"></tbody></table></div>
+  <details class="lz-edit" style="margin-top:16px"><summary>Leasegegevens bewerken</summary><div class="lz-body">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px 18px;margin-bottom:14px">
+      <div class="field"><label>Kenteken</label>${ti('kent',o.kent,140)}</div>
+      <div class="field"><label>Maandtermijn €</label>${ni('mt',o.mt)}</div>
+      <div class="field"><label>Looptijd (maanden)</label>${ni('lt',o.lt,90)}</div>
+      <div class="field"><label>Startjaar</label>${ni('sj',o.sj,90)}</div>
+      <div class="field"><label>Maanden in startjaar</label>${ni('sm',o.sm,90)}</div>
+      <div class="field"><label>Totaal rente €</label>${ni('rt',o.rt)}</div>
+      <div class="field"><label>Hoofdsom (aflossing) €</label>${ni('hs',o.hs)}</div>
+      <div class="field"><label>Slottermijn €</label>${ni('st',o.st)}</div>
+      <div class="field"><label>Boekjaar (journaalpost)</label>${ni('bj',o.bj,90)}</div>
+    </div>
+    <div class="mod-sub">Grootboekrekeningen</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px 18px">
+      <div class="field"><label>Rekening rente (kosten)</label>${ti('ar',o.acc?o.acc.r:'',120)}</div>
+      <div class="field"><label>Rekening leaseverplichting</label>${ti('av',o.acc?o.acc.v:'',120)}</div>
+      <div class="field"><label>Tegenrekening (bank/kruispost)</label>${ti('at',o.acc?o.acc.t:'',120)}</div>
+    </div>
+  </div></details>
   <div style="margin-top:14px;display:flex;gap:10px"><button class="btn ghost sm" onclick="printLease('${naam}',${leaseIdx})">⬇ Print / PDF</button><button class="btn ghost sm" onclick="delLease('${naam}',${leaseIdx})">Lease verwijderen</button></div>`;
 }
 function leaseCalc(){const naam=leaseNaam;const arr=leaseList(naam);const o=arr[leaseIdx];if(!o)return;
@@ -1366,8 +1451,17 @@ function leaseCalc(){const naam=leaseNaam;const arr=leaseList(naam);const o=arr[
   set('lo_rm','€ '+m2(res.renteM));set('lo_am','€ '+m2(res.aflM));set('lo_tm','€ '+m2(res.renteM+res.aflM));
   const tb=document.getElementById('lo_rows');if(tb)tb.innerHTML=rows.map(r=>`<tr><td>${r.y}</td><td class="r">${r.m}</td><td class="r">${m2(r.r)}</td><td class="r">${m2(r.a)}</td><td class="r">${m2(r.s)}</td></tr>`).join('')+`<tr class="sent"><td><b>Totaal</b></td><td class="r">${Math.round(o.lt)}</td><td class="r"><b>${m2(rows.reduce((a,r)=>a+r.r,0))}</b></td><td class="r"><b>${m2(rows.reduce((a,r)=>a+r.a,0))}</b></td><td></td></tr>`;
   set('lo_bjlabel',String(o.bj||''));
+  // summary cards + status
+  const curY=new Date().getFullYear();const cur=rows.find(r=>r.y===curY)||rows[rows.length-1]||{s:0};
+  set('lz_k_kent',o.kent||'—');set('lz_k_mt','€ '+m2(o.mt));set('lz_k_lt',(Math.round(o.lt)||0)+' mnd');set('lz_k_sj',String(Math.round(o.sj)||'—'));
+  set('lz_k_schuld','€ '+m2(cur.s));set('lz_k_rm','€ '+m2(res.renteM));set('lz_k_am','€ '+m2(res.aflM));set('lz_k_bj',String(Math.round(o.bj)||'—'));
+  const ctrl=(o.mt||0)>0&&Math.abs((res.renteM+res.aflM)-(o.mt||0))>0.5;
+  const lastY=rows.length?rows[rows.length-1].y:o.sj;const stTone=ctrl?'a':'g';
+  const dot=document.getElementById('lz_dot');if(dot)dot.className='mh-dot '+stTone;
+  set('lz_status',ctrl?'Controle nodig':(curY>lastY?'Afgerond':'Actief'));
+  const schuldEl=document.getElementById('lz_k_schuld');if(schuldEl)schuldEl.className='sv'+(cur.s<=0?' g':'');
   const row=rows.find(r=>r.y===Math.round(o.bj));const jp=document.getElementById('lo_jp');
-  if(jp)jp.innerHTML=row?`<tr><td>${o.acc.r||'—'} Rente lease</td><td class="r">${m2(row.r)}</td><td class="r"></td></tr><tr><td>${o.acc.v||'—'} Leaseverplichting (aflossing)</td><td class="r">${m2(row.a)}</td><td class="r"></td></tr><tr class="sent"><td>aan ${o.acc.t||'—'}</td><td class="r"></td><td class="r"><b>${m2(row.r+row.a)}</b></td></tr>`:`<tr><td style="color:var(--grey)">Geen termijnen in dit boekjaar.</td></tr>`;
+  if(jp)jp.innerHTML=row?`<div class="jline"><div class="jg">${o.acc.r||'—'} · Rente lease (kosten)</div><div class="jd">${m2(row.r)}</div><div class="jc"></div></div><div class="jline"><div class="jg">${o.acc.v||'—'} · Leaseverplichting (aflossing)</div><div class="jd">${m2(row.a)}</div><div class="jc"></div></div><div class="jline tot"><div class="jg">aan ${o.acc.t||'—'} · bank/kruispost</div><div class="jd"></div><div class="jc">${m2(row.r+row.a)}</div></div>`:`<div class="jline"><div class="jg" style="color:var(--grey)">Geen termijnen in dit boekjaar.</div><div class="jd"></div><div class="jc"></div></div>`;
 }
 function addLease(naam){const arr=leaseList(naam);arr.push({kent:'',mt:0,lt:60,sj:new Date().getFullYear(),sm:12,rt:0,hs:0,st:0,bj:new Date().getFullYear(),acc:{r:'',v:'',t:''}});leaseIdx=arr.length-1;openClient(naam,'lease');}
 function delLease(naam,i){const arr=leaseList(naam);arr.splice(i,1);leaseIdx=-1;openClient(naam,'lease');}
@@ -1423,9 +1517,14 @@ function printOB(naam){const d=aanslGet(naam,aanslJaar);if(!d)return;const jaar=
  printDoc('OB-aansluiting '+jaar+' '+naam, body);}
 function printLease(naam,i){const o=leaseList(naam)[i];if(!o)return;const res=leaseRows(o);
  const rows=res.rows.map(r=>`<tr><td class="l">${r.y}</td><td>${r.m}</td><td>${m2(r.r)}</td><td>${m2(r.a)}</td><td>${m2(r.s)}</td></tr>`).join('');
+ const curY=new Date().getFullYear();const cur=res.rows.find(r=>r.y===curY)||res.rows[res.rows.length-1]||{s:0};
+ const jr=res.rows.find(r=>r.y===Math.round(o.bj));const ac=o.acc||{};
+ const jhtml=jr?`<h3>Journaalpost boekjaar ${o.bj}</h3><table><tr><th class="l">Grootboek</th><th>Debet</th><th>Credit</th></tr><tr><td class="l">${(ac.r||'—')} Rente lease (kosten)</td><td>${m2(jr.r)}</td><td></td></tr><tr><td class="l">${(ac.v||'—')} Leaseverplichting (aflossing)</td><td>${m2(jr.a)}</td><td></td></tr><tr class="tot"><td class="l">aan ${(ac.t||'—')} (bank/kruispost)</td><td></td><td>${m2(jr.r+jr.a)}</td></tr></table>`:'';
  const body=`<h2>Lease ${String(o.kent||'').replace(/[<>]/g,'')} — ${naam}</h2>
- <p>Maandtermijn EUR ${m2(o.mt)} · looptijd ${o.lt} mnd · rente/maand EUR ${m2(res.renteM)} · aflossing/maand EUR ${m2(res.aflM)}</p>
- <h3>Rente &amp; aflossing per jaar</h3><table><tr><th class="l">Jaar</th><th>Maanden</th><th>Rente</th><th>Aflossing</th><th>Schuld per 31-12</th></tr>${rows}<tr class="tot"><td class="l">Totaal</td><td>${Math.round(o.lt)}</td><td>${m2(res.rows.reduce((a,r)=>a+r.r,0))}</td><td>${m2(res.rows.reduce((a,r)=>a+r.a,0))}</td><td></td></tr></table>`;
+ <p>Maandtermijn EUR ${m2(o.mt)} · looptijd ${o.lt} mnd · startjaar ${o.sj} · rente/maand EUR ${m2(res.renteM)} · aflossing/maand EUR ${m2(res.aflM)}</p>
+ <p><b>Huidige restschuld (per 31-12-${cur.y||curY}):</b> EUR ${m2(cur.s)}</p>
+ <h3>Rente &amp; aflossing per jaar</h3><table><tr><th class="l">Jaar</th><th>Maanden</th><th>Rente</th><th>Aflossing</th><th>Schuld per 31-12</th></tr>${rows}<tr class="tot"><td class="l">Totaal</td><td>${Math.round(o.lt)}</td><td>${m2(res.rows.reduce((a,r)=>a+r.r,0))}</td><td>${m2(res.rows.reduce((a,r)=>a+r.a,0))}</td><td></td></tr></table>
+ ${jhtml}`;
  printDoc('Lease '+(o.kent||'')+' '+naam, body);}
 function leaseUpload(naam,inp){const f=inp.files&&inp.files[0];if(!f)return;inp.value='';toast('Leasecontract wordt gelezen door de AI…');
   const send=(b64,mime)=>{fetch('/.netlify/functions/explain',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'lease',imageBase64:b64,mimeType:mime})}).then(r=>r.json()).then(d=>{if(d.error)throw new Error(d.error);const arr=leaseList(naam);arr.push({kent:d.kenteken||'',mt:+d.maandbedrag||0,lt:+d.looptijd||60,sj:+d.startjaar||new Date().getFullYear(),sm:+d.startmaanden||12,rt:+d.renteTotaal||0,hs:+d.hoofdsom||0,st:+d.slottermijn||0,bj:new Date().getFullYear(),acc:{r:'',v:'',t:''}});leaseIdx=arr.length-1;toast('Lease ingelezen — controleer de gegevens ✓');openClient(naam,'lease');}).catch(e=>{toast('Kon contract niet lezen: '+String(e.message||e));});};
@@ -2765,12 +2864,13 @@ function renderClient(){
     const lm=w.loon['2026'];const lDone=Object.values(lm).filter(Boolean).length;
     const nowM=parseInt(TODAY.split('-')[1],10);
     const due=MAANDEN.slice(0,nowM).filter(m=>!lm[m]);
-    const lTone=due.length===0?'g':(lDone>0?'a':'r');
-    content=modHead({tone:lTone,status:due.length===0?'Loonaangiften bij':`${due.length} maand(en) openstaand`,
-      kpis:[['Verantwoordelijke',c.mw],['Volgende deadline','30-06-2026'],['Verwerkt 2026',lDone+'/12']],
+    const filed=MAANDEN.filter(m=>lm[m]);const lastFiled=filed.length?filed[filed.length-1].replace(/^./,x=>x.toUpperCase())+' 2026':'—';
+    const onSchedule=due.length===0;const lTone=onSchedule?'g':(lDone>0?'a':'r');
+    content=modHead({tone:lTone,status:onSchedule?'Op schema':`Achter op schema — ${due.length} maand(en)`,
+      kpis:[['Verwerkte maanden',lDone+'/12'],['Laatste aangifte',lastFiled],['Volgende deadline','30-06-2026'],['Status',onSchedule?'Op schema':'Achter']],
       pct:nowM?Math.round((nowM-due.length)/nowM*100):100,
       missing:due.length?`Nog in te dienen: <b>${due.join(', ')}</b>.`:'Alle maanden tot nu toe zijn ingediend.',action:due.length>0})
-    +`<div class="panel"><div class="mod-sub">Alle maanden 2026</div><div class="sub" style="margin:-4px 0 12px">Klik op een maand om de aangifte als gedaan/niet-gedaan te markeren.</div>
+    +`<div class="panel"><div class="mod-sub">Maandstatus · jan–dec 2026</div><div class="sub" style="margin:-4px 0 12px">Klik op een maand om de aangifte als gedaan/niet-gedaan te markeren.</div>
       <div class="loon-grid">${MAANDEN.map(m=>`<div class="loon-cell ${lm[m]?'on':''}" onclick="toggleLoon('${naam}','${m}')"><div style="text-transform:capitalize">${m}</div><div style="font-size:15px;margin-top:3px">${lm[m]?'✓':'—'}</div></div>`).join('')}</div></div>`;
   } else if(clientTab==='mappen'){
     const counts={};MAPPEN.forEach(m=>counts[m]=state.dossierDocs.filter(x=>x.client===naam&&x.map===m).length);
@@ -2778,12 +2878,17 @@ function renderClient(){
       <div class="folder-grid" style="margin-top:12px">${MAPPEN.map(m=>`<div class="folder" onclick="openClient('${naam}','map:${m}')"><div class="fic">${MAP_ICON[m]||'📁'}</div><div class="fn">${m}</div><div class="fc">${counts[m]} document(en)</div></div>`).join('')}</div>`;
   } else if(clientTab==='personeel'){
     const emps=state.employees.filter(e=>e.client===naam);
-    const vast=emps.filter(e=>/onbepaald|vast/i.test(e.contract||'')).length;
-    content=modHead({tone:emps.length?'g':'a',status:emps.length?`${emps.length} ${emps.length===1?'medewerker':'medewerkers'} in dienst`:'Geen medewerkers',
-      kpis:[['Verantwoordelijke',c.mw],['Vast contract',vast+'/'+emps.length],['Loonaangifte','zie Loonaangifte']],
-      missing:emps.length?'Klik op een medewerker voor contract, uren, verlof en loonstroken.':'Deze klant heeft nog geen medewerkers in het systeem.',action:false})
-    +`<div class="panel"><div class="row-between" style="margin-bottom:11px"><div class="mod-sub" style="margin:0">Alle medewerkers</div>${emps.length?`<button class="btn primary sm" onclick="bulkLoon('${naam}')">📂 Bulk loonstroken/aangiften</button>`:''}</div>
-    ${emps.length?`<div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Naam</th><th>Functie</th><th>Contractvorm</th><th>Loon</th><th>Documenten</th></tr></thead><tbody>${emps.map(e=>`<tr class="clickable" onclick="openEmployee(${e.id},'docs')"><td><b>${e.naam}</b></td><td>${e.functie}</td><td>${e.contract}</td><td>${e.loon}</td><td><span class="pill n">${e.docs.length}</span></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty"><div class="big">👥</div>Deze klant heeft (nog) geen medewerkers in het systeem.</div>'}</div>`;
+    const isVast=e=>/onbepaald|vast/i.test(e.contract||'');
+    const vast=emps.filter(isVast).length;const tijd=emps.length-vast;
+    const ends=emps.filter(e=>e.einddatum&&e.einddatum!=='—');
+    const pk=s=>{const p=(s||'01-01-2000').split('-');return p[2]+p[1]+p[0];};
+    const allDocs=emps.reduce((a,e)=>a.concat(e.docs||[]),[]);
+    const lastRun=allDocs.length?allDocs.slice().sort((a,b)=>pk(b.date).localeCompare(pk(a.date)))[0].date:'—';
+    content=modHead({tone:emps.length?(ends.length?'a':'g'):'a',status:emps.length?`${emps.length} ${emps.length===1?'medewerker':'medewerkers'} in dienst`:'Geen medewerkers',
+      kpis:[['Medewerkers',emps.length],['Vast contract',vast],['Tijdelijk',tijd],['Contract loopt af',ends.length],['Laatste loonrun',lastRun]],
+      missing:ends.length?`Loopt af: <b>${ends.map(e=>e.naam+' ('+e.einddatum+')').join(', ')}</b>.`:(emps.length?'Klik op een medewerker voor contract, uren, verlof en loonstroken.':'Deze klant heeft nog geen medewerkers in het systeem.'),action:false})
+    +`<div class="panel"><div class="row-between" style="margin-bottom:13px"><div class="mod-sub" style="margin:0">Medewerkers</div>${emps.length?`<button class="btn primary sm" onclick="bulkLoon('${naam}')">📂 Bulk loonstroken/aangiften</button>`:''}</div>
+    ${emps.length?`<div class="emp-grid">${emps.map(e=>`<div class="emp-card" onclick="openEmployee(${e.id},'docs')"><div class="emp-av">${cpInitials(e.naam)}</div><div class="emp-main"><div class="emp-nm">${e.naam}</div><div class="emp-fn">${e.functie}</div><div class="emp-meta"><span class="emp-chip ${isVast(e)?'g':'a'}">${e.contract}</span>${e.uren?`<span class="emp-chip">${e.uren}</span>`:''}${e.einddatum&&e.einddatum!=='—'?`<span class="emp-chip a">Eindigt ${e.einddatum}</span>`:''}</div><div class="emp-sub">${e.loon} · sinds ${e.startdatum||'—'} · ${e.docs.length} document(en)</div></div></div>`).join('')}</div>`:'<div class="empty"><div class="big">👥</div>Deze klant heeft (nog) geen medewerkers in het systeem.</div>'}</div>`;
   } else if(clientTab==='signalen'){
     const sg=state.signals.filter(s=>s.client===naam&&s.state!=='resolved');
     const hi=sg.filter(s=>s.ernst==='hoog').length,mid=sg.filter(s=>s.ernst==='midden').length;
