@@ -369,25 +369,83 @@
   .uploadbox{border:2px dashed #cfd6e0;border-radius:12px;padding:22px;text-align:center;color:var(--grey);font-size:13px;background:var(--brand-tint);transition:border-color .14s,background .14s}
   .uploadbox:hover{border-color:var(--brand-2);background:var(--brand-soft)}
   .uploadbox b{color:var(--ink)}
-  /* ===== Phase 2 · premium enterprise login/landing ===== */
-  .login{position:fixed;inset:0;z-index:200;display:grid;place-items:center;overflow-y:auto;padding:56px 20px;
-    background:
-      radial-gradient(1000px 560px at 82% -10%, #15436b5c 0%, transparent 58%),
-      radial-gradient(760px 520px at 4% 112%, #0e3a5e4d 0%, transparent 56%),
-      linear-gradient(#ffffff07 1px,transparent 1px),
-      linear-gradient(90deg,#ffffff07 1px,transparent 1px),
-      linear-gradient(180deg,#0b2238 0%,#081726 100%);
-    background-size:auto,auto,48px 48px,48px 48px,auto}
+  /* ===== Premium accounting-firm landing (merk primair, portaal secundair) ===== */
+  .login{position:fixed;inset:0;z-index:200;display:block;overflow-y:auto;padding:0;background:var(--bg);color:var(--ink)}
   .login.hide{display:none}
-  .login .wrap{width:900px;max-width:94vw;text-align:center;color:#fff}
-  .login .hero-logo{margin:0 auto 22px;width:74px;height:74px;filter:drop-shadow(0 18px 40px #00000073)}
-  .login h1{font-size:42px;font-weight:800;letter-spacing:-1.1px;margin-bottom:11px;line-height:1.05}
-  .login h1 span{background:linear-gradient(90deg,#8FBCE6,#D7E8F7);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .login .tag{color:#9FB1C5;font-size:15.5px;margin-bottom:26px;font-weight:500;line-height:1.5}
-  .login .feats{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-bottom:30px}
-  .login .feats .fc{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#cdd8e4;background:#ffffff0d;border:1px solid #ffffff1f;border-radius:10px;padding:7px 13px;font-weight:600;backdrop-filter:blur(6px)}
-  .login .feats .fc svg{width:14px;height:14px;color:#86bdee}
-  .login .feats .fc b{color:#fff;font-weight:600}
+  .lp-wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .lp-nav{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:14px;height:68px;padding:0 24px;background:#ffffffd6;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .lp-nav .bw{display:flex;align-items:center;gap:11px}
+  .lp-nav .bw .nm{font-size:15.5px;font-weight:800;color:var(--ink);letter-spacing:-.3px;line-height:1.1}
+  .lp-nav .bw .nm small{display:block;font-size:9.5px;font-weight:700;letter-spacing:1.6px;color:var(--grey-2);text-transform:uppercase;margin-top:2px}
+  .lp-nav .sp{flex:1}
+  .lp-nav .langsel{background:#fff;border:1px solid var(--line);color:var(--ink)}
+  .lp-login{display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:#fff;border:0;border-radius:var(--r-btn);padding:10px 16px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .14s}
+  .lp-login:hover{background:var(--navy-dark)}
+  .lp-login svg{width:15px;height:15px}
+  .lp-hero{position:relative;overflow:hidden;color:#fff;padding:66px 0 76px;background:radial-gradient(900px 520px at 84% -22%, #1a4e7a5e 0%, transparent 60%),linear-gradient(180deg,#0d2a45,#0a1f34)}
+  .lp-hero .lp-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.3px;color:#a7c8ec;background:#ffffff12;border:1px solid #ffffff26;border-radius:20px;padding:6px 14px;margin-bottom:20px}
+  .lp-hero .lp-eyebrow .d{width:7px;height:7px;border-radius:50%;background:#39B57D;box-shadow:0 0 0 3px #39b57d33}
+  .lp-hero h1{font-size:46px;line-height:1.07;font-weight:800;letter-spacing:-1.4px;max-width:780px;margin-bottom:16px}
+  .lp-hero h1 span{color:#9fc0e6}
+  .lp-hero p{font-size:17px;line-height:1.6;color:#b7c5d6;max-width:620px;margin-bottom:28px}
+  .lp-hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+  .lp-hero .cta .btn{padding:13px 22px;font-size:14.5px}
+  .lp-hero .cta .ghost{background:#ffffff14;border:1px solid #ffffff30;color:#fff;box-shadow:none}
+  .lp-hero .cta .ghost:hover{background:#ffffff24;border-color:#ffffff45}
+  .lp-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1140px;margin:-44px auto 0;position:relative;z-index:3;padding:0 24px}
+  .lp-stat{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:22px 18px;box-shadow:var(--sh-md);text-align:center}
+  .lp-stat .n{font-size:32px;font-weight:800;color:var(--navy);letter-spacing:-1px;line-height:1}
+  .lp-stat .l{font-size:12.5px;color:var(--grey);font-weight:600;margin-top:6px}
+  .lp-sec{padding:62px 0}
+  .lp-sec.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .lp-h{text-align:center;max-width:640px;margin:0 auto 38px}
+  .lp-h .k{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--brand-2)}
+  .lp-h h2{font-size:30px;font-weight:800;letter-spacing:-.6px;color:var(--ink);margin:9px 0 10px}
+  .lp-h p{font-size:15px;color:var(--grey);line-height:1.6}
+  .lp-serv{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .lp-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:24px;box-shadow:var(--sh-sm);transition:transform .16s,box-shadow .16s,border-color .16s}
+  .lp-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:#D7E0EC}
+  .lp-card .ic{width:46px;height:46px;border-radius:12px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;margin-bottom:14px}
+  .lp-card .ic svg{width:23px;height:23px}
+  .lp-card h3{font-size:16.5px;font-weight:700;color:var(--ink);margin-bottom:7px}
+  .lp-card p{font-size:13.5px;color:var(--grey);line-height:1.55}
+  .lp-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+  .lp-logo{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 18px;font-weight:700;color:var(--ink-2);font-size:14px;box-shadow:var(--sh-xs)}
+  .lp-logo .d{width:9px;height:9px;border-radius:50%}
+  .lp-certs{display:flex;flex-wrap:wrap;justify-content:center;gap:11px;margin-top:20px}
+  .lp-cert{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--grey);background:var(--brand-tint);border:1px solid var(--line);border-radius:20px;padding:7px 14px}
+  .lp-cert svg{width:15px;height:15px;color:var(--brand-2)}
+  .lp-testi{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .lp-quote{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:24px;box-shadow:var(--sh-sm);display:flex;flex-direction:column}
+  .lp-quote .stars{color:#E0A422;font-size:14px;letter-spacing:2px;margin-bottom:11px}
+  .lp-quote p{font-size:14px;color:var(--ink-2);line-height:1.6;flex:1}
+  .lp-quote .who{display:flex;align-items:center;gap:11px;margin-top:16px}
+  .lp-quote .who .av{width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13.5px;flex-shrink:0}
+  .lp-quote .who .nm{font-size:13.5px;font-weight:700;color:var(--ink)}
+  .lp-quote .who .rl{font-size:12px;color:var(--grey)}
+  .lp-team{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+  .lp-team .txt{flex:1;min-width:280px}
+  .lp-team .txt h2{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:14px;color:var(--ink)}
+  .lp-team .txt p{font-size:15px;color:var(--grey);line-height:1.7;margin-bottom:12px}
+  .lp-team .photo{flex:1;min-width:280px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .lp-mem{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:20px;text-align:center;box-shadow:var(--sh-sm)}
+  .lp-mem .av{width:58px;height:58px;border-radius:50%;margin:0 auto 10px;background:linear-gradient(150deg,#1F5C90,#103B63);color:#fff;display:grid;place-items:center;font-weight:800;font-size:19px}
+  .lp-mem .nm{font-weight:700;color:var(--ink);font-size:14px}
+  .lp-mem .rl{font-size:12px;color:var(--grey);margin-top:2px}
+  .lp-portal{padding:60px 0}
+  .lp-portal .roles{max-width:880px;margin:0 auto}
+  .lp-portal .rolecard{box-shadow:var(--sh-md);border:1px solid var(--line)}
+  .lp-portal .rolecard:hover{box-shadow:var(--sh-lg),inset 0 0 0 1.5px var(--brand-2);transform:translateY(-4px)}
+  .lp-foot{background:#0a1f34;color:#9fb1c5;padding:40px 0 28px}
+  .lp-foot .top{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between}
+  .lp-foot .nm{color:#fff;font-weight:800;font-size:16px;margin-bottom:8px}
+  .lp-foot .top span{display:block;font-size:13px;line-height:1.85}
+  .lp-foot .cols{display:flex;gap:46px;flex-wrap:wrap}
+  .lp-foot .cols b{color:#cdd9e6;font-size:12px;text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:8px}
+  .lp-foot .cols a{display:block;color:#9fb1c5;font-size:13px;line-height:1.9;text-decoration:none;cursor:pointer}
+  .lp-foot .cols a:hover{color:#fff}
+  .lp-foot .bot{border-top:1px solid #ffffff14;margin-top:26px;padding-top:16px;font-size:12px;color:#6f8294}
+  @media(max-width:900px){.lp-hero h1{font-size:34px}.lp-hero p{font-size:15.5px}.lp-stats{grid-template-columns:repeat(2,1fr)}.lp-serv,.lp-testi{grid-template-columns:1fr}.lp-portal .roles{grid-template-columns:1fr}.lp-nav .bw .nm small{display:none}}
   .roles{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
   .rolecard{background:#fff;border-radius:var(--r-card);padding:28px;text-align:left;box-shadow:0 24px 60px #0000004d,0 2px 6px #00000026;cursor:pointer;border:1px solid #ffffff1a;transition:transform .18s,box-shadow .18s;position:relative;display:flex;flex-direction:column}
   .rolecard:hover{transform:translateY(-4px);box-shadow:0 34px 80px #00000061,0 0 0 1.5px var(--brand-2)}
@@ -463,59 +521,154 @@
 <body>
 
 <div class="login" id="login">
-  <div class="wrap">
-    <svg class="hero-logo" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vatan">
-      <defs>
-        <linearGradient id="vgB" x1="20" y1="6" x2="100" y2="114" gradientUnits="userSpaceOnUse"><stop stop-color="#F5394F"/><stop offset=".52" stop-color="#D5152E"/><stop offset="1" stop-color="#90091F"/></linearGradient>
-        <radialGradient id="vgBg" cx="32%" cy="20%" r="85%"><stop stop-color="#fff" stop-opacity=".26"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></radialGradient>
-      </defs>
-      <rect x="6" y="6" width="108" height="108" rx="31" fill="url(#vgB)"/>
-      <rect x="6" y="6" width="108" height="108" rx="31" fill="url(#vgBg)"/>
-      <rect x="6.9" y="6.9" width="106.2" height="106.2" rx="30.1" fill="none" stroke="#fff" stroke-opacity=".24" stroke-width="1.5"/>
-      <path d="M26 31 C32 46 45 71 59 90 C73 71 85 47 94 30 L79 35 C72 49 65 60 60 70 C55 60 48 49 41 35 Z" fill="#3d0510" opacity=".15" transform="translate(0,2.5)"/>
-      <path d="M26 31 C32 46 45 71 59 90 C73 71 85 47 94 30 L79 35 C72 49 65 60 60 70 C55 60 48 49 41 35 Z" fill="#fff" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-      <path d="M100 12 L101.98 18.02 L108 20 L101.98 21.98 L100 28 L98.02 21.98 L92 20 L98.02 18.02 Z" fill="#fff"/>
-    </svg>
-    <h1>VATAN <span>Administratie &amp; Advies</span></h1>
-    <div class="tag">Uw administratie, belastingzaken en loonadministratie onder één dak — met een modern digitaal portaal.</div>
-    <div class="feats">
-      <span class="fc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L5 13h6l-1 9 9-12h-6z"/></svg> <b>AI-boekingen</b></span>
-      <span class="fc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 16.5h6"/></svg> <b>Documentherkenning</b></span>
-      <span class="fc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 2.6 15.4 0 18M12 3c-2.6 2.6-2.6 15.4 0 18"/></svg> <b>5 talen</b></span>
-      <span class="fc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/></svg> <b>GDPR · EU-hosting</b></span>
-      <span class="fc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.6 20a5.5 5.5 0 0 1 10.8 0M16 5.6a3 3 0 0 1 0 5.4"/></svg> <b>Klant- &amp; kantoorportaal</b></span>
+  <!-- ======= TOPNAV ======= -->
+  <header class="lp-nav">
+    <div class="bw">
+      <svg width="34" height="34" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vatan">
+        <defs><linearGradient id="vgN" x1="20" y1="6" x2="100" y2="114" gradientUnits="userSpaceOnUse"><stop stop-color="#F5394F"/><stop offset=".52" stop-color="#D5152E"/><stop offset="1" stop-color="#90091F"/></linearGradient></defs>
+        <rect x="6" y="6" width="108" height="108" rx="31" fill="url(#vgN)"/>
+        <path d="M26 31 C32 46 45 71 59 90 C73 71 85 47 94 30 L79 35 C72 49 65 60 60 70 C55 60 48 49 41 35 Z" fill="#fff" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M100 12 L101.98 18.02 L108 20 L101.98 21.98 L100 28 L98.02 21.98 L92 20 L98.02 18.02 Z" fill="#fff"/>
+      </svg>
+      <div class="nm">VATAN Administratie<small>Administratie &amp; Advies</small></div>
     </div>
-    <div style="margin-bottom:22px"><select id="loginLangSel" class="langsel" onchange="setLang(this.value)"><option value="nl">Nederlands</option><option value="en">English</option><option value="tr">Türkçe</option><option value="bg">Български</option><option value="ar">العربية</option></select></div>
-    <div class="roles">
-      <div class="rolecard k" onclick="enter('klant')">
-        <div class="rc-top"><div class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></div><div><h2>Klantportaal</h2><div class="rc-for">Voor ondernemers</div></div></div>
-        <p>Beheer uw administratie zelf — overzichtelijk, in uw eigen taal.</p>
-        <ul class="rc-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Facturen &amp; offertes maken</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Bonnen uploaden — AI boekt automatisch</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Uren, kilometers, personeel &amp; cijfers</li>
-        </ul>
-        <div class="rc-cta">Inloggen als klant <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      </div>
-      <div class="rolecard a" onclick="enter('kantoor')">
-        <div class="rc-top"><div class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M10 21v-3h4v3"/></svg></div><div><h2>Kantoorportaal</h2><div class="rc-for">Voor Vatan Administratie</div></div></div>
-        <p>De volledige praktijk in één werkomgeving — slim en in controle.</p>
-        <ul class="rc-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Documenten verwerken met AI &amp; goedkeuren</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> OB/IB-werklijsten &amp; deadlines bewaken</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Loonadministratie &amp; rapporten delen</li>
-        </ul>
-        <div class="rc-cta">Inloggen als kantoor <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    <div class="sp"></div>
+    <select id="loginLangSel" class="langsel" onchange="setLang(this.value)"><option value="nl">Nederlands</option><option value="en">English</option><option value="tr">Türkçe</option><option value="bg">Български</option><option value="ar">العربية</option></select>
+    <button class="lp-login" onclick="document.getElementById('lp-portal').scrollIntoView({behavior:'smooth'})">Inloggen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+  </header>
+
+  <!-- ======= HERO ======= -->
+  <section class="lp-hero">
+    <div class="lp-wrap">
+      <span class="lp-eyebrow"><span class="d"></span> Administratiekantoor in Lijnden · ruim 15 jaar ervaring</span>
+      <h1>Uw cijfers in <span>vertrouwde handen</span>.</h1>
+      <p>Persoonlijke begeleiding van een ervaren administratiekantoor, gecombineerd met een modern digitaal portaal voor uw administratie, belastingaangiften en loonadministratie.</p>
+      <div class="cta">
+        <button class="btn primary" onclick="document.getElementById('lp-portal').scrollIntoView({behavior:'smooth'})">Naar uw portaal <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button class="btn ghost" onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Onze diensten</button>
       </div>
     </div>
-    <div class="trust">
-      <span class="tb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6-6M11 7l1-1a3.5 3.5 0 0 1 5 5l-1 1M13 17l-1 1a3.5 3.5 0 0 1-5-5l1-1"/></svg> Exact Online</span>
-      <span class="tb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6-6M11 7l1-1a3.5 3.5 0 0 1 5 5l-1 1M13 17l-1 1a3.5 3.5 0 0 1-5-5l1-1"/></svg> SnelStart</span>
-      <span class="tb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6-6M11 7l1-1a3.5 3.5 0 0 1 5 5l-1 1M13 17l-1 1a3.5 3.5 0 0 1-5-5l1-1"/></svg> Fiscaal Gemak</span>
-      <span class="tb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg> ISO 27001 · GDPR</span>
-    </div>
-    <div class="foot">© 2026 Vatan Administratie &amp; Advies · Raasdorperweg 193 A, Lijnden · DEMO met voorbeeldgegevens</div>
+  </section>
+
+  <!-- ======= STAT BAND ======= -->
+  <div class="lp-stats">
+    <div class="lp-stat"><div class="n">15+</div><div class="l">Jaar ervaring</div></div>
+    <div class="lp-stat"><div class="n">300+</div><div class="l">Tevreden ondernemers</div></div>
+    <div class="lp-stat"><div class="n">5</div><div class="l">Talen aan de balie</div></div>
+    <div class="lp-stat"><div class="n">100%</div><div class="l">Digitaal &amp; persoonlijk</div></div>
   </div>
+
+  <!-- ======= DIENSTEN ======= -->
+  <section class="lp-sec" id="lp-diensten">
+    <div class="lp-wrap">
+      <div class="lp-h"><div class="k">Onze diensten</div><h2>Alles onder één dak</h2><p>Van dagelijkse boekhouding tot jaarrekening en fiscaal advies — wij ontzorgen u volledig.</p></div>
+      <div class="lp-serv">
+        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 9h16M9 13h6M9 16h4"/></svg></div><h3>Boekhouding &amp; administratie</h3><p>Uw volledige administratie verzorgd, met realtime inzicht via Exact Online en SnelStart.</p></div>
+        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 16.5h4"/></svg></div><h3>Belastingaangiften</h3><p>Inkomsten-, omzet- en vennootschapsbelasting — tijdig en correct via SBR ingediend.</p></div>
+        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0M17 4a3 3 0 0 1 0 6"/></svg></div><h3>Loonadministratie</h3><p>Salarisverwerking, loonstroken en loonaangiften — uw personeel altijd op tijd betaald.</p></div>
+        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19V9M10 19V5M15 19v-7M20 19v-11"/></svg></div><h3>Jaarrekening &amp; rapportage</h3><p>Heldere jaarcijfers en tussentijdse rapportages waarmee u écht stuurt op uw onderneming.</p></div>
+        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 1 3 11v3H9v-3a6 6 0 0 1 3-11zM9 21h6"/></svg></div><h3>Advies &amp; coaching</h3><p>Meedenkend advies over fiscaliteit, groei en bedrijfsvoering — in begrijpelijke taal.</p></div>
+        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L5 13h6l-1 9 9-12h-6z"/></svg></div><h3>Starters &amp; ZZP</h3><p>Begeleiding bij het opstarten, met overzicht en rust vanaf de eerste factuur.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= PARTNERS & CERTIFICERINGEN ======= -->
+  <section class="lp-sec alt">
+    <div class="lp-wrap">
+      <div class="lp-h"><div class="k">Partners &amp; koppelingen</div><h2>Wij werken met toonaangevende software</h2><p>Officieel gekoppeld aan de boekhoud- en aangiftesystemen die uw cijfers betrouwbaar houden.</p></div>
+      <div class="lp-logos">
+        <span class="lp-logo"><span class="d" style="background:#D5152E"></span> Exact Online</span>
+        <span class="lp-logo"><span class="d" style="background:#0E8BD1"></span> SnelStart</span>
+        <span class="lp-logo"><span class="d" style="background:#1393A8"></span> Fiscaal Gemak</span>
+        <span class="lp-logo"><span class="d" style="background:#103B63"></span> Belastingdienst · SBR</span>
+        <span class="lp-logo"><span class="d" style="background:#16507F"></span> Digipoort</span>
+      </div>
+      <div class="lp-certs">
+        <span class="lp-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg> AVG / GDPR-proof</span>
+        <span class="lp-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> EU-datahosting · SSL</span>
+        <span class="lp-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg> SBR-aangiften</span>
+        <span class="lp-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/></svg> Beconnummer Belastingdienst</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= ERVARINGEN ======= -->
+  <section class="lp-sec">
+    <div class="lp-wrap">
+      <div class="lp-h"><div class="k">Ervaringen</div><h2>Wat ondernemers over ons zeggen</h2></div>
+      <div class="lp-testi">
+        <div class="lp-quote"><div class="stars">★★★★★</div><p>"Eindelijk een kantoor dat met me meedenkt én bereikbaar is. Mijn administratie is sinds jaren weer op orde en ik begrijp nu echt mijn cijfers."</p><div class="who"><div class="av">MY</div><div><div class="nm">Mehmet Y.</div><div class="rl">Horeca-ondernemer, Amsterdam</div></div></div></div>
+        <div class="lp-quote"><div class="stars">★★★★★</div><p>"Als ZZP'er wilde ik geen gedoe. Bonnetje fotograferen en klaar — de rest regelen zij. Persoonlijk contact in mijn eigen taal is goud waard."</p><div class="who"><div class="av">SD</div><div><div class="nm">Sandra de V.</div><div class="rl">Zelfstandig ondernemer</div></div></div></div>
+        <div class="lp-quote"><div class="stars">★★★★★</div><p>"Loonadministratie voor mijn personeel loopt nu vlekkeloos. Altijd op tijd, nooit verrassingen bij de Belastingdienst. Een aanrader."</p><div class="who"><div class="av">AK</div><div><div class="nm">Ahmad K.</div><div class="rl">Bouwbedrijf, regio Haarlem</div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= TEAM ======= -->
+  <section class="lp-sec alt">
+    <div class="lp-wrap lp-team">
+      <div class="txt">
+        <h2>Een vast, deskundig team</h2>
+        <p>Bij VATAN Administratie &amp; Advies heeft u een vast aanspreekpunt dat uw onderneming kent. Korte lijnen, persoonlijke aandacht en jarenlange ervaring met ondernemers in het MKB.</p>
+        <p>Wij spreken uw taal — letterlijk: u kunt bij ons terecht in vijf talen. Zo voelt advies nooit als een drempel.</p>
+      </div>
+      <div class="photo">
+        <div class="lp-mem"><div class="av">EV</div><div class="nm">Erkan</div><div class="rl">Oprichter &amp; Adviseur</div></div>
+        <div class="lp-mem"><div class="av">BA</div><div class="nm">Boekhouding</div><div class="rl">Administratie &amp; OB</div></div>
+        <div class="lp-mem"><div class="av">LO</div><div class="nm">Loonteam</div><div class="rl">Salaris &amp; loonaangiften</div></div>
+        <div class="lp-mem"><div class="av">FA</div><div class="nm">Fiscaal</div><div class="rl">Aangiften &amp; advies</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= PORTAAL (secundair) ======= -->
+  <section class="lp-portal" id="lp-portal">
+    <div class="lp-wrap">
+      <div class="lp-h"><div class="k">Inloggen</div><h2>Naar uw online portaal</h2><p>Kies uw omgeving. Bestaande klant of medewerker? Log hieronder in.</p></div>
+      <div class="roles">
+        <div class="rolecard k" onclick="enter('klant')">
+          <div class="rc-top"><div class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></div><div><h2>Klantportaal</h2><div class="rc-for">Voor ondernemers</div></div></div>
+          <p>Beheer uw administratie zelf — overzichtelijk, in uw eigen taal.</p>
+          <ul class="rc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Facturen &amp; offertes maken</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Bonnen uploaden — AI boekt automatisch</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Uren, kilometers, personeel &amp; cijfers</li>
+          </ul>
+          <div class="rc-cta">Inloggen als klant <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+        <div class="rolecard a" onclick="enter('kantoor')">
+          <div class="rc-top"><div class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M10 21v-3h4v3"/></svg></div><div><h2>Kantoorportaal</h2><div class="rc-for">Voor Vatan Administratie</div></div></div>
+          <p>De volledige praktijk in één werkomgeving — slim en in controle.</p>
+          <ul class="rc-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Documenten verwerken met AI &amp; goedkeuren</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> OB/IB-werklijsten &amp; deadlines bewaken</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Loonadministratie &amp; rapporten delen</li>
+          </ul>
+          <div class="rc-cta">Inloggen als kantoor <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <footer class="lp-foot">
+    <div class="lp-wrap">
+      <div class="top">
+        <div>
+          <div class="nm">VATAN Administratie &amp; Advies</div>
+          <span>Raasdorperweg 193 A · Lijnden</span>
+          <span>facturen@vatanadministratie.nl</span>
+          <span>Administratie · Belastingen · Loon · Advies</span>
+        </div>
+        <div class="cols">
+          <div><b>Diensten</b><a onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Boekhouding</a><a onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Belastingaangiften</a><a onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Loonadministratie</a></div>
+          <div><b>Portaal</b><a onclick="enter('klant')">Klantportaal</a><a onclick="enter('kantoor')">Kantoorportaal</a></div>
+        </div>
+      </div>
+      <div class="bot">© 2026 Vatan Administratie &amp; Advies · Demo-omgeving met voorbeeldgegevens</div>
+    </div>
+  </footer>
 </div>
 
 <div class="app" id="app">
