@@ -275,6 +275,27 @@
   .ai-strip-h b{font-size:13.5px;color:var(--ink)}
   .ai-strip-h .s{font-size:11.5px;color:var(--grey);margin-top:1px}
   .ai-strip-links{display:flex;gap:8px;flex-wrap:wrap}
+  /* Klantdashboard — rustig aandachtspaneel + compacte acties */
+  .ap{padding:16px 20px}
+  .ap>h3{margin-bottom:4px}
+  .ap-row{display:flex;align-items:center;gap:13px;padding:11px 4px;border-bottom:1px solid var(--line-2);cursor:pointer;transition:background .12s;border-radius:8px}
+  .ap-row:last-child{border-bottom:0}
+  .ap-row:hover{background:var(--hover)}
+  .ap-ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;background:var(--brand-soft);color:var(--brand-2)}
+  .ap-ic svg{width:17px;height:17px}
+  .ap-ic.warn{background:#FBF4E6;color:#a9781a}
+  .ap-ic.pay{background:#FBEDED;color:#b5485a}
+  .ap-id{flex:1;min-width:0}
+  .ap-t{font-size:13.5px;font-weight:700;color:var(--ink);letter-spacing:-.1px}
+  .ap-s{font-size:12px;color:var(--grey);margin-top:1px}
+  .ap-v{font-size:14px;font-weight:800;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ap-row .chev{color:var(--grey-2);width:16px;height:16px;flex-shrink:0}
+  .qact{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .qact button{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;transition:border-color .14s,background .14s,transform .1s}
+  .qact button:hover{border-color:#cfd8e3;background:var(--brand-tint);transform:translateY(-1px)}
+  .qact .i{width:30px;height:30px;border-radius:8px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;flex-shrink:0}
+  .qact .i svg{width:16px;height:16px}
+  @media(max-width:560px){.qact{grid-template-columns:1fr}}
   .qic svg{width:19px;height:19px}
   .qbtn .arr svg{width:17px;height:17px;display:block}
   .grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
@@ -1734,30 +1755,33 @@ VIEWS.klant.overzicht = ()=>{
   const unread=state.messages.filter(m=>m.from==='kantoor'&&!m.read).length;
   const docReq=state.messages.filter(m=>m.from==='kantoor'&&!m.read&&/document|bon|stuk|aanlever|upload/i.test(m.text||'')).length;
   const needs=openCount||inkCount||docReq||unread;
-  const at=(cls,lbl,val,hint,oc)=>`<div class="at ${cls}" onclick="${oc}"><div class="l">${lbl}</div><div class="v">${val}</div><div class="h">${hint}</div></div>`;
+  const apRows=[];
+  if(openCount) apRows.push({ic:icon('facturatie'),cls:'',t:'Openstaande facturen',s:`${openCount} nog niet betaald door uw klanten`,v:money(open),oc:"go('facturatie')"});
+  if(inkCount) apRows.push({ic:icon('inkoop'),cls:'pay',t:'Te betalen',s:`${inkCount} ${inkCount===1?'rekening':'rekeningen'} openstaand`,v:money(inkoopOpen),oc:"go('inkoop')"});
+  if(docReq) apRows.push({ic:icon('documenten'),cls:'warn',t:'Documenten gevraagd',s:'Vatan vraagt u iets aan te leveren',v:docReq,oc:"go('berichten')"});
+  if(unread) apRows.push({ic:icon('berichten'),cls:'warn',t:'Nieuwe berichten',s:'van Vatan Administratie',v:unread,oc:"go('berichten')"});
   return `<div class="row-between"><h1 class="title">Goedemiddag, Demo</h1><button class="btn primary" onclick="newInvoice()">+ Nieuwe factuur</button></div>
-  <div class="sub">Welkom terug. Hieronder ziet u alleen wat nu uw aandacht nodig heeft.</div>
-  ${needs?`<div class="at-grid">
-    ${at(openCount?'amber':'ok','Openstaande facturen',openCount?money(open):'✓',openCount?`${openCount} nog niet betaald →`:'alles betaald',"go('facturatie')")}
-    ${at(inkCount?'red':'ok','Te betalen',inkCount?money(inkoopOpen):'✓',inkCount?`${inkCount} ${inkCount===1?'rekening':'rekeningen'} te betalen →`:'niets te betalen',"go('inkoop')")}
-    ${at(docReq?'amber':'ok','Documenten gevraagd',docReq?docReq:'✓',docReq?'Vatan vraagt iets aan u →':'niets gevraagd',"go('berichten')")}
-    ${at(unread?'amber':'ok','Nieuwe berichten',unread?unread:'✓',unread?'van Vatan — lezen →':'geen nieuwe',"go('berichten')")}
+  <div class="sub">Welkom terug. Hieronder ziet u rustig wat er voor u open staat.</div>
+  ${needs?`<div class="panel ap" style="margin-bottom:14px"><h3>Uw aandacht nodig</h3>
+    ${apRows.map(r=>`<div class="ap-row" onclick="${r.oc}"><span class="ap-ic ${r.cls}">${r.ic}</span><div class="ap-id"><div class="ap-t">${r.t}</div><div class="ap-s">${r.s}</div></div><div class="ap-v">${r.v}</div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>`).join('')}
   </div>`:`<div class="up-band"><span class="ic">${_svg('<path d="M20 6L9 17l-5-5"/>')}</span><div><div class="uh">Alles is up-to-date ✨</div><div class="us">Er is op dit moment niets dat uw aandacht nodig heeft — Vatan houdt uw administratie voor u bij.</div></div></div>`}
-  <div class="qa4">
-    <button class="qbtn" onclick="newInvoice()"><span class="qic">${icon('facturatie')}</span> Factuur maken</button>
-    <button class="qbtn" onclick="uploadBon()"><span class="qic">${icon('inkoop')}</span> Bon uploaden</button>
-    <button class="qbtn" onclick="addTime()"><span class="qic">${icon('tijd')}</span> Uren boeken</button>
-    <button class="qbtn" onclick="addKm()"><span class="qic">${icon('km')}</span> Rit registreren</button>
+  <div class="grid2">
+    <div class="panel"><h3>Snel aan de slag</h3>
+      <div class="qact">
+        <button onclick="newInvoice()"><span class="i">${icon('facturatie')}</span> Factuur maken</button>
+        <button onclick="uploadBon()"><span class="i">${icon('inkoop')}</span> Bon uploaden</button>
+        <button onclick="addTime()"><span class="i">${icon('tijd')}</span> Uren boeken</button>
+        <button onclick="addKm()"><span class="i">${icon('km')}</span> Rit registreren</button>
+      </div>
+    </div>
+    <div class="panel"><div class="row-between"><h3 style="margin:0">Recent door Vatan</h3><span class="btn text sm" onclick="go('berichten')">Alle activiteiten →</span></div>
+      <div style="margin-top:4px">
+        <div class="actrow"><span class="dot" style="background:#15803D;margin-top:5px"></span><div style="flex:1"><b>Bon verwerkt</b> — KPN-factuur automatisch geboekt<div class="t">vandaag</div></div></div>
+        <div class="actrow"><span class="dot" style="background:var(--brand-2);margin-top:5px"></span><div style="flex:1"><b>Factuur F0004</b> verstuurd<div class="t">12 jun 2026</div></div></div>
+        <div class="actrow"><span class="dot" style="background:#15803D;margin-top:5px"></span><div style="flex:1"><b>BTW-aangifte Q1</b> voorbereid<div class="t">28 apr 2026</div></div></div>
+      </div></div>
   </div>
-  <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Wat Vatan voor u deed</h3><span class="btn text sm" onclick="go('berichten')">Alle berichten →</span></div>
-    <div style="margin-top:6px">
-      <div class="actrow"><span class="dot" style="background:#15803D;margin-top:5px"></span><div style="flex:1"><b>Bon verwerkt</b> — KPN-factuur automatisch geboekt<div class="t">vandaag</div></div></div>
-      <div class="actrow"><span class="dot" style="background:var(--brand-2);margin-top:5px"></span><div style="flex:1"><b>Factuur F0004</b> definitief gemaakt en verstuurd<div class="t">12 jun 2026</div></div></div>
-      <div class="actrow"><span class="dot" style="background:#15803D;margin-top:5px"></span><div style="flex:1"><b>BTW-aangifte Q1</b> voorbereid door Vatan<div class="t">28 apr 2026</div></div></div>
-      <div class="actrow"><span class="dot" style="background:var(--navy);margin-top:5px"></span><div style="flex:1"><b>Rapport gedeeld</b> — Jaarrekening 2025<div class="t">14 apr 2026</div></div></div>
-      <div class="actrow"><span class="dot" style="background:#15803D;margin-top:5px"></span><div style="flex:1"><b>3 bonnen verwerkt</b> — automatisch ingeboekt door Vatan<div class="t">10 apr 2026</div></div></div>
-    </div></div>
-  <div class="ai-strip">
+  <div class="ai-strip" style="margin-top:14px">
     <div class="ai-strip-h"><span class="ic">${_svg(ICONS.aihulp)}</span><div><b>Slimme hulp van Vatan</b><div class="s">Een brief niet duidelijk of niet in één keer kunnen betalen? Wij helpen.</div></div></div>
     <div class="ai-strip-links"><button class="btn ghost sm" onclick="go('watisdit')">Document uitleggen</button><button class="btn ghost sm" onclick="go('regeling')">Betalingsregeling</button><button class="btn ghost sm" onclick="toggleChat()">Vraag stellen</button></div>
   </div>`;
