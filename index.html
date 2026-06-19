@@ -191,6 +191,45 @@
   .wl-bar{flex:1;max-width:96px;height:5px;border-radius:4px;background:#EBEFF5;overflow:hidden}
   .wl-bar span{display:block;height:100%;border-radius:4px}
   .wl-pct{font-size:10.5px;font-weight:700;color:var(--grey-2);min-width:30px}
+  /* ===== Workflow-werklijst (status-eerst) ===== */
+  .wl-ov-l{display:flex;align-items:baseline;gap:9px}
+  .wl-big{font-size:23px;font-weight:800;color:var(--navy);letter-spacing:-.8px;line-height:1}
+  .wf-list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--sh-sm)}
+  .wf-grp{display:flex;align-items:center;gap:8px;padding:10px 18px 7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-2);background:var(--bg);border-bottom:1px solid var(--line-2)}
+  .wf-grp .n{font-weight:500;text-transform:none;letter-spacing:0}
+  .wf-row{display:grid;grid-template-columns:1.5fr 140px 1.4fr 150px;align-items:center;gap:16px;padding:12px 18px;border-bottom:1px solid var(--line-2);transition:background .12s}
+  .wf-row:last-child{border-bottom:0}
+  .wf-row:hover{background:var(--hover)}
+  .wf-l{display:flex;align-items:center;gap:12px;min-width:0;cursor:pointer}
+  .wf-id{min-width:0}
+  .wf-nm{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-sub{font-size:11.5px;color:var(--grey-2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-c{display:flex;flex-direction:column;gap:5px}
+  .wf-bar{height:6px;border-radius:5px;background:#EBEFF5;overflow:hidden}
+  .wf-bar span{display:block;height:100%;border-radius:5px;transition:width .3s}
+  .wf-pct{font-size:11px;font-weight:700;color:var(--grey)}
+  .wf-r{display:flex;flex-direction:column;gap:8px;min-width:0}
+  .wf-st{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;letter-spacing:-.1px}
+  .wf-st .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .wf-st.red{color:var(--danger)}.wf-st.red .dot{background:var(--red)}
+  .wf-st.amber{color:#a9781a}.wf-st.amber .dot{background:var(--amber)}
+  .wf-st.done{color:#15803D}.wf-st.done .dot{background:#15803D}
+  .wf-steps{display:flex;gap:13px}
+  .wf-step{display:inline-flex;align-items:center;gap:5px}
+  .wf-step .vink{width:22px;height:22px}
+  .wf-step .vink svg{width:13px;height:13px}
+  .wf-step-l{font-size:10px;color:var(--grey-2);font-weight:600}
+  .wf-note{border:0;border-bottom:1px solid transparent;background:transparent;font-size:12px;color:var(--grey);font-family:inherit;padding:3px 0;outline:none;width:100%;transition:border-color .14s,color .14s}
+  .wf-note:hover{border-bottom-color:var(--line)}
+  .wf-note:focus{border-bottom-color:var(--brand-2);color:var(--ink)}
+  .wf-note::placeholder{color:#c4ccd6}
+  .wf-row.done{background:#fbfcfe}
+  .wf-row.done .wf-nm{color:var(--ink-2);font-weight:600}
+  .wf-row.done .mono{opacity:.8}
+  .wf-row.red{box-shadow:inset 3px 0 0 var(--red)}
+  .wf-row.amber{box-shadow:inset 3px 0 0 var(--amber)}
+  @media(max-width:1000px){.wf-row{grid-template-columns:1fr 1fr;gap:10px}.wf-l{grid-column:1/3}.wf-note{grid-column:1/3;order:5}}
+  @media(max-width:620px){.wf-row{grid-template-columns:1fr}.wf-l,.wf-note{grid-column:auto}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
   tbody tr.wl-prog{background:#FFFCF4}tbody tr.wl-prog:hover{background:#FFF7E6}
@@ -2656,6 +2695,11 @@ VIEWS.kantoor.obwerk = ()=>{
   const cntTodoOB=base.filter(c=>stepsOB(state.werk[c.naam].ob[kw])===0).length;
   const cntProgOB=base.length-ingediend-cntTodoOB;
   const sel=(opts,cur,fn)=>`<select class="gl" style="width:auto" onchange="${fn}">${opts.map(o=>`<option value="${o[0]}" ${o[0]===cur?'selected':''}>${o[1]}</option>`).join('')}</select>`;
+  const obState=o=>o.ingediend?{t:'Ingediend',tone:'done'}:(o.ingelezen?{t:'Klaar voor indiening',tone:'amber'}:(o.ingeleverd?{t:'Wacht op invoer',tone:'amber'}:{t:'Nog niet gestart',tone:'red'}));
+  const stepCell=(lbl,v,fn)=>`<span class="wf-step" title="${lbl}">${dateCell(v,fn,'')}<span class="wf-step-l">${lbl}</span></span>`;
+  const wfRow=c=>{const o=state.werk[c.naam].ob[kw];const st=stepsOB(o);const pct=Math.round(st/3*100);const sd=obState(o);const col=sd.tone==='done'?'#15803D':(sd.tone==='red'?'var(--red)':'var(--amber)');
+    return `<div class="wf-row ${sd.tone}"><div class="wf-l" onclick="openClient('${c.naam}','ob')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}</div></div></div><div class="wf-c"><div class="wf-bar"><span style="width:${pct}%;background:${col}"></span></div><span class="wf-pct">${pct}% voltooid</span></div><div class="wf-r"><span class="wf-st ${sd.tone}"><span class="dot"></span>${sd.t}</span><div class="wf-steps">${stepCell('Ingeleverd',o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`)}${stepCell('Ingevoerd',o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`)}${stepCell('Ingediend',o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`)}</div></div><input class="wf-note" value="${(o.opm||'').replace(/"/g,'&quot;')}" oninput="state.werk['${c.naam}'].ob['${kw}'].opm=this.value" placeholder="notitie…"></div>`;};
+  const obBuckets=[{l:'Actie nodig',f:c=>!state.werk[c.naam].ob[kw].ingeleverd},{l:'In behandeling',f:c=>{const o=state.werk[c.naam].ob[kw];return o.ingeleverd&&!o.ingediend;}},{l:'Ingediend',f:c=>state.werk[c.naam].ob[kw].ingediend}];
   return `<h1 class="title">OB-werklijst</h1>
   <div class="sub">Per kwartaal en medewerker in één oogopslag zien wat nog moet gebeuren — kleur en voortgang per klant, zonder elke cel te lezen.</div>
   <div class="ftabs" style="align-items:center">
@@ -2665,12 +2709,10 @@ VIEWS.kantoor.obwerk = ()=>{
     <span class="ftab ${obStat==='ingediend'?'active':''}" style="margin-left:auto" title="Filter op ingediend" onclick="obStat=(obStat==='ingediend'?'alle':'ingediend');renderView()">Ingediend: ${ingediend}/${base.length} · ${base.length?Math.round(ingediend/base.length*100):0}%</span>
   </div>
   <div class="wl-overall">
-    <div class="wh"><span class="wt">Voortgang ${kw} — ${overallOB}% afgerond</span><div class="wl-legend"><span class="wl-lg done"><span class="d"></span>${ingediend} ingediend</span><span class="wl-lg prog"><span class="d"></span>${cntProgOB} mee bezig</span><span class="wl-lg todo"><span class="d"></span>${cntTodoOB} nog te starten</span></div></div>
+    <div class="wh"><div class="wl-ov-l"><span class="wl-big">${overallOB}%</span><span class="wt">voltooid · ${kw}</span></div><div class="wl-legend"><span class="wl-lg done"><span class="d"></span>${ingediend} ingediend</span><span class="wl-lg prog"><span class="d"></span>${cntProgOB} bezig</span><span class="wl-lg todo"><span class="d"></span>${cntTodoOB} actie nodig</span></div></div>
     <div class="wl-obar"><span style="width:${overallOB}%"></span></div>
   </div>
-  <div class="tablewrap"><table><thead><tr><th>Nr</th><th>Klant &amp; voortgang</th><th>Mw.</th><th>Ingeleverd</th><th>Ingevoerd</th><th>Ingediend</th><th style="width:22%">Opmerking</th></tr></thead><tbody>
-  ${cs.length?cs.map(c=>{const o=state.werk[c.naam].ob[kw];const st=stepsOB(o);const cls=o.ingediend?'wl-done':(st>0?'wl-prog':'wl-todo');const pct=Math.round(st/3*100);const bc=o.ingediend?'#15803D':(st>0?'var(--amber)':'var(--red)');return `<tr class="${cls}"><td>${c.nr} ${progLogo(c.prog)}</td><td class="clickable" onclick="openClient('${c.naam}','ob')"><b>${c.naam}</b><div class="wl-mini"><div class="wl-bar"><span style="width:${pct}%;background:${bc}"></span></div><span class="wl-pct">${pct}%</span></div></td><td>${c.mw}</td><td>${dateCell(o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`,`setObDate('${c.naam}','${kw}','ingeleverd',this.value)`)}</td><td>${dateCell(o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`,`setObDate('${c.naam}','${kw}','ingelezen',this.value)`)}</td><td>${dateCell(o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`,`setObDate('${c.naam}','${kw}','ingediend',this.value)`)}</td><td><input class="gl" value="${(o.opm||'').replace(/"/g,'&quot;')}" oninput="state.werk['${c.naam}'].ob['${kw}'].opm=this.value" placeholder="opmerking"></td></tr>`;}).join(''):'<tr><td colspan="7"><div class="empty"><div class="big">✅</div>Geen klanten in deze selectie.</div></td></tr>'}
-  </tbody></table></div>`;
+  ${cs.length?`<div class="wf-list">${obBuckets.map(b=>{const rows=cs.filter(b.f);return rows.length?`<div class="wf-grp">${b.l} <span class="n">· ${rows.length}</span></div>`+rows.map(wfRow).join(''):'';}).join('')}</div>`:`<div class="empty" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:40px 20px"><div class="big">✅</div>Geen klanten in deze selectie.</div>`}`;
 };
 function obToggle(naam,kw,f){const o=state.werk[naam].ob[kw];o[f]=o[f]?'':TODAY;renderView();}
 VIEWS.kantoor.ibwerk = ()=>{
