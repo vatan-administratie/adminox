@@ -173,6 +173,31 @@
   tbody tr.wl-prog td:first-child{box-shadow:inset 3px 0 0 var(--amber)}
   tbody tr.wl-todo td:first-child{box-shadow:inset 3px 0 0 var(--red)}
   tbody tr.wl-done td:first-child{box-shadow:inset 3px 0 0 #d4dde7}
+  /* ===== Klantenportfolio (kaartrijen i.p.v. tabel) ===== */
+  .psum{gap:12px;margin-bottom:16px}
+  .pcard{padding:12px 14px}
+  .pcard .pl{font-size:11px}
+  .pcard .pv{font-size:18px;margin:5px 0 7px}
+  .pcard .pp{font-size:12px}
+  .pbar{height:6px}
+  .pmini{font-size:11px;margin-top:6px}
+  .grp-h .grp-c{color:var(--grey-2);font-weight:600;font-size:12px}
+  .cl-list{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+  .clx{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 14px;cursor:pointer;transition:border-color .14s,box-shadow .14s,transform .1s}
+  .clx:hover{border-color:#cfd8e3;box-shadow:var(--sh-md);transform:translateY(-1px)}
+  .clx .av{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:12.5px;flex-shrink:0;box-shadow:inset 0 1px 0 #ffffff33}
+  .clx .id{min-width:0;width:238px;flex-shrink:0}
+  .clx .nm{font-size:14px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:8px;letter-spacing:-.2px}
+  .clx .nm .ptag{height:16px;font-size:9.5px;padding:0 6px;border-radius:5px;gap:4px;flex-shrink:0}
+  .clx .nm .ptag .pdot{width:5px;height:5px}
+  .clx .meta{font-size:11.5px;color:var(--grey-2);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .clx .chips{display:flex;align-items:center;gap:7px;flex-wrap:wrap;flex:1;justify-content:flex-end}
+  .clx .chev{color:var(--grey-2);flex-shrink:0;width:16px;height:16px}
+  .ck{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:7px;white-space:nowrap;line-height:1.3}
+  .ck.done{background:#f1f5f9;color:#9aa7b5}
+  .ck.amber{background:var(--amber-soft);color:var(--amber)}
+  .ck.red{background:var(--danger-soft);color:var(--danger)}
+  @media(max-width:940px){.clx{flex-wrap:wrap}.clx .id{width:auto;flex:1}.clx .chips{flex-basis:100%;justify-content:flex-start;margin-top:7px}.clx .chev{display:none}}
   .qic svg{width:19px;height:19px}
   .qbtn .arr svg{width:17px;height:17px;display:block}
   .grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
@@ -2256,24 +2281,35 @@ VIEWS.kantoor.overzicht = ()=>{
 VIEWS.kantoor.klanten = ()=>{
   const tab=(k,l,n)=>`<div class="ftab ${mwFilter===k?'active':''}" onclick="setMwFilter('${k}')">${l}<span class="c">${n}</span></div>`;
   const actief=state.clients.filter(c=>c.actief), exit=state.clients.filter(c=>!c.actief);
+  const clRow=(c,exitMode)=>{
+    const tv=state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;
+    const w=state.werk[c.naam];
+    const ob1=w.ob['Q1 2026'].ingediend, ib24=w.ib[IBYEAR].ingediend, loonDone=Object.values(w.loon['2026']).filter(Boolean).length;
+    const sc=state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length;
+    const work=(!exitMode&&tv)?`<span class="ck red">${tv} te verwerken</span>`:'';
+    const sig=sc?`<span class="ck red" style="cursor:pointer" onclick="event.stopPropagation();openClient('${c.naam}','signalen')">⚠ ${sc} signaal${sc>1?'en':''}</span>`:'';
+    const ob=ob1?'<span class="ck done">OB ✓</span>':'<span class="ck amber">OB open</span>';
+    const ib=ib24?'<span class="ck done">IB ✓</span>':'<span class="ck amber">IB open</span>';
+    const loon=`<span class="ck ${loonDone>=12?'done':(loonDone>=6?'amber':'red')}">Loon ${loonDone}/12</span>`;
+    const meta=exitMode?`nr ${c.nr} · ${c.mw} · laatst actief ${c.eindDatum||'—'}`:`nr ${c.nr} · ${c.mw}`;
+    return `<div class="clx" onclick="openClient('${c.naam}')">
+      <span class="av" style="background:${cpAvColor(c)}">${cpInitials(c.naam)}</span>
+      <div class="id"><div class="nm">${c.naam} <span class="ptag ${c.prog}" style="cursor:pointer" title="Programma wijzigen" onclick="event.stopPropagation();switchProgram('${c.naam}')"><span class="pdot"></span>${PROG[c.prog]}</span></div><div class="meta">${meta}</div></div>
+      <div class="chips">${work}${sig}${ob}${ib}${loon}</div>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </div>`;
+  };
   let body='';
   if(mwFilter==='exit'){
-    body=`<div class="grp-h">🗄️ Exit klanten <span style="color:var(--grey-2);font-weight:600;font-size:12px">· ${exit.length}</span></div>
+    body=`<div class="grp-h">🗄️ Exit klanten <span class="grp-c">· ${exit.length}</span></div>
     <div class="sub" style="margin:-6px 0 12px">Niet-actieve klanten. De openstaande taken (laatste aangiften, jaarrekening) blijven zichtbaar zodat u ze kunt afronden — klik voor het volledige dossier.</div>
-    <div class="tablewrap"><table><thead><tr><th>Nr</th><th>Klant</th><th>Medewerker</th><th>Laatst actief</th><th>OB Q1</th><th>IB ${IBYEAR}</th><th>Loon 2026</th><th>Signalen</th></tr></thead><tbody>
-    ${exit.length?exit.map(c=>{const w=state.werk[c.naam];const ob1=w.ob['Q1 2026'].ingediend,ib24=w.ib[IBYEAR].ingediend,loonDone=Object.values(w.loon['2026']).filter(Boolean).length;
-      return `<tr class="clickable" onclick="openClient('${c.naam}')"><td>${c.nr} ${progLogo(c.prog,`event.stopPropagation();switchProgram('${c.naam}')`)}</td><td><b>${c.naam}</b></td><td>${c.mw}</td><td>${c.eindDatum||'—'}</td><td>${ob1?'<span class="pill g">✓</span>':'<span class="pill a">open</span>'}</td><td>${ib24?'<span class="pill g">✓</span>':'<span class="pill a">open</span>'}</td><td><span class="pill ${loonDone>=6?'g':'a'}">${loonDone}/12</span></td><td>${(()=>{const sc=state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length;return sc?`<span class="pill r" style="cursor:pointer" onclick="event.stopPropagation();openClient('${c.naam}','signalen')">⚠ ${sc}</span>`:'<span class="pill g">0</span>';})()}</td></tr>`;}).join(''):'<tr><td colspan="8"><div class="empty"><div class="big">🗄️</div>Geen exit-klanten.</div></td></tr>'}
-    </tbody></table></div>`;
+    <div class="cl-list">${exit.length?exit.map(c=>clRow(c,true)).join(''):'<div class="empty"><div class="big">🗄️</div>Geen exit-klanten.</div>'}</div>`;
   } else {
     const groups = mwFilter==='alle'?MEDEWERKERS:[mwFilter];
     groups.forEach(mw=>{
       const cs=actief.filter(c=>c.mw===mw);
-      body+=`<div class="grp-h">👤 ${mw} <span style="color:var(--grey-2);font-weight:600;font-size:12px">· ${cs.length} klanten</span></div>
-      <div class="tablewrap" style="margin-bottom:20px"><table><thead><tr><th>Nr</th><th>Klant</th><th>Te verwerken</th><th>OB Q1</th><th>IB ${IBYEAR}</th><th>Loon 2026</th><th>Signalen</th></tr></thead><tbody>
-      ${cs.map(c=>{const tv=state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;const w=state.werk[c.naam];
-        const ob1=w.ob['Q1 2026'].ingediend, ib24=w.ib[IBYEAR].ingediend, loonDone=Object.values(w.loon['2026']).filter(Boolean).length;
-        return `<tr class="clickable" onclick="openClient('${c.naam}')"><td>${c.nr} ${progLogo(c.prog,`event.stopPropagation();switchProgram('${c.naam}')`)}</td><td><b>${c.naam}</b></td><td>${tv?'<span class="pill r">'+tv+'</span>':'<span class="pill g">0</span>'}</td><td>${ob1?'<span class="pill g">✓</span>':'<span class="pill a">open</span>'}</td><td>${ib24?'<span class="pill g">✓</span>':'<span class="pill a">open</span>'}</td><td><span class="pill ${loonDone>=6?'g':'a'}">${loonDone}/12</span></td><td>${(()=>{const sc=state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length;return sc?`<span class="pill r" style="cursor:pointer" onclick="event.stopPropagation();openClient('${c.naam}','signalen')">⚠ ${sc}</span>`:'<span class="pill g">0</span>';})()}</td></tr>`;}).join('')||'<tr><td colspan="7"><div class="empty">Geen actieve klanten in deze groep.</div></td></tr>'}
-      </tbody></table></div>`;
+      body+=`<div class="grp-h">👤 ${mw} <span class="grp-c">· ${cs.length} klanten</span></div>
+      <div class="cl-list">${cs.length?cs.map(c=>clRow(c,false)).join(''):'<div class="empty">Geen actieve klanten in deze groep.</div>'}</div>`;
     });
   }
   let summaryHTML='';
