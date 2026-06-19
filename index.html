@@ -242,6 +242,27 @@
   .cc-opv{font-size:13.5px;font-weight:700;color:var(--ink);margin-top:3px}
   .cc-opx{font-size:11px;font-weight:600;color:var(--grey);margin-left:4px}
   .cc-cad{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2);background:var(--bg);border:1px solid var(--line);padding:1px 6px;border-radius:5px;margin-left:7px;vertical-align:1px}
+  /* module status header (operational dashboard) */
+  .mh{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px 20px;margin-bottom:18px}
+  .mh-row{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .mh-status{display:inline-flex;align-items:center;gap:9px;font-size:17px;font-weight:800;color:var(--ink)}
+  .mh-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+  .mh-dot.g{background:#22A565}.mh-dot.a{background:var(--amber)}.mh-dot.r{background:var(--red)}
+  .mh-kpis{display:flex;gap:24px;flex-wrap:wrap}
+  .mh-kl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2)}
+  .mh-kv{font-size:13px;font-weight:700;color:var(--ink);margin-top:2px}
+  .mh-bar{height:7px;border-radius:5px;background:var(--line-2);margin:15px 0 0;overflow:hidden}
+  .mh-fill{height:100%;border-radius:5px;background:var(--navy)}
+  .mh-fill.g{background:#22A565}.mh-fill.a{background:var(--amber)}.mh-fill.r{background:var(--red)}
+  .mh-steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+  .mh-step{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--grey);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 11px}
+  .mh-step.done{color:#166534;background:#DCFCE7;border-color:#bbf7d0}
+  .mh-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line-2);flex-wrap:wrap}
+  .mh-missing{font-size:12.5px;color:var(--grey)}
+  .mh-missing b{color:var(--ink);font-weight:700}
+  .mh-act{font-size:11px;font-weight:700;color:#991B1B;background:#FEE2E2;border:1px solid #fecaca;padding:4px 11px;border-radius:7px;white-space:nowrap}
+  .mh-ok{font-size:11px;font-weight:700;color:#166534;background:#DCFCE7;border:1px solid #bbf7d0;padding:4px 11px;border-radius:7px;white-space:nowrap}
+  .mod-sub{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--grey-2);margin:0 0 11px}
   .cc-sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:16px}
   .cc-side .cc-sec{padding:14px 16px}
   .cc-h{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey);margin:0 0 12px}
@@ -1300,10 +1321,15 @@ function openLease(naam,i){leaseIdx=i;openClient(naam,'lease');}
 function leaseRows(o){const lt=Math.max(1,Math.round(o.lt||0)),sj=Math.round(o.sj||0),sm=Math.max(1,Math.round(o.sm||1));const renteM=(o.rt||0)/lt,aflM=((o.hs||0)-(o.st||0))/lt;let rest=lt,y=sj,cum=0,rows=[];while(rest>0&&rows.length<60){const m=(y===sj)?Math.min(sm,rest):Math.min(12,rest);const r=m*renteM,a=m*aflM;cum+=a;rows.push({y,m,r,a,s:(o.hs||0)-cum});rest-=m;y++;}return {rows,renteM,aflM};}
 function leaseContent(naam){leaseNaam=naam;const arr=leaseList(naam);
   if(leaseIdx<0||!arr[leaseIdx]){
-    const rows=arr.map((o,i)=>{const rr=leaseRows(o).rows;const cur=rr.find(x=>x.y===(new Date().getFullYear()))||rr[rr.length-1]||{s:0};return `<tr class="clickable" onclick="openLease('${naam}',${i})"><td><b>${o.kent||'—'}</b></td><td>€ ${m2(o.mt||0)}</td><td>${o.lt} mnd</td><td>vanaf ${o.sj}</td><td class="r">€ ${m2(cur.s||0)}</td></tr>`;}).join('');
-    return `<div class="row-between"><h3 style="margin:0">Lease-overeenkomsten</h3><div style="display:flex;gap:8px"><input type="file" id="lzFile" accept="image/*,.pdf" style="display:none" onchange="leaseUpload('${naam}',this)"><button class="btn ghost sm" onclick="document.getElementById('lzFile').click()">⤓ Contract uploaden (AI)</button><button class="btn primary sm" onclick="addLease('${naam}')">+ Handmatig</button></div></div>
-    <div class="sub" style="margin:6px 0 12px">Per lease wordt de maandtermijn lineair gesplitst in rente en aflossing. Jaarlijks worden rente (kosten) en aflossing (leaseverplichting) geboekt. <span style="color:var(--brand-2)">Upload een leasecontract en de AI vult de gegevens automatisch in; in de live versie komen de grootboekrekeningen uit de boekhouding.</span></div>
-    <div class="tablewrap"><table><thead><tr><th>Kenteken</th><th>Maandtermijn</th><th>Looptijd</th><th>Start</th><th class="r">Schuld huidig jaar</th></tr></thead><tbody>${rows||`<tr><td colspan="5"><div class="empty"><div class="big">🚗</div>Nog geen lease-overeenkomsten.</div></td></tr>`}</tbody></table></div>`;
+    let totM=0,totD=0;
+    const rows=arr.map((o,i)=>{const rr=leaseRows(o).rows;const cur=rr.find(x=>x.y===(new Date().getFullYear()))||rr[rr.length-1]||{s:0};totM+=(o.mt||0);totD+=(cur.s||0);return `<tr class="clickable" onclick="openLease('${naam}',${i})"><td><b>${o.kent||'—'}</b></td><td>€ ${m2(o.mt||0)}</td><td>${o.lt} mnd</td><td>vanaf ${o.sj}</td><td class="r">€ ${m2(cur.s||0)}</td></tr>`;}).join('');
+    const lc=state.clients.find(x=>x.naam===naam)||{};
+    return modHead({tone:arr.length?'g':'a',status:arr.length?`${arr.length} lopende lease-overeenkomst(en)`:'Geen lease-overeenkomsten',
+      kpis:[['Verantwoordelijke',lc.mw||'—'],['Totaal maandtermijn','€ '+m2(totM)],['Schuld huidig jaar','€ '+m2(totD)]],
+      missing:arr.length?'Boek jaarlijks rente (kosten) en aflossing (leaseverplichting) per overeenkomst.':'Upload een leasecontract; de AI vult de gegevens automatisch in.',action:false})
+    +`<div class="panel"><div class="row-between" style="margin-bottom:11px"><div class="mod-sub" style="margin:0">Alle overeenkomsten</div><div style="display:flex;gap:8px"><input type="file" id="lzFile" accept="image/*,.pdf" style="display:none" onchange="leaseUpload('${naam}',this)"><button class="btn ghost sm" onclick="document.getElementById('lzFile').click()">⤓ Contract uploaden (AI)</button><button class="btn primary sm" onclick="addLease('${naam}')">+ Handmatig</button></div></div>
+    <div class="sub" style="margin:-4px 0 12px">Per lease wordt de maandtermijn lineair gesplitst in rente en aflossing. Jaarlijks worden rente (kosten) en aflossing (leaseverplichting) geboekt. <span style="color:var(--brand-2)">Upload een leasecontract en de AI vult de gegevens automatisch in; in de live versie komen de grootboekrekeningen uit de boekhouding.</span></div>
+    <div class="tablewrap"><table><thead><tr><th>Kenteken</th><th>Maandtermijn</th><th>Looptijd</th><th>Start</th><th class="r">Schuld huidig jaar</th></tr></thead><tbody>${rows||`<tr><td colspan="5"><div class="empty"><div class="big">🚗</div>Nog geen lease-overeenkomsten.</div></td></tr>`}</tbody></table></div></div>`;
   }
   const o=arr[leaseIdx];const ni=(k,v,w)=>`<input id="lz_${k}" class="dinp" style="width:${w||110}px;text-align:right" type="number" step="0.01" value="${v}" oninput="leaseCalc()">`;const ti=(k,v,w)=>`<input id="lz_${k}" class="dinp" style="width:${w||120}px" value="${String(v||'').replace(/"/g,'&quot;')}" oninput="leaseCalc()">`;
   return `<div class="backbar"><span class="backbtn" onclick="leaseOpen('${naam}')">← Lease-overzicht</span></div>
@@ -2604,6 +2630,11 @@ function setClientActief(naam,actief){const c=state.clients.find(x=>x.naam===naa
   else{c.actief=true;c.eindDatum='';toast(naam+' is opnieuw geactiveerd');openClient(naam,'overzicht');}}
 function statusCell(v,onclick){return `<span class="pill ${v?'g':'n'}" style="cursor:pointer;min-width:24px;display:inline-block;text-align:center" onclick="${onclick}">${v?'✓':'—'}</span>`;}
 function dateCell(v,toggleFn,dateFn){return `<span class="vink ${v?'on':''}" title="${v?'Ingediend op '+v:'Nog niet gedaan — klik om af te vinken'}" onclick="${toggleFn}">${v?'<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'3\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M5 12.5l4.5 4.5L19 7\'/></svg>':'<span class=\'dash\'></span>'}</span>`;}
+function modHead(o){
+  const steps=(o.steps||[]).map(s=>`<span class="mh-step ${s[1]?'done':''}">${s[1]?'✓':'○'} ${s[0]}</span>`).join('');
+  const kpis=(o.kpis||[]).map(k=>`<div class="mh-kpi"><div class="mh-kl">${k[0]}</div><div class="mh-kv">${k[1]}</div></div>`).join('');
+  return `<div class="mh"><div class="mh-row"><div class="mh-status"><span class="mh-dot ${o.tone}"></span>${o.status}</div><div class="mh-kpis">${kpis}</div></div>${o.pct!=null?`<div class="mh-bar"><div class="mh-fill ${o.fill||o.tone}" style="width:${o.pct}%"></div></div>`:''}${steps?`<div class="mh-steps">${steps}</div>`:''}<div class="mh-foot"><div class="mh-missing">${o.missing||''}</div>${o.action?'<span class="mh-act">● Actie vereist</span>':'<span class="mh-ok">● Geen actie nodig</span>'}</div></div>`;
+}
 function openClient(naam,tab){curClient=naam;clientTab=tab||'overzicht';cpUpdateTrigger();renderClient();}
 function backToVerwerken(){if(curClient)openClient(curClient,'verwerken');else go('verwerken');}
 function toggleOb(naam,kw,f){const o=state.werk[naam].ob[kw];o[f]=o[f]?'':TODAY;renderClient();}
@@ -2696,32 +2727,71 @@ function renderClient(){
     </div>`;
   } else if(clientTab==='verwerken'){
     const items=state.inbox.filter(x=>x.client===naam);
-    content=`<div class="panel"><h3>Documenten van ${naam}</h3>${items.length?`<div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Leverancier</th><th>Datum</th><th class="r">Bedrag</th><th>Zekerheid</th><th>Status</th></tr></thead><tbody>${items.map(dd=>{const st=dd.state==='sent'?'Verwerkt':dd.state==='queue'?'In verwerking':'Nieuw';return `<tr class="clickable" onclick="openBoeking(${dd.id})"><td><b>${dd.sup}</b></td><td>${dd.date}</td><td class="r">${money(dd.amt)}</td><td>${dd.conf==='hi'?'<span class="conf hi">● '+dd.confTxt+'</span>':'<span class="conf mid">● '+dd.confTxt+'</span>'}</td><td>${statusPill(st)}</td></tr>`;}).join('')}</tbody></table></div>`:'<div class="empty"><div class="big">🎉</div>Geen documenten te verwerken.</div>'}</div>`;
+    const todo=items.filter(x=>x.state!=='sent').length,gedaan=items.length-todo;
+    const oldest=items.filter(x=>x.state!=='sent').map(x=>x.date).sort((a,b)=>a.split('-').reverse().join('').localeCompare(b.split('-').reverse().join('')))[0];
+    content=modHead({tone:todo?'r':'g',status:todo?`${todo} document(en) te verwerken`:'Alle documenten verwerkt',
+      kpis:[['Verantwoordelijke',c.mw],['Oudste openstaand',oldest||'—'],['Verwerkt',`${gedaan}/${items.length||0}`]],
+      pct:items.length?Math.round(gedaan/items.length*100):100,
+      missing:todo?`Nog te boeken: <b>${todo} inkoopfactuur(en)</b>.`:'Geen openstaande documenten.',action:!!todo})
+    +`<div class="panel"><div class="mod-sub">Alle documenten</div>${items.length?`<div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Leverancier</th><th>Datum</th><th class="r">Bedrag</th><th>Zekerheid</th><th>Status</th></tr></thead><tbody>${items.map(dd=>{const st=dd.state==='sent'?'Verwerkt':dd.state==='queue'?'In verwerking':'Nieuw';return `<tr class="clickable" onclick="openBoeking(${dd.id})"><td><b>${dd.sup}</b></td><td>${dd.date}</td><td class="r">${money(dd.amt)}</td><td>${dd.conf==='hi'?'<span class="conf hi">● '+dd.confTxt+'</span>':'<span class="conf mid">● '+dd.confTxt+'</span>'}</td><td>${statusPill(st)}</td></tr>`;}).join('')}</tbody></table></div>`:'<div class="empty"><div class="big">🎉</div>Geen documenten te verwerken.</div>'}</div>`;
   } else if(clientTab==='ob'){
-    content=`<div class="panel"><div class="row-between"><h3 style="margin:0">OB / BTW-aangifte</h3><span style="font-size:12px;color:var(--grey)">BTW automatisch: ${c.btwAuto?'<span class="pill g">Ja</span>':'<span class="pill a">Nee</span>'}</span></div>
-      <div class="tablewrap" style="box-shadow:none;margin-top:12px"><table><thead><tr><th>Tijdvak</th><th>Ingeleverd</th><th>Ingevoerd</th><th>Ingediend</th><th style="width:34%">Opmerking</th></tr></thead><tbody>
+    const obQ=w.ob['Q1 2026'];const obDone=KWARTALEN.filter(q=>w.ob[q].ingediend).length;
+    const obTone=obQ.ingediend?'g':((obQ.ingelezen||obQ.ingeleverd)?'a':'r');
+    const obMiss=[!obQ.ingeleverd&&'aanleveren',!obQ.ingelezen&&'invoeren',!obQ.ingediend&&'indienen'].filter(Boolean);
+    content=modHead({tone:obTone,status:obQ.ingediend?'Q1 2026 ingediend':((obQ.ingelezen||obQ.ingeleverd)?'Q1 2026 in behandeling':'Q1 2026 — actie vereist'),
+      kpis:[['Verantwoordelijke',c.mw],['Volgende deadline','31-07-2026'],['Kwartalen ingediend',obDone+'/4'],['BTW automatisch',c.btwAuto?'Ja':'Nee']],
+      pct:Math.round(obDone/4*100),
+      steps:[['Ingeleverd',!!obQ.ingeleverd],['Ingevoerd',!!obQ.ingelezen],['Ingediend',!!obQ.ingediend]],
+      missing:obMiss.length?`Nog te doen voor Q1 2026: <b>${obMiss.join(', ')}</b>.`:'Q1 2026 volledig afgerond.',action:!obQ.ingediend})
+    +`<div class="panel"><div class="mod-sub">Alle tijdvakken</div>
+      <div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Tijdvak</th><th>Ingeleverd</th><th>Ingevoerd</th><th>Ingediend</th><th style="width:34%">Opmerking</th></tr></thead><tbody>
       ${KWARTALEN.map(q=>{const o=w.ob[q];return `<tr><td><b>${q}</b></td><td>${dateCell(o.ingeleverd,`toggleOb('${naam}','${q}','ingeleverd')`,`setObDate('${naam}','${q}','ingeleverd',this.value)`)}</td><td>${dateCell(o.ingelezen,`toggleOb('${naam}','${q}','ingelezen')`,`setObDate('${naam}','${q}','ingelezen',this.value)`)}</td><td>${dateCell(o.ingediend,`toggleOb('${naam}','${q}','ingediend')`,`setObDate('${naam}','${q}','ingediend',this.value)`)}</td><td><input class="gl" value="${(o.opm||'').replace(/"/g,'&quot;')}" placeholder="bijv. stuurt via whatsapp" oninput="state.werk['${naam}'].ob['${q}'].opm=this.value"></td></tr>`;}).join('')}
       </tbody></table></div><div class="ai-note" style="margin-top:12px">Ingeleverd = klant heeft de administratie aangeleverd · Ingevoerd = door ons verwerkt · Ingediend = OB-aangifte verstuurd. Klik op een vinkje om de status te wijzigen.</div></div>`;
   } else if(clientTab==='ib'){
-    content=`<div class="panel"><div class="row-between"><h3 style="margin:0">Inkomstenbelasting &amp; Jaarrekening</h3><button class="btn ghost sm" onclick="toast('Geopend in Fiscaal Gemak (demo)')"><span class="plogo fg" style="width:18px;height:18px;font-size:10px">FG</span> Open in Fiscaal Gemak</button></div>
-      <div class="tablewrap" style="box-shadow:none;margin-top:12px"><table><thead><tr><th>Jaar</th><th>Jaarrekening</th><th>IB</th><th>Suppletie</th><th>Uitstel</th><th>Ingediend</th></tr></thead><tbody>
+    const ibY=w.ib[IBYEAR];const ibDone=IBJAREN.filter(y=>w.ib[y].ingediend).length;
+    const ibTone=ibY.ingediend?'g':((ibY.ib||ibY.jaarrekening)?'a':'r');
+    const ibMiss=[!ibY.jaarrekening&&'jaarrekening opstellen',!ibY.ib&&'IB-aangifte opstellen',!ibY.ingediend&&'indienen'].filter(Boolean);
+    const ibDl=ibY.uitstel?'01-05-2027 (met uitstel)':'01-05-2026';
+    content=modHead({tone:ibTone,status:ibY.ingediend?`IB ${IBYEAR} ingediend`:((ibY.ib||ibY.jaarrekening)?`IB ${IBYEAR} in behandeling`:`IB ${IBYEAR} — actie vereist`),
+      kpis:[['Verantwoordelijke',c.mw],['Volgende deadline',ibDl],['Jaren ingediend',ibDone+'/'+IBJAREN.length],['Suppletie',ibY.suppletie?'Ja':'Nee']],
+      pct:Math.round([ibY.jaarrekening,ibY.ib,ibY.ingediend].filter(Boolean).length/3*100),
+      steps:[['Jaarrekening',!!ibY.jaarrekening],['IB-aangifte',!!ibY.ib],['Ingediend',!!ibY.ingediend]],
+      missing:ibMiss.length?`Nog te doen voor ${IBYEAR}: <b>${ibMiss.join(', ')}</b>.`:`${IBYEAR} volledig afgerond.`,action:!ibY.ingediend})
+    +`<div class="panel"><div class="row-between" style="margin-bottom:11px"><div class="mod-sub" style="margin:0">Alle jaren</div><button class="btn ghost sm" onclick="toast('Geopend in Fiscaal Gemak (demo)')"><span class="plogo fg" style="width:18px;height:18px;font-size:10px">FG</span> Open in Fiscaal Gemak</button></div>
+      <div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Jaar</th><th>Jaarrekening</th><th>IB</th><th>Suppletie</th><th>Uitstel</th><th>Ingediend</th></tr></thead><tbody>
       ${IBJAREN.map(y=>{const o=w.ib[y];return `<tr><td><b>${y}</b></td><td>${dateCell(o.jaarrekening,`toggleIb('${naam}','${y}','jaarrekening')`,`setIbDate('${naam}','${y}','jaarrekening',this.value)`)}</td><td>${dateCell(o.ib,`toggleIb('${naam}','${y}','ib')`,`setIbDate('${naam}','${y}','ib',this.value)`)}</td><td>${dateCell(o.suppletie,`toggleIb('${naam}','${y}','suppletie')`,`setIbDate('${naam}','${y}','suppletie',this.value)`)}</td><td>${dateCell(o.uitstel,`toggleIb('${naam}','${y}','uitstel')`,`setIbDate('${naam}','${y}','uitstel',this.value)`)}</td><td>${dateCell(o.ingediend,`toggleIb('${naam}','${y}','ingediend')`,`setIbDate('${naam}','${y}','ingediend',this.value)`)}</td></tr>`;}).join('')}
       </tbody></table></div><div class="ai-note" style="margin-top:12px">🔗 Gekoppeld met <b>Fiscaal Gemak</b>: relatiegegevens en aangiftestatus synchroniseren automatisch. <b>Uitstel</b> = uitstel aangevraagd/verleend (verlengt de indien-deadline) — aangevraagd via Fiscaal Gemak (Beconregeling).</div></div>`;
   } else if(clientTab==='loon'){
-    content=`<div class="panel"><h3>Loonaangifte 2026</h3><div class="sub" style="margin:6px 0 14px">Klik op een maand om de aangifte als gedaan/niet-gedaan te markeren.</div>
-      <div class="loon-grid">${MAANDEN.map(m=>`<div class="loon-cell ${w.loon['2026'][m]?'on':''}" onclick="toggleLoon('${naam}','${m}')"><div style="text-transform:capitalize">${m}</div><div style="font-size:15px;margin-top:3px">${w.loon['2026'][m]?'✓':'—'}</div></div>`).join('')}</div></div>`;
+    const lm=w.loon['2026'];const lDone=Object.values(lm).filter(Boolean).length;
+    const nowM=parseInt(TODAY.split('-')[1],10);
+    const due=MAANDEN.slice(0,nowM).filter(m=>!lm[m]);
+    const lTone=due.length===0?'g':(lDone>0?'a':'r');
+    content=modHead({tone:lTone,status:due.length===0?'Loonaangiften bij':`${due.length} maand(en) openstaand`,
+      kpis:[['Verantwoordelijke',c.mw],['Volgende deadline','30-06-2026'],['Verwerkt 2026',lDone+'/12']],
+      pct:nowM?Math.round((nowM-due.length)/nowM*100):100,
+      missing:due.length?`Nog in te dienen: <b>${due.join(', ')}</b>.`:'Alle maanden tot nu toe zijn ingediend.',action:due.length>0})
+    +`<div class="panel"><div class="mod-sub">Alle maanden 2026</div><div class="sub" style="margin:-4px 0 12px">Klik op een maand om de aangifte als gedaan/niet-gedaan te markeren.</div>
+      <div class="loon-grid">${MAANDEN.map(m=>`<div class="loon-cell ${lm[m]?'on':''}" onclick="toggleLoon('${naam}','${m}')"><div style="text-transform:capitalize">${m}</div><div style="font-size:15px;margin-top:3px">${lm[m]?'✓':'—'}</div></div>`).join('')}</div></div>`;
   } else if(clientTab==='mappen'){
     const counts={};MAPPEN.forEach(m=>counts[m]=state.dossierDocs.filter(x=>x.client===naam&&x.map===m).length);
     content=`<div class="row-between"><h3 style="margin:0">Documentmappen</h3><button class="btn primary sm" onclick="uploadDocKantoor('${naam}')">+ Document</button></div>
       <div class="folder-grid" style="margin-top:12px">${MAPPEN.map(m=>`<div class="folder" onclick="openClient('${naam}','map:${m}')"><div class="fic">${MAP_ICON[m]||'📁'}</div><div class="fn">${m}</div><div class="fc">${counts[m]} document(en)</div></div>`).join('')}</div>`;
   } else if(clientTab==='personeel'){
     const emps=state.employees.filter(e=>e.client===naam);
-    content=`<div class="row-between"><h3 style="margin:0">Personeel &amp; loonadministratie</h3>${emps.length?`<button class="btn primary sm" onclick="bulkLoon('${naam}')">📂 Bulk loonstroken/aangiften</button>`:''}</div>
-    <div class="sub" style="margin:6px 0 12px">Medewerkers van deze klant. Klik op een medewerker voor contract, uren, verlof en de loonstroken/aangiften loonheffing.</div>
-    ${emps.length?`<div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Naam</th><th>Functie</th><th>Contractvorm</th><th>Loon</th><th>Documenten</th></tr></thead><tbody>${emps.map(e=>`<tr class="clickable" onclick="openEmployee(${e.id},'docs')"><td><b>${e.naam}</b></td><td>${e.functie}</td><td>${e.contract}</td><td>${e.loon}</td><td><span class="pill n">${e.docs.length}</span></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty"><div class="big">👥</div>Deze klant heeft (nog) geen medewerkers in het systeem.</div>'}`;
+    const vast=emps.filter(e=>/onbepaald|vast/i.test(e.contract||'')).length;
+    content=modHead({tone:emps.length?'g':'a',status:emps.length?`${emps.length} ${emps.length===1?'medewerker':'medewerkers'} in dienst`:'Geen medewerkers',
+      kpis:[['Verantwoordelijke',c.mw],['Vast contract',vast+'/'+emps.length],['Loonaangifte','zie Loonaangifte']],
+      missing:emps.length?'Klik op een medewerker voor contract, uren, verlof en loonstroken.':'Deze klant heeft nog geen medewerkers in het systeem.',action:false})
+    +`<div class="panel"><div class="row-between" style="margin-bottom:11px"><div class="mod-sub" style="margin:0">Alle medewerkers</div>${emps.length?`<button class="btn primary sm" onclick="bulkLoon('${naam}')">📂 Bulk loonstroken/aangiften</button>`:''}</div>
+    ${emps.length?`<div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Naam</th><th>Functie</th><th>Contractvorm</th><th>Loon</th><th>Documenten</th></tr></thead><tbody>${emps.map(e=>`<tr class="clickable" onclick="openEmployee(${e.id},'docs')"><td><b>${e.naam}</b></td><td>${e.functie}</td><td>${e.contract}</td><td>${e.loon}</td><td><span class="pill n">${e.docs.length}</span></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty"><div class="big">👥</div>Deze klant heeft (nog) geen medewerkers in het systeem.</div>'}</div>`;
   } else if(clientTab==='signalen'){
     const sg=state.signals.filter(s=>s.client===naam&&s.state!=='resolved');
-    content=`<div class="panel"><h3>AI-controles &amp; signalen</h3><div class="sub" style="margin:6px 0 12px">Mogelijke fouten en attentiepunten die de AI voor deze klant heeft gevonden.</div>
+    const hi=sg.filter(s=>s.ernst==='hoog').length,mid=sg.filter(s=>s.ernst==='midden').length;
+    const sTone=hi?'r':(sg.length?'a':'g');
+    content=modHead({tone:sTone,status:sg.length?`${sg.length} open ${sg.length===1?'signaal':'signalen'}`:'Geen open signalen',
+      kpis:[['Verantwoordelijke',c.mw],['Hoog',hi],['Midden',mid],['Laag',sg.length-hi-mid]],
+      missing:sg.length?`${hi?`<b>${hi} hoog</b> — direct nakijken. `:''}Handel de gemarkeerde controles af.`:'De AI vond geen attentiepunten voor deze klant.',action:hi>0})
+    +`<div class="panel"><div class="mod-sub">Alle signalen</div>
     ${sg.length?`<div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Type</th><th>Signaal</th><th>Ernst</th><th></th></tr></thead><tbody>${sg.map(s=>`<tr><td><b>${s.type}</b></td><td style="color:var(--grey)">${s.oms}</td><td>${s.ernst==='hoog'?'<span class="pill r">Hoog</span>':s.ernst==='midden'?'<span class="pill a">Midden</span>':'<span class="pill n">Laag</span>'}</td><td class="r"><button class="btn ghost sm" onclick="resolveSignalC(${state.signals.indexOf(s)},'${naam}')">Afhandelen</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty"><div class="big">✅</div>Geen open signalen voor deze klant.</div>'}</div>`;
   } else if(clientTab==='logins'){
     const lg=w.logins||[];
@@ -2733,20 +2803,30 @@ function renderClient(){
     <div class="ai-note" style="margin-top:12px">🔒 Inloggegevens worden versleuteld opgeslagen en zijn alleen zichtbaar voor geautoriseerde kantoormedewerkers.</div>`;
   } else if(clientTab==='regeling'){
     const list=state.regelingen.map((r,gi)=>({r,gi})).filter(x=>x.r.client===naam);
-    content=`<div class="row-between"><h3 style="margin:0">Betalingsregelingen</h3></div>
-    <div class="sub" style="margin:6px 0 12px">De klant vraagt een regeling aan; Vatan stelt de Belastingdienst-brief op, downloadt en post deze. Markeer daarna als <b>afgehandeld</b> — de klant ziet dan de indieningsdatum.</div>
+    const openR=list.filter(x=>x.r.status!=='afgehandeld').length;
+    content=modHead({tone:openR?'a':(list.length?'g':'g'),status:openR?`${openR} regeling(en) in behandeling`:(list.length?'Alle regelingen afgehandeld':'Geen betalingsregelingen'),
+      kpis:[['Verantwoordelijke',c.mw],['Aanvragen',list.length],['Afgehandeld',(list.length-openR)+'/'+list.length]],
+      missing:openR?'Stel de Belastingdienst-brief op, post deze en markeer als afgehandeld.':'Geen openstaande aanvragen van deze klant.',action:openR>0})
+    +`<div class="panel"><div class="mod-sub">Alle aanvragen</div>
     <div class="tablewrap"><table><thead><tr><th>Kenmerk</th><th>Bedrag</th><th>Termijnen</th><th>Aangevraagd</th><th>Status</th><th></th></tr></thead><tbody>
     ${list.length?list.map(({r,gi})=>`<tr><td><b>${r.kenmerk}</b></td><td>${r.bedrag?'€ '+r.bedrag:'—'}</td><td>${r.termijnen}×</td><td>${r.datum}</td><td>${r.status==='afgehandeld'?'<span class="pill g">Ingediend '+r.afgehandeldDatum+'</span>':'<span class="pill a">'+(r.status==='aangevraagd'?'Aangevraagd':'Open')+'</span>'}</td><td style="text-align:right"><button class="btn ghost sm" onclick="openRegeling(${gi})">Brief openen →</button></td></tr>`).join(''):'<tr><td colspan="6"><div class="empty"><div class="big">📭</div>Nog geen aanvragen van deze klant.</div></td></tr>'}
-    </tbody></table></div>`;
+    </tbody></table></div></div>`;
   } else if(clientTab==='obaansl'){
     content=obAansluitingContent(naam);
   } else if(clientTab==='lease'){
     content=leaseContent(naam);
   } else {
-    content=`<div class="panel"><h3>Compliance &amp; gegevens</h3>
-      <div class="frow"><span class="k">KvK-nummer</span><b>${d.kvk||'—'}</b></div><div class="frow"><span class="k">BTW-nummer</span><b>${d.btw||'—'}</b></div>
-      <div class="frow"><span class="k">Machtiging</span><b>${d.machtiging||'—'}</b></div><div class="frow"><span class="k">WWFT-onderzoek</span><b>${d.wwft||'—'}</b></div>
-      <div class="frow"><span class="k">UBO-registratie</span><b>${d.ubo||'—'}</b></div><div class="frow"><span class="k">Contactpersoon</span><b>${d.contact||'—'}</b></div></div>`;
+    const ci=[['KvK-nummer','KvK',d.kvk],['BTW-nummer','BTW',d.btw],['Machtiging','Machtiging',d.machtiging],['WWFT-onderzoek','WWFT',d.wwft],['UBO-registratie','UBO',d.ubo],['Contactpersoon','Contact',d.contact]];
+    const has=x=>!!(x[2]&&x[2]!=='—');
+    const miss=ci.filter(x=>!has(x));
+    const crit=miss.filter(x=>['Machtiging','WWFT-onderzoek','UBO-registratie'].includes(x[0]));
+    const cTone=miss.length===0?'g':(crit.length?'r':'a');
+    content=modHead({tone:cTone,status:miss.length===0?'Compliance compleet':`${miss.length} gegeven(s) ontbreken`,
+      kpis:[['Verantwoordelijke',c.mw],['Volledig',`${ci.length-miss.length}/${ci.length}`]],
+      pct:Math.round((ci.length-miss.length)/ci.length*100),
+      steps:ci.map(x=>[x[1],has(x)]),
+      missing:miss.length?`Ontbreekt nog: <b>${miss.map(x=>x[0]).join(', ')}</b>.${crit.length?' Bevat verplichte WWFT/UBO/machtiging.':''}`:'Alle compliancegegevens zijn vastgelegd.',action:crit.length>0})
+    +`<div class="panel"><div class="mod-sub">Alle gegevens</div>${ci.map(x=>`<div class="frow"><span class="k">${x[0]}</span><b>${x[2]||'—'}</b></div>`).join('')}</div>`;
   }
   const clDocs=state.inbox.filter(x=>x.client===naam&&x.state!=='sent').length;
   const clSig=(state.signals||[]).filter(s=>s.client===naam&&s.state!=='resolved').length;
