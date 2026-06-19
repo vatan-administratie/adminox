@@ -148,6 +148,29 @@
   .attn-chip.amber{background:var(--amber-soft);color:var(--amber);border-color:#f3e0b0}
   .attn-chip.ok{background:var(--green-soft);color:var(--green);border-color:#bfe3cb}
   @media(max-width:760px){.attn-band{flex-wrap:wrap}}
+  /* ===== Werklijsten: scanbaar i.p.v. leesbaar ===== */
+  .wl-overall{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:12px 16px;margin-bottom:14px;box-shadow:var(--sh-sm)}
+  .wl-overall .wh{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px;flex-wrap:wrap}
+  .wl-overall .wt{font-size:13.5px;font-weight:800;color:var(--ink);letter-spacing:-.1px}
+  .wl-obar{height:8px;border-radius:5px;background:#EBEFF5;overflow:hidden}
+  .wl-obar span{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#1FA971,#15803D);transition:width .4s}
+  .wl-legend{display:flex;gap:7px;flex-wrap:wrap}
+  .wl-lg{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid var(--line)}
+  .wl-lg .d{width:8px;height:8px;border-radius:50%}
+  .wl-lg.done{background:#f1f5f9;color:var(--grey)}.wl-lg.done .d{background:#9fb0c2}
+  .wl-lg.prog{background:var(--amber-soft);color:var(--amber);border-color:#f3e0b0}.wl-lg.prog .d{background:var(--amber)}
+  .wl-lg.todo{background:var(--danger-soft);color:var(--danger);border-color:#f3c9c9}.wl-lg.todo .d{background:var(--red)}
+  .wl-mini{display:flex;align-items:center;gap:7px;margin-top:4px}
+  .wl-bar{flex:1;max-width:96px;height:5px;border-radius:4px;background:#EBEFF5;overflow:hidden}
+  .wl-bar span{display:block;height:100%;border-radius:4px}
+  .wl-pct{font-size:10.5px;font-weight:700;color:var(--grey-2);min-width:30px}
+  tbody tr.wl-done td{color:var(--grey-2)}
+  tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
+  tbody tr.wl-prog{background:#FFFCF4}tbody tr.wl-prog:hover{background:#FFF7E6}
+  tbody tr.wl-todo{background:#FEF7F7}tbody tr.wl-todo:hover{background:#FDEEEE}
+  tbody tr.wl-prog td:first-child{box-shadow:inset 3px 0 0 var(--amber)}
+  tbody tr.wl-todo td:first-child{box-shadow:inset 3px 0 0 var(--red)}
+  tbody tr.wl-done td:first-child{box-shadow:inset 3px 0 0 #d4dde7}
   .qic svg{width:19px;height:19px}
   .qbtn .arr svg{width:17px;height:17px;display:block}
   .grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
@@ -2414,17 +2437,26 @@ VIEWS.kantoor.obwerk = ()=>{
   const base=state.clients.filter(c=>c.actief&&(obMw==='alle'||c.mw===obMw));
   let cs=base.filter(c=>{const o=state.werk[c.naam].ob[kw];if(obStat==='alle')return true;if(obStat==='todo')return !o.ingediend;if(obStat==='ingeleverd')return o.ingeleverd&&!o.ingelezen;if(obStat==='ingevoerd')return o.ingelezen&&!o.ingediend;if(obStat==='ingediend')return o.ingediend;return true;});
   const ingediend=base.filter(c=>state.werk[c.naam].ob[kw].ingediend).length;
+  const stepsOB=o=>(o.ingeleverd?1:0)+(o.ingelezen?1:0)+(o.ingediend?1:0);
+  const totDoneOB=base.reduce((a,c)=>a+stepsOB(state.werk[c.naam].ob[kw]),0);
+  const overallOB=base.length?Math.round(totDoneOB/(base.length*3)*100):0;
+  const cntTodoOB=base.filter(c=>stepsOB(state.werk[c.naam].ob[kw])===0).length;
+  const cntProgOB=base.length-ingediend-cntTodoOB;
   const sel=(opts,cur,fn)=>`<select class="gl" style="width:auto" onchange="${fn}">${opts.map(o=>`<option value="${o[0]}" ${o[0]===cur?'selected':''}>${o[1]}</option>`).join('')}</select>`;
   return `<h1 class="title">OB-werklijst</h1>
-  <div class="sub">Zie per kwartaal en per medewerker direct welke klanten ingeleverd / ingevoerd / ingediend zijn — net als in Excel, maar live bij te werken. Vink aan en de datum verschijnt automatisch.</div>
+  <div class="sub">Per kwartaal en medewerker in één oogopslag zien wat nog moet gebeuren — kleur en voortgang per klant, zonder elke cel te lezen.</div>
   <div class="ftabs" style="align-items:center">
     ${sel(KWARTALEN.map(q=>[q,q]),kw,'obKw=this.value;renderView()')}
     ${sel([['alle','Alle medewerkers'],...MEDEWERKERS.map(m=>[m,m])],obMw,'obMw=this.value;renderView()')}
     ${sel([['alle','Alle statussen'],['todo','Nog te doen'],['ingeleverd','Alleen ingeleverd'],['ingevoerd','Ingevoerd, niet ingediend'],['ingediend','Ingediend']],obStat,'obStat=this.value;renderView()')}
     <span class="ftab ${obStat==='ingediend'?'active':''}" style="margin-left:auto" title="Filter op ingediend" onclick="obStat=(obStat==='ingediend'?'alle':'ingediend');renderView()">Ingediend: ${ingediend}/${base.length} · ${base.length?Math.round(ingediend/base.length*100):0}%</span>
   </div>
-  <div class="tablewrap"><table><thead><tr><th>Nr</th><th>Klant</th><th>Mw.</th><th>Ingeleverd</th><th>Ingevoerd</th><th>Ingediend</th><th style="width:24%">Opmerking</th></tr></thead><tbody>
-  ${cs.length?cs.map(c=>{const o=state.werk[c.naam].ob[kw];return `<tr><td>${c.nr} ${progLogo(c.prog)}</td><td class="clickable" onclick="openClient('${c.naam}','ob')"><b>${c.naam}</b></td><td>${c.mw}</td><td>${dateCell(o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`,`setObDate('${c.naam}','${kw}','ingeleverd',this.value)`)}</td><td>${dateCell(o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`,`setObDate('${c.naam}','${kw}','ingelezen',this.value)`)}</td><td>${dateCell(o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`,`setObDate('${c.naam}','${kw}','ingediend',this.value)`)}</td><td><input class="gl" value="${(o.opm||'').replace(/"/g,'&quot;')}" oninput="state.werk['${c.naam}'].ob['${kw}'].opm=this.value" placeholder="opmerking"></td></tr>`;}).join(''):'<tr><td colspan="7"><div class="empty"><div class="big">✅</div>Geen klanten in deze selectie.</div></td></tr>'}
+  <div class="wl-overall">
+    <div class="wh"><span class="wt">Voortgang ${kw} — ${overallOB}% afgerond</span><div class="wl-legend"><span class="wl-lg done"><span class="d"></span>${ingediend} ingediend</span><span class="wl-lg prog"><span class="d"></span>${cntProgOB} mee bezig</span><span class="wl-lg todo"><span class="d"></span>${cntTodoOB} nog te starten</span></div></div>
+    <div class="wl-obar"><span style="width:${overallOB}%"></span></div>
+  </div>
+  <div class="tablewrap"><table><thead><tr><th>Nr</th><th>Klant &amp; voortgang</th><th>Mw.</th><th>Ingeleverd</th><th>Ingevoerd</th><th>Ingediend</th><th style="width:22%">Opmerking</th></tr></thead><tbody>
+  ${cs.length?cs.map(c=>{const o=state.werk[c.naam].ob[kw];const st=stepsOB(o);const cls=o.ingediend?'wl-done':(st>0?'wl-prog':'wl-todo');const pct=Math.round(st/3*100);const bc=o.ingediend?'#15803D':(st>0?'var(--amber)':'var(--red)');return `<tr class="${cls}"><td>${c.nr} ${progLogo(c.prog)}</td><td class="clickable" onclick="openClient('${c.naam}','ob')"><b>${c.naam}</b><div class="wl-mini"><div class="wl-bar"><span style="width:${pct}%;background:${bc}"></span></div><span class="wl-pct">${pct}%</span></div></td><td>${c.mw}</td><td>${dateCell(o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`,`setObDate('${c.naam}','${kw}','ingeleverd',this.value)`)}</td><td>${dateCell(o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`,`setObDate('${c.naam}','${kw}','ingelezen',this.value)`)}</td><td>${dateCell(o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`,`setObDate('${c.naam}','${kw}','ingediend',this.value)`)}</td><td><input class="gl" value="${(o.opm||'').replace(/"/g,'&quot;')}" oninput="state.werk['${c.naam}'].ob['${kw}'].opm=this.value" placeholder="opmerking"></td></tr>`;}).join(''):'<tr><td colspan="7"><div class="empty"><div class="big">✅</div>Geen klanten in deze selectie.</div></td></tr>'}
   </tbody></table></div>`;
 };
 function obToggle(naam,kw,f){const o=state.werk[naam].ob[kw];o[f]=o[f]?'':TODAY;renderView();}
@@ -2433,17 +2465,26 @@ VIEWS.kantoor.ibwerk = ()=>{
   const base=state.clients.filter(c=>c.actief&&(ibwMw==='alle'||c.mw===ibwMw));
   const cs=base.filter(c=>{const o=state.werk[c.naam].ib[y];if(ibwStat==='alle')return true;if(ibwStat==='todo')return !o.ingediend;if(ibwStat==='ingediend')return o.ingediend;if(ibwStat==='uitstel')return !!o.uitstel;if(ibwStat==='geenjr')return !o.jaarrekening;if(ibwStat==='jrklaar')return o.jaarrekening&&!o.ingediend;return true;});
   const ingediend=base.filter(c=>state.werk[c.naam].ib[y].ingediend).length;
+  const stepsIB=o=>(o.jaarrekening?1:0)+(o.ib?1:0)+(o.ingediend?1:0);
+  const totDoneIB=base.reduce((a,c)=>a+stepsIB(state.werk[c.naam].ib[y]),0);
+  const overallIB=base.length?Math.round(totDoneIB/(base.length*3)*100):0;
+  const cntTodoIB=base.filter(c=>stepsIB(state.werk[c.naam].ib[y])===0).length;
+  const cntProgIB=base.length-ingediend-cntTodoIB;
   const sel=(opts,cur,fn)=>`<select class="gl" style="width:auto" onchange="${fn}">${opts.map(o=>`<option value="${o[0]}" ${o[0]===cur?'selected':''}>${o[1]}</option>`).join('')}</select>`;
   return `<h1 class="title">IB-werklijst</h1>
-  <div class="sub">Inkomstenbelasting &amp; jaarrekening per jaar — filter op jaar, medewerker en status. Vink aan en de datum vult automatisch in.</div>
+  <div class="sub">Inkomstenbelasting &amp; jaarrekening per jaar — kleur en voortgang per klant maken direct zichtbaar wat nog moet. Filter op jaar, medewerker en status.</div>
   <div class="ftabs" style="align-items:center;flex-wrap:wrap">
     ${sel(IBJAREN.map(j=>[j,j]),y,'ibwJaar=this.value;renderView()')}
     ${sel([['alle','Alle medewerkers'],...MEDEWERKERS.map(m=>[m,m])],ibwMw,'ibwMw=this.value;renderView()')}
     ${sel([['alle','Alle statussen'],['todo','Nog te doen'],['geenjr','Zonder jaarrekening'],['jrklaar','Jaarrekening klaar, IB open'],['uitstel','Met uitstel'],['ingediend','Ingediend']],ibwStat,'ibwStat=this.value;renderView()')}
     <span class="ftab ${ibwStat==='ingediend'?'active':''}" style="margin-left:auto" title="Filter op ingediend" onclick="ibwStat=(ibwStat==='ingediend'?'alle':'ingediend');renderView()">Ingediend: ${ingediend}/${base.length} · ${base.length?Math.round(ingediend/base.length*100):0}%</span>
   </div>
-  <div class="tablewrap"><table><thead><tr><th>Nr</th><th>Klant</th><th>Mw.</th><th>Jaarrekening</th><th>IB</th><th>Suppletie</th><th>Uitstel</th><th>Ingediend</th><th style="width:18%">Opmerking</th></tr></thead><tbody>
-  ${cs.length?cs.map(c=>{const o=state.werk[c.naam].ib[y];return `<tr><td>${c.nr} ${progLogo(c.prog)}</td><td class="clickable" onclick="openClient('${c.naam}','ib')"><b>${c.naam}</b></td><td>${c.mw}</td><td>${dateCell(o.jaarrekening,`ibToggle('${c.naam}','${y}','jaarrekening')`,`setIbDate('${c.naam}','${y}','jaarrekening',this.value)`)}</td><td>${dateCell(o.ib,`ibToggle('${c.naam}','${y}','ib')`,`setIbDate('${c.naam}','${y}','ib',this.value)`)}</td><td>${dateCell(o.suppletie,`ibToggle('${c.naam}','${y}','suppletie')`,`setIbDate('${c.naam}','${y}','suppletie',this.value)`)}</td><td>${dateCell(o.uitstel,`ibToggle('${c.naam}','${y}','uitstel')`,`setIbDate('${c.naam}','${y}','uitstel',this.value)`)}</td><td>${dateCell(o.ingediend,`ibToggle('${c.naam}','${y}','ingediend')`,`setIbDate('${c.naam}','${y}','ingediend',this.value)`)}</td><td><input class="gl" value="${(o.opm||'').replace(/"/g,'&quot;')}" oninput="state.werk['${c.naam}'].ib['${y}'].opm=this.value" placeholder="opmerking"></td></tr>`;}).join(''):'<tr><td colspan="9"><div class="empty"><div class="big">✅</div>Geen klanten in deze selectie.</div></td></tr>'}
+  <div class="wl-overall">
+    <div class="wh"><span class="wt">Voortgang ${y} — ${overallIB}% afgerond</span><div class="wl-legend"><span class="wl-lg done"><span class="d"></span>${ingediend} ingediend</span><span class="wl-lg prog"><span class="d"></span>${cntProgIB} mee bezig</span><span class="wl-lg todo"><span class="d"></span>${cntTodoIB} nog te starten</span></div></div>
+    <div class="wl-obar"><span style="width:${overallIB}%"></span></div>
+  </div>
+  <div class="tablewrap"><table><thead><tr><th>Nr</th><th>Klant &amp; voortgang</th><th>Mw.</th><th>Jaarrekening</th><th>IB</th><th>Suppletie</th><th>Uitstel</th><th>Ingediend</th><th style="width:16%">Opmerking</th></tr></thead><tbody>
+  ${cs.length?cs.map(c=>{const o=state.werk[c.naam].ib[y];const st=stepsIB(o);const cls=o.ingediend?'wl-done':(st>0?'wl-prog':'wl-todo');const pct=Math.round(st/3*100);const bc=o.ingediend?'#15803D':(st>0?'var(--amber)':'var(--red)');return `<tr class="${cls}"><td>${c.nr} ${progLogo(c.prog)}</td><td class="clickable" onclick="openClient('${c.naam}','ib')"><b>${c.naam}</b><div class="wl-mini"><div class="wl-bar"><span style="width:${pct}%;background:${bc}"></span></div><span class="wl-pct">${pct}%</span></div></td><td>${c.mw}</td><td>${dateCell(o.jaarrekening,`ibToggle('${c.naam}','${y}','jaarrekening')`,`setIbDate('${c.naam}','${y}','jaarrekening',this.value)`)}</td><td>${dateCell(o.ib,`ibToggle('${c.naam}','${y}','ib')`,`setIbDate('${c.naam}','${y}','ib',this.value)`)}</td><td>${dateCell(o.suppletie,`ibToggle('${c.naam}','${y}','suppletie')`,`setIbDate('${c.naam}','${y}','suppletie',this.value)`)}</td><td>${dateCell(o.uitstel,`ibToggle('${c.naam}','${y}','uitstel')`,`setIbDate('${c.naam}','${y}','uitstel',this.value)`)}</td><td>${dateCell(o.ingediend,`ibToggle('${c.naam}','${y}','ingediend')`,`setIbDate('${c.naam}','${y}','ingediend',this.value)`)}</td><td><input class="gl" value="${(o.opm||'').replace(/"/g,'&quot;')}" oninput="state.werk['${c.naam}'].ib['${y}'].opm=this.value" placeholder="opmerking"></td></tr>`;}).join(''):'<tr><td colspan="9"><div class="empty"><div class="big">✅</div>Geen klanten in deze selectie.</div></td></tr>'}
   </tbody></table></div>`;
 };
 function ibToggle(naam,y,f){const o=state.werk[naam].ib[y];o[f]=o[f]?'':TODAY;renderView();}
