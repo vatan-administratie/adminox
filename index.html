@@ -128,6 +128,26 @@
   .stat .delta{font-size:11.5px;font-weight:600;margin-top:9px;color:var(--grey);display:flex;align-items:center;gap:5px}
   .stat .delta svg{width:13px;height:13px;flex-shrink:0}
   .stat .delta.up{color:var(--green)}.stat .delta.down{color:var(--red-dark)}
+  /* KPI-toon: aandacht-vereisende kaarten springen eruit (tier-1) */
+  .stat.t-red::before{background:var(--red)}.stat.t-red .val{color:var(--danger)}.stat.t-red .stat-ic{background:var(--danger-soft);color:var(--danger)}
+  .stat.t-amber::before{background:var(--amber)}.stat.t-amber .val{color:var(--amber)}.stat.t-amber .stat-ic{background:var(--amber-soft);color:var(--amber)}
+  .stat.t-green::before{background:#15803D}
+  /* Aandachtsbalk (tier-1) */
+  .attn-band{display:flex;align-items:center;gap:14px;background:linear-gradient(180deg,#fff,var(--brand-tint));border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:13px;padding:11px 16px;margin-bottom:14px;box-shadow:var(--sh-sm)}
+  .attn-band.warn{border-left-color:var(--amber)}.attn-band.danger{border-left-color:var(--red)}
+  .attn-band .ab-ic{width:34px;height:34px;border-radius:9px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;flex-shrink:0}
+  .attn-band.danger .ab-ic{background:var(--danger-soft);color:var(--danger)}.attn-band.warn .ab-ic{background:var(--amber-soft);color:var(--amber)}
+  .attn-band .ab-ic svg{width:18px;height:18px}
+  .attn-band .ab-txt{flex:1;min-width:0}
+  .attn-band .ab-h{font-weight:800;font-size:13.5px;color:var(--ink);letter-spacing:-.1px}
+  .attn-band .ab-s{font-size:12px;color:var(--grey);margin-top:1px}
+  .attn-chips{display:flex;gap:8px;flex-wrap:wrap}
+  .attn-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;background:#fff;border:1px solid var(--line);cursor:pointer;transition:.13s;white-space:nowrap}
+  .attn-chip:hover{transform:translateY(-1px);box-shadow:var(--sh-sm)}
+  .attn-chip.red{background:var(--danger-soft);color:var(--danger);border-color:#f3c9c9}
+  .attn-chip.amber{background:var(--amber-soft);color:var(--amber);border-color:#f3e0b0}
+  .attn-chip.ok{background:var(--green-soft);color:var(--green);border-color:#bfe3cb}
+  @media(max-width:760px){.attn-band{flex-wrap:wrap}}
   .qic svg{width:19px;height:19px}
   .qbtn .arr svg{width:17px;height:17px;display:block}
   .grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
@@ -1354,7 +1374,7 @@ const NAV = {
     ['__g','OVERIG'],['instellingen','⚙','Instellingen'],
   ],
   kantoor:[
-    ['__g','KANTOOR'],['overzicht','▦','Overzicht'],['klanten','◑','Klanten'],['verwerken','⤓','Documenten verwerken'],['obwerk','%','OB-werklijst'],['ibwerk','%','IB-werklijst'],
+    ['__g','KANTOOR'],['overzicht','▦','Overzicht'],['klanten','◑','Klanten'],['obwerk','%','OB-werklijst'],['ibwerk','%','IB-werklijst'],
     ['__g','FISCAAL'],['fg','▦','Fiscaal Gemak'],
     ['__g','DIENSTEN'],['uren','€','Abonnementen'],
     ['__g','BEHEER'],['statistieken','▥','Statistieken'],['instellingen','⚙','Instellingen'],
@@ -1595,9 +1615,9 @@ VIEWS.klant.overzicht = ()=>{
   return `<div class="row-between"><h1 class="title">Goedemiddag, Demo</h1><button class="btn primary" onclick="newInvoice()">+ Nieuwe factuur</button></div>
   <div class="sub">Overzicht van Demo BV — open posten, omzet en snelle acties.</div>
   <div class="stats">
-    <div class="stat"><div class="stat-top"><div class="lbl">Openstaande facturen</div><div class="stat-ic">${icon('facturatie')}</div></div><div class="val">${money(open)}</div><div class="delta">${openCount} open ${openCount===1?'post':'posten'}</div></div>
-    <div class="stat"><div class="stat-top"><div class="lbl">Te betalen inkoop</div><div class="stat-ic">${icon('inkoop')}</div></div><div class="val">${money(inkoopOpen)}</div><div class="delta">${inkCount} ${inkCount===1?'factuur':'facturen'} te betalen</div></div>
-    <div class="stat"><div class="stat-top"><div class="lbl">Omzet (betaald)</div><div class="stat-ic">${icon('statistieken')}</div></div><div class="val">${money(omzet)}</div><div class="delta up">${uptrend} dit jaar</div></div>
+    <div class="stat ${openCount?'t-amber':''}"><div class="stat-top"><div class="lbl">Openstaande facturen</div><div class="stat-ic">${icon('facturatie')}</div></div><div class="val">${money(open)}</div><div class="delta">${openCount} open ${openCount===1?'post':'posten'}</div></div>
+    <div class="stat ${inkCount?'t-amber':''}"><div class="stat-top"><div class="lbl">Te betalen inkoop</div><div class="stat-ic">${icon('inkoop')}</div></div><div class="val">${money(inkoopOpen)}</div><div class="delta">${inkCount} ${inkCount===1?'factuur':'facturen'} te betalen</div></div>
+    <div class="stat t-green"><div class="stat-top"><div class="lbl">Omzet (betaald)</div><div class="stat-ic">${icon('statistieken')}</div></div><div class="val">${money(omzet)}</div><div class="delta up">${uptrend} dit jaar</div></div>
     <div class="stat"><div class="stat-top"><div class="lbl">Nog te factureren uren</div><div class="stat-ic">${icon('tijd')}</div></div><div class="val">${money(onbill)}</div><div class="delta">${uren} uur geregistreerd</div></div>
   </div>
   <div class="hub-band" style="margin-bottom:22px">
@@ -2186,17 +2206,23 @@ function uploadBon(){const sup=['Albert Heijn XL','Gamma Bouwmarkt','Bol.com zak
 /* ============ KANTOOR VIEWS ============ */
 VIEWS.kantoor.overzicht = ()=>{
   const teVerwerken=state.inbox.filter(x=>x.state==='new').length, inQueue=state.inbox.filter(x=>x.state==='queue').length;
+  const openSig=state.signals.filter(s=>s.state!=='resolved').length;
   return `<h1 class="title">Kantooroverzicht</h1><div class="sub">Vatan Administratie &amp; Advies — ${state.clients.length} actieve klanten.</div>
+  ${(teVerwerken||inQueue||openSig)?`<div class="attn-band ${teVerwerken||openSig?'danger':'warn'}">
+    <div class="ab-ic">${_svg('<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>')}</div>
+    <div class="ab-txt"><div class="ab-h">Vraagt vandaag aandacht</div><div class="ab-s">Open werk verdeeld over uw klanten.</div></div>
+    <div class="attn-chips">${teVerwerken?`<span class="attn-chip red" onclick="go('verwerken')">${teVerwerken} te verwerken</span>`:''}${inQueue?`<span class="attn-chip amber" onclick="go('goedkeuren')">${inQueue} in goedkeuring</span>`:''}${openSig?`<span class="attn-chip red" onclick="setMwFilter('alle');go('klanten')">${openSig} signalen</span>`:''}</div>
+  </div>`:''}
   <div class="stats">
-    <div class="stat"><div class="stat-top"><div class="lbl">Te verwerken</div><div class="stat-ic">${icon('verwerken')}</div></div><div class="val">${teVerwerken}</div><div class="delta">documenten in wachtrij</div></div>
-    <div class="stat"><div class="stat-top"><div class="lbl">In goedkeuring</div><div class="stat-ic">${icon('offertes')}</div></div><div class="val">${inQueue}</div><div class="delta">klaar voor controle</div></div>
-    <div class="stat"><div class="stat-top"><div class="lbl">Geboekt deze maand</div><div class="stat-ic">${icon('statistieken')}</div></div><div class="val">${monthlyDone}</div><div class="delta up">verwerkt door AI + controle</div></div>
-    <div class="stat"><div class="stat-top"><div class="lbl">Open signalen</div><div class="stat-ic">${icon('watisdit')}</div></div><div class="val">${state.signals.filter(s=>s.state!=='resolved').length}</div><div class="delta">aandachtspunten</div></div>
+    <div class="stat ${teVerwerken?'t-red':''}" onclick="go('verwerken')" style="cursor:pointer" title="Open verwerkingswachtrij per klant"><div class="stat-top"><div class="lbl">Te verwerken</div><div class="stat-ic">${icon('verwerken')}</div></div><div class="val">${teVerwerken}</div><div class="delta">klik voor wachtrij per klant →</div></div>
+    <div class="stat ${inQueue?'t-amber':''}"><div class="stat-top"><div class="lbl">In goedkeuring</div><div class="stat-ic">${icon('offertes')}</div></div><div class="val">${inQueue}</div><div class="delta">klaar voor controle</div></div>
+    <div class="stat t-green"><div class="stat-top"><div class="lbl">Geboekt deze maand</div><div class="stat-ic">${icon('statistieken')}</div></div><div class="val">${monthlyDone}</div><div class="delta up">verwerkt door AI + controle</div></div>
+    <div class="stat ${openSig?'t-red':''}"><div class="stat-top"><div class="lbl">Open signalen</div><div class="stat-ic">${icon('watisdit')}</div></div><div class="val">${openSig}</div><div class="delta">aandachtspunten</div></div>
   </div>
   <div class="grid2">
     <div class="panel"><h3>Te verwerken per klant</h3>
       ${(()=>{const byC={};state.inbox.filter(x=>x.state==='new').forEach(d=>{byC[d.client]=(byC[d.client]||0)+1;});const ks=Object.keys(byC);return ks.length?ks.map(cn=>{const c=state.clients.find(x=>x.naam===cn)||{};return `<div class="actrow" style="cursor:pointer" onclick="openClient('${cn}','verwerken')"><span class="dot" style="background:var(--red)"></span><div style="flex:1"><b>${cn}</b><div class="t">${c.mw?'Medewerker: '+c.mw:''}</div></div><span class="pill r">${byC[cn]} document(en)</span></div>`;}).join(''):'<div class="empty">Alles verwerkt 🎉</div>';})()}
-      <div style="margin-top:12px"><button class="btn primary sm" onclick="go('verwerken')">Naar verwerken →</button></div></div>
+      <div style="margin-top:12px"><button class="btn primary sm" onclick="go('verwerken')">Volledige wachtrij openen →</button></div></div>
     <div class="panel"><h3>Gekoppelde programma's</h3>
       <div class="intg"><div class="ico ex"><span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span></div><div><div class="nm">Exact Online</div><div class="ds">${state.clients.filter(c=>c.actief&&c.prog==='ex').length} klanten · OAuth2-koppeling</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
       <div class="intg"><div class="ico sn"><span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span></div><div><div class="nm">SnelStart</div><div class="ds">${state.clients.filter(c=>c.actief&&c.prog==='sn').length} klanten · B2B API</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
@@ -2369,7 +2395,7 @@ function renderClient(){
 VIEWS.kantoor.verwerken = ()=>{
   const byC={};state.inbox.filter(x=>x.state==='new').forEach(d=>{byC[d.client]=(byC[d.client]||0)+1;});
   const ks=Object.keys(byC);
-  return `<input type="file" id="fbFile" accept="image/*,.pdf" style="display:none" onchange="factuurUpload(this)">`+listView('Documenten verwerken','Per klant het aantal te verwerken documenten — of upload direct een inkoopfactuur; de AI herkent de gegevens en stelt het grootboek voor (op basis van eerdere boekingen van die leverancier).','Inkoopfactuur uploaden (AI)',"document.getElementById('fbFile').click()",
+  return `<input type="file" id="fbFile" accept="image/*,.pdf" style="display:none" onchange="factuurUpload(this)"><div class="backbar"><span class="backbtn" onclick="go('overzicht')">← Kantooroverzicht</span></div>`+listView('Verwerkingswachtrij','Lichte wachtrij per klant. Klik op een klant om de documenten in het dossier te verwerken — of upload direct een inkoopfactuur; de AI herkent de gegevens en stelt het grootboek voor (op basis van eerdere boekingen van die leverancier).','Inkoopfactuur uploaden (AI)',"document.getElementById('fbFile').click()",
   `<th>Klant</th><th>Medewerker</th><th>Programma</th><th class="r">Te verwerken</th>`,
   ks.length?ks.map(cn=>{const c=state.clients.find(x=>x.naam===cn)||{};return `<tr class="clickable" onclick="openClient('${cn}','verwerken')"><td><b>${cn}</b></td><td>${c.mw||'—'}</td><td>${c.prog?progPill(c.prog):''}</td><td class="r"><span class="pill r">${byC[cn]}</span></td></tr>`;}).join(''):'<tr><td colspan="4"><div class="empty"><div class="big">🎉</div>Geen documenten te verwerken.</div></td></tr>');
 };
