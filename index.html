@@ -39,16 +39,19 @@
   body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:14px;background:var(--bg);color:#1c1f24;height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"cv02","cv03","cv04","cv11"}
   .app{display:none;grid-template-columns:230px 1fr;grid-template-rows:60px 1fr;height:100vh}
   .app.show{display:grid}
-  .topbar{grid-column:1/3;background:var(--navy-dark);color:#fff;display:flex;align-items:center;padding:0 24px;gap:20px;border-bottom:1px solid #ffffff14;box-shadow:0 1px 0 #00000026}
-  .brand{display:flex;align-items:center;gap:13px}
+  .topbar{grid-column:1/3;background:linear-gradient(180deg,#0E3358 0%,#082742 100%);color:#fff;display:flex;align-items:center;padding:0 22px;gap:15px;border-bottom:1px solid #ffffff12;box-shadow:0 1px 0 #0000001f}
+  .brand{display:flex;align-items:center;gap:12px;flex-shrink:0;min-width:0}
   .vlogo{display:block;flex-shrink:0}
-  .wm{display:flex;flex-direction:column;line-height:1}
-  .wm-main{font-size:18px;font-weight:900;color:#fff;letter-spacing:.6px}
-  .wm-main .wm-prod{color:#A9C6E6;font-weight:600}
-  .wm-sub{font-size:8.5px;font-weight:700;letter-spacing:3px;color:#9aa2ab;margin-top:4px}
+  .wm{display:flex;flex-direction:column;line-height:1.12;min-width:0}
+  .wm-main{font-size:15.5px;font-weight:800;color:#fff;letter-spacing:-.2px;white-space:nowrap}
+  .wm-main .wm-prod{color:#A9C6E6;font-weight:500}
+  .wm-sub{font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#8da3bd;margin-top:3px;white-space:nowrap}
+  .tb-div{width:1px;height:22px;background:#ffffff24;flex-shrink:0}
   .topbar .spacer{flex:1}
-  .role-chip{background:#ffffff14;border:1px solid #ffffff33;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
-  .role-chip.kantoor{background:#ffffff1f;border-color:#ffffff3d;color:#eaf1f8}
+  .role-chip{display:inline-flex;align-items:center;gap:7px;background:#ffffff12;border:1px solid #ffffff26;padding:5px 13px;border-radius:20px;font-size:12px;font-weight:600;color:#dce6f1;white-space:nowrap;flex-shrink:0}
+  .role-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:#5fa8e0;flex-shrink:0}
+  .role-chip.kantoor{background:#ffffff1a;border-color:#ffffff38;color:#eaf1f8}
+  .role-chip.kantoor::before{background:#39B57D}
   .topbar .who{font-size:13px;color:#cfd4da;display:flex;align-items:center;gap:10px}
   .avatar{width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px}
   /* ===== Klant-switcher — minimal command palette (Linear/Attio) ===== */
@@ -496,10 +499,11 @@
   @media(max-width:880px){
     .app{grid-template-columns:184px 1fr}
     .topbar{padding:0 12px;gap:9px}
-    .wm-sub{display:none}.main{padding:18px 16px}
+    .wm-sub,.tb-div{display:none}.main{padding:18px 16px}
     .stats,.psum{grid-template-columns:repeat(2,1fr)!important}
     .tabs{flex-wrap:nowrap}
   }
+  @media(max-width:520px){.wm-main{font-size:14px}.brand{flex-shrink:1}.wm{overflow:hidden}.wm-main{overflow:hidden;text-overflow:ellipsis}}
   @media(max-width:620px){
     .app{grid-template-columns:1fr;grid-template-rows:56px auto 1fr}
     .topbar{grid-column:1/2}
@@ -955,8 +959,9 @@
         <path d="M26 31 C32 46 45 71 59 90 C73 71 85 47 94 30 L79 35 C72 49 65 60 60 70 C55 60 48 49 41 35 Z" fill="#fff" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
         <path d="M100 12 L101.98 18.02 L108 20 L101.98 21.98 L100 28 L98.02 21.98 L92 20 L98.02 18.02 Z" fill="#fff"/>
       </svg>
-      <div class="wm"><div class="wm-main">VATAN <span class="wm-prod">Administratie</span></div><div class="wm-sub">&amp; ADVIES · PORTAAL</div></div>
+      <div class="wm"><div class="wm-main">VATAN <span class="wm-prod">Administratie</span></div><div class="wm-sub">Administratie &amp; Advies</div></div>
     </div>
+    <span class="tb-div"></span>
     <span class="role-chip" id="roleChip">Klantportaal</span>
     <div class="spacer"></div>
     <select id="langSel" class="langsel" title="Taal" onchange="setLang(this.value)"><option value="nl">NL</option><option value="en">EN</option><option value="tr">TR</option><option value="bg">BG</option><option value="ar">AR</option></select>
