@@ -71,9 +71,9 @@
   .cp-search input{flex:1;border:0;outline:none;font-size:13px;font-family:inherit;color:var(--ink);background:transparent}
   .cp-mwf{display:flex;gap:5px;padding:7px 10px;border-bottom:1px solid var(--line-2);overflow-x:auto;scrollbar-width:none}
   .cp-mwf::-webkit-scrollbar{display:none}
-  .cp-mwf .chip{font-size:11px;font-weight:600;color:var(--grey);background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:3px 10px;cursor:pointer;white-space:nowrap;transition:.13s}
-  .cp-mwf .chip:hover{border-color:var(--brand-2);color:var(--ink)}
-  .cp-mwf .chip.on{background:var(--brand-soft);color:var(--navy);border-color:#cfe0f2}
+  .cp-mwf .chip{font-size:11px;font-weight:600;color:var(--grey);background:transparent;border:0;border-radius:7px;padding:4px 9px;cursor:pointer;white-space:nowrap;transition:.13s}
+  .cp-mwf .chip:hover{background:var(--hover);color:var(--ink)}
+  .cp-mwf .chip.on{background:var(--brand-soft);color:var(--navy);font-weight:700}
   .cp-list{overflow-y:auto;padding:5px;flex:1}
   .cp-sec{font-size:9.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--grey-2);padding:9px 9px 4px}
   .cp-row{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:9px;cursor:pointer;transition:background .12s}
@@ -197,6 +197,18 @@
   .ck.done{background:#f1f5f9;color:#9aa7b5}
   .ck.amber{background:var(--amber-soft);color:var(--amber)}
   .ck.red{background:var(--danger-soft);color:var(--danger)}
+  /* unified list: lichte groepskoppen, rustige rijen zonder open werk */
+  .cl-grp{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--grey-2);margin:16px 2px 8px;display:flex;align-items:center;gap:8px}
+  .cl-grp:first-child{margin-top:2px}
+  .cl-grp .av{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand-2);font-size:9.5px;font-weight:800}
+  .cl-grp span{color:var(--grey-2);font-weight:700}
+  .clx{padding:8px 13px;gap:12px}
+  .clx .av{width:32px;height:32px;font-size:11.5px}
+  .clx.quiet{background:var(--bg);border-color:var(--line-2)}
+  .clx.quiet:hover{background:#fff;border-color:#cfd8e3}
+  .clx.quiet .nm{font-weight:600;color:var(--ink-2)}
+  .clx.quiet .av{opacity:.78}
+  .cl-ok{font-size:11.5px;font-weight:600;color:#9aa7b5;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
   @media(max-width:940px){.clx{flex-wrap:wrap}.clx .id{width:auto;flex:1}.clx .chips{flex-basis:100%;justify-content:flex-start;margin-top:7px}.clx .chev{display:none}}
   /* ===== Kantooroverzicht command-center ===== */
   .attn-band.slim{padding:9px 15px;margin-bottom:14px}
@@ -2326,35 +2338,40 @@ VIEWS.kantoor.overzicht = ()=>{
 VIEWS.kantoor.klanten = ()=>{
   const tab=(k,l,n)=>`<div class="ftab ${mwFilter===k?'active':''}" onclick="setMwFilter('${k}')">${l}<span class="c">${n}</span></div>`;
   const actief=state.clients.filter(c=>c.actief), exit=state.clients.filter(c=>!c.actief);
+  const hasWork=c=>{const w=state.werk[c.naam];const tv=state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;const sc=state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length;return tv||sc||!w.ob['Q1 2026'].ingediend||!w.ib[IBYEAR].ingediend||Object.values(w.loon['2026']).filter(Boolean).length<6;};
   const clRow=(c,exitMode)=>{
-    const tv=state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;
     const w=state.werk[c.naam];
+    const tv=exitMode?0:state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;
     const ob1=w.ob['Q1 2026'].ingediend, ib24=w.ib[IBYEAR].ingediend, loonDone=Object.values(w.loon['2026']).filter(Boolean).length;
     const sc=state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length;
-    const work=(!exitMode&&tv)?`<span class="ck red">${tv} te verwerken</span>`:'';
-    const sig=sc?`<span class="ck red" style="cursor:pointer" onclick="event.stopPropagation();openClient('${c.naam}','signalen')">⚠ ${sc} signaal${sc>1?'en':''}</span>`:'';
-    const ob=ob1?'<span class="ck done">OB ✓</span>':'<span class="ck amber">OB open</span>';
-    const ib=ib24?'<span class="ck done">IB ✓</span>':'<span class="ck amber">IB open</span>';
-    const loon=`<span class="ck ${loonDone>=12?'done':(loonDone>=6?'amber':'red')}">Loon ${loonDone}/12</span>`;
+    const chips=[];
+    if(tv) chips.push(`<span class="ck red">${tv} te verwerken</span>`);
+    if(sc) chips.push(`<span class="ck red" style="cursor:pointer" onclick="event.stopPropagation();openClient('${c.naam}','signalen')">⚠ ${sc} signaal${sc>1?'en':''}</span>`);
+    if(!ob1) chips.push('<span class="ck amber">OB open</span>');
+    if(!ib24) chips.push('<span class="ck amber">IB open</span>');
+    if(loonDone<6) chips.push(`<span class="ck amber">Loon ${loonDone}/12</span>`);
+    const quiet=chips.length===0;
+    const right=quiet?'<span class="cl-ok">✓ geen open werk</span>':`<div class="chips">${chips.join('')}</div>`;
     const meta=exitMode?`nr ${c.nr} · ${c.mw} · laatst actief ${c.eindDatum||'—'}`:`nr ${c.nr} · ${c.mw}`;
-    return `<div class="clx" onclick="openClient('${c.naam}')">
+    return `<div class="clx ${quiet?'quiet':''}" onclick="openClient('${c.naam}')">
       <span class="av" style="background:${cpAvColor(c)}">${cpInitials(c.naam)}</span>
       <div class="id"><div class="nm">${c.naam} <span class="ptag ${c.prog}" style="cursor:pointer" title="Programma wijzigen" onclick="event.stopPropagation();switchProgram('${c.naam}')"><span class="pdot"></span>${PROG[c.prog]}</span></div><div class="meta">${meta}</div></div>
-      <div class="chips">${work}${sig}${ob}${ib}${loon}</div>
+      ${right}
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
     </div>`;
   };
+  const sortWork=(a,b)=>(hasWork(b)?1:0)-(hasWork(a)?1:0);
   let body='';
   if(mwFilter==='exit'){
-    body=`<div class="grp-h">🗄️ Exit klanten <span class="grp-c">· ${exit.length}</span></div>
-    <div class="sub" style="margin:-6px 0 12px">Niet-actieve klanten. De openstaande taken (laatste aangiften, jaarrekening) blijven zichtbaar zodat u ze kunt afronden — klik voor het volledige dossier.</div>
-    <div class="cl-list">${exit.length?exit.map(c=>clRow(c,true)).join(''):'<div class="empty"><div class="big">🗄️</div>Geen exit-klanten.</div>'}</div>`;
+    body=`<div class="cl-grp">Exit klanten <span>· ${exit.length}</span></div>
+    <div class="sub" style="margin:-2px 0 10px">Niet-actieve klanten. Open taken (laatste aangiften, jaarrekening) blijven zichtbaar zodat u ze kunt afronden — klik voor het dossier.</div>
+    <div class="cl-list">${exit.length?exit.slice().sort(sortWork).map(c=>clRow(c,true)).join(''):'<div class="empty"><div class="big">🗄️</div>Geen exit-klanten.</div>'}</div>`;
   } else {
     const groups = mwFilter==='alle'?MEDEWERKERS:[mwFilter];
     groups.forEach(mw=>{
-      const cs=actief.filter(c=>c.mw===mw);
-      body+=`<div class="grp-h">👤 ${mw} <span class="grp-c">· ${cs.length} klanten</span></div>
-      <div class="cl-list">${cs.length?cs.map(c=>clRow(c,false)).join(''):'<div class="empty">Geen actieve klanten in deze groep.</div>'}</div>`;
+      const cs=actief.filter(c=>c.mw===mw), open=cs.filter(hasWork).length;
+      body+=`<div class="cl-grp"><span class="av">${mw[0]}</span>${mw} <span>· ${cs.length} klanten${open?` · ${open} met werk`:''}</span></div>
+      <div class="cl-list">${cs.length?cs.slice().sort(sortWork).map(c=>clRow(c,false)).join(''):'<div class="empty">Geen actieve klanten in deze groep.</div>'}</div>`;
     });
   }
   let summaryHTML='';
