@@ -311,7 +311,14 @@
   .lz-edit[open]>summary::before{transform:rotate(90deg)}
   .lz-edit .lz-body{padding:4px 16px 16px}
   .tablewrap.fin td,.tablewrap.fin th{font-variant-numeric:tabular-nums}
+  .tablewrap.fin table td,.tablewrap.fin table th{padding-top:11px;padding-bottom:11px}
   .tablewrap.fin tr.sent td{font-size:13px;background:var(--brand-tint)}
+  /* inline report-style input: looks like a report value, still editable */
+  .rinp{border:1px solid transparent;background:transparent;font:inherit;font-weight:700;color:var(--ink);text-align:right;padding:5px 8px;border-radius:7px;width:104px;font-variant-numeric:tabular-nums;transition:.12s;-moz-appearance:textfield}
+  .rinp::-webkit-outer-spin-button,.rinp::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .rinp:hover{border-color:var(--line);background:var(--bg)}
+  .rinp:focus{border-color:var(--navy);background:#fff;outline:none;box-shadow:0 0 0 3px rgba(16,59,99,.12)}
+  .rinp.l{text-align:left;font-weight:600;width:100%}
   .dpill{display:inline-block;padding:2px 9px;border-radius:6px;font-weight:700;font-size:11.5px;font-variant-numeric:tabular-nums}
   .dpill.g{background:#DCFCE7;color:#166534}.dpill.a{background:#FEF3C7;color:#92400E}.dpill.r{background:#FEE2E2;color:#991B1B}
   /* loon month matrix */
@@ -1339,13 +1346,13 @@ const AANSL_JAREN=['2026','2025','2024'];
 function m2(v){return (isFinite(v)?v:0).toLocaleString('nl-NL',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function aanslGet(naam,jaar){const w=state.werk[naam];if(!w)return null;if(!w.aansl)w.aansl={};if(!w.aansl[jaar]){if(naam==='Demo BV'&&jaar==='2025'){w.aansl[jaar]={b:{oh:1985163,ol:91984,on:42360,oa:659851,vbl:2301.67,vbh:398928.97},q:[{oh:309358,ol:14362,on:2563,oa:104967,vb:56139,bt:42817},{oh:392265,ol:13697.91,on:13875,oa:158701,vb:88905.21,bt:50186},{oh:545185,ol:23797,on:0,oa:178470,vb:113061.70,bt:64786},{oh:465490,ol:22668,on:13672,oa:187440,vb:93970.40,bt:43299}],posten:[['Suppletie 2023',11179]]};}else{w.aansl[jaar]={b:{oh:0,ol:0,on:0,oa:0,vbl:0,vbh:0},q:[0,1,2,3].map(()=>({oh:0,ol:0,on:0,oa:0,vb:0,bt:0})),posten:[]};}}return w.aansl[jaar];}
 function obAansluitingContent(naam){aanslNaam=naam;const d=aanslGet(naam,aanslJaar);if(!d)return '<div class="empty">Geen gegevens.</div>';
-  const ni=(id,v)=>`<input id="${id}" class="dinp" style="width:98px;text-align:right" type="number" step="0.01" value="${v}" oninput="aanslCalc()">`;
+  const ni=(id,v)=>`<input id="${id}" class="rinp" type="number" step="0.01" value="${v}" oninput="aanslCalc()">`;
   const tabs=AANSL_JAREN.map(y=>`<div class="ftab ${y===aanslJaar?'active':''}" onclick="aanslSwitchJaar('${naam}','${y}')">${y}</div>`).join('');
   const bf=[['oh','1A Verkoop hoog (21%)'],['ol','1B Verkoop laag (9%)'],['on','1E Verkoop 0%'],['oa','2A Onderaanneming verlegd (21%)'],['vbl','5B Voorbelasting laag'],['vbh','5B Voorbelasting hoog']];
   const balansRows=bf.map(f=>`<tr><td>${f[1]}</td><td class="r">${ni('a_b_'+f[0],d.b[f[0]])}</td><td class="r" id="ao_b_${f[0]}"></td></tr>`).join('');
   const qn=['1e kw','2e kw','3e kw','4e kw'];
   const qrows=d.q.map((q,i)=>`<tr><td>${qn[i]}</td><td class="r">${ni('a_q'+i+'_oh',q.oh)}</td><td class="r">${ni('a_q'+i+'_ol',q.ol)}</td><td class="r">${ni('a_q'+i+'_on',q.on)}</td><td class="r">${ni('a_q'+i+'_oa',q.oa)}</td><td class="r">${ni('a_q'+i+'_vb',q.vb)}</td><td class="r">${ni('a_q'+i+'_bt',q.bt)}</td><td class="r" id="ao_q${i}_s"></td><td class="r" id="ao_q${i}_m"></td></tr>`).join('');
-  const postRows=d.posten.map((p,i)=>`<tr><td><input id="a_pl${i}" class="dinp" style="width:180px" value="${String(p[0]).replace(/"/g,'&quot;')}" oninput="aanslCalc()"></td><td class="r">${ni('a_pa'+i,p[1])}</td><td class="r"><span style="cursor:pointer;color:var(--red);font-weight:800" onclick="aanslDelPost('${naam}',${i})">✕</span></td></tr>`).join('');
+  const postRows=d.posten.map((p,i)=>`<tr><td><input id="a_pl${i}" class="rinp l" value="${String(p[0]).replace(/"/g,'&quot;')}" oninput="aanslCalc()"></td><td class="r">${ni('a_pa'+i,p[1])}</td><td class="r"><span style="cursor:pointer;color:var(--grey-2);font-weight:800" title="Verwijderen" onclick="aanslDelPost('${naam}',${i})">✕</span></td></tr>`).join('');
   return `<div class="row-between"><h3 style="margin:0">OB-aansluiting &amp; suppletie</h3><div style="display:flex;gap:8px;align-items:center"><div class="ftabs" style="margin:0">${tabs}</div><button class="btn ghost sm" onclick="printOB('${naam}')">⬇ Print / PDF</button></div></div>
   <div class="sub" style="margin:6px 0 14px">VAT-aansluiting boekjaar ${aanslJaar}: jaarcijfers tegenover de ingediende kwartaalaangiften. <span style="color:var(--brand-2)">In de live versie komen deze cijfers automatisch uit Exact/SnelStart.</span></div>
   <div class="mh"><div class="mh-row"><div class="mh-status"><span class="mh-dot" id="obh_dot"></span><span id="obh_status">—</span></div>
@@ -1357,16 +1364,16 @@ function obAansluitingContent(naam){aanslNaam=naam;const d=aanslGet(naam,aanslJa
     </div></div>
     <div class="mh-foot"><div class="mh-missing" id="obh_msg">—</div><span id="obh_act" class="mh-ok">—</span></div>
   </div>
-  <div class="grp-h">Grootste verschillen per kwartaal</div>
+  <div class="mod-sub">Grootste verschillen per kwartaal</div>
   <div id="obh_qbars" style="margin-bottom:16px"></div>
   <div class="stats s3" style="margin-bottom:14px"><div class="stat"><div class="lbl">Saldo jaar (balans)</div><div class="val" id="ak_saldo"></div></div><div class="stat"><div class="lbl">Som aangiften</div><div class="val" id="ak_som"></div></div><div class="stat"><div class="lbl">Suppletie ${aanslJaar}</div><div class="val" id="ak_sup" style="color:var(--amber)"></div></div></div>
   <div class="ai-note" id="obh_insight" style="margin-bottom:20px">—</div>
-  <div class="mod-sub">Detailgegevens — balans, aangiften &amp; balanspositie</div>
-  <div class="grp-h">Balans — jaarcijfers</div>
+  <div class="mod-sub" style="font-size:12px;color:var(--grey)">Detailgegevens — balans, aangiften &amp; balanspositie</div>
+  <div class="mod-sub">Balans — jaarcijfers</div>
   <div class="tablewrap fin" style="margin-bottom:18px"><table><thead><tr><th>Post</th><th class="r">Bedrag</th><th class="r">Btw</th></tr></thead><tbody>${balansRows}<tr class="sent"><td><b>Saldo jaar (te betalen btw)</b></td><td></td><td class="r"><b id="ao_saldojaar"></b></td></tr></tbody></table></div>
-  <div class="grp-h">Aangiften per kwartaal</div>
+  <div class="mod-sub">Aangiften per kwartaal</div>
   <div class="tablewrap fin" style="margin-bottom:18px;overflow-x:auto"><table><thead><tr><th>Kwartaal</th><th class="r">Omzet hoog</th><th class="r">Omzet laag</th><th class="r">Omzet 0%</th><th class="r">Onderaann.</th><th class="r">Voorbel.</th><th class="r">Aangegeven</th><th class="r">Saldo</th><th class="r">Verschil</th></tr></thead><tbody>${qrows}<tr class="sent"><td><b>Som</b></td><td class="r" id="ao_soh"></td><td class="r" id="ao_sol"></td><td class="r" id="ao_son"></td><td class="r" id="ao_soa"></td><td class="r" id="ao_svb"></td><td class="r" id="ao_sbt"></td><td class="r"><b id="ao_ssaldo"></b></td><td class="r" id="ao_sm"></td></tr></tbody></table></div>
-  <div class="grp-h">Balanspositie OB per 31-12-${aanslJaar}</div>
+  <div class="mod-sub">Balanspositie OB per 31-12-${aanslJaar}</div>
   <div class="grid2" style="align-items:start;gap:16px">
     <div><div class="row-between" style="margin-bottom:8px"><div class="mod-sub" style="margin:0">Openstaande balansposten</div><button class="btn ghost sm" onclick="aanslAddPost('${naam}')">+ post</button></div>
       <div class="tablewrap fin"><table><thead><tr><th>Omschrijving</th><th class="r">Bedrag</th><th></th></tr></thead><tbody>${postRows||`<tr><td colspan="3" style="color:var(--grey)">Geen openstaande posten — voeg toe met "+ post".</td></tr>`}</tbody></table></div></div>
@@ -1524,8 +1531,8 @@ function factuurBoek(){if(!curFactuur)return;const gl=document.getElementById('f
 function printDoc(title,body){const w=window.open('','_blank','width=820,height=1040');if(!w){toast('Sta pop-ups toe om te printen');return;}w.document.write(`<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>${String(title).replace(/[<>]/g,'')}</title><style>body{font-family:Arial,Helvetica,sans-serif;padding:40px;color:#1c1f24;font-size:13px}h2{font-size:18px;margin:0 0 4px}h3{font-size:14px;margin:18px 0 6px}p{margin:4px 0}table{width:100%;border-collapse:collapse;margin-bottom:8px}td,th{padding:5px 7px;border-bottom:1px solid #e6e9ef;text-align:right}td.l,th.l{text-align:left}th{color:#5C6675;font-weight:600}tr.tot td{font-weight:bold;border-top:2px solid #15171a}@media print{body{padding:0}}</style></head><body><div style="font-weight:900;color:#C8102E;font-size:16px;margin-bottom:14px">VATAN <span style="color:#111;font-weight:700">Administratie &amp; Advies</span></div>${body}<script>window.onload=function(){setTimeout(function(){window.print();},300);}<\/script></body></html>`);w.document.close();toast('Afdrukvenster geopend — kies "Opslaan als PDF"');}
 function printOB(naam){const d=aanslGet(naam,aanslJaar);if(!d)return;const jaar=aanslJaar;
  const bh=d.b.oh*0.21,bl=d.b.ol*0.09,bo=d.b.oa*0.21,vb=d.b.vbl+d.b.vbh,saldoJaar=bh+bl+bo-vb;
- const qn=['1e kw','2e kw','3e kw','4e kw'];let sumS=0,q4s=0;
- const qrows=d.q.map((q,i)=>{const s=q.oh*0.21+q.ol*0.09+q.oa*0.21-q.vb;sumS+=s;if(i===3)q4s=s;return `<tr><td class="l">${qn[i]}</td><td>${m2(q.oh)}</td><td>${m2(q.ol)}</td><td>${m2(q.oa)}</td><td>${m2(q.vb)}</td><td>${m2(s)}</td></tr>`;}).join('');
+ const qn=['1e kw','2e kw','3e kw','4e kw'];let sumS=0,q4s=0,sumBt=0,sumM=0;
+ const qrows=d.q.map((q,i)=>{const s=q.oh*0.21+q.ol*0.09+q.oa*0.21-q.vb;const mm=q.bt-s;sumS+=s;sumBt+=q.bt;sumM+=mm;if(i===3)q4s=s;return `<tr><td class="l">${qn[i]}</td><td>${m2(q.oh)}</td><td>${m2(q.ol)}</td><td>${m2(q.oa)}</td><td>${m2(q.vb)}</td><td>${m2(q.bt)}</td><td>${m2(s)}</td><td>${m2(mm)}</td></tr>`;}).join('');
  const sup=saldoJaar-sumS;let pos=0;d.posten.forEach(p=>pos+=(parseFloat(String(p[1]).replace(',','.'))||0));
  const postRows=d.posten.map(p=>`<tr><td class="l">${String(p[0]).replace(/[<>]/g,'')}</td><td>${m2(parseFloat(String(p[1]).replace(',','.'))||0)}</td></tr>`).join('');
  const aSup=Math.abs(sup);const stat=aSup<1?'Geen verschil':(aSup<1000?'Controle vereist':'Suppletie vereist');const risk=aSup<1?'Laag':(aSup<1000?'Midden':'Hoog');
@@ -1538,7 +1545,7 @@ function printOB(naam){const d=aanslGet(naam,aanslJaar);if(!d)return;const jaar=
  <tr><td class="l">2A Onderaanneming verlegd (21%)</td><td>${m2(d.b.oa)}</td><td>btw ${m2(bo)}</td></tr>
  <tr><td class="l">5B Voorbelasting</td><td></td><td>-${m2(vb)}</td></tr>
  <tr class="tot"><td class="l">Saldo jaar</td><td></td><td>${m2(saldoJaar)}</td></tr></table>
- <h3>Aangiften per kwartaal</h3><table><tr><th class="l">Kwartaal</th><th>Omzet hoog</th><th>Omzet laag</th><th>Onderaann.</th><th>Voorbel.</th><th>Saldo</th></tr>${qrows}<tr class="tot"><td class="l">Som</td><td></td><td></td><td></td><td></td><td>${m2(sumS)}</td></tr></table>
+ <h3>Aangiften per kwartaal</h3><table><tr><th class="l">Kwartaal</th><th>Omzet hoog</th><th>Omzet laag</th><th>Onderaann.</th><th>Voorbel.</th><th>Aangegeven</th><th>Saldo</th><th>Verschil</th></tr>${qrows}<tr class="tot"><td class="l">Som</td><td></td><td></td><td></td><td></td><td>${m2(sumBt)}</td><td>${m2(sumS)}</td><td>${m2(sumM)}</td></tr></table>
  <p style="font-size:15px"><b>Suppletie ${jaar}: EUR ${m2(sup)}</b></p>
  <h3>Balanspositie OB per 31-12-${jaar}</h3><table>${postRows}<tr><td class="l">4e kw ${jaar} (onbetaald)</td><td>${m2(q4s)}</td></tr><tr><td class="l">Suppletie ${jaar}</td><td>${m2(sup)}</td></tr><tr class="tot"><td class="l">Balanspositie OB</td><td>${m2(pos+q4s+sup)}</td></tr></table>`;
  printDoc('OB-aansluiting '+jaar+' '+naam, body);}
