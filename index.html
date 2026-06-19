@@ -675,24 +675,42 @@
   @media(max-width:1000px){.psum{grid-template-columns:repeat(2,1fr)}}
   /* ===== Kleine schermen / kleine laptops: layout blijft scrollbaar ===== */
   @media(max-width:1180px){.app{grid-template-columns:216px 1fr}.main{padding:24px 26px}}
+  @media(max-width:980px){.grid2{grid-template-columns:1fr}}
   @media(max-width:880px){
-    .app{grid-template-columns:184px 1fr}
+    .app{grid-template-columns:200px 1fr}
     .topbar{padding:0 12px;gap:9px}
     .wm-sub,.tb-div,.tb-ctx{display:none}.main{padding:18px 16px}
     .stats,.psum{grid-template-columns:repeat(2,1fr)!important}
     .tabs{flex-wrap:nowrap}
   }
   @media(max-width:720px){.tb-ws-sub{display:none}.tb-ctrls{gap:11px}}
-  @media(max-width:520px){.wm-main{font-size:14px}.brand{flex-shrink:1}.wm{overflow:hidden}.wm-main{overflow:hidden;text-overflow:ellipsis}.tb-ws{display:none}.switch#switchBtn{display:none}}
-  @media(max-width:620px){
-    .app{grid-template-columns:1fr;grid-template-rows:56px auto 1fr}
-    .topbar{grid-column:1/2}
-    .side{grid-row:2;flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--line);padding:6px 8px;gap:4px;max-height:120px}
-    .side .grp,.side .uinfo{display:none}
-    .navitem{padding:6px 9px;font-size:12px}
-    .main{grid-row:3;padding:16px 12px}
-    .stats,.psum{grid-template-columns:1fr!important}
-    .topbar .who{display:none}
+  /* hamburger + off-canvas drawer (telefoon/tablet) */
+  .navtog{display:none;align-items:center;justify-content:center;width:38px;height:38px;flex-shrink:0;border:0;background:#ffffff22;color:#fff;border-radius:9px;font-size:18px;cursor:pointer;line-height:1;padding:0}
+  .nav-backdrop{display:none}
+  @media(max-width:760px){
+    .app{grid-template-columns:1fr;grid-template-rows:54px 1fr}
+    .topbar{grid-column:1;grid-row:1;padding:0 11px;gap:8px}
+    .navtog{display:inline-flex}
+    .brand .vlogo{height:31px!important}
+    .tb-ws,.tb-div{display:none}
+    .main{grid-row:2;padding:15px 13px;max-width:100%}
+    .side{position:fixed;top:54px;left:0;bottom:0;width:252px;max-width:84vw;z-index:60;transform:translateX(-100%);transition:transform .22s ease;flex-direction:column;flex-wrap:nowrap;max-height:none;border-right:1px solid var(--line);border-bottom:0;padding:11px;background:#fff;box-shadow:6px 0 28px rgba(8,18,30,.18)}
+    .side .grp,.side .uinfo{display:block}
+    body.nav-open .side{transform:translateX(0)}
+    .nav-backdrop{display:block;position:fixed;inset:54px 0 0 0;background:rgba(8,18,30,.42);z-index:55;opacity:0;pointer-events:none;transition:opacity .22s}
+    body.nav-open .nav-backdrop{opacity:1;pointer-events:auto}
+    body.dark .side{background:#12151b}
+    .grid2,.cc-grid{grid-template-columns:1fr!important}
+    .row-between{flex-wrap:wrap;gap:9px}
+    .tablewrap{overflow-x:auto}
+    h1.title{font-size:21px}
+    .cl-bar{flex-wrap:wrap}
+  }
+  @media(max-width:430px){
+    .wm-main{font-size:13px}.brand{flex-shrink:1}.wm{overflow:hidden}.wm-main{overflow:hidden;text-overflow:ellipsis}
+    .switch#switchBtn{display:none}.langsel{padding:5px 6px}
+    .stats,.psum,.sgrid.c4,.sgrid.c3{grid-template-columns:repeat(2,1fr)!important}
+    .mh-status{font-size:15px}
   }
   /* Korte schermen: zorg dat content altijd kan scrollen i.p.v. afgekapt te worden */
   @media(max-height:640px){.main{padding-top:18px;padding-bottom:18px}}
@@ -1127,6 +1145,7 @@
 
 <div class="app" id="app">
   <div class="topbar">
+    <button class="navtog" id="navTog" onclick="toggleNav()" aria-label="Menu">☰</button>
     <div class="brand">
       <svg class="vlogo" style="height:38px" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vatan">
         <defs>
@@ -1155,6 +1174,7 @@
     </div>
   </div>
   <nav class="side" id="side"></nav>
+  <div class="nav-backdrop" id="navBackdrop" onclick="closeNav()"></div>
   <main class="main" id="view"></main>
 </div>
 
@@ -1990,7 +2010,9 @@ function renderNav(){
   s.appendChild(u);
   if(ROLE==='kantoor')cpUpdateTrigger();
 }
-function go(v){VIEW=v;docMap=null;cpUpdateTrigger();renderNav();renderView();}
+function toggleNav(){document.body.classList.toggle('nav-open');}
+function closeNav(){document.body.classList.remove('nav-open');}
+function go(v){VIEW=v;docMap=null;cpUpdateTrigger();renderNav();renderView();closeNav();}
 function renderView(){let html=(VIEWS[ROLE][VIEW]?VIEWS[ROLE][VIEW]():'<h1 class="title">In ontwikkeling</h1>');if(impersonate&&ROLE==='klant'){html=`<div class="imp-bar">👁 U bekijkt het klantportaal als <b>${impersonate}</b> — precies wat de klant ziet (facturen, geüploade bonnen, etc.). <span class="backbtn" style="margin-left:auto" onclick="backToKantoor()">← Terug naar kantoor</span></div>`+html;}document.getElementById('view').innerHTML=html;var _ap=document.getElementById('app');if(_ap){_ap.classList.toggle('role-klant',ROLE==='klant');_ap.classList.toggle('role-kantoor',ROLE==='kantoor');}startI18nObserver();applyI18n();}
 function listView(title, sub, btnLabel, btnFn, head, rows){
   return `<div class="row-between"><h1 class="title">${title}</h1>${btnLabel?`<button class="btn primary" onclick="${btnFn}">+ ${btnLabel}</button>`:''}</div>
@@ -2774,7 +2796,7 @@ function modHead(o){
   const kpis=(o.kpis||[]).map(k=>`<div class="mh-kpi"><div class="mh-kl">${k[0]}</div><div class="mh-kv">${k[1]}</div></div>`).join('');
   return `<div class="mh"><div class="mh-row"><div class="mh-status"><span class="mh-dot ${o.tone}"></span>${o.status}</div><div class="mh-kpis">${kpis}</div></div>${o.pct!=null?`<div class="mh-bar"><div class="mh-fill ${o.fill||o.tone}" style="width:${o.pct}%"></div></div>`:''}${steps?`<div class="mh-steps">${steps}</div>`:''}<div class="mh-foot"><div class="mh-missing">${o.missing||''}</div>${o.action?'<span class="mh-act">● Actie vereist</span>':'<span class="mh-ok">● Geen actie nodig</span>'}</div></div>`;
 }
-function openClient(naam,tab){curClient=naam;clientTab=tab||'overzicht';cpUpdateTrigger();renderClient();}
+function openClient(naam,tab){curClient=naam;clientTab=tab||'overzicht';cpUpdateTrigger();renderClient();closeNav();}
 function backToVerwerken(){if(curClient)openClient(curClient,'verwerken');else go('verwerken');}
 function toggleOb(naam,kw,f){const o=state.werk[naam].ob[kw];o[f]=o[f]?'':TODAY;renderClient();}
 function toggleIb(naam,y,f){const o=state.werk[naam].ib[y];o[f]=o[f]?'':TODAY;renderClient();}
