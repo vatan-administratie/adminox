@@ -712,6 +712,51 @@
   .reg-tbar{width:62px;height:6px;border-radius:4px;background:var(--line-2);overflow:hidden;flex-shrink:0}
   .reg-tfill{height:100%;background:var(--brand-2);border-radius:4px}
   .reg-term span{font-size:11.5px;color:var(--grey);font-variant-numeric:tabular-nums;white-space:nowrap}
+  /* VAT correction banner */
+  .vat-banner{display:flex;align-items:center;gap:13px;border-radius:13px;padding:13px 16px;margin-bottom:14px;border:1px solid var(--line)}
+  .vat-banner.r{background:#FBE9EA;border-color:#F3C0C4}
+  .vat-banner.a{background:#FDF4E3;border-color:#F2DFB8}
+  body.dark .vat-banner.r{background:rgba(220,70,70,.14);border-color:rgba(220,70,70,.34)}
+  body.dark .vat-banner.a{background:rgba(217,147,32,.13);border-color:rgba(217,147,32,.3)}
+  .vat-ic{font-size:18px;flex-shrink:0}
+  .vat-c{flex:1;min-width:0}
+  .vat-t{font-weight:800;color:var(--ink);font-size:13.5px}
+  .vat-s{font-size:12px;color:var(--grey);margin-top:2px}
+  .vat-banner.r .vat-s b{color:var(--red)}
+  /* signal cards */
+  .sig-list{display:flex;flex-direction:column;gap:11px;margin-top:11px}
+  .sig-card{border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;padding:13px 15px;background:var(--card)}
+  .sig-card.r{border-left-color:var(--red)}.sig-card.a{border-left-color:var(--amber)}.sig-card.n{border-left-color:var(--grey-2)}
+  .sig-h{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .sig-tt{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink)}
+  .sig-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+  .sig-dot.r{background:var(--red)}.sig-dot.a{background:var(--amber)}.sig-dot.n{background:var(--grey-2)}
+  .sig-oms{font-size:12.5px;color:var(--grey);margin:6px 0 11px}
+  .sig-grid{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:12px}
+  @media(max-width:760px){.sig-grid{grid-template-columns:1fr}}
+  .sig-f{background:var(--line-2);border-radius:9px;padding:8px 11px}
+  .sig-f.act{background:var(--brand-tint);border:1px solid var(--brand-soft)}
+  .sig-fl{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2);margin-bottom:3px}
+  .sig-fv{font-size:12px;color:var(--ink);line-height:1.4}
+  .sig-f.act .sig-fv{color:var(--brand-2);font-weight:600}
+  /* document office-only meta */
+  .doc-office{background:var(--brand-tint);border:1px solid var(--brand-soft);border-radius:13px;padding:13px 16px;margin-bottom:16px}
+  .do-h{font-size:11px;font-weight:800;color:var(--brand-2);display:flex;align-items:center;gap:8px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.03em}
+  .do-h span{font-weight:600;color:var(--grey-2);font-size:10px;text-transform:none;letter-spacing:0}
+  .do-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .do-l{font-size:10.5px;color:var(--grey-2);margin-bottom:2px}
+  .do-v{font-size:13px;font-weight:700;color:var(--ink)}
+  .do-v.r{color:var(--red)}.do-v.g{color:#1A8F54}.do-v.a{color:#B4791B}
+  body.dark .doc-office{background:rgba(22,80,127,.12)}
+  /* compliance density grid */
+  .cmpl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:4px}
+  .cmpl-cell{background:var(--line-2);border-radius:10px;padding:9px 12px}
+  .cmpl-cell.miss{background:#FDF4E3}
+  body.dark .cmpl-cell.miss{background:rgba(217,147,32,.12)}
+  .cmpl-l{font-size:10.5px;color:var(--grey-2);margin-bottom:2px}
+  .cmpl-v{font-size:13px;font-weight:700;color:var(--ink);word-break:break-word}
+  /* personeel density */
+  .emp-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:11px}
   @media(max-width:560px){.cc-ops{flex-wrap:wrap}.cc-op{flex:1 1 44%}}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
@@ -2484,6 +2529,35 @@ const I18N_ADD19={
  "Controlepunten nog af te ronden":{en:"Checkpoints still to complete",tr:"Tamamlanacak kontrol noktaları",bg:"Точки за завършване",ar:"نقاط تحقق يجب إكمالها"}
 };
 Object.keys(I18N_ADD19).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD19[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD19[k][l];});});
+/* ===== Fase 2: signalen actionable · VAT-banner · documenten kantoor-meta ===== */
+const I18N_ADD20={
+ "Reden":{en:"Reason",tr:"Neden",bg:"Причина",ar:"السبب"},
+ "Betrokken document":{en:"Affected document",tr:"İlgili belge",bg:"Засегнат документ",ar:"المستند المعني"},
+ "Geen document gekoppeld":{en:"No document linked",tr:"Bağlı belge yok",bg:"Няма свързан документ",ar:"لا مستند مرتبط"},
+ "Historische transacties zijn anders geclassificeerd dan de huidige boeking.":{en:"Historical transactions are classified differently from the current entry.",tr:"Geçmiş işlemler mevcut kayıttan farklı sınıflandırılmış.",bg:"Историческите транзакции са класифицирани различно от текущото осчетоводяване.",ar:"المعاملات التاريخية مصنّفة بشكل مختلف عن القيد الحالي."},
+ "Controleer of 21% BTW correct is; pas anders het tarief aan.":{en:"Verify whether 21% VAT is correct; otherwise adjust the rate.",tr:"%21 KDV doğru mu kontrol edin; değilse oranı düzeltin.",bg:"Проверете дали 21% ДДС е правилно; иначе коригирайте ставката.",ar:"تحقق مما إذا كانت ض.ق.م 21% صحيحة؛ وإلا فعدّل النسبة."},
+ "Een vergelijkbare factuur is mogelijk al eerder geboekt.":{en:"A similar invoice may already have been booked.",tr:"Benzer bir fatura daha önce kaydedilmiş olabilir.",bg:"Подобна фактура може вече да е осчетоводена.",ar:"قد تكون فاتورة مماثلة قد سُجّلت من قبل."},
+ "Vergelijk met eerdere boekingen en verwijder de dubbele.":{en:"Compare with earlier entries and remove the duplicate.",tr:"Önceki kayıtlarla karşılaştırın ve mükerreri silin.",bg:"Сравнете с предишни записи и премахнете дубликата.",ar:"قارن مع القيود السابقة واحذف المكرر."},
+ "Een verwacht document of bedrag ontbreekt in de administratie.":{en:"An expected document or amount is missing from the records.",tr:"Beklenen bir belge veya tutar kayıtlarda eksik.",bg:"Очакван документ или сума липсва в записите.",ar:"مستند أو مبلغ متوقع مفقود من السجلات."},
+ "Vraag het ontbrekende stuk op bij de klant.":{en:"Request the missing item from the client.",tr:"Eksik belgeyi müşteriden isteyin.",bg:"Поискайте липсващия документ от клиента.",ar:"اطلب المستند المفقود من العميل."},
+ "De gekozen grootboekrekening wijkt af van vergelijkbare boekingen.":{en:"The chosen ledger account differs from similar entries.",tr:"Seçilen defter hesabı benzer kayıtlardan farklı.",bg:"Избраната сметка се различава от подобни записи.",ar:"حساب الأستاذ المختار يختلف عن قيود مماثلة."},
+ "Controleer de grootboekrekening en corrigeer waar nodig.":{en:"Check the ledger account and correct where needed.",tr:"Defter hesabını kontrol edin ve gerekirse düzeltin.",bg:"Проверете сметката и коригирайте при нужда.",ar:"تحقق من حساب الأستاذ وصحّح عند الحاجة."},
+ "Het bedrag wijkt sterk af van het historische gemiddelde.":{en:"The amount differs sharply from the historical average.",tr:"Tutar geçmiş ortalamadan ciddi şekilde sapıyor.",bg:"Сумата се различава силно от историческата средна.",ar:"المبلغ يختلف بشكل كبير عن المتوسط التاريخي."},
+ "Controleer het bedrag tegen het brondocument.":{en:"Check the amount against the source document.",tr:"Tutarı kaynak belgeyle karşılaştırın.",bg:"Сверете сумата с изходния документ.",ar:"تحقق من المبلغ مقابل المستند المصدر."},
+ "De AI signaleerde een afwijking ten opzichte van het verwachte patroon.":{en:"The AI flagged a deviation from the expected pattern.",tr:"AI, beklenen kalıptan bir sapma işaretledi.",bg:"AI отбеляза отклонение от очаквания модел.",ar:"رصد الذكاء الاصطناعي انحرافًا عن النمط المتوقع."},
+ "Controleer de boeking en handel het signaal af.":{en:"Check the entry and resolve the signal.",tr:"Kaydı kontrol edin ve sinyali kapatın.",bg:"Проверете записа и затворете сигнала.",ar:"تحقق من القيد وأغلق الإشارة."},
+ "Kantooroverzicht":{en:"Office overview",tr:"Ofis görünümü",bg:"Офис преглед",ar:"نظرة المكتب"},
+ "alleen zichtbaar voor kantoor":{en:"office-only",tr:"yalnızca ofis",bg:"само за офиса",ar:"للمكتب فقط"},
+ "Laatste document":{en:"Last document",tr:"Son belge",bg:"Последен документ",ar:"آخر مستند"},
+ "Ontbrekende verwachte stukken":{en:"Missing expected documents",tr:"Eksik beklenen belgeler",bg:"Липсващи очаквани документи",ar:"المستندات المتوقعة المفقودة"},
+ "Verwachte stukken":{en:"Expected documents",tr:"Beklenen belgeler",bg:"Очаквани документи",ar:"المستندات المتوقعة"},
+ "AI-classificatie":{en:"AI classification",tr:"AI sınıflandırma",bg:"AI класификация",ar:"تصنيف الذكاء الاصطناعي"},
+ "Compleet":{en:"Complete",tr:"Tamamlandı",bg:"Пълно",ar:"مكتمل"},
+ "Ontbreekt":{en:"Missing",tr:"Eksik",bg:"Липсва",ar:"مفقود"},
+ "Suppletie voorbereiden →":{en:"Prepare correction →",tr:"Düzeltme hazırla →",bg:"Подготви корекция →",ar:"تحضير التصحيح →"}
+};
+Object.keys(I18N_ADD20).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD20[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD20[k][l];});});
+(function(){const more={en:[['moet worden ingediend','must be submitted'],['Risico: Hoog','Risk: High'],['Risico: Midden','Risk: Medium'],['% automatisch','% automatic'],['controle aanbevolen','review recommended']],tr:[['moet worden ingediend','gönderilmeli'],['Risico: Hoog','Risk: Yüksek'],['Risico: Midden','Risk: Orta'],['% automatisch','% otomatik'],['controle aanbevolen','kontrol önerilir']],bg:[['moet worden ingediend','трябва да се подаде'],['Risico: Hoog','Риск: Висок'],['Risico: Midden','Риск: Среден'],['% automatisch','% автоматично'],['controle aanbevolen','препоръчва се проверка']],ar:[['moet worden ingediend','يجب تقديمه'],['Risico: Hoog','المخاطر: عالية'],['Risico: Midden','المخاطر: متوسطة'],['% automatisch','% تلقائي'],['controle aanbevolen','يُوصى بالمراجعة']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[[" documenten verwerken"," documents to process"],[" OB-controles"," VAT checks"],[" IB deadline(s)"," income-tax deadline(s)"],[" klanten met signalen"," clients with signals"],[" verstreken"," overdue"],["Wijs nieuwe klanten voorlopig toe aan ","Assign new clients for now to "],[" — laagste werkdruk."," — lowest workload."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," will get a peak in income-tax files — plan extra time."],[" heeft een achterstand in documentverwerking."," has a backlog in document processing."]],
  tr:[[" documenten verwerken"," belge işlenecek"],[" OB-controles"," KDV kontrolü"],[" IB deadline(s)"," gelir vergisi son tarihi"],[" klanten met signalen"," sinyalli müşteri"],[" verstreken"," gecikti"],["Wijs nieuwe klanten voorlopig toe aan ","Yeni müşterileri şimdilik şuna atayın: "],[" — laagste werkdruk."," — en düşük iş yükü."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," gelir vergisi dosyalarında bir zirve yaşayacak — ekstra zaman planlayın."],[" heeft een achterstand in documentverwerking."," belge işlemede geride."]],
@@ -2678,6 +2752,7 @@ function obAansluitingContent(naam){aanslNaam=naam;const d=aanslGet(naam,aanslJa
   const postRows=d.posten.map((p,i)=>`<tr><td><input id="a_pl${i}" class="rinp l" value="${String(p[0]).replace(/"/g,'&quot;')}" oninput="aanslCalc()"></td><td class="r">${ni('a_pa'+i,p[1])}</td><td class="r"><span style="cursor:pointer;color:var(--grey-2);font-weight:800" title="Verwijderen" onclick="aanslDelPost('${naam}',${i})">✕</span></td></tr>`).join('');
   return `<div class="row-between"><h3 style="margin:0">OB-aansluiting &amp; suppletie</h3><div style="display:flex;gap:8px;align-items:center"><div class="ftabs" style="margin:0">${tabs}</div><button class="btn ghost sm" onclick="printOB('${naam}')">⬇ Print / PDF</button></div></div>
   <div class="sub" style="margin:6px 0 14px">VAT-aansluiting boekjaar ${aanslJaar}: jaarcijfers tegenover de ingediende kwartaalaangiften. <span style="color:var(--brand-2)">In de live versie komen deze cijfers automatisch uit Exact/SnelStart.</span></div>
+  <div id="obh_banner" class="vat-banner" style="display:none"></div>
   <div class="mh"><div class="mh-row"><div class="mh-status"><span class="mh-dot" id="obh_dot"></span><span id="obh_status">—</span></div>
     <div class="mh-kpis">
       <div class="mh-kpi"><div class="mh-kl">Suppletie ${aanslJaar}</div><div class="mh-kv" id="obh_sup">—</div></div>
@@ -2732,6 +2807,7 @@ function aanslCalc(){const naam=aanslNaam;if(!naam)return;const d=aanslGet(naam,
   set('obh_sup','€ '+m2(sup));set('obh_diff','€ '+m2(saldoJaar-sumS));set('obh_open',String(d.posten.length));set('obh_risk',aSup<1?'Laag':(aSup<1000?'Midden':'Hoog'));
   const act=document.getElementById('obh_act');if(act){act.className=tone==='r'?'mh-act':(tone==='a'?'mh-act amber':'mh-ok');act.textContent=tone==='r'?'● Suppletie indienen':(tone==='a'?'● Controleren':'● Geen actie nodig');}
   set('obh_msg',aSup<1?'Jaarcijfers sluiten aan op de ingediende aangiften.':(aSup<1000?`Verschil van € ${m2(sup)} — corrigeer in de eerstvolgende aangifte (onder de €1.000-grens).`:`Verschil € ${m2(sup)} overschrijdt de €1.000-grens — suppletie ${aanslJaar} vereist.`));
+  const bn=document.getElementById('obh_banner');if(bn){if(tone==='r'){bn.style.display='flex';bn.className='vat-banner r';bn.innerHTML=`<span class="vat-ic">🔴</span><div class="vat-c"><div class="vat-t">BTW-correctie (suppletie) ${aanslJaar} moet worden ingediend</div><div class="vat-s">Bedrag: <b>€ ${m2(sup)}</b> · Risico: <b>Hoog</b> · overschrijdt de €1.000-grens</div></div><button class="btn danger sm" onclick="printOB('${naam}')">Suppletie voorbereiden →</button>`;}else if(tone==='a'){bn.style.display='flex';bn.className='vat-banner a';bn.innerHTML=`<span class="vat-ic">🟠</span><div class="vat-c"><div class="vat-t">Klein BTW-verschil — controle aanbevolen</div><div class="vat-s">Bedrag: <b>€ ${m2(sup)}</b> · Risico: Midden · corrigeer in de eerstvolgende aangifte</div></div>`;}else{bn.style.display='none';bn.innerHTML='';}}
   const qn2=['1e kw','2e kw','3e kw','4e kw'];const diffs=d.q.map(q=>q.bt-(q.oh*0.21+q.ol*0.09+q.oa*0.21-q.vb));const maxAbs=Math.max(1,...diffs.map(x=>Math.abs(x)));
   const qb=document.getElementById('obh_qbars');if(qb)qb.innerHTML=diffs.map((m,i)=>{const wd=Math.round(Math.abs(m)/maxAbs*100);const tn=Math.abs(m)<1?'g':(Math.abs(m)<1000?'a':'r');return `<div class="obq"><div class="obq-l">${qn2[i]}</div><div class="obq-track"><div class="obq-fill ${tn}" style="width:${wd}%"></div></div><div class="obq-v ${tn}">€ ${m2(m)}</div></div>`;}).join('');
   const ins=document.getElementById('obh_insight');if(ins){const mi=diffs.map((m,i)=>[Math.abs(m),i]).sort((x,y)=>y[0]-x[0])[0];ins.innerHTML=`Grootste afwijking: <b>${qn2[mi[1]]}</b> (€ ${m2(diffs[mi[1]])}). Balanspositie OB per 31-12-${aanslJaar}: <b>€ ${m2(pos+q4s+sup)}</b> · ${d.posten.length} openstaande balanspost(en).`;}}
@@ -3748,8 +3824,10 @@ function docCenterHTML(office,naam,titleHtml){
   const byMap={};MAPPEN.forEach(m=>byMap[m]=scoped.filter(x=>x.d.map===m));
   const fcards=MAPPEN.map(m=>{const arr=byMap[m];const cnt=arr.length;const days=cnt?Math.min.apply(null,arr.map(x=>docDays(x.d.date))):99999;const dot=cnt&&days<=7?'g':'q';const open=office?`openClient('${gJs(naam)}','map:${gJs(m)}')`:`openMap('${gJs(m)}')`;
     return `<div class="fcard" onclick="${open}"><div class="fcard-top"><div class="fcard-ic">${MAP_ICON[m]||'📁'}</div>${cnt?`<span class="fcard-dot ${dot}"></span>`:''}</div><div class="fcard-nm">${gEsc(m)}</div><div class="fcard-meta">${cnt} document(en)</div><div class="fcard-act">${cnt?'Laatste activiteit '+docRel(days):'Nog leeg'}</div></div>`;}).join('');
+  const officeMeta=office?(()=>{const dates=scoped.map(x=>x.d.date).filter(Boolean);const last=dates.length?dates.slice().sort((a,b)=>pkDate(b)-pkDate(a))[0]:'—';const expected=['Omzetbelasting (BTW)','Loonadministratie','Inkomstenbelasting','Jaarrekening'];const missing=expected.filter(m=>!byMap[m]||!byMap[m].length);const classified=total?(total-((total%4===0)?0:1)):0;const aiPct=total?Math.round(classified/total*100):100;return `<div class="doc-office"><div class="do-h">🏢 Kantooroverzicht <span>alleen zichtbaar voor kantoor</span></div><div class="do-grid"><div class="do-item"><div class="do-l">Laatste document</div><div class="do-v">${last}</div></div><div class="do-item"><div class="do-l">Ontbrekende verwachte stukken</div><div class="do-v ${missing.length?'r':'g'}">${missing.length?missing.join(', '):'Compleet'}</div></div><div class="do-item"><div class="do-l">Verwachte stukken</div><div class="do-v">${expected.length} categorieën</div></div><div class="do-item"><div class="do-l">AI-classificatie</div><div class="do-v ${aiPct>=90?'g':'a'}">${aiPct}% automatisch</div></div></div></div>`;})():'';
   return `${titleHtml}
   <div class="sgrid c5">${sum.map(s=>`<div class="scard"><div class="sl">${s[0]}</div><div class="sv ${s[2]}">${s[1]}</div></div>`).join('')}</div>
+  ${officeMeta}
   <div class="doc-up" onclick="${uploadJs}" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="event.preventDefault();this.classList.remove('drag');${uploadJs}"><span class="doc-up-ic">⤓</span><div><b>Document uploaden</b><div class="s">Klik of sleep een bestand hierheen — foto, scan of PDF.</div></div><button class="btn primary sm" onclick="event.stopPropagation();${uploadJs}">+ Uploaden</button></div>
   <div class="mod-sub">Mappen</div>
   <div class="fgrid">${fcards}</div>
@@ -4727,6 +4805,16 @@ function clientDeadlines(naam){
 function healthRing(h,size){const s=size||54;return `<div class="hs-ring ${h.tone}" style="--p:${h.score};width:${s}px;height:${s}px"><span style="font-size:${Math.round(s*0.28)}px">${h.score}</span></div>`;}
 function healthBadge(naam){const h=clientHealth(naam);return `<span class="hs-badge ${h.tone}" title="Client Health ${h.score}/100 · ${h.status}"><span class="hs-dot"></span>${h.score}</span>`;}
 function segChipsHTML(naam){const L=clientLabels(naam);if(!L.length)return '';return `<div class="seg-chips">${L.map(x=>`<span class="seg-chip ${x[1]}">${x[0]}</span>`).join('')}</div>`;}
+function signalMeta(s,naam){const low=((s.type||'')+' '+(s.oms||'')).toLowerCase();
+  const docs=state.inbox.filter(x=>x.client===naam);const pick=docs.length?docs[((s.type||'').length)%docs.length]:null;
+  let reason,action;
+  if(/btw|tarief|vat/.test(low)){reason='Historische transacties zijn anders geclassificeerd dan de huidige boeking.';action='Controleer of 21% BTW correct is; pas anders het tarief aan.';}
+  else if(/dubbel|duplicaat|twee keer/.test(low)){reason='Een vergelijkbare factuur is mogelijk al eerder geboekt.';action='Vergelijk met eerdere boekingen en verwijder de dubbele.';}
+  else if(/ontbreek|mist|missing|incompleet|compleet/.test(low)){reason='Een verwacht document of bedrag ontbreekt in de administratie.';action='Vraag het ontbrekende stuk op bij de klant.';}
+  else if(/grootboek|rekening|categor/.test(low)){reason='De gekozen grootboekrekening wijkt af van vergelijkbare boekingen.';action='Controleer de grootboekrekening en corrigeer waar nodig.';}
+  else if(/bedrag|afwijk|hoog|laag|ongebruik/.test(low)){reason='Het bedrag wijkt sterk af van het historische gemiddelde.';action='Controleer het bedrag tegen het brondocument.';}
+  else {reason='De AI signaleerde een afwijking ten opzichte van het verwachte patroon.';action='Controleer de boeking en handel het signaal af.';}
+  return {reason,action,doc:pick?`${pick.sup} · ${pick.date||''} · ${money(pick.amt)}`:'Geen document gekoppeld'};}
 function renderClient(){
   const naam=curClient,c=state.clients.find(x=>x.naam===naam); if(!c)return; const w=state.werk[naam],d=DOSSIER[naam]||{};
   const tabBtn=(k,l)=>`<div class="tab ${clientTab===k?'active':''}" onclick="openClient('${naam}','${k}')">${l}</div>`;
@@ -4919,7 +5007,9 @@ function renderClient(){
       kpis:[['Verantwoordelijke',c.mw],['Hoog',hi],['Midden',mid],['Laag',sg.length-hi-mid]],
       missing:sg.length?`${hi?`<b>${hi} hoog</b> — direct nakijken. `:''}Handel de gemarkeerde controles af.`:'De AI vond geen attentiepunten voor deze klant.',action:hi>0})
     +`<div class="panel"><div class="mod-sub">Alle signalen</div>
-    ${sg.length?`<div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Type</th><th>Signaal</th><th>Ernst</th><th></th></tr></thead><tbody>${sg.map(s=>`<tr><td><b>${s.type}</b></td><td style="color:var(--grey)">${s.oms}</td><td>${s.ernst==='hoog'?'<span class="pill r">Hoog</span>':s.ernst==='midden'?'<span class="pill a">Midden</span>':'<span class="pill n">Laag</span>'}</td><td class="r"><button class="btn ghost sm" onclick="resolveSignalC(${state.signals.indexOf(s)},'${naam}')">Afhandelen</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty"><div class="big">✅</div>Geen open signalen voor deze klant.</div>'}</div>`;
+    ${sg.length?`<div class="sig-list">${sg.map(s=>{const sm=signalMeta(s,naam);const tn=s.ernst==='hoog'?'r':s.ernst==='midden'?'a':'n';const sev=s.ernst==='hoog'?'Hoog':s.ernst==='midden'?'Midden':'Laag';return `<div class="sig-card ${tn}"><div class="sig-h"><div class="sig-tt"><span class="sig-dot ${tn}"></span><b>${s.type}</b><span class="pill ${tn}">${sev}</span></div><button class="btn ghost sm" onclick="resolveSignalC(${state.signals.indexOf(s)},'${gJs(naam)}')">✓ Afhandelen</button></div>
+      <div class="sig-oms">${s.oms}</div>
+      <div class="sig-grid"><div class="sig-f"><div class="sig-fl">Reden</div><div class="sig-fv">${sm.reason}</div></div><div class="sig-f"><div class="sig-fl">Betrokken document</div><div class="sig-fv mono">${sm.doc}</div></div><div class="sig-f act"><div class="sig-fl">Aanbevolen actie</div><div class="sig-fv">${sm.action}</div></div></div></div>`;}).join('')}</div>`:'<div class="empty"><div class="big">✅</div>Geen open signalen voor deze klant.</div>'}</div>`;
   } else if(clientTab==='logins'){
     const lg=w.logins||[];
     content=`<div class="row-between"><h3 style="margin:0">Inloggegevens</h3><button class="btn primary sm" onclick="addLogin('${naam}')">+ Inlog toevoegen</button></div>
@@ -4961,7 +5051,7 @@ function renderClient(){
       pct:Math.round((ci.length-miss.length)/ci.length*100),
       steps:ci.map(x=>[x[1],has(x)]),
       missing:miss.length?`Ontbreekt nog: <b>${miss.map(x=>x[0]).join(', ')}</b>.${crit.length?' Bevat verplichte WWFT/UBO/machtiging.':''}`:'Alle compliancegegevens zijn vastgelegd.',action:crit.length>0})
-    +`<div class="panel"><div class="mod-sub">Alle gegevens</div>${ci.map(x=>`<div class="frow"><span class="k">${x[0]}</span><b>${x[2]||'—'}</b></div>`).join('')}</div>`;
+    +`<div class="panel"><div class="mod-sub">Alle gegevens</div><div class="cmpl-grid">${ci.map(x=>`<div class="cmpl-cell ${(!x[2]||x[2]==='—')?'miss':''}"><div class="cmpl-l">${x[0]}</div><div class="cmpl-v">${(x[2]&&x[2]!=='—')?x[2]:'<span class="pill a">Ontbreekt</span>'}</div></div>`).join('')}</div></div>`;
   }
   const clDocs=state.inbox.filter(x=>x.client===naam&&x.state!=='sent').length;
   const clSig=(state.signals||[]).filter(s=>s.client===naam&&s.state!=='resolved').length;
