@@ -468,6 +468,34 @@
   .jcsum .hsum-n{font-size:22px}
   .jcsum-r{flex:1;min-width:0}
   .jcsum-s{font-size:11.5px;color:var(--grey);margin-top:6px}
+  /* workload center */
+  .wl-row{display:flex;align-items:center;gap:12px;padding:11px 6px;border-bottom:1px solid var(--line-2);cursor:pointer}
+  .wl-row:last-child{border-bottom:0}
+  .wl-row .av{width:38px;height:38px;border-radius:11px;color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;flex-shrink:0}
+  .wl-id{flex:1;min-width:0}.wl-nm{font-weight:700;color:var(--ink);font-size:13.5px}.wl-sub{font-size:11.5px;color:var(--grey)}
+  .wl-metr{display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;justify-content:flex-end}
+  .wl-m{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--bg);color:var(--grey)}
+  .wl-m.r{background:var(--danger-soft);color:var(--danger)}.wl-m.a{background:var(--amber-soft);color:var(--amber)}
+  @media(max-width:680px){.wl-metr{width:100%;justify-content:flex-start;margin-top:6px}}
+  /* exact health */
+  .exl{display:flex;flex-direction:column;gap:8px}
+  .ex-row{display:flex;align-items:flex-start;gap:10px}
+  .ex-dot{width:9px;height:9px;border-radius:50%;margin-top:4px;flex-shrink:0}
+  .ex-dot.r{background:var(--red)}.ex-dot.a{background:var(--amber)}.ex-dot.g{background:#22A565}
+  .ex-a{font-size:12.5px;font-weight:700;color:var(--ink)}
+  .ex-m{font-size:11.5px;color:var(--grey)}
+  /* AI coach */
+  .coach-qs{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+  .coach-q{text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;transition:.12s}
+  .coach-q:hover{border-color:var(--brand-2);background:var(--hover)}
+  .coach-ans{background:var(--brand-tint);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--ink);line-height:1.55}
+  .coach-ans p{margin:0 0 8px}.coach-ans p:last-child{margin:0}
+  .coach-h{font-size:13px;margin-bottom:8px}
+  .coach-ul{margin:6px 0 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:5px}
+  .coach-ul li{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;border-bottom:1px solid var(--line-2);padding-bottom:5px}
+  .coach-ul li b{color:var(--red);flex-shrink:0}
+  .coach-flag{margin-top:10px;background:var(--amber-soft);color:var(--amber);border-radius:9px;padding:9px 12px;font-size:12px;font-weight:600}
+  .coach-list{display:flex;flex-direction:column;gap:2px}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
@@ -1999,6 +2027,41 @@ const I18N_ADD11={
  "Accountantskosten":{en:"Accounting fees",tr:"Muhasebe ücretleri",bg:"Счетоводни такси",ar:"أتعاب المحاسبة"}
 };
 Object.keys(I18N_ADD11).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD11[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD11[k][l];});});
+/* ===== Workload center · Exact health · AI coach ===== */
+const I18N_ADD12={
+ "Workload-center · medewerkers":{en:"Workload center · employees",tr:"İş yükü merkezi · çalışanlar",bg:"Център за натоварване · служители",ar:"مركز عبء العمل · الموظفون"},
+ "klanten · docs · signalen · deadlines · werkdruk":{en:"clients · docs · signals · deadlines · pressure",tr:"müşteriler · belge · sinyal · son tarih · yoğunluk",bg:"клиенти · документи · сигнали · срокове · натиск",ar:"عملاء · مستندات · إشارات · مواعيد · ضغط"},
+ "Boekhoudkoppelingen — health":{en:"Bookkeeping connections — health",tr:"Muhasebe bağlantıları — sağlık",bg:"Счетоводни връзки — здраве",ar:"روابط المحاسبة — الصحة"},
+ "✨ AI-coach":{en:"✨ AI coach",tr:"✨ AI koç",bg:"✨ AI коуч",ar:"✨ مدرب AI"},
+ "Probleem":{en:"Problem",tr:"Sorun",bg:"Проблем",ar:"مشكلة"},
+ "Attentie":{en:"Attention",tr:"Dikkat",bg:"Внимание",ar:"انتباه"},
+ "Koppelingen":{en:"Connections",tr:"Bağlantılar",bg:"Връзки",ar:"الروابط"},
+ "Alle koppelingen gezond 🎉":{en:"All connections healthy 🎉",tr:"Tüm bağlantılar sağlıklı 🎉",bg:"Всички връзки здрави 🎉",ar:"كل الروابط سليمة 🎉"},
+ "Koppeling gezond — geen problemen gevonden.":{en:"Connection healthy — no issues found.",tr:"Bağlantı sağlıklı — sorun bulunamadı.",bg:"Връзката е здрава — няма проблеми.",ar:"الاتصال سليم — لا مشاكل."},
+ "Verbinding":{en:"Connection",tr:"Bağlantı",bg:"Връзка",ar:"الاتصال"},
+ "Synchronisatie":{en:"Synchronization",tr:"Senkronizasyon",bg:"Синхронизация",ar:"المزامنة"},
+ "Boekjaar":{en:"Book year",tr:"Defter yılı",bg:"Финансова година",ar:"السنة المالية"},
+ "Grootboekmapping":{en:"Ledger mapping",tr:"Defter eşlemesi",bg:"Картографиране на сметки",ar:"ربط دفتر الأستاذ"},
+ "Saldi":{en:"Balances",tr:"Bakiyeler",bg:"Салда",ar:"الأرصدة"},
+ "Bankkoppeling":{en:"Bank connection",tr:"Banka bağlantısı",bg:"Банкова връзка",ar:"ربط البنك"},
+ "BTW-rekeningen":{en:"VAT accounts",tr:"KDV hesapları",bg:"ДДС сметки",ar:"حسابات ض.ق.م"},
+ "Categorieën":{en:"Categories",tr:"Kategoriler",bg:"Категории",ar:"الفئات"},
+ "Stel een vraag — de coach gebruikt de actuele gegevens, statussen, deadlines en signalen van deze klant.":{en:"Ask a question — the coach uses this client's current data, statuses, deadlines and signals.",tr:"Bir soru sorun — koç bu müşterinin güncel verilerini, durumlarını, son tarihlerini ve sinyallerini kullanır.",bg:"Задайте въпрос — коучът използва текущите данни, статуси, срокове и сигнали на клиента.",ar:"اطرح سؤالاً — يستخدم المدرب بيانات هذا العميل وحالاته ومواعيده وإشاراته الحالية."},
+ "Waarom is deze klant risicovol?":{en:"Why is this client risky?",tr:"Bu müşteri neden riskli?",bg:"Защо този клиент е рисков?",ar:"لماذا هذا العميل عالي المخاطر؟"},
+ "Wat moet ik checken vóór de jaarafsluiting?":{en:"What should I check before year-end?",tr:"Yıl sonundan önce ne kontrol etmeliyim?",bg:"Какво да проверя преди приключването?",ar:"ماذا أتحقق قبل الإقفال السنوي؟"},
+ "Welke documenten ontbreken?":{en:"Which documents are missing?",tr:"Hangi belgeler eksik?",bg:"Кои документи липсват?",ar:"أي مستندات مفقودة؟"},
+ "Waarom verschilt de OB-aansluiting?":{en:"Why does the VAT reconciliation differ?",tr:"KDV mutabakatı neden farklı?",bg:"Защо ДДС равнението се различава?",ar:"لماذا تختلف تسوية ض.ق.م؟"},
+ "Welke klanten vragen vandaag aandacht?":{en:"Which clients need attention today?",tr:"Bugün hangi müşteriler dikkat gerektiriyor?",bg:"Кои клиенти изискват внимание днес?",ar:"أي العملاء يحتاجون انتباهًا اليوم؟"},
+ "Gesorteerd op risico — op basis van openstaand werk, signalen, deadlines en compliance.":{en:"Sorted by risk — based on open work, signals, deadlines and compliance.",tr:"Riske göre sıralı — açık iş, sinyaller, son tarihler ve uyuma göre.",bg:"Сортирано по риск — въз основа на работа, сигнали, срокове и съответствие.",ar:"مرتب حسب المخاطر — بناءً على العمل المفتوح والإشارات والمواعيد والامتثال."},
+ "Geen risicofactoren — deze klant is gezond.":{en:"No risk factors — this client is healthy.",tr:"Risk faktörü yok — bu müşteri sağlıklı.",bg:"Няма рискови фактори — клиентът е здрав.",ar:"لا عوامل خطر — هذا العميل سليم."}
+};
+Object.keys(I18N_ADD12).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD12[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD12[k][l];});});
+(function(){const more={
+ en:[[" — koppeling health"," — connection health"],[" issues"," issues"],[" issue"," issue"],[" klanten · health "," clients · health "],[" afgerond"," completed"]],
+ tr:[[" — koppeling health"," — bağlantı sağlığı"],[" issues"," sorun"],[" issue"," sorun"],[" klanten · health "," müşteri · sağlık "],[" afgerond"," tamamlandı"]],
+ bg:[[" — koppeling health"," — здраве на връзката"],[" issues"," проблема"],[" issue"," проблем"],[" klanten · health "," клиенти · здраве "],[" afgerond"," завършено"]],
+ ar:[[" — koppeling health"," — صحة الاتصال"],[" issues"," مشاكل"],[" issue"," مشكلة"],[" klanten · health "," عملاء · صحة "],[" afgerond"," مكتمل"]]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[[" mnd gevonden"," mo found"],["ontbreekt: ","missing: "],["Mogelijk ontbrekende boeking in ","Possibly missing entry in "],["Geen afwijking gevonden","No deviation found"],[" controlepunten afgerond"," control points completed"],[" AI-signaal/signalen"," AI signal(s)"],[" open opvraging(en)"," open request(s)"],[" mogelijk ontbrekende terugkerende kosten"," possibly missing recurring expenses"]],
  tr:[[" mnd gevonden"," ay bulundu"],["ontbreekt: ","eksik: "],["Mogelijk ontbrekende boeking in ","Olası eksik kayıt: "],["Geen afwijking gevonden","Sapma bulunamadı"],[" controlepunten afgerond"," kontrol noktası tamamlandı"],[" AI-signaal/signalen"," AI sinyali"],[" open opvraging(en)"," açık talep"],[" mogelijk ontbrekende terugkerende kosten"," olası eksik tekrarlayan gider"]],
@@ -3560,8 +3623,11 @@ VIEWS.kantoor.overzicht = ()=>{
       <div>${dls.map(x=>`<div class="dl-row ${x.tone}"><span class="dl-dot ${x.tone}"></span><div style="min-width:0"><div class="l">${x.l}</div><div class="s">${x.sub}</div></div><div class="when">${x.d}</div></div>`).join('')}</div>
       <div style="font-size:11px;color:var(--grey-2);margin-top:10px;line-height:1.5">Status: <b style="color:var(--danger)">rood</b> te laat · <b style="color:var(--amber)">oranje</b> binnenkort · <b style="color:#15803D">groen</b> op schema.</div></div>
   </div>
-  <div class="panel" style="margin-bottom:14px"><h3>Werklast per medewerker</h3>
-    ${(()=>{const md=MEDEWERKERS.map(mw=>{const cs=base.filter(c=>c.mw===mw);const tv=cs.reduce((a,c)=>a+state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length,0);const lo=cs.reduce((a,c)=>a+(12-Object.values(state.werk[c.naam].loon['2026']).filter(Boolean).length),0);return {mw,n:cs.length,tv,lo,load:tv+lo};});const mx=Math.max(1,...md.map(x=>x.load));return md.map(x=>{const pct=Math.round(x.load/mx*100);const col=x.tv?'var(--red)':(x.lo?'var(--amber)':'#15803D');return `<div class="wkrow" onclick="mwFilter='${x.mw}';go('klanten')"><span class="av" style="background:${x.tv?'linear-gradient(150deg,#E0233C,#A20C24)':'linear-gradient(150deg,#1F5C90,#103B63)'}">${x.mw[0]}</span><div class="id"><b>${x.mw}</b><div class="t">${x.n} klanten · werklast</div><div class="pbar" style="margin-top:5px;height:5px"><div class="pfill" style="width:${pct}%;background:${col}"></div></div></div><div style="display:flex;gap:6px;flex-shrink:0">${x.tv?`<span class="ck red">${x.tv} te verwerken</span>`:'<span class="ck done">0 te verwerken</span>'}${x.lo?`<span class="ck amber">${x.lo} loon open</span>`:'<span class="ck done">loon bij</span>'}</div></div>`;}).join('');})()}
+  <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Workload-center · medewerkers</h3><span style="font-size:11.5px;color:var(--grey)">klanten · docs · signalen · deadlines · werkdruk</span></div>
+    <div style="margin-top:12px">${workloadCenterHTML()}</div></div>
+  <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Boekhoudkoppelingen — health</h3><button class="btn ghost sm" onclick="coachOffice()">✨ AI-coach</button></div>
+    ${(()=>{const aff=base.map(c=>({c,iss:exactIssues(c.naam)})).filter(x=>x.iss.length).sort((a,b)=>b.iss.filter(i=>i.tone==='r').length-a.iss.filter(i=>i.tone==='r').length);return `<div class="hsum" style="margin-top:12px"><div class="hsum-c"><div class="hsum-n">${base.length-aff.length}</div><div class="hsum-l">Gezond</div></div><div class="hsum-c"><div class="hsum-n" style="color:var(--red)">${aff.filter(x=>x.iss.some(i=>i.tone==='r')).length}</div><div class="hsum-l">Probleem</div></div><div class="hsum-c"><div class="hsum-n" style="color:var(--amber)">${aff.filter(x=>!x.iss.some(i=>i.tone==='r')).length}</div><div class="hsum-l">Attentie</div></div><div class="hsum-c"><div class="hsum-n">${base.length}</div><div class="hsum-l">Koppelingen</div></div></div>
+      <div style="margin-top:12px">${aff.length?aff.slice(0,5).map(x=>`<div class="wkrow" onclick="openClient('${x.c.naam}','overzicht')"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div class="id"><b>${x.c.naam}</b><div class="t">${PROG[x.c.prog]} · ${x.iss[0].area}: ${x.iss[0].msg}</div></div><span class="ck ${x.iss.some(i=>i.tone==='r')?'red':'amber'}">${x.iss.length} ${x.iss.length>1?'issues':'issue'}</span></div>`).join(''):'<div class="empty" style="padding:18px">Alle koppelingen gezond 🎉</div>'}</div>`;})()}
   </div>
   <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Client Health &amp; risico</h3><span style="font-size:11.5px;color:var(--grey)">${base.length} actieve klanten</span></div>
     ${(()=>{const hs=base.map(c=>({c,h:clientHealth(c.naam)}));const avg=Math.round(hs.reduce((a,x)=>a+x.h.score,0)/Math.max(1,hs.length));const risk=hs.filter(x=>x.h.tone==='r').length,att=hs.filter(x=>x.h.tone==='a').length;const top=hs.filter(x=>x.h.tone!=='g').sort((a,b)=>a.h.score-b.h.score).slice(0,5);
@@ -3817,6 +3883,34 @@ function jaarCheckContent(naam){
     ${reqs.length?`<div class="dr2">${reqs.map(r=>`<div class="dr2-row"><span class="dr2-st ${DR_TONE[r.status]}">${DR_LBL[r.status]}</span><div class="dr2-main"><div class="dr2-l">${gEsc(r.item)}</div><div class="dr2-meta">Aangevraagd ${r.requested}${r.reminder?' · herinnerd':''}</div></div><div class="dr2-acts">${r.status!=='completed'?`<button class="dact" title="Ontvangen" onclick="docReqSet(${r.id},'received')">📥</button><button class="dact" title="Herinnering" onclick="docReqRemind(${r.id})">🔔</button><button class="dact" title="Afronden" onclick="docReqSet(${r.id},'completed')">✓</button>`:''}</div></div>`).join('')}</div>`:'<div class="cc-empty">Geen openstaande opvragingen.</div>'}
     </div></div>`;
 }
+/* ===== Workload center · Exact health monitor · AI coach ===== */
+function mwStats(mw){
+  const cs=state.clients.filter(c=>c.actief&&c.mw===mw);let docs=0,sig=0,overdue=0,dl=0,hsum=0,tT=0,tD=0;const nm=parseInt(TODAY.split('-')[1],10);
+  cs.forEach(c=>{const w=state.werk[c.naam];docs+=state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;sig+=state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length;
+    const d=clientDeadlines(c.naam);overdue+=d.filter(x=>x.bucket==='overdue').length;dl+=d.filter(x=>x.bucket==='today'||x.bucket==='week').length;hsum+=clientHealth(c.naam).score;
+    KWARTALEN.forEach(q=>{tT++;if(w.ob[q].ingediend)tD++;});IBJAREN.forEach(y=>{tT++;if(w.ib[y].ingediend)tD++;});MAANDEN.slice(0,nm).forEach(m=>{tT++;if(w.loon['2026'][m])tD++;});});
+  return {mw,n:cs.length,docs,sig,overdue,dl,completion:tT?Math.round(tD/tT*100):100,avgHealth:cs.length?Math.round(hsum/cs.length):100,pressure:docs+sig*2+overdue*3+dl};
+}
+function workloadCenterHTML(){const md=MEDEWERKERS.map(mwStats);const mx=Math.max(1,...md.map(x=>x.pressure));
+  return md.map(x=>{const pct=Math.round(x.pressure/mx*100);const lvl=x.pressure>mx*0.66?'r':(x.pressure>mx*0.33?'a':'g');
+    return `<div class="wl-row" onclick="mwFilter='${x.mw}';go('klanten')"><span class="av" style="background:linear-gradient(150deg,#1F5C90,#103B63)">${x.mw[0]}</span><div class="wl-id"><div class="wl-nm">${x.mw}</div><div class="wl-sub">${x.n} klanten · health ${x.avgHealth} · ${x.completion}% afgerond</div><div class="pbar" style="margin-top:6px;height:5px"><div class="pfill" style="width:${pct}%;background:${lvl==='r'?'var(--red)':lvl==='a'?'var(--amber)':'#22A565'}"></div></div></div><div class="wl-metr"><span class="wl-m ${x.docs?'r':''}">${x.docs} doc</span><span class="wl-m ${x.sig?'a':''}">${x.sig} signaal</span><span class="wl-m ${x.overdue?'r':''}">${x.overdue} te laat</span><span class="wl-m">${x.dl} deadline</span></div></div>`;}).join('');
+}
+const EX_MSG={Verbinding:{r:'Koppeling verbroken — opnieuw autoriseren vereist',a:'Token verloopt binnenkort',g:'Actief en geautoriseerd'},Synchronisatie:{r:'Geen synchronisatie in 14+ dagen',a:'Laatste sync 5 dagen geleden',g:'Realtime gesynchroniseerd'},Boekjaar:{r:'Boekhouding loopt achter — geen mutaties deze maand',a:'Enkele dagen achterstand',g:'Bijgewerkt t/m vandaag'},Grootboekmapping:{r:'Ontbrekende grootboekkoppeling voor 2 rubrieken',a:'1 rekening niet gekoppeld',g:'Rekeningschema volledig gekoppeld'},Saldi:{r:'Ongebruikelijk saldo op tussenrekening',a:'Kleine afwijking op kruispost',g:'Saldi in orde'},Bankkoppeling:{r:'Bankkoppeling onderbroken',a:'Transacties wachten op afletteren',g:'Bank gekoppeld en afgeletterd'},'BTW-rekeningen':{r:'BTW-grootboek wijkt af van aangifte',a:'Kleine BTW-afrondingsverschillen',g:'BTW-rekeningen consistent'},Categorieen:{r:'Ontbrekende boekingscategorieën',a:'Enkele ongecategoriseerde boekingen',g:'Alle boekingen gecategoriseerd'}};
+function exactHealth(naam){const c=state.clients.find(x=>x.naam===naam)||{};const seed=parseInt(c.nr,10)||1;const areas=[['Verbinding','Koppeling'],['Synchronisatie','Laatste sync'],['Boekjaar','Actualiteit'],['Grootboekmapping','Rekeningschema'],['Saldi','Tussenrekeningen'],['Bankkoppeling','Banktransacties'],['BTW-rekeningen','BTW-grootboek'],['Categorieen','Boekingscategorieën']];
+  return areas.map((ar,i)=>{const bad=((seed+i*2)%9===0),warn=((seed+i*2)%9===3);const tone=bad?'r':(warn?'a':'g');return {area:ar[0]==='Categorieen'?'Categorieën':ar[0],sub:ar[1],tone,msg:(EX_MSG[ar[0]]||{})[tone]||'In orde'};});}
+function exactIssues(naam){return exactHealth(naam).filter(x=>x.tone!=='g');}
+function exactHealthSection(naam){const ex=exactHealth(naam);const iss=ex.filter(x=>x.tone!=='g');const c=state.clients.find(x=>x.naam===naam)||{};const prog=c.prog==='ex'?'Exact Online':'SnelStart';
+  return `<div class="cc-sec"><div class="cc-h">${prog} — koppeling health</div>${iss.length?`<div class="exl">${iss.map(x=>`<div class="ex-row"><span class="ex-dot ${x.tone}"></span><div style="min-width:0"><div class="ex-a">${x.area}</div><div class="ex-m">${x.msg}</div></div></div>`).join('')}</div>`:`<div class="cc-clear"><span class="cc-ok">✓</span> Koppeling gezond — geen problemen gevonden.</div>`}</div>`;}
+function coachAsk(naam,key){const h=clientHealth(naam);
+  if(key==='risk')return `<div class="coach-h">Health: <b class="hs-status ${h.tone}">${h.score} / 100 · ${h.status}</b></div>${h.factors.length?`<ul class="coach-ul">${h.factors.map(f=>`<li><span>${f.l}</span> <b>−${f.p}</b></li>`).join('')}</ul>`:'<p>Geen risicofactoren — deze klant is gezond.</p>'}`;
+  if(key==='jaar'){const open=JAARCHECK.filter(it=>{const s=jcStatus(naam,it[0]);return s!=='done'&&s!=='na';});const gaps=recurringCheck(naam).filter(x=>!x.ok);return `<p><b>${open.length} controlepunten</b> nog te doen vóór de jaarafsluiting:</p><ul class="coach-ul">${open.slice(0,8).map(it=>`<li>${it[1]}</li>`).join('')}</ul>${gaps.length?`<div class="coach-flag">⚠ AI-signaal: mogelijk ontbrekende terugkerende kosten — ${gaps.map(g=>g.cat+' ('+g.missing.join(', ')+')').join('; ')}</div>`:''}`;}
+  if(key==='docs'){const reqs=docReqs(naam).filter(r=>r.status!=='completed');const d=DOSSIER[naam]||{};const comp=[];if(!d.wwft||d.wwft==='Actie vereist')comp.push('WWFT-onderzoek');if(d.ubo==='Ontbreekt')comp.push('UBO-registratie');return `${reqs.length?`<p><b>${reqs.length} openstaande opvraging(en):</b></p><ul class="coach-ul">${reqs.map(r=>`<li>${r.item} <span class="pill ${DR_TONE[r.status]}">${DR_LBL[r.status]}</span></li>`).join('')}</ul>`:'<p>Geen openstaande documentopvragingen.</p>'}${comp.length?`<div class="coach-flag">Compliance ontbreekt: ${comp.join(', ')}.</div>`:''}`;}
+  if(key==='ob'){const dd=(typeof aanslGet==='function')?aanslGet(naam,'2025'):null;if(!dd)return '<p>Geen OB-aansluitingsgegevens beschikbaar.</p>';const bh=dd.b.oh*0.21,bl=dd.b.ol*0.09,bo=dd.b.oa*0.21,vb=dd.b.vbl+dd.b.vbh,saldoJaar=bh+bl+bo-vb;let sumS=0;dd.q.forEach(q=>{sumS+=q.oh*0.21+q.ol*0.09+q.oa*0.21-q.vb;});const sup=saldoJaar-sumS;return `<p>De OB-aansluiting vergelijkt de <b>jaarcijfers</b> (€ ${m2(saldoJaar)}) met de <b>som van de kwartaalaangiften</b> (€ ${m2(sumS)}).</p><p>Het verschil — de <b>suppletie</b> — is <b>€ ${m2(sup)}</b>.${Math.abs(sup)>=1000?' Dit overschrijdt de €1.000-grens; een suppletie is vereist.':(Math.abs(sup)<1?' Er is geen verschil; de aansluiting klopt.':' Het verschil is klein en kan in de eerstvolgende aangifte worden gecorrigeerd.')}</p>`;}
+  return '';}
+function coachClient(naam){const qs=[['risk','Waarom is deze klant risicovol?'],['jaar','Wat moet ik checken vóór de jaarafsluiting?'],['docs','Welke documenten ontbreken?'],['ob','Waarom verschilt de OB-aansluiting?']];
+  modal('✨ AI-coach · '+naam,`<div class="sub" style="margin:-4px 0 12px">Stel een vraag — de coach gebruikt de actuele gegevens, statussen, deadlines en signalen van deze klant.</div><div class="coach-qs">${qs.map(q=>`<button class="coach-q" onclick="document.getElementById('coachAns').innerHTML=coachAsk('${gJs(naam)}','${q[0]}')">${q[1]}</button>`).join('')}</div><div id="coachAns" class="coach-ans">${coachAsk(naam,'risk')}</div>`,'Sluiten',()=>true);}
+function coachOffice(){const risky=state.clients.filter(c=>c.actief).map(c=>({c,h:clientHealth(c.naam)})).filter(x=>x.h.tone!=='g').sort((a,b)=>a.h.score-b.h.score).slice(0,8);
+  modal('✨ AI-coach · Welke klanten vragen vandaag aandacht?',`<div class="sub" style="margin:-4px 0 12px">Gesorteerd op risico — op basis van openstaand werk, signalen, deadlines en compliance.</div>${risky.length?`<div class="coach-list">${risky.map(x=>`<div class="wkrow" onclick="closeM();openClient('${gJs(x.c.naam)}','overzicht')"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div class="id"><b>${x.c.naam}</b><div class="t">${x.c.mw} · ${x.h.factors.length?x.h.factors[0].l:'—'}</div></div>${healthBadge(x.c.naam)}</div>`).join('')}</div>`:'<p>Alle actieve klanten zijn gezond 🎉</p>'}`,'Sluiten',()=>true);}
 /* ===== Client intelligence (health · segmentatie · deadlines) ===== */
 function daysUntil(d){return -docDays(d);}
 function clientHealth(naam){
@@ -3934,7 +4028,7 @@ function renderClient(){
         </div>
         ${_segs}
         <div class="cc-sec">
-          <div class="cc-h">Wat vraagt vandaag aandacht?</div>
+          <div class="row-between"><div class="cc-h" style="margin:0">Wat vraagt vandaag aandacht?</div><button class="btn ghost sm" onclick="coachClient('${naam}')">✨ AI-coach</button></div>
           ${acts.length?`<div class="cc-acts">${acts.map(a=>`<div class="cc-actrow ${a.sev}" onclick="openClient('${naam}','${a.tab}')"><span class="cc-bar"></span><div class="cc-atxt"><div class="cc-at">${a.t}</div><div class="cc-as">${a.s}</div></div><span class="cc-arrow">→</span></div>`).join('')}</div>`:`<div class="cc-clear"><span class="cc-ok">✓</span> Geen openstaande acties — alles is bij.</div>`}
         </div>
       </div>
@@ -3953,6 +4047,7 @@ function renderClient(){
           <div class="cc-h">Statusoverzicht</div>
           <div class="cc-comp">${comp.map(r=>`<div class="cc-crow" onclick="openClient('${naam}','${r.tab}')"><span class="cc-cdot ${r.tone}"></span><div class="cc-cl"><div class="cc-cn">${r.l}<span class="cc-cad">${r.cad}</span></div><div class="cc-cs">${r.sub}</div></div><span class="pill ${r.tone}">${r.st}</span></div>`).join('')}</div>
         </div>
+        ${exactHealthSection(naam)}
         <div class="cc-sec">
           <div class="cc-h">Tijdlijn</div>
           <div class="cc-feed">${(gT.length||gY.length||gE.length)?`${fGrp('Vandaag',gT)}${fGrp('Gisteren',gY)}${fGrp('Eerder',gE)}`:'<div class="cc-empty">Nog geen recente activiteit.</div>'}</div>
