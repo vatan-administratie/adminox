@@ -650,6 +650,36 @@
   .ks-ml{font-size:9px;color:var(--grey-2);margin-top:1px;text-transform:uppercase;letter-spacing:.02em}
   .ks-foot{font-size:11px;color:var(--grey);border-top:1px solid var(--line-2);padding-top:8px}
   .ks-act{font-size:11.5px;color:var(--ink);margin-top:7px;background:var(--line-2);border-radius:8px;padding:7px 9px;line-height:1.4}
+  /* === Gedeelde workflow-engine (OB · IB · Loon) === */
+  .wf-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px;flex-wrap:wrap}
+  .wf-top-t{font-weight:800;color:var(--ink);font-size:15px}
+  .wf-top-a{display:flex;gap:8px;flex-wrap:wrap}
+  .wfp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(208px,1fr));gap:12px;margin-top:12px}
+  .wfp{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:13px;padding:13px 14px}
+  .wfp.r{border-left-color:var(--red)}.wfp.a{border-left-color:var(--amber)}.wfp.g{border-left-color:#22A565}
+  .wfp-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;gap:8px}
+  .wfp-lbl{font-weight:800;color:var(--ink);font-size:14px}
+  .wfp-pill{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .wfp-pill.g{background:var(--green-soft,#E7F6EE);color:#1A8F54}.wfp-pill.a{background:#FDF1DC;color:#B4791B}.wfp-pill.r{background:#FBE6E8;color:#C8362F}
+  body.dark .wfp-pill.g{background:rgba(34,165,101,.16);color:#5fd39a}body.dark .wfp-pill.a{background:rgba(217,147,32,.16);color:#e7b766}body.dark .wfp-pill.r{background:rgba(220,70,70,.16);color:#ef9a9a}
+  .wfp-step{justify-content:space-between;margin:0 2px}
+  .wfp-slbl{display:flex;justify-content:space-between;margin-top:7px;gap:4px}
+  .wfp-slbl span{flex:1;text-align:center;font-size:9.5px;color:var(--grey-2);line-height:1.2}
+  .wfp-slbl span.on{color:var(--ink);font-weight:600}
+  .wfp-meta{margin-top:11px}
+  .wfp-note{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:6px 9px;font-size:11.5px;color:var(--ink);font-family:inherit}
+  .wfp-chips{display:flex;gap:6px}
+  .wfp-chip{font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid var(--line);color:var(--grey);cursor:pointer;background:var(--card);transition:.1s}
+  .wfp-chip:hover{border-color:var(--brand-2);color:var(--ink)}
+  .wfp-chip.on{background:var(--brand-2);border-color:var(--brand-2);color:#fff}
+  .wfp-chip.on.a{background:var(--amber);border-color:var(--amber);color:#fff}
+  .wft{display:flex;flex-direction:column;margin-top:8px}
+  .wft-row{display:flex;gap:11px;padding:8px 0;position:relative}
+  .wft-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;margin-top:3px;box-shadow:0 0 0 2px var(--card),0 0 0 3px var(--line);z-index:1}
+  .wft-dot.navy{background:var(--brand-2)}.wft-dot.blue{background:#2F80ED}.wft-dot.green{background:#22A565}.wft-dot.amber{background:var(--amber)}
+  .wft-row:not(:last-child)::before{content:'';position:absolute;left:5px;top:18px;bottom:-4px;width:2px;background:var(--line-2)}
+  .wft-t{font-size:12.5px;color:var(--ink);font-weight:600}
+  .wft-d{font-size:11px;color:var(--grey-2);font-variant-numeric:tabular-nums}
   @media(max-width:560px){.cc-ops{flex-wrap:wrap}.cc-op{flex:1 1 44%}}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
@@ -2382,6 +2412,19 @@ const I18N_ADD17={
  "Controleer de koppeling":{en:"Check the connection",tr:"Bağlantıyı kontrol edin",bg:"Проверете връзката",ar:"تحقق من الاتصال"}
 };
 Object.keys(I18N_ADD17).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD17[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD17[k][l];});});
+/* ===== Workflow-engine (OB · IB · Loon dossier) ===== */
+const I18N_ADD18={
+ "Werkstroom per kwartaal":{en:"Workflow per quarter",tr:"Çeyrek bazında iş akışı",bg:"Работен поток по тримесечие",ar:"سير العمل لكل ربع"},
+ "Werkstroom per jaar":{en:"Workflow per year",tr:"Yıl bazında iş akışı",bg:"Работен поток по година",ar:"سير العمل لكل سنة"},
+ "Ingeleverd":{en:"Submitted",tr:"Teslim edildi",bg:"Подадено",ar:"تم التسليم"},
+ "Ingevoerd":{en:"Entered",tr:"Girildi",bg:"Въведено",ar:"تم الإدخال"},
+ "Ingediend":{en:"Filed",tr:"Beyan edildi",bg:"Подадено",ar:"تم التقديم"},
+ "In verwerking":{en:"In progress",tr:"İşleniyor",bg:"В обработка",ar:"قيد المعالجة"},
+ "Jaarrekening":{en:"Annual accounts",tr:"Yıllık hesap",bg:"Годишен отчет",ar:"الحساب السنوي"},
+ "IB-aangifte":{en:"Income tax return",tr:"Gelir vergisi beyanı",bg:"Декларация ДДФЛ",ar:"إقرار ضريبة الدخل"},
+ "Op schema":{en:"On schedule",tr:"Programa uygun",bg:"По график",ar:"وفق الجدول"}
+};
+Object.keys(I18N_ADD18).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD18[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD18[k][l];});});
 (function(){const more={
  en:[[" documenten verwerken"," documents to process"],[" OB-controles"," VAT checks"],[" IB deadline(s)"," income-tax deadline(s)"],[" klanten met signalen"," clients with signals"],[" verstreken"," overdue"],["Wijs nieuwe klanten voorlopig toe aan ","Assign new clients for now to "],[" — laagste werkdruk."," — lowest workload."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," will get a peak in income-tax files — plan extra time."],[" heeft een achterstand in documentverwerking."," has a backlog in document processing."]],
  tr:[[" documenten verwerken"," belge işlenecek"],[" OB-controles"," KDV kontrolü"],[" IB deadline(s)"," gelir vergisi son tarihi"],[" klanten met signalen"," sinyalli müşteri"],[" verstreken"," gecikti"],["Wijs nieuwe klanten voorlopig toe aan ","Yeni müşterileri şimdilik şuna atayın: "],[" — laagste werkdruk."," — en düşük iş yükü."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," gelir vergisi dosyalarında bir zirve yaşayacak — ekstra zaman planlayın."],[" heeft een achterstand in documentverwerking."," belge işlemede geride."]],
@@ -4328,6 +4371,18 @@ function renameGroupModal(id){const g=groupById(id);if(!g)return;modal('Groep be
 function deleteGroupModal(id){const g=groupById(id);if(!g)return;if(id===DEFGROUP){toast('De standaardgroep kan niet verwijderd worden');return;}if(state.groups.length<=1){toast('Minimaal één groep is vereist');return;}const cnt=groupCount(id);const others=state.groups.filter(x=>x.id!==id);modal('Groep verwijderen',`<div class="ai-note" style="margin:0 0 12px;border-left-color:var(--amber)">Groep <b>${gEsc(g.naam)}</b> bevat <b>${cnt} klant(en)</b>. De klanten worden NIET verwijderd — kies naar welke groep ze worden verplaatst.</div>`+selectFieldKV('Klanten verplaatsen naar','grMove',others.map(x=>[x.id,x.naam]),others[0].id),'Groep verwijderen',()=>{const to=val('grMove');state.clients.forEach(c=>{if(clientGroupId(c)===id)c.groep=to;});state.groups=state.groups.filter(x=>x.id!==id);toast('Groep "'+g.naam+'" verwijderd · klanten verplaatst naar '+groupName(to)+' ✓');manageGroupsModal();return false;});}
 /* klant bewerken / nieuw */
 function renameClientEverywhere(o,n){if(o===n)return;if(state.werk[o]){state.werk[n]=state.werk[o];delete state.werk[o];}if(DOSSIER[o]){DOSSIER[n]=DOSSIER[o];delete DOSSIER[o];}(state.dossierDocs||[]).forEach(x=>{if(x.client===o)x.client=n;});(state.employees||[]).forEach(x=>{if(x.client===o)x.client=n;});(state.signals||[]).forEach(x=>{if(x.client===o)x.client=n;});(state.inbox||[]).forEach(x=>{if(x.client===o)x.client=n;});(state.regelingen||[]).forEach(x=>{if(x.client===o)x.client=n;});const c=state.clients.find(x=>x.naam===o);if(c)c.naam=n;if(curClient===o)curClient=n;}
+/* ===== Gedeelde workflow-engine (OB · IB · Loon dossier) ===== */
+const WF_CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
+function pkDate(s){const p=String(s||'').split('-');return p.length===3?Number(p[2]+(p[1]||'').padStart(2,'0')+(p[0]||'').padStart(2,'0')):0;}
+function wfStages(stages){return `<div class="wf-step3 wfp-step">${stages.map((s,i)=>`<button class="wf-node ${s.done?'on':''}" title="${s.label}: ${s.done?'gedaan':'open'}" onclick="event.stopPropagation();${s.toggle}">${s.done?WF_CHK:''}</button>${i<stages.length-1?`<span class="wf-conn ${s.done?'on':''}"></span>`:''}`).join('')}</div>`;}
+function wfPeriodCard(o){return `<div class="wfp ${o.tone}">
+    <div class="wfp-h"><div class="wfp-lbl">${o.label}</div><span class="wfp-pill ${o.tone}">${o.status}</span></div>
+    ${wfStages(o.stages)}
+    <div class="wfp-slbl">${o.stages.map(s=>`<span class="${s.done?'on':''}">${s.label}</span>`).join('')}</div>
+    ${o.meta?`<div class="wfp-meta">${o.meta}</div>`:''}</div>`;}
+function wfGrid(cards){return `<div class="wfp-grid">${cards.join('')}</div>`;}
+function wfTimeline(events){if(!events.length)return '';return `<div class="panel"><div class="mod-sub">Tijdlijn</div><div class="wft">${events.map(e=>`<div class="wft-row"><span class="wft-dot ${e.tone||'navy'}"></span><div class="wft-c"><div class="wft-t">${e.t}</div>${e.d?`<div class="wft-d">${e.d}</div>`:''}</div></div>`).join('')}</div></div>`;}
+function wfTop(title,actions){return `<div class="wf-top"><div class="wf-top-t">${title}</div><div class="wf-top-a">${actions||''}</div></div>`;}
 function initClientWerk(c){const ob={};KWARTALEN.forEach(q=>{ob[q]={ingeleverd:'',ingelezen:'',ingediend:'',opm:''};});const ib={};IBJAREN.forEach(y=>{ib[y]={jaarrekening:'',ib:'',suppletie:'',ingediend:'',uitstel:'',opm:''};});const loon={'2026':{}};MAANDEN.forEach(m=>{loon['2026'][m]=false;});state.werk[c.naam]={ob,ib,loon,opmerking:'',logins:[]};}
 function nextClientNr(){let mx=0;state.clients.forEach(c=>{const n=parseInt(c.nr,10);if(!isNaN(n)&&n>mx)mx=n;});return String(mx+1).padStart(3,'0');}
 function clientEditModal(naam){const c=state.clients.find(x=>x.naam===naam);if(!c)return;const d=DOSSIER[naam]||{};const cp=d.contactpersoon||((d.contact||'').split('·')[0].trim());const em=d.email||((d.contact||'').split('·')[1]||'').trim();
@@ -4684,50 +4739,59 @@ function renderClient(){
     const obQ=w.ob['Q1 2026'];const obDone=KWARTALEN.filter(q=>w.ob[q].ingediend).length;
     const obTone=obQ.ingediend?'g':((obQ.ingelezen||obQ.ingeleverd)?'a':'r');
     const obMiss=[!obQ.ingeleverd&&'aanleveren',!obQ.ingelezen&&'invoeren',!obQ.ingediend&&'indienen'].filter(Boolean);
-    content=modHead({tone:obTone,status:obQ.ingediend?'Q1 2026 ingediend':((obQ.ingelezen||obQ.ingeleverd)?'Q1 2026 in behandeling':'Q1 2026 — actie vereist'),
+    const obState=o=>o.ingediend?['Ingediend','g']:(o.ingelezen?['Klaar voor indiening','a']:(o.ingeleverd?['In verwerking','a']:['Actie vereist','r']));
+    const obCards=KWARTALEN.map(q=>{const o=w.ob[q];const st=obState(o);return wfPeriodCard({label:q,tone:st[1],status:st[0],
+      stages:[{label:'Ingeleverd',done:!!o.ingeleverd,toggle:`toggleOb('${naam}','${q}','ingeleverd')`},{label:'Ingevoerd',done:!!o.ingelezen,toggle:`toggleOb('${naam}','${q}','ingelezen')`},{label:'Ingediend',done:!!o.ingediend,toggle:`toggleOb('${naam}','${q}','ingediend')`}],
+      meta:`<input class="wfp-note" value="${(o.opm||'').replace(/"/g,'&quot;')}" placeholder="notitie…" onclick="event.stopPropagation()" oninput="state.werk['${naam}'].ob['${q}'].opm=this.value">`});});
+    const obEv=[];KWARTALEN.forEach(q=>{const o=w.ob[q];[['ingeleverd','aangeleverd','navy'],['ingelezen','ingevoerd','blue'],['ingediend','ingediend','green']].forEach(s=>{if(o[s[0]])obEv.push({d:o[s[0]],t:`${q} — ${s[1]}`,tone:s[2],_k:o[s[0]]});});});
+    obEv.sort((a,b)=>pkDate(b._k)-pkDate(a._k));
+    content=wfTop('OB-aangifte · '+naam,`<button class="btn ghost sm" onclick="go('obwerk')">OB-werklijst →</button>`)
+    +modHead({tone:obTone,status:obQ.ingediend?'Q1 2026 ingediend':((obQ.ingelezen||obQ.ingeleverd)?'Q1 2026 in behandeling':'Q1 2026 — actie vereist'),
       kpis:[['Verantwoordelijke',c.mw],['Volgende deadline','31-07-2026'],['Kwartalen ingediend',obDone+'/4'],['BTW automatisch',c.btwAuto?'Ja':'Nee']],
       pct:Math.round(obDone/4*100),
       steps:[['Ingeleverd',!!obQ.ingeleverd],['Ingevoerd',!!obQ.ingelezen],['Ingediend',!!obQ.ingediend]],
       missing:obMiss.length?`Nog te doen voor Q1 2026: <b>${obMiss.join(', ')}</b>.`:'Q1 2026 volledig afgerond.',action:!obQ.ingediend})
-    +`<div class="panel"><div class="mod-sub">Alle tijdvakken</div>
-      <div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Tijdvak</th><th>Ingeleverd</th><th>Ingevoerd</th><th>Ingediend</th><th style="width:34%">Opmerking</th></tr></thead><tbody>
-      ${KWARTALEN.map(q=>{const o=w.ob[q];return `<tr><td><b>${q}</b></td><td>${dateCell(o.ingeleverd,`toggleOb('${naam}','${q}','ingeleverd')`,`setObDate('${naam}','${q}','ingeleverd',this.value)`)}</td><td>${dateCell(o.ingelezen,`toggleOb('${naam}','${q}','ingelezen')`,`setObDate('${naam}','${q}','ingelezen',this.value)`)}</td><td>${dateCell(o.ingediend,`toggleOb('${naam}','${q}','ingediend')`,`setObDate('${naam}','${q}','ingediend',this.value)`)}</td><td><input class="gl" value="${(o.opm||'').replace(/"/g,'&quot;')}" placeholder="bijv. stuurt via whatsapp" oninput="state.werk['${naam}'].ob['${q}'].opm=this.value"></td></tr>`;}).join('')}
-      </tbody></table></div><div class="ai-note" style="margin-top:12px">Ingeleverd = klant heeft de administratie aangeleverd · Ingevoerd = door ons verwerkt · Ingediend = OB-aangifte verstuurd. Klik op een vinkje om de status te wijzigen.</div></div>`;
+    +`<div class="panel"><div class="mod-sub">Werkstroom per kwartaal</div>${wfGrid(obCards)}<div class="ai-note" style="margin-top:12px">Ingeleverd = klant heeft de administratie aangeleverd · Ingevoerd = door ons verwerkt · Ingediend = OB-aangifte verstuurd. Klik op een stap om de status te wijzigen.</div></div>`
+    +wfTimeline(obEv.slice(0,8));
   } else if(clientTab==='ib'){
     const ibY=w.ib[IBYEAR];const ibDone=IBJAREN.filter(y=>w.ib[y].ingediend).length;
     const ibTone=ibY.ingediend?'g':((ibY.ib||ibY.jaarrekening)?'a':'r');
     const ibMiss=[!ibY.jaarrekening&&'jaarrekening opstellen',!ibY.ib&&'IB-aangifte opstellen',!ibY.ingediend&&'indienen'].filter(Boolean);
     const ibDl=ibY.uitstel?'01-05-2027 (met uitstel)':'01-05-2026';
-    content=modHead({tone:ibTone,status:ibY.ingediend?`IB ${IBYEAR} ingediend`:((ibY.ib||ibY.jaarrekening)?`IB ${IBYEAR} in behandeling`:`IB ${IBYEAR} — actie vereist`),
+    const ibState=o=>o.ingediend?['Ingediend','g']:(o.ib?['Klaar voor indiening','a']:(o.jaarrekening?['Aangifte opstellen','a']:['Jaarrekening nodig','r']));
+    const ibCards=IBJAREN.map(y=>{const o=w.ib[y];const st=ibState(o);return wfPeriodCard({label:y,tone:st[1],status:st[0],
+      stages:[{label:'Jaarrekening',done:!!o.jaarrekening,toggle:`toggleIb('${naam}','${y}','jaarrekening')`},{label:'IB-aangifte',done:!!o.ib,toggle:`toggleIb('${naam}','${y}','ib')`},{label:'Ingediend',done:!!o.ingediend,toggle:`toggleIb('${naam}','${y}','ingediend')`}],
+      meta:`<div class="wfp-chips"><span class="wfp-chip ${o.uitstel?'on a':''}" onclick="event.stopPropagation();toggleIb('${naam}','${y}','uitstel')">Uitstel</span><span class="wfp-chip ${o.suppletie?'on':''}" onclick="event.stopPropagation();toggleIb('${naam}','${y}','suppletie')">Suppletie</span></div>`});});
+    const ibEv=[];IBJAREN.forEach(y=>{const o=w.ib[y];[['jaarrekening','jaarrekening opgesteld','navy'],['ib','IB-aangifte opgesteld','blue'],['ingediend','ingediend','green'],['suppletie','suppletie','amber'],['uitstel','uitstel verleend','amber']].forEach(s=>{if(o[s[0]])ibEv.push({d:o[s[0]],t:`${y} — ${s[1]}`,tone:s[2],_k:o[s[0]]});});});
+    ibEv.sort((a,b)=>pkDate(b._k)-pkDate(a._k));
+    content=wfTop('IB &amp; Jaarrekening · '+naam,`<button class="btn ghost sm" onclick="toast('Geopend in Fiscaal Gemak (demo)')"><span class="plogo fg" style="width:18px;height:18px;font-size:10px">FG</span> Open in Fiscaal Gemak</button><button class="btn ghost sm" onclick="go('ibwerk')">IB-werklijst →</button>`)
+    +modHead({tone:ibTone,status:ibY.ingediend?`IB ${IBYEAR} ingediend`:((ibY.ib||ibY.jaarrekening)?`IB ${IBYEAR} in behandeling`:`IB ${IBYEAR} — actie vereist`),
       kpis:[['Verantwoordelijke',c.mw],['Volgende deadline',ibDl],['Jaren ingediend',ibDone+'/'+IBJAREN.length],['Suppletie',ibY.suppletie?'Ja':'Nee']],
       pct:Math.round([ibY.jaarrekening,ibY.ib,ibY.ingediend].filter(Boolean).length/3*100),
       steps:[['Jaarrekening',!!ibY.jaarrekening],['IB-aangifte',!!ibY.ib],['Ingediend',!!ibY.ingediend]],
       missing:ibMiss.length?`Nog te doen voor ${IBYEAR}: <b>${ibMiss.join(', ')}</b>.`:`${IBYEAR} volledig afgerond.`,action:!ibY.ingediend})
-    +`<div class="panel"><div class="row-between" style="margin-bottom:11px"><div class="mod-sub" style="margin:0">Alle jaren</div><button class="btn ghost sm" onclick="toast('Geopend in Fiscaal Gemak (demo)')"><span class="plogo fg" style="width:18px;height:18px;font-size:10px">FG</span> Open in Fiscaal Gemak</button></div>
-      <div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Jaar</th><th>Jaarrekening</th><th>IB</th><th>Suppletie</th><th>Uitstel</th><th>Ingediend</th></tr></thead><tbody>
-      ${IBJAREN.map(y=>{const o=w.ib[y];return `<tr><td><b>${y}</b></td><td>${dateCell(o.jaarrekening,`toggleIb('${naam}','${y}','jaarrekening')`,`setIbDate('${naam}','${y}','jaarrekening',this.value)`)}</td><td>${dateCell(o.ib,`toggleIb('${naam}','${y}','ib')`,`setIbDate('${naam}','${y}','ib',this.value)`)}</td><td>${dateCell(o.suppletie,`toggleIb('${naam}','${y}','suppletie')`,`setIbDate('${naam}','${y}','suppletie',this.value)`)}</td><td>${dateCell(o.uitstel,`toggleIb('${naam}','${y}','uitstel')`,`setIbDate('${naam}','${y}','uitstel',this.value)`)}</td><td>${dateCell(o.ingediend,`toggleIb('${naam}','${y}','ingediend')`,`setIbDate('${naam}','${y}','ingediend',this.value)`)}</td></tr>`;}).join('')}
-      </tbody></table></div><div class="ai-note" style="margin-top:12px">🔗 Gekoppeld met <b>Fiscaal Gemak</b>: relatiegegevens en aangiftestatus synchroniseren automatisch. <b>Uitstel</b> = uitstel aangevraagd/verleend (verlengt de indien-deadline) — aangevraagd via Fiscaal Gemak (Beconregeling).</div></div>`;
+    +`<div class="panel"><div class="mod-sub">Werkstroom per jaar</div>${wfGrid(ibCards)}<div class="ai-note" style="margin-top:12px">🔗 Gekoppeld met <b>Fiscaal Gemak</b>: status synchroniseert automatisch. <b>Uitstel</b> verlengt de indien-deadline (Beconregeling). Klik op een stap of label om de status te wijzigen.</div></div>`
+    +wfTimeline(ibEv.slice(0,8));
   } else if(clientTab==='loon'){
     const lm=w.loon['2026'];const lDone=Object.values(lm).filter(Boolean).length;
     const nowM=parseInt(TODAY.split('-')[1],10);
     const due=MAANDEN.slice(0,nowM).filter(m=>!lm[m]);
     const filed=MAANDEN.filter(m=>lm[m]);const lastFiled=filed.length?filed[filed.length-1].replace(/^./,x=>x.toUpperCase())+' 2026':'—';
     const onSchedule=due.length===0;const lTone=onSchedule?'g':(lDone>0?'a':'r');const lpct=Math.round(lDone/12*100);
-    content=`<div class="row-between" style="margin-bottom:12px"><h3 style="margin:0">Loonaangifte 2026</h3><button class="btn ghost sm" onclick="printLoon('${naam}')">⬇ Print / PDF</button></div>`
+    const cap=s=>s.replace(/^./,x=>x.toUpperCase());
+    const QS=[['Q1',['jan','feb','mrt']],['Q2',['apr','mei','jun']],['Q3',['jul','aug','sep']],['Q4',['okt','nov','dec']]];
+    const loonCards=QS.map(qd=>{const ql=qd[0],ms=qd[1];const dc=ms.filter(m=>lm[m]).length;const ov=ms.filter(m=>!lm[m]&&MAANDEN.indexOf(m)<nowM).length;const tone=dc===3?'g':(ov>0?'r':'a');
+      return wfPeriodCard({label:ql+' 2026',tone,status:`${dc}/3 ingediend`,stages:ms.map(m=>({label:cap(m),done:!!lm[m],toggle:`toggleLoon('${naam}','${m}')`}))});});
+    const loonSteps=QS.map(qd=>[qd[0],qd[1].every(m=>lm[m])]);
+    const loonEv=filed.slice().reverse().slice(0,8).map(m=>({t:`${cap(m)} 2026 — aangifte ingediend`,tone:'green'}));
+    content=wfTop('Loonaangifte 2026 · '+naam,`<button class="btn ghost sm" onclick="printLoon('${naam}')">⬇ Print / PDF</button>`)
     +modHead({tone:lTone,status:onSchedule?'Op schema':`Achter op schema — ${due.length} maand(en)`,
       kpis:[['Verwerkte maanden',lDone+'/12'],['Laatste aangifte',lastFiled],['Volgende deadline','30-06-2026'],['Status',onSchedule?'Op schema':'Achter']],
-      pct:nowM?Math.round((nowM-due.length)/nowM*100):100,
-      missing:due.length?`Nog in te dienen: <b>${due.join(', ')}</b>.`:'Alle maanden tot nu toe zijn ingediend.',action:due.length>0})
-    +`<div class="panel"><div class="row-between" style="margin-bottom:6px"><div class="mod-sub" style="margin:0">Maandstatus 2026</div><div style="font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums">${lDone}/12 verwerkt · ${lpct}%</div></div>
-      <div class="mh-bar" style="margin:0 0 14px"><div class="mh-fill ${lTone}" style="width:${lpct}%"></div></div>
-      <div class="lmx">${MAANDEN.map((m,idx)=>{const done=lm[m];const isPast=idx<nowM;const tn=done?'done':(isPast?'due':'');return `<div class="lmc ${tn}" onclick="toggleLoon('${naam}','${m}')" title="${m} 2026 — ${done?'ingediend':'open'}"><div class="lmc-m">${m}</div><div class="lmc-i">${done?'✓':(isPast?'!':'·')}</div></div>`;}).join('')}</div>
-      <div class="sgrid c4" style="margin:16px 0 0">
-        <div class="scard"><div class="sl">Voltooid</div><div class="sv g">${lDone} mnd</div></div>
-        <div class="scard"><div class="sl">Resterend</div><div class="sv">${12-lDone} mnd</div></div>
-        <div class="scard"><div class="sl">Voltooiing</div><div class="sv">${lpct}%</div></div>
-        <div class="scard"><div class="sl">Laatste maand</div><div class="sv">${lastFiled}</div></div>
-      </div>
-      <div class="ai-note" style="margin-top:14px;font-size:11.5px">Klik op een maand om de aangifte als gedaan/niet-gedaan te markeren. Groen = ingediend · amber = openstaand (verstreken) · grijs = toekomstig.</div></div>`;
+      pct:lpct,
+      steps:loonSteps,
+      missing:due.length?`Nog in te dienen: <b>${due.map(cap).join(', ')}</b>.`:'Alle maanden tot nu toe zijn ingediend.',action:due.length>0})
+    +`<div class="panel"><div class="row-between" style="margin-bottom:6px"><div class="mod-sub" style="margin:0">Werkstroom per kwartaal</div><div style="font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums">${lDone}/12 verwerkt · ${lpct}%</div></div>${wfGrid(loonCards)}<div class="ai-note" style="margin-top:12px">Elke maand is een loonaangifte-tijdvak. Klik op een maand om als ingediend/open te markeren. Groen = ingediend · amber = openstaand · rood = verstreken.</div></div>`
+    +wfTimeline(loonEv);
   } else if(clientTab==='mappen'){
     content=docCenterHTML(true,naam,`<div class="row-between" style="margin-bottom:8px"><h3 style="margin:0">Documenten</h3><div style="display:flex;gap:8px;align-items:center"><button class="btn ghost sm" onclick="oDocZip('${gJs(naam)}')">🗂 ${tStr('Dossier als ZIP')}</button><button class="btn primary sm" onclick="uploadDocKantoor('${naam}')">+ Document</button></div></div><div class="sub" style="margin:-2px 0 14px">Intern = alleen kantoor. Gedeeld = ook zichtbaar voor de klant in het klantportaal.</div>`);
   } else if(clientTab==='personeel'){
