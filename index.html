@@ -591,6 +591,7 @@
   body.dark .exp-menu{box-shadow:0 16px 40px rgba(0,0,0,.5)}
   body.dark .exp-item:hover .exp-ic{background:rgba(255,255,255,.14);color:var(--ink)}
   body.dark .exp-item:hover{background:var(--hover)}
+  body.dark thead th{background:var(--hover)}
   /* === Inzicht modules === */
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   @media(max-width:900px){.grid3{grid-template-columns:1fr}}
@@ -2473,6 +2474,12 @@ Object.keys(I18N_ADD18).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]
  bg:[["Goedemiddag, ","Добър ден, "],["Goedemorgen, ","Добро утро, "],["Goedenavond, ","Добър вечер, "],[" nog niet betaald door uw klanten"," все още неплатени от клиентите ви"],[" rekeningen openstaand"," сметки дължими"],[" rekening openstaand"," сметка дължима"],["KPN-factuur automatisch geboekt","Фактура KPN осчетоводена автоматично"],["BTW-aangifte","ДДС декларация"],["Factuur ","Фактура "],[" verstuurd"," изпратено"],[" voorbereid"," подготвено"]],
  ar:[["Goedemiddag, ","مساء الخير، "],["Goedemorgen, ","صباح الخير، "],["Goedenavond, ","مساء الخير، "],[" nog niet betaald door uw klanten"," لم تُدفع بعد من عملائك"],[" rekeningen openstaand"," فواتير مستحقة"],[" rekening openstaand"," فاتورة مستحقة"],["KPN-factuur automatisch geboekt","تم تسجيل فاتورة KPN تلقائيًا"],["BTW-aangifte","إقرار ض.ق.م"],["Factuur ","فاتورة "],[" verstuurd"," أُرسلت"],[" voorbereid"," تم التحضير"]]
 };['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
+(function(){const more={
+ en:[['aangifte ingediend','return filed'],['jaarrekening opgesteld','annual accounts prepared'],['IB-aangifte opgesteld','income tax return prepared'],['uitstel verleend','extension granted'],['aangeleverd','submitted'],['ingevoerd','entered'],['ingediend','filed'],['dagen geleden','days ago'],['uur geleden','hours ago'],['min geleden','min ago'],['Laatste sync','Last sync'],['suppletie','correction']],
+ tr:[['aangifte ingediend','beyan gönderildi'],['jaarrekening opgesteld','yıllık hesap hazırlandı'],['IB-aangifte opgesteld','gelir vergisi beyanı hazırlandı'],['uitstel verleend','erteleme verildi'],['aangeleverd','teslim edildi'],['ingevoerd','girildi'],['ingediend','gönderildi'],['dagen geleden','gün önce'],['uur geleden','saat önce'],['min geleden','dk önce'],['Laatste sync','Son senkronizasyon'],['suppletie','düzeltme']],
+ bg:[['aangifte ingediend','декларацията подадена'],['jaarrekening opgesteld','годишният отчет изготвен'],['IB-aangifte opgesteld','ДДФЛ декларацията изготвена'],['uitstel verleend','отсрочка предоставена'],['aangeleverd','подадено'],['ingevoerd','въведено'],['ingediend','подадено'],['dagen geleden','дни преди'],['uur geleden','часа преди'],['min geleden','мин преди'],['Laatste sync','Последна синхр.'],['suppletie','корекция']],
+ ar:[['aangifte ingediend','تم تقديم الإقرار'],['jaarrekening opgesteld','تم إعداد الحساب السنوي'],['IB-aangifte opgesteld','تم إعداد إقرار ضريبة الدخل'],['uitstel verleend','تم منح التمديد'],['aangeleverd','تم التسليم'],['ingevoerd','تم الإدخال'],['ingediend','تم التقديم'],['dagen geleden','منذ أيام'],['uur geleden','منذ ساعات'],['min geleden','منذ دقائق'],['Laatste sync','آخر مزامنة'],['suppletie','تصحيح']]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 function translateDOM(root){
   if(LANG==='nl'||!root)return;const map=I18N[LANG];if(!map)return;const sub=(I18N_SUB&&I18N_SUB[LANG])||null;
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);const ns=[];let nn;while(nn=w.nextNode())ns.push(nn);
@@ -2921,6 +2928,10 @@ expDef('c_btw',()=>{const inv=state.invoices.filter(i=>effStatus(i)!=='Concept')
   const cols=[{h:'Rubriek',k:'r',t:'text',w:34,tr:true},{h:'Grondslag',k:'g',t:'eur',w:16},{h:'BTW',k:'b',t:'eur',w:16}];
   const rows=[{r:'1a Leveringen/diensten 21%',g:excl,b:hoog},{r:'5a Verschuldigde BTW',g:null,b:btw},{r:'5b Voorbelasting',g:null,b:voorbel},{r:'Saldo aangifte',g:null,b:btw-voorbel}];
   return {title:tStr('BTW-overzicht'),file:'BTW_overzicht',formats:['pdf','xlsx','csv'],sub:`${tStr('Te betalen/terug te vragen')}: €${m2(btw-voorbel)} · ${_expStamp()}`,cols,rows};});
+expDef('k_fg',()=>{const rows=(state.opgaven||[]).filter(o=>(fgStatus==='alle'||o.status===fgStatus)&&(fgType==='alle'||o.type===fgType)&&(fgJaar==='alle'||o.jaar===fgJaar)&&(fgMw==='alle'||o.mw===fgMw));
+  const cols=[{h:'Nr',k:'nr',t:'text',w:10},{h:'Cliënt',k:'client',t:'text',w:26},{h:'Opgaaftype',k:'type',t:'text',w:18,tr:true},{h:'Jaar',k:'jaar',t:'text',w:8},{h:'Status',k:'status',t:'text',w:16,tr:true},{h:'Deadline',k:'deadline',t:'date',w:13},{h:'Medewerker',k:'mw',t:'text',w:14}];
+  const data=rows.map(o=>({nr:o.nr,client:o.client,type:o.type,jaar:o.jaar,status:o.status,deadline:o.deadline,mw:o.mw}));
+  return {title:tStr('Fiscaal Gemak')+' · '+tStr('Werkvoorraad'),file:'FiscaalGemak_werkvoorraad',sub:tStr('Geëxporteerd')+': '+_expStamp()+' · '+data.length,cols,rows:data};});
 function _docZip(naam,scope){const docs=(scope||state.dossierDocs.filter(d=>d.client===naam&&(_docOffice||d.gedeeld||d.by==='klant')));
   if(!docs.length){toast(tStr('Geen documenten om te exporteren'));return;}
   const root=_fname(naam);const files=docs.map(d=>{const folder=_fname(d.map||'Overig');const fn=_fname(d.naam||'document');
@@ -2956,6 +2967,16 @@ function printLoon(naam){const w=state.werk[naam];if(!w)return;const lm=w.loon['
  <h3>Samenvatting</h3><table><tr><td class="l">Verwerkte maanden</td><td>${done} / 12</td></tr><tr><td class="l">Resterende maanden</td><td>${12-done}</td></tr><tr class="tot"><td class="l">Voltooiing</td><td>${pct}%</td></tr></table>
  <h3>Status per maand — boekjaar 2026</h3><table><tr><th class="l">Maand</th><th>Status</th></tr>${rows}</table>`;
  printDoc('Loonaangifte 2026 '+naam, body);}
+function printObDossier(naam){const w=state.werk[naam];if(!w)return;const c=state.clients.find(x=>x.naam===naam)||{};
+ const rows=KWARTALEN.map(q=>{const o=w.ob[q];const st=o.ingediend?'Ingediend':(o.ingelezen?'Klaar voor indiening':(o.ingeleverd?'In verwerking':'Actie vereist'));return `<tr><td class="l">${q}</td><td>${o.ingeleverd||'—'}</td><td>${o.ingelezen||'—'}</td><td>${o.ingediend||'—'}</td><td class="l">${st}</td></tr>`;}).join('');
+ const done=KWARTALEN.filter(q=>w.ob[q].ingediend).length;
+ const body=`<h2>OB-aangifte — ${naam}</h2><h3>Samenvatting</h3><table><tr><td class="l">Verantwoordelijke</td><td>${c.mw||'—'}</td></tr><tr><td class="l">Kwartalen ingediend</td><td>${done}/4</td></tr><tr><td class="l">Volgende deadline</td><td>31-07-2026</td></tr></table><h3>Werkstroom per kwartaal</h3><table><tr><th class="l">Kwartaal</th><th>Ingeleverd</th><th>Ingevoerd</th><th>Ingediend</th><th class="l">Status</th></tr>${rows}</table>`;
+ printDoc('OB-aangifte '+naam, body);}
+function printIbDossier(naam){const w=state.werk[naam];if(!w)return;const c=state.clients.find(x=>x.naam===naam)||{};
+ const rows=IBJAREN.map(y=>{const o=w.ib[y];const st=o.ingediend?'Ingediend':(o.ib?'Klaar voor indiening':(o.jaarrekening?'Aangifte opstellen':'Jaarrekening nodig'));return `<tr><td class="l">${y}</td><td>${o.jaarrekening||'—'}</td><td>${o.ib||'—'}</td><td>${o.ingediend||'—'}</td><td>${o.uitstel?'Ja':'Nee'}</td><td>${o.suppletie?'Ja':'Nee'}</td><td class="l">${st}</td></tr>`;}).join('');
+ const done=IBJAREN.filter(y=>w.ib[y].ingediend).length;
+ const body=`<h2>IB &amp; Jaarrekening — ${naam}</h2><h3>Samenvatting</h3><table><tr><td class="l">Verantwoordelijke</td><td>${c.mw||'—'}</td></tr><tr><td class="l">Jaren ingediend</td><td>${done}/${IBJAREN.length}</td></tr></table><h3>Werkstroom per jaar</h3><table><tr><th class="l">Jaar</th><th>Jaarrekening</th><th>IB-aangifte</th><th>Ingediend</th><th>Uitstel</th><th>Suppletie</th><th class="l">Status</th></tr>${rows}</table>`;
+ printDoc('IB '+naam, body);}
 function printLease(naam,i){const o=leaseList(naam)[i];if(!o)return;const res=leaseRows(o);
  const rows=res.rows.map(r=>`<tr><td class="l">${r.y}</td><td>${r.m}</td><td>${m2(r.r)}</td><td>${m2(r.a)}</td><td>${m2(r.s)}</td></tr>`).join('');
  const curY=new Date().getFullYear();const cur=res.rows.find(r=>r.y===curY)||res.rows[res.rows.length-1]||{s:0};
@@ -3613,7 +3634,7 @@ VIEWS.klant.tijd = ()=>{
   let body='';
   Object.keys(weeks).forEach(w=>{
     const rows=weeks[w]; const wt=rows.reduce((a,t)=>a+t.uren,0);
-    body+=`<tr style="background:#FAFAFB"><td colspan="5" style="font-weight:800;color:var(--ink)">${w} — ${wt} uur</td></tr>`;
+    body+=`<tr style="background:var(--hover)"><td colspan="5" style="font-weight:800;color:var(--ink)">${w} — ${wt} uur</td></tr>`;
     body+=rows.map(t=>`<tr><td>${t.date}</td><td>${t.rel}</td><td>${t.project}</td><td class="r"><b>${t.uren}</b> u × ${money(t.tarief)}</td><td>${t.billed?'<span class="pill g">Gefactureerd</span>':'<span class="pill a">Te factureren</span>'}</td></tr>`).join('');
   });
   return `<div class="row-between"><h1 class="title">Tijdregistratie</h1><div style="display:flex;gap:9px;align-items:center">${expBar('c_tijd')}<button class="btn ghost" onclick="addTime()">+ Uren boeken</button><button class="btn primary" onclick="factureerUren()">€ Uren factureren</button></div></div>
@@ -3725,7 +3746,7 @@ function openBtw(periode){const b=state.btwReturns.find(x=>x.periode===periode);
         ${rij('4a','Leveringen/diensten uit landen buiten de EU',0,0)}
         ${rij('4b','Leveringen/diensten uit landen binnen de EU',0,0)}
         ${sec('5. Voorbelasting en eindtotaal')}
-        <tr style="background:#FAFAFB"><td style="color:var(--grey)">5a</td><td><b>Verschuldigde omzetbelasting (rubrieken 1 t/m 4)</b></td><td></td><td class="r"><b>${money(verschuldigd)}</b></td></tr>
+        <tr style="background:var(--hover)"><td style="color:var(--grey)">5a</td><td><b>Verschuldigde omzetbelasting (rubrieken 1 t/m 4)</b></td><td></td><td class="r"><b>${money(verschuldigd)}</b></td></tr>
         ${rij('5b','Voorbelasting',null,voorbelasting)}
         <tr><td style="color:var(--grey)">5c</td><td>Subtotaal (5a − 5b)</td><td></td><td class="r">${money(verschuldigd-voorbelasting)}</td></tr>
         ${rij('5d','Vermindering kleineondernemersregeling (KOR)',null,0)}
@@ -4010,7 +4031,7 @@ function renderFactureerUren(rels){
   const weeks={}; ts.forEach(t=>{(weeks[t.week]=weeks[t.week]||[]).push(t);});
   let rows='';
   Object.keys(weeks).forEach(w=>{const wt=weeks[w].reduce((a,t)=>a+t.uren*t.tarief,0);
-    rows+=`<tr style="background:#FAFAFB"><td><label style="display:flex;gap:8px;align-items:center;font-weight:800;color:var(--ink)"><input type="checkbox" onchange="fuToggleWeek(this,'${w}')" checked> ${w}</label></td><td></td><td></td><td class="r" style="font-weight:800">${money(wt)}</td></tr>`;
+    rows+=`<tr style="background:var(--hover)"><td><label style="display:flex;gap:8px;align-items:center;font-weight:800;color:var(--ink)"><input type="checkbox" onchange="fuToggleWeek(this,'${w}')" checked> ${w}</label></td><td></td><td></td><td class="r" style="font-weight:800">${money(wt)}</td></tr>`;
     rows+=weeks[w].map(t=>`<tr><td style="padding-left:34px"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" class="fuChk" data-w="${w}" value="${t.id}" checked> ${t.date}</label></td><td>${t.project}</td><td class="r">${t.uren} u × ${money(t.tarief)}</td><td class="r">${money(t.uren*t.tarief)}</td></tr>`).join('');
   });
   document.getElementById('view').innerHTML=`
@@ -4083,7 +4104,7 @@ function openEmployee(id,tab){const e=state.employees.find(x=>x.id===id); if(!e)
   if(empTab==='uren'){
     const tot=e.hoursLog.reduce((a,h)=>a+h.uren,0);
     content=`<div class="row-between"><h3 style="margin:0">Urenregistratie</h3><button class="btn ghost sm" onclick="addEmpHours(${id})">+ Uren</button></div>
-    <div class="tablewrap" style="box-shadow:none;margin-top:12px"><table><thead><tr><th>Week</th><th class="r">Gewerkte uren</th></tr></thead><tbody>${e.hoursLog.length?e.hoursLog.map(h=>`<tr><td><b>${h.week}</b></td><td class="r">${h.uren} u</td></tr>`).join(''):'<tr><td colspan="2"><div class="empty">Nog geen uren.</div></td></tr>'}<tr style="background:#FAFAFB"><td><b>Totaal</b></td><td class="r"><b>${tot} u</b></td></tr></tbody></table></div>`;
+    <div class="tablewrap" style="box-shadow:none;margin-top:12px"><table><thead><tr><th>Week</th><th class="r">Gewerkte uren</th></tr></thead><tbody>${e.hoursLog.length?e.hoursLog.map(h=>`<tr><td><b>${h.week}</b></td><td class="r">${h.uren} u</td></tr>`).join(''):'<tr><td colspan="2"><div class="empty">Nog geen uren.</div></td></tr>'}<tr style="background:var(--hover)"><td><b>Totaal</b></td><td class="r"><b>${tot} u</b></td></tr></tbody></table></div>`;
   } else if(empTab==='verlof'){
     content=`<div class="row-between"><h3 style="margin:0">Verlof &amp; ziekte</h3><button class="btn ghost sm" onclick="addVerlof(${id})">+ Verlof / ziek melden</button></div>
     <div class="tablewrap" style="box-shadow:none;margin-top:12px"><table><thead><tr><th>Type</th><th>Van</th><th>Tot</th><th class="r">Dagen</th></tr></thead><tbody>${e.verlof.length?e.verlof.map(v=>`<tr><td>${v.type==='Ziek'?'<span class="pill r">Ziek</span>':'<span class="pill ex">Vakantie</span>'}</td><td>${v.van}</td><td>${v.tot}</td><td class="r"><b>${v.dagen}</b></td></tr>`).join(''):'<tr><td colspan="4"><div class="empty">Geen verlof/ziekte gemeld.</div></td></tr>'}</tbody></table></div>`;
@@ -4745,7 +4766,7 @@ function renderClient(){
       meta:`<input class="wfp-note" value="${(o.opm||'').replace(/"/g,'&quot;')}" placeholder="notitie…" onclick="event.stopPropagation()" oninput="state.werk['${naam}'].ob['${q}'].opm=this.value">`});});
     const obEv=[];KWARTALEN.forEach(q=>{const o=w.ob[q];[['ingeleverd','aangeleverd','navy'],['ingelezen','ingevoerd','blue'],['ingediend','ingediend','green']].forEach(s=>{if(o[s[0]])obEv.push({d:o[s[0]],t:`${q} — ${s[1]}`,tone:s[2],_k:o[s[0]]});});});
     obEv.sort((a,b)=>pkDate(b._k)-pkDate(a._k));
-    content=wfTop('OB-aangifte · '+naam,`<button class="btn ghost sm" onclick="go('obwerk')">OB-werklijst →</button>`)
+    content=wfTop('OB-aangifte · '+naam,`<button class="btn ghost sm" onclick="printObDossier('${naam}')">⬇ Print / PDF</button><button class="btn ghost sm" onclick="go('obwerk')">OB-werklijst →</button>`)
     +modHead({tone:obTone,status:obQ.ingediend?'Q1 2026 ingediend':((obQ.ingelezen||obQ.ingeleverd)?'Q1 2026 in behandeling':'Q1 2026 — actie vereist'),
       kpis:[['Verantwoordelijke',c.mw],['Volgende deadline','31-07-2026'],['Kwartalen ingediend',obDone+'/4'],['BTW automatisch',c.btwAuto?'Ja':'Nee']],
       pct:Math.round(obDone/4*100),
@@ -4764,7 +4785,7 @@ function renderClient(){
       meta:`<div class="wfp-chips"><span class="wfp-chip ${o.uitstel?'on a':''}" onclick="event.stopPropagation();toggleIb('${naam}','${y}','uitstel')">Uitstel</span><span class="wfp-chip ${o.suppletie?'on':''}" onclick="event.stopPropagation();toggleIb('${naam}','${y}','suppletie')">Suppletie</span></div>`});});
     const ibEv=[];IBJAREN.forEach(y=>{const o=w.ib[y];[['jaarrekening','jaarrekening opgesteld','navy'],['ib','IB-aangifte opgesteld','blue'],['ingediend','ingediend','green'],['suppletie','suppletie','amber'],['uitstel','uitstel verleend','amber']].forEach(s=>{if(o[s[0]])ibEv.push({d:o[s[0]],t:`${y} — ${s[1]}`,tone:s[2],_k:o[s[0]]});});});
     ibEv.sort((a,b)=>pkDate(b._k)-pkDate(a._k));
-    content=wfTop('IB &amp; Jaarrekening · '+naam,`<button class="btn ghost sm" onclick="toast('Geopend in Fiscaal Gemak (demo)')"><span class="plogo fg" style="width:18px;height:18px;font-size:10px">FG</span> Open in Fiscaal Gemak</button><button class="btn ghost sm" onclick="go('ibwerk')">IB-werklijst →</button>`)
+    content=wfTop('IB &amp; Jaarrekening · '+naam,`<button class="btn ghost sm" onclick="printIbDossier('${naam}')">⬇ Print / PDF</button><button class="btn ghost sm" onclick="go('ibwerk')">IB-werklijst →</button>`)
     +modHead({tone:ibTone,status:ibY.ingediend?`IB ${IBYEAR} ingediend`:((ibY.ib||ibY.jaarrekening)?`IB ${IBYEAR} in behandeling`:`IB ${IBYEAR} — actie vereist`),
       kpis:[['Verantwoordelijke',c.mw],['Volgende deadline',ibDl],['Jaren ingediend',ibDone+'/'+IBJAREN.length],['Suppletie',ibY.suppletie?'Ja':'Nee']],
       pct:Math.round([ibY.jaarrekening,ibY.ib,ibY.ingediend].filter(Boolean).length/3*100),
@@ -4973,7 +4994,7 @@ function ibToggle(naam,y,f){const o=state.werk[naam].ib[y];o[f]=o[f]?'':TODAY;re
 function ibNote(naam,y){const o=state.werk[naam].ib[y];modal('Notitie · '+naam+' ('+y+')',field('Notitie','ibNoteV','text',(o.opm||'').replace(/"/g,'&quot;')),'Opslaan',()=>{o.opm=val('ibNoteV');renderView();});}
 VIEWS.kantoor.fg = ()=>{
   const tab=(k,l)=>`<div class="ftab ${fgTab===k?'active':''}" onclick="fgTab='${k}';renderView()">${l}</div>`;
-  return `<div class="row-between"><h1 class="title"><span class="plogo fg" style="width:22px;height:22px;font-size:9px;vertical-align:middle">FG</span> Fiscaal Gemak</h1><div style="display:flex;gap:9px"><button class="btn ghost sm" onclick="toast('Exporteren (demo)')">⬇ Exporteren</button><button class="btn ghost sm" onclick="toast('Importeren (demo)')">⬆ Importeren</button></div></div>
+  return `<div class="row-between"><h1 class="title"><span class="plogo fg" style="width:22px;height:22px;font-size:9px;vertical-align:middle">FG</span> Fiscaal Gemak</h1><div style="display:flex;gap:9px;align-items:center">${expBar('k_fg')}<button class="btn ghost sm" onclick="toast('Importeren (demo)')">⬆ Importeren</button></div></div>
   <div class="sub">Gekoppeld met Fiscaal Gemak — werkvoorraad (opgaven) en uitstel synchroniseren automatisch met uw kantoor.</div>
   <div class="ftabs">${tab('werkvoorraad','Werkvoorraad')}${tab('uitstel','Uitstel')}</div>
   ${fgTab==='uitstel'?fgUitstel():fgWerkvoorraad()}`;
@@ -5083,7 +5104,7 @@ VIEWS.kantoor.statistieken = ()=>{
     <div class="panel"><h3>Voortgang per klantmanager</h3>
       <div class="tablewrap" style="box-shadow:none"><table><thead><tr><th>Manager</th><th>Klanten</th><th class="r">Gedaan</th><th class="r">Open</th><th>Voortgang</th></tr></thead><tbody>
       ${MEDEWERKERS.map(mw=>{const cs=actief.filter(c=>c.mw===mw);const t=taken(cs);return `<tr class="clickable" onclick="mwFilter='${mw}';go('klanten')"><td><b>${mw}</b></td><td>${cs.length}</td><td class="r">${t.done}/${t.total}</td><td class="r">${t.open?'<span class="pill a">'+t.open+'</span>':'<span class="pill g">0</span>'}</td><td style="min-width:120px"><div class="pbar"><div class="pfill" style="width:${t.pct}%"></div></div><div style="font-size:11px;color:var(--grey);margin-top:3px">${t.pct}%</div></td></tr>`;}).join('')}
-      <tr style="background:#FAFAFB"><td><b>Algemeen</b></td><td>${actief.length}</td><td class="r"><b>${alg.done}/${alg.total}</b></td><td class="r"><b>${alg.open}</b></td><td><div class="pbar"><div class="pfill" style="width:${alg.pct}%"></div></div><div style="font-size:11px;color:var(--grey);margin-top:3px">${alg.pct}%</div></td></tr>
+      <tr style="background:var(--hover)"><td><b>Algemeen</b></td><td>${actief.length}</td><td class="r"><b>${alg.done}/${alg.total}</b></td><td class="r"><b>${alg.open}</b></td><td><div class="pbar"><div class="pfill" style="width:${alg.pct}%"></div></div><div style="font-size:11px;color:var(--grey);margin-top:3px">${alg.pct}%</div></td></tr>
       </tbody></table></div><div class="ai-note" style="margin-top:10px">To-do = alle OB-tijdvakken, IB-jaren en loonaangiften samen (ingediend/gedaan). Klik op een manager om diens klanten te openen.</div></div>
     <div class="panel"><h3>Verwerkte boekingen per maand</h3><div class="chart">${data.map(d=>`<div class="bar"><div class="bv">${d[1]}</div><div class="b" style="height:${Math.round(d[1]/max*100)}%"></div><div class="bl">${d[0]}</div></div>`).join('')}</div></div>
   </div>`;
