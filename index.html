@@ -646,11 +646,47 @@
   .emp-head .ph{width:54px;height:54px;border-radius:14px;background:linear-gradient(145deg,#1F5C90,#143A5E);color:#fff;display:grid;place-items:center;font-weight:800;font-size:19px;box-shadow:0 6px 16px #143a5e3a}
   .emp-head .nm{font-size:18px;font-weight:800;color:var(--ink)}
   .emp-head .meta{font-size:12.5px;color:var(--grey);margin-top:3px}
-  .doc-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin-bottom:9px;font-size:13px;background:#fff;box-shadow:var(--sh-xs);transition:border-color .14s,box-shadow .14s,transform .14s}
+  .doc-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin-bottom:9px;font-size:13px;background:var(--card);box-shadow:var(--sh-xs);transition:border-color .14s,box-shadow .14s,transform .14s}
   .doc-item:hover{border-color:var(--brand-2);box-shadow:var(--sh-md);transform:translateY(-1px)}
   .doc-item .di{width:36px;height:36px;border-radius:9px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;font-size:16px}
   .doc-item .dn{font-weight:700;color:var(--ink)}
   .doc-item .dm{font-size:11.5px;color:var(--grey)}
+  /* ===== Document center (beide portalen) ===== */
+  .sgrid.c5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
+  @media(max-width:900px){.sgrid.c5{grid-template-columns:repeat(2,1fr)}}
+  .doc-up{display:flex;align-items:center;gap:13px;background:var(--card);border:1.5px dashed var(--line);border-radius:14px;padding:13px 16px;margin-bottom:18px;cursor:pointer;transition:.14s}
+  .doc-up:hover,.doc-up.drag{border-color:var(--brand-2);background:var(--hover)}
+  .doc-up-ic{width:40px;height:40px;border-radius:11px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;font-size:18px;flex-shrink:0}
+  .doc-up b{font-size:13.5px;color:var(--ink)}
+  .doc-up .s{font-size:12px;color:var(--grey);margin-top:1px}
+  .doc-up>button{margin-left:auto;flex-shrink:0}
+  .fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:1100px){.fgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.fgrid{grid-template-columns:1fr}}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;cursor:pointer;transition:.14s}
+  .fcard:hover{border-color:var(--brand-2);transform:translateY(-2px);box-shadow:var(--sh-md)}
+  .fcard-top{display:flex;align-items:flex-start;justify-content:space-between}
+  .fcard-ic{width:42px;height:42px;border-radius:11px;background:var(--brand-soft);display:grid;place-items:center;font-size:20px}
+  .fcard-dot{width:8px;height:8px;border-radius:50%;margin-top:4px}
+  .fcard-dot.g{background:#22A565}.fcard-dot.q{background:var(--grey-2)}
+  .fcard-nm{font-weight:700;color:var(--ink);font-size:13.5px;margin-top:12px}
+  .fcard-meta{font-size:11.5px;color:var(--grey);margin-top:3px;font-variant-numeric:tabular-nums}
+  .fcard-act{font-size:11px;color:var(--grey-2);margin-top:7px}
+  .doc-tools{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 14px}
+  .dhead,.drow{display:grid;grid-template-columns:1.9fr 1fr .9fr .8fr auto;align-items:center;gap:12px}
+  .dhead{padding:0 14px 8px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2)}
+  .drow{padding:10px 14px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;transition:.12s}
+  .drow:hover{border-color:var(--brand-2);box-shadow:var(--sh-sm)}
+  .dfile{display:flex;align-items:center;gap:11px;min-width:0}
+  .dfile .di{width:34px;height:34px;border-radius:9px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;font-size:15px;flex-shrink:0}
+  .dname{font-weight:700;color:var(--ink);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dsub{font-size:11px;color:var(--grey-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dcat,.dby{font-size:12px;color:var(--grey)}
+  .ddate{font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums}
+  .dacts{display:flex;gap:5px;justify-content:flex-end}
+  .dact{width:30px;height:30px;border:1px solid var(--line);background:var(--card);border-radius:8px;cursor:pointer;color:var(--grey);display:grid;place-items:center;font-size:13px;transition:.12s;padding:0}
+  .dact:hover{border-color:var(--brand-2);color:var(--ink)}
+  @media(max-width:760px){.dhead,.drow{grid-template-columns:1.7fr .8fr auto}.dcat-h,.dby-h,.dcat,.dby{display:none}}
   .tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:20px;overflow-x:auto}
   .tab{padding:11px 15px;cursor:pointer;font-size:13px;font-weight:700;color:var(--grey);border-bottom:2.5px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .14s,border-color .14s}
   .tab:hover{color:var(--ink);background:var(--line-2);border-radius:8px 8px 0 0}
@@ -688,7 +724,7 @@
   #bldPreview{position:sticky;top:0}
   @media(max-width:1000px){.bld-grid{grid-template-columns:1fr}#bldPreview{position:static}}
   .folder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .folder{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;cursor:pointer;transition:.15s}
+  .folder{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;cursor:pointer;transition:.15s}
   .folder:hover{border-color:var(--brand-2);transform:translateY(-2px);box-shadow:var(--sh-md)}
   .folder .fic{font-size:30px}
   .folder .fn{font-weight:800;color:var(--ink);margin-top:8px;font-size:14px}
@@ -1622,6 +1658,54 @@ const I18N_ADD5={
  "Kostenplaats ":{en:"Cost center ",tr:"Masraf yeri ",bg:"Разходен център ",ar:"مركز التكلفة "}
 };
 Object.keys(I18N_ADD5).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD5[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD5[k][l];});});
+/* ===== Document center labels ===== */
+const I18N_ADD6={
+ "Documenten & rapporten":{en:"Documents & reports",tr:"Belgeler & raporlar",bg:"Документи и отчети",ar:"المستندات والتقارير"},
+ "Documenten":{en:"Documents",tr:"Belgeler",bg:"Документи",ar:"المستندات"},
+ "Mappen":{en:"Folders",tr:"Klasörler",bg:"Папки",ar:"المجلدات"},
+ "Recente documenten":{en:"Recent documents",tr:"Son belgeler",bg:"Скорошни документи",ar:"المستندات الأخيرة"},
+ "Document uploaden":{en:"Upload document",tr:"Belge yükle",bg:"Качи документ",ar:"رفع مستند"},
+ "Klik of sleep een bestand hierheen — foto, scan of PDF.":{en:"Click or drag a file here — photo, scan or PDF.",tr:"Tıklayın veya bir dosyayı buraya sürükleyin — fotoğraf, tarama veya PDF.",bg:"Щракнете или плъзнете файл тук — снимка, скан или PDF.",ar:"انقر أو اسحب ملفًا هنا — صورة أو مسح أو PDF."},
+ "+ Uploaden":{en:"+ Upload",tr:"+ Yükle",bg:"+ Качи",ar:"+ رفع"},
+ "+ Document uploaden":{en:"+ Upload document",tr:"+ Belge yükle",bg:"+ Качи документ",ar:"+ رفع مستند"},
+ "+ Document":{en:"+ Document",tr:"+ Belge",bg:"+ Документ",ar:"+ مستند"},
+ "Totaal documenten":{en:"Total documents",tr:"Toplam belge",bg:"Общо документи",ar:"إجمالي المستندات"},
+ "Recent geüpload":{en:"Recently uploaded",tr:"Son yüklenen",bg:"Скоро качени",ar:"المرفوعة حديثًا"},
+ "Te beoordelen":{en:"Awaiting review",tr:"İnceleme bekliyor",bg:"За преглед",ar:"بانتظار المراجعة"},
+ "Gedeeld door kantoor":{en:"Shared by office",tr:"Ofis tarafından paylaşıldı",bg:"Споделено от офиса",ar:"مُشارَك من المكتب"},
+ "Gedeeld door klant":{en:"Shared by client",tr:"Müşteri tarafından paylaşıldı",bg:"Споделено от клиента",ar:"مُشارَك من العميل"},
+ "Document":{en:"Document",tr:"Belge",bg:"Документ",ar:"المستند"},
+ "Categorie":{en:"Category",tr:"Kategori",bg:"Категория",ar:"الفئة"},
+ "Door":{en:"By",tr:"Yükleyen",bg:"От",ar:"بواسطة"},
+ "Datum":{en:"Date",tr:"Tarih",bg:"Дата",ar:"التاريخ"},
+ "Zoek document of categorie…":{en:"Search document or category…",tr:"Belge veya kategori ara…",bg:"Търси документ или категория…",ar:"ابحث عن مستند أو فئة…"},
+ "Alle categorieën":{en:"All categories",tr:"Tüm kategoriler",bg:"Всички категории",ar:"كل الفئات"},
+ "Alle jaren":{en:"All years",tr:"Tüm yıllar",bg:"Всички години",ar:"كل السنوات"},
+ "Iedereen":{en:"Everyone",tr:"Herkes",bg:"Всички",ar:"الجميع"},
+ "Nieuwste eerst":{en:"Newest first",tr:"En yeni önce",bg:"Първо най-нови",ar:"الأحدث أولاً"},
+ "Oudste eerst":{en:"Oldest first",tr:"En eski önce",bg:"Първо най-стари",ar:"الأقدم أولاً"},
+ "Naam (A–Z)":{en:"Name (A–Z)",tr:"Ad (A–Z)",bg:"Име (А–Я)",ar:"الاسم (أ–ي)"},
+ "Geen documenten gevonden.":{en:"No documents found.",tr:"Belge bulunamadı.",bg:"Няма намерени документи.",ar:"لا توجد مستندات."},
+ "Nog leeg":{en:"Empty",tr:"Boş",bg:"Празно",ar:"فارغ"},
+ "vandaag":{en:"today",tr:"bugün",bg:"днес",ar:"اليوم"},
+ "gisteren":{en:"yesterday",tr:"dün",bg:"вчера",ar:"أمس"},
+ "Document verplaatsen":{en:"Move document",tr:"Belgeyi taşı",bg:"Премести документ",ar:"نقل المستند"},
+ "Naar map":{en:"To folder",tr:"Klasöre",bg:"Към папка",ar:"إلى المجلد"},
+ "Verplaatsen":{en:"Move",tr:"Taşı",bg:"Премести",ar:"نقل"},
+ "Alle mappen":{en:"All folders",tr:"Tüm klasörler",bg:"Всички папки",ar:"كل المجلدات"},
+ "Vatan":{en:"Vatan",tr:"Vatan",bg:"Vatan",ar:"Vatan"},
+ "Kantoor":{en:"Office",tr:"Ofis",bg:"Офис",ar:"المكتب"},
+ "Klant":{en:"Client",tr:"Müşteri",bg:"Клиент",ar:"العميل"},
+ "Gedeeld":{en:"Shared",tr:"Paylaşıldı",bg:"Споделено",ar:"مُشارَك"},
+ "Intern":{en:"Internal",tr:"Dahili",bg:"Вътрешно",ar:"داخلي"}
+};
+Object.keys(I18N_ADD6).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD6[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD6[k][l];});});
+(function(){const more={
+ en:[["Laatste activiteit ","Last activity "],[" document(en)"," document(s)"],[" dagen geleden"," days ago"],[" weken geleden"," weeks ago"],[" maanden geleden"," months ago"],[" jaar geleden"," years ago"],["1 week geleden","1 week ago"]],
+ tr:[["Laatste activiteit ","Son etkinlik "],[" document(en)"," belge"],[" dagen geleden"," gün önce"],[" weken geleden"," hafta önce"],[" maanden geleden"," ay önce"],[" jaar geleden"," yıl önce"],["1 week geleden","1 hafta önce"]],
+ bg:[["Laatste activiteit ","Последна активност "],[" document(en)"," документа"],[" dagen geleden"," дни преди"],[" weken geleden"," седмици преди"],[" maanden geleden"," месеца преди"],[" jaar geleden"," години преди"],["1 week geleden","преди 1 седмица"]],
+ ar:[["Laatste activiteit ","آخر نشاط "],[" document(en)"," مستند"],[" dagen geleden"," يومًا مضت"],[" weken geleden"," أسابيع مضت"],[" maanden geleden"," أشهر مضت"],[" jaar geleden"," سنوات مضت"],["1 week geleden","قبل أسبوع"]]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[["Goedemiddag, ","Good afternoon, "],["Goedemorgen, ","Good morning, "],["Goedenavond, ","Good evening, "],[" nog niet betaald door uw klanten"," not yet paid by your clients"],[" rekeningen openstaand"," bills outstanding"],[" rekening openstaand"," bill outstanding"],["KPN-factuur automatisch geboekt","KPN invoice booked automatically"],["BTW-aangifte","VAT return"],["Factuur ","Invoice "],[" verstuurd"," sent"],[" voorbereid"," prepared"]],
  tr:[["Goedemiddag, ","İyi günler, "],["Goedemorgen, ","Günaydın, "],["Goedenavond, ","İyi akşamlar, "],[" nog niet betaald door uw klanten"," müşterileriniz tarafından henüz ödenmedi"],[" rekeningen openstaand"," fatura açık"],[" rekening openstaand"," fatura açık"],["KPN-factuur automatisch geboekt","KPN faturası otomatik kaydedildi"],["BTW-aangifte","KDV beyanı"],["Factuur ","Fatura "],[" verstuurd"," gönderildi"],[" voorbereid"," hazırlandı"]],
@@ -2645,6 +2729,55 @@ VIEWS.klant.personeel = ()=> listView('Personeel','Uw medewerkers. Klik voor ure
     return `<tr class="clickable" onclick="openEmployee(${e.id})"><td><b>${e.naam}</b></td><td>${e.functie}</td><td>${e.contract}</td><td>${e.loon}</td><td><span class="pill n">${vd} verlof · ${zd} ziek</span></td></tr>`;}).join(''));
 
 const MAP_ICON={'Jaarrekening':'📊','Omzetbelasting (BTW)':'🧾','Inkomstenbelasting':'📄','Vennootschapsbelasting':'🏢','Loonadministratie':'👥','Contracten':'📑','Verzekeringen':'🛡️','Overig':'📁'};
+/* ===== Document center — gedeeld door beide portalen ===== */
+let docSearch='',docCat='alle',docYear='alle',docUploader='alle',docSort='nieuw',_docOffice=false,_docNaam='Demo BV';
+function docDays(date){const p=(date||'').split('-');if(p.length!==3)return 99999;const d=new Date(+p[2],+p[1]-1,+p[0]);return Math.round((new Date(2026,5,17)-d)/86400000);}
+function docRel(days){if(days<=0)return 'vandaag';if(days===1)return 'gisteren';if(days<7)return days+' dagen geleden';if(days<14)return '1 week geleden';if(days<31)return Math.round(days/7)+' weken geleden';if(days<365)return Math.round(days/30)+' maanden geleden';return Math.round(days/365)+' jaar geleden';}
+function docScope(){return _docOffice?state.dossierDocs.map((d,i)=>({d,i})).filter(x=>x.d.client===_docNaam):state.dossierDocs.map((d,i)=>({d,i})).filter(x=>x.d.client==='Demo BV'&&(x.d.gedeeld||x.d.by==='klant'));}
+function docApply(list){const q=(docSearch||'').toLowerCase().trim();let r=list.filter(x=>{const d=x.d;if(docCat!=='alle'&&d.map!==docCat)return false;if(docUploader!=='alle'&&d.by!==docUploader)return false;if(docYear!=='alle'&&(d.date||'').slice(-4)!==docYear)return false;if(q&&(d.naam+' '+d.map).toLowerCase().indexOf(q)<0)return false;return true;});
+  r.sort((a,b)=>{if(docSort==='naam')return a.d.naam.localeCompare(b.d.naam);if(docSort==='oud')return docDays(b.d.date)-docDays(a.d.date);return docDays(a.d.date)-docDays(b.d.date);});return r;}
+function docSelHTML(varName,pairs,sel){return `<select class="kb-sel" onchange="${varName}=this.value;docListRender()">${pairs.map(p=>`<option value="${gEsc(p[0])}" ${p[0]===sel?'selected':''}>${gEsc(p[1])}</option>`).join('')}</select>`;}
+function docRowsHTML(){const office=_docOffice,naam=_docNaam;const list=docApply(docScope());
+  if(!list.length)return '<div class="empty"><div class="big">🔍</div>Geen documenten gevonden.</div>';
+  return list.slice(0,50).map(({d,i})=>{const shared=(d.gedeeld||d.by==='klant');
+    const openJs=office?`openClient('${gJs(naam)}','map:${gJs(d.map)}')`:`openMap('${gJs(d.map)}')`;
+    const byLbl=office?(d.by==='kantoor'?'Kantoor':'Klant'):(d.by==='kantoor'?'Vatan':'U');
+    let acts=`<button class="dact" title="Openen" onclick="${openJs}">↗</button><button class="dact" title="Downloaden" onclick="toast('Download (demo)')">⬇</button>`;
+    if(office)acts+=`<button class="dact" title="${d.gedeeld?'Niet meer delen':'Delen met klant'}" onclick="toggleShare(${i},'${gJs(naam)}')">${d.gedeeld?'⊘':'⇲'}</button><button class="dact" title="Verplaatsen" onclick="moveDocModal(${i},'${gJs(naam)}')">⇄</button>`;
+    return `<div class="drow"><div class="dfile"><span class="di">📄</span><div style="min-width:0"><div class="dname">${gEsc(d.naam)}</div><div class="dsub">${gEsc(d.map)}${office?(shared?' · Gedeeld':' · Intern'):''}</div></div></div><div class="dcat">${gEsc(d.map)}</div><div class="dby">${byLbl}</div><div class="ddate">${gEsc(d.date)}</div><div class="dacts">${acts}</div></div>`;}).join('');
+}
+function docListRender(){const el=document.getElementById('docList');if(el)el.innerHTML=docRowsHTML();}
+function moveDocModal(i,naam){const d=state.dossierDocs[i];if(!d)return;modal('Document verplaatsen',selectFieldKV('Naar map','mvMap',MAPPEN.map(m=>[m,m]),d.map),'Verplaatsen',()=>{state.dossierDocs[i].map=val('mvMap');toast('Verplaatst naar '+val('mvMap')+' ✓');if(_docOffice)renderClient();else renderView();return true;});}
+function docCenterHTML(office,naam,titleHtml){
+  _docOffice=office;_docNaam=naam;
+  const scoped=docScope();
+  const total=scoped.length;
+  const recent=scoped.filter(x=>docDays(x.d.date)<7).length;
+  const sharedOffice=scoped.filter(x=>x.d.by==='kantoor'&&x.d.gedeeld).length;
+  const sharedClient=scoped.filter(x=>x.d.by==='klant').length;
+  const review=office?sharedClient:scoped.filter(x=>x.d.by==='kantoor'&&docDays(x.d.date)<14).length;
+  const years=[...new Set(scoped.map(x=>(x.d.date||'').slice(-4)).filter(y=>y.length===4))].sort().reverse();
+  const uploadJs=office?`uploadDocKantoor('${gJs(naam)}')`:`uploadDoc()`;
+  const sum=[['Totaal documenten',total,''],['Recent geüpload',recent,recent?'g':''],['Te beoordelen',review,review?'a':''],['Gedeeld door kantoor',sharedOffice,''],['Gedeeld door klant',sharedClient,'']];
+  const byMap={};MAPPEN.forEach(m=>byMap[m]=scoped.filter(x=>x.d.map===m));
+  const fcards=MAPPEN.map(m=>{const arr=byMap[m];const cnt=arr.length;const days=cnt?Math.min.apply(null,arr.map(x=>docDays(x.d.date))):99999;const dot=cnt&&days<=7?'g':'q';const open=office?`openClient('${gJs(naam)}','map:${gJs(m)}')`:`openMap('${gJs(m)}')`;
+    return `<div class="fcard" onclick="${open}"><div class="fcard-top"><div class="fcard-ic">${MAP_ICON[m]||'📁'}</div>${cnt?`<span class="fcard-dot ${dot}"></span>`:''}</div><div class="fcard-nm">${gEsc(m)}</div><div class="fcard-meta">${cnt} document(en)</div><div class="fcard-act">${cnt?'Laatste activiteit '+docRel(days):'Nog leeg'}</div></div>`;}).join('');
+  return `${titleHtml}
+  <div class="sgrid c5">${sum.map(s=>`<div class="scard"><div class="sl">${s[0]}</div><div class="sv ${s[2]}">${s[1]}</div></div>`).join('')}</div>
+  <div class="doc-up" onclick="${uploadJs}" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="event.preventDefault();this.classList.remove('drag');${uploadJs}"><span class="doc-up-ic">⤓</span><div><b>Document uploaden</b><div class="s">Klik of sleep een bestand hierheen — foto, scan of PDF.</div></div><button class="btn primary sm" onclick="event.stopPropagation();${uploadJs}">+ Uploaden</button></div>
+  <div class="mod-sub">Mappen</div>
+  <div class="fgrid">${fcards}</div>
+  <div class="mod-sub" style="margin:20px 0 11px">Recente documenten</div>
+  <div class="doc-tools">
+    <input class="kb-search" placeholder="Zoek document of categorie…" value="${gEsc(docSearch)}" oninput="docSearch=this.value;docListRender()">
+    ${docSelHTML('docCat',[['alle','Alle categorieën'],...MAPPEN.map(m=>[m,m])],docCat)}
+    ${docSelHTML('docYear',[['alle','Alle jaren'],...years.map(y=>[y,y])],docYear)}
+    ${docSelHTML('docUploader',[['alle','Iedereen'],['kantoor',office?'Kantoor':'Vatan'],['klant',office?'Klant':'U']],docUploader)}
+    ${docSelHTML('docSort',[['nieuw','Nieuwste eerst'],['oud','Oudste eerst'],['naam','Naam (A–Z)']],docSort)}
+  </div>
+  <div class="dhead"><div>Document</div><div class="dcat-h">Categorie</div><div class="dby-h">Door</div><div>Datum</div><div></div></div>
+  <div id="docList">${docRowsHTML()}</div>`;
+}
 VIEWS.klant.documenten = ()=>{
   if(docMap){const docs=state.dossierDocs.filter(d=>d.map===docMap&&d.client==='Demo BV'&&(d.gedeeld||d.by==='klant'));
     return `<div class="backbar"><span class="backbtn" onclick="closeMap()">← Alle mappen</span></div>
@@ -2652,10 +2785,8 @@ VIEWS.klant.documenten = ()=>{
     <div class="sub">Documenten in deze map. Vatan Administratie heeft hier ook inzage.</div>
     ${docs.length?docs.map(d=>`<div class="doc-item"><div class="di">📄</div><div style="flex:1"><div class="dn">${d.naam}</div><div class="dm">Toegevoegd door ${d.by==='kantoor'?'Vatan Administratie':'u'} · ${d.date}</div></div><button class="btn ghost sm" onclick="toast('Download (demo)')">⬇</button></div>`).join(''):'<div class="empty"><div class="big">📂</div>Deze map is nog leeg.</div>'}`;
   }
-  const counts={}; MAPPEN.forEach(m=>counts[m]=state.dossierDocs.filter(d=>d.map===m&&d.client==='Demo BV'&&(d.gedeeld||d.by==='klant')).length);
-  return `<div class="row-between"><h1 class="title">Documenten &amp; rapporten</h1><button class="btn primary" onclick="uploadDoc()">+ Document uploaden</button></div>
-  <div class="sub">Bewaar alle bedrijfsdocumenten van uw onderneming op één plek, geordend in mappen. Documenten van Vatan (jaarrekening, aangiften) verschijnen hier automatisch; u kunt zelf ook contracten, polissen e.d. toevoegen.</div>
-  <div class="folder-grid">${MAPPEN.map(m=>`<div class="folder" onclick="openMap(\`${m}\`)"><div class="fic">${MAP_ICON[m]||'📁'}</div><div class="fn">${m}</div><div class="fc">${counts[m]} document(en)</div></div>`).join('')}</div>`;
+  return docCenterHTML(false,'Demo BV',`<div class="row-between"><h1 class="title">Documenten &amp; rapporten</h1><button class="btn primary" onclick="uploadDoc()">+ Document uploaden</button></div>
+  <div class="sub">Al uw bedrijfsdocumenten op één plek. Documenten van Vatan (jaarrekening, aangiften) verschijnen hier automatisch; u kunt zelf ook contracten en polissen toevoegen.</div>`);
 };
 function openMap(m){docMap=m;renderView();}
 function closeMap(){docMap=null;renderView();}
@@ -3458,9 +3589,7 @@ function renderClient(){
       </div>
       <div class="ai-note" style="margin-top:14px;font-size:11.5px">Klik op een maand om de aangifte als gedaan/niet-gedaan te markeren. Groen = ingediend · amber = openstaand (verstreken) · grijs = toekomstig.</div></div>`;
   } else if(clientTab==='mappen'){
-    const counts={};MAPPEN.forEach(m=>counts[m]=state.dossierDocs.filter(x=>x.client===naam&&x.map===m).length);
-    content=`<div class="row-between"><h3 style="margin:0">Documentmappen</h3><button class="btn primary sm" onclick="uploadDocKantoor('${naam}')">+ Document</button></div>
-      <div class="folder-grid" style="margin-top:12px">${MAPPEN.map(m=>`<div class="folder" onclick="openClient('${naam}','map:${m}')"><div class="fic">${MAP_ICON[m]||'📁'}</div><div class="fn">${m}</div><div class="fc">${counts[m]} document(en)</div></div>`).join('')}</div>`;
+    content=docCenterHTML(true,naam,`<div class="row-between" style="margin-bottom:8px"><h3 style="margin:0">Documenten</h3><button class="btn primary sm" onclick="uploadDocKantoor('${naam}')">+ Document</button></div><div class="sub" style="margin:-2px 0 14px">Intern = alleen kantoor. Gedeeld = ook zichtbaar voor de klant in het klantportaal.</div>`);
   } else if(clientTab==='personeel'){
     const emps=state.employees.filter(e=>e.client===naam);
     const isVast=e=>/onbepaald|vast/i.test(e.contract||'');
