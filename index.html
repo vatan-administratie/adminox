@@ -591,6 +591,65 @@
   body.dark .exp-menu{box-shadow:0 16px 40px rgba(0,0,0,.5)}
   body.dark .exp-item:hover .exp-ic{background:rgba(255,255,255,.14);color:var(--ink)}
   body.dark .exp-item:hover{background:var(--hover)}
+  /* === Inzicht modules === */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:900px){.grid3{grid-template-columns:1fr}}
+  .hc-filters{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+  .hc-fg{display:flex;flex-wrap:wrap;gap:7px}
+  .hc-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid var(--line);border-radius:20px;font-size:12px;font-weight:600;color:var(--grey);background:var(--card);cursor:pointer;transition:.12s}
+  .hc-chip:hover{border-color:var(--brand-2);color:var(--ink)}
+  .hc-chip.on{background:var(--brand-2);border-color:var(--brand-2);color:#fff}
+  .hc-chip .d{width:9px;height:9px;border-radius:50%}
+  .sv-d{font-size:12px;font-weight:700;vertical-align:middle}.sv-d.up{color:#22A565}.sv-d.dn{color:var(--red)}
+  .trend-wrap{margin-top:8px}
+  .trend-svg{width:100%;height:64px;display:block}
+  .trend-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums}
+  .trend-foot small{color:var(--grey-2);font-size:10px;text-transform:uppercase;letter-spacing:.03em}
+  .trend-foot .up{color:#22A565;font-weight:700}.trend-foot .dn{color:var(--red);font-weight:700}
+  .hc-mini{display:flex;gap:10px;margin-top:14px}
+  .hc-mini-c{flex:1;text-align:center;background:var(--line-2);border-radius:10px;padding:9px 6px}
+  .hc-mini-n{font-size:17px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}.hc-mini-n.r{color:var(--red)}.hc-mini-n.g{color:#22A565}
+  .hc-mini-l{font-size:10.5px;color:var(--grey-2);margin-top:2px}
+  .hd{font-size:10.5px;font-weight:800;white-space:nowrap}.hd.up{color:#22A565}.hd.dn{color:var(--red)}.hd.fl{color:var(--grey-2)}
+  .hc-cols .wkrow{padding:8px 6px}
+  .wc-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+  .wc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;cursor:pointer;transition:.14s}
+  .wc:hover{border-color:var(--brand-2);box-shadow:var(--sh-md)}
+  .wc-top{display:flex;align-items:center;gap:11px}
+  .wc-av{width:38px;height:38px;border-radius:11px;background:linear-gradient(150deg,#1F5C90,#103B63);color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px;flex-shrink:0}
+  .wc-nm{font-weight:700;color:var(--ink);font-size:14px}
+  .wc-sub{font-size:11.5px;color:var(--grey-2)}
+  .wc-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}
+  .wc-badge.g{background:var(--green-soft,#E7F6EE);color:#1A8F54}.wc-badge.a{background:#FDF1DC;color:#B4791B}.wc-badge.r{background:#FBE6E8;color:#C8362F}
+  body.dark .wc-badge.g{background:rgba(34,165,101,.16);color:#5fd39a}body.dark .wc-badge.a{background:rgba(217,147,32,.16);color:#e7b766}body.dark .wc-badge.r{background:rgba(220,70,70,.16);color:#ef9a9a}
+  .wc-cap{margin:13px 0 11px}
+  .wc-cap-h{display:flex;justify-content:space-between;font-size:11.5px;color:var(--grey);margin-bottom:5px}
+  .wc-cap-p{font-weight:800}.wc-cap-p.g{color:#1A8F54}.wc-cap-p.a{color:#B4791B}.wc-cap-p.r{color:var(--red)}
+  .wc-bar{height:7px;border-radius:5px;background:var(--line-2);overflow:hidden}
+  .wc-fill{height:100%;border-radius:5px}.wc-fill.g{background:#22A565}.wc-fill.a{background:var(--amber)}.wc-fill.r{background:var(--red)}
+  .wc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .wc-m{background:var(--line-2);border-radius:9px;padding:8px 6px;text-align:center}
+  .wc-mv{font-size:14px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}.wc-mv.r{color:var(--red)}.wc-mv.a{color:var(--amber)}
+  .wc-ml{font-size:9.5px;color:var(--grey-2);margin-top:2px;text-transform:uppercase;letter-spacing:.02em}
+  .ks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
+  .ks{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:14px;padding:14px 15px;cursor:pointer;transition:.14s}
+  .ks:hover{box-shadow:var(--sh-md)}
+  .ks.r{border-left-color:var(--red)}.ks.a{border-left-color:var(--amber)}.ks.g{border-left-color:#22A565}
+  .ks.sel{border-color:var(--brand-2);box-shadow:0 0 0 2px var(--brand-soft)}
+  .ks-top{display:flex;align-items:center;gap:10px}
+  .ks-ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+  .ks-ic.ex{background:#C8102E}.ks-ic.sn{background:#1763a6}.ks-ic.bank{background:#0f766e;font-size:16px}.ks-ic.fg{background:#475569}
+  .ks-nm{font-weight:700;color:var(--ink);font-size:13.5px}
+  .ks-cl{font-size:11px;color:var(--grey-2)}
+  .ks-st{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .ks-st.g{background:var(--green-soft,#E7F6EE);color:#1A8F54}.ks-st.a{background:#FDF1DC;color:#B4791B}.ks-st.r{background:#FBE6E8;color:#C8362F}
+  body.dark .ks-st.g{background:rgba(34,165,101,.16);color:#5fd39a}body.dark .ks-st.a{background:rgba(217,147,32,.16);color:#e7b766}body.dark .ks-st.r{background:rgba(220,70,70,.16);color:#ef9a9a}
+  .ks-metr{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:13px 0 10px}
+  .ks-metr>div{text-align:center}
+  .ks-mv{font-size:15px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}.ks-mv.r{color:var(--red)}.ks-mv.a{color:var(--amber)}
+  .ks-ml{font-size:9px;color:var(--grey-2);margin-top:1px;text-transform:uppercase;letter-spacing:.02em}
+  .ks-foot{font-size:11px;color:var(--grey);border-top:1px solid var(--line-2);padding-top:8px}
+  .ks-act{font-size:11.5px;color:var(--ink);margin-top:7px;background:var(--line-2);border-radius:8px;padding:7px 9px;line-height:1.4}
   @media(max-width:560px){.cc-ops{flex-wrap:wrap}.cc-op{flex:1 1 44%}}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
@@ -2291,6 +2350,38 @@ const I18N_ADD16={
  "Aangifte opstellen":{en:"Prepare return",tr:"Beyan hazırla",bg:"Подготви декларация",ar:"إعداد الإقرار"}
 };
 Object.keys(I18N_ADD16).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD16[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD16[k][l];});});
+/* ===== Inzicht-modules (health-trend, werkdruk, koppelingen) ===== */
+const I18N_ADD17={
+ "Health-trend":{en:"Health trend",tr:"Sağlık trendi",bg:"Тренд на здравето",ar:"اتجاه الصحة"},
+ "Alle groepen":{en:"All groups",tr:"Tüm gruplar",bg:"Всички групи",ar:"كل المجموعات"},
+ "Hoogste risico":{en:"Highest risk",tr:"En yüksek risk",bg:"Най-висок риск",ar:"الأعلى خطورة"},
+ "Snelst verbeterend":{en:"Fastest improving",tr:"En hızlı iyileşen",bg:"Най-бързо подобряващи се",ar:"الأسرع تحسناً"},
+ "Actie vereist":{en:"Action required",tr:"İşlem gerekli",bg:"Изисква действие",ar:"يتطلب إجراءً"},
+ "Verbeterend":{en:"Improving",tr:"İyileşen",bg:"Подобряващи се",ar:"يتحسن"},
+ "Nog geen stijgers":{en:"No risers yet",tr:"Henüz yükselen yok",bg:"Все още няма растящи",ar:"لا تحسّن بعد"},
+ "Geen acties open":{en:"No open actions",tr:"Açık işlem yok",bg:"Няма отворени действия",ar:"لا إجراءات مفتوحة"},
+ "Teamvoltooiing":{en:"Team completion",tr:"Takım tamamlama",bg:"Завършеност на екипа",ar:"إنجاز الفريق"},
+ "Gebalanceerd":{en:"Balanced",tr:"Dengeli",bg:"Балансиран",ar:"متوازن"},
+ "Druk":{en:"Busy",tr:"Yoğun",bg:"Натоварен",ar:"مشغول"},
+ "Overbelast":{en:"Overloaded",tr:"Aşırı yüklü",bg:"Претоварен",ar:"مُحمَّل بإفراط"},
+ "Werkdruk per medewerker":{en:"Workload per employee",tr:"Çalışan başına iş yükü",bg:"Натоварване по служител",ar:"عبء العمل لكل موظف"},
+ "Bezetting":{en:"Utilization",tr:"Doluluk",bg:"Натовареност",ar:"الإشغال"},
+ "Beschikbaar":{en:"Available",tr:"Uygun",bg:"Налично",ar:"متاح"},
+ "Prognose":{en:"Forecast",tr:"Tahmin",bg:"Прогноза",ar:"التوقّع"},
+ "Open docs":{en:"Open docs",tr:"Açık belgeler",bg:"Отворени документи",ar:"مستندات مفتوحة"},
+ "Signalen":{en:"Signals",tr:"Sinyaller",bg:"Сигнали",ar:"إشارات"},
+ "Kritiek":{en:"Critical",tr:"Kritik",bg:"Критично",ar:"حرج"},
+ "Waarschuwing":{en:"Warning",tr:"Uyarı",bg:"Предупреждение",ar:"تحذير"},
+ "Waarsch.":{en:"Warn.",tr:"Uyarı",bg:"Предупр.",ar:"تحذير"},
+ "Sync-succes":{en:"Sync success",tr:"Senk. başarısı",bg:"Успех на синхр.",ar:"نجاح المزامنة"},
+ "Integraties":{en:"Integrations",tr:"Entegrasyonlar",bg:"Интеграции",ar:"التكاملات"},
+ "Alle integraties":{en:"All integrations",tr:"Tüm entegrasyonlar",bg:"Всички интеграции",ar:"كل التكاملات"},
+ "Bankkoppelingen":{en:"Bank connections",tr:"Banka bağlantıları",bg:"Банкови връзки",ar:"روابط البنوك"},
+ "Geen meldingen voor deze selectie.":{en:"No alerts for this selection.",tr:"Bu seçim için uyarı yok.",bg:"Няма сигнали за тази селекция.",ar:"لا تنبيهات لهذا التحديد."},
+ "Geen actie nodig — koppeling gezond":{en:"No action needed — connection healthy",tr:"İşlem gerekmiyor — bağlantı sağlıklı",bg:"Не е нужно действие — връзката е здрава",ar:"لا حاجة لإجراء — الاتصال سليم"},
+ "Controleer de koppeling":{en:"Check the connection",tr:"Bağlantıyı kontrol edin",bg:"Проверете връзката",ar:"تحقق من الاتصال"}
+};
+Object.keys(I18N_ADD17).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD17[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD17[k][l];});});
 (function(){const more={
  en:[[" documenten verwerken"," documents to process"],[" OB-controles"," VAT checks"],[" IB deadline(s)"," income-tax deadline(s)"],[" klanten met signalen"," clients with signals"],[" verstreken"," overdue"],["Wijs nieuwe klanten voorlopig toe aan ","Assign new clients for now to "],[" — laagste werkdruk."," — lowest workload."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," will get a peak in income-tax files — plan extra time."],[" heeft een achterstand in documentverwerking."," has a backlog in document processing."]],
  tr:[[" documenten verwerken"," belge işlenecek"],[" OB-controles"," KDV kontrolü"],[" IB deadline(s)"," gelir vergisi son tarihi"],[" klanten met signalen"," sinyalli müşteri"],[" verstreken"," gecikti"],["Wijs nieuwe klanten voorlopig toe aan ","Yeni müşterileri şimdilik şuna atayın: "],[" — laagste werkdruk."," — en düşük iş yükü."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," gelir vergisi dosyalarında bir zirve yaşayacak — ekstra zaman planlayın."],[" heeft een achterstand in documentverwerking."," belge işlemede geride."]],
@@ -4067,36 +4158,91 @@ VIEWS.kantoor.overzicht = ()=>{
     <div style="font-size:11.5px;color:var(--grey);margin:8px 2px 0;line-height:1.5">Elke klant is aan precies één boekhoudprogramma gekoppeld; Fiscaal Gemak is kantoorbreed gekoppeld voor IB/VPB/jaarwerk en uitstel.</div></div>`;
 };
 const EX_ACTION={Verbinding:'Koppeling opnieuw autoriseren in instellingen',Synchronisatie:'Handmatige sync starten en controleren',Boekjaar:'Mutaties bijwerken of klant herinneren',Grootboekmapping:'Ontbrekende rekeningen koppelen in rekeningschema',Saldi:'Tussenrekening uitzoeken en afboeken',Bankkoppeling:'Bankkoppeling herstellen of opnieuw koppelen','BTW-rekeningen':'BTW-grootboek aansluiten op de aangifte','Categorieën':'Ongecategoriseerde boekingen indelen'};
+let hcMw='alle',hcGroep='alle',hcTrend=6;
+function healthDelta(naam){const c=state.clients.find(x=>x.naam===naam)||{};const seed=parseInt(c.nr,10)||1;return ((seed*7+3)%13)-6;}
+function healthTrendSeries(curAvg,months){const out=[];for(let i=months-1;i>=1;i--){const wig=((i*29)%7)-3;out.push(Math.max(45,Math.min(96,curAvg-Math.round(i*1.0)+wig)));}out.push(curAvg);return out;}
+function _spark(vals,w,h){const min=Math.min(...vals)-3,max=Math.max(...vals)+3,rng=(max-min)||1,dx=w/Math.max(1,vals.length-1);const pts=vals.map((v,i)=>[+(i*dx).toFixed(1),+(h-((v-min)/rng)*h).toFixed(1)]);const line=pts.map((p,i)=>(i?'L':'M')+p[0]+' '+p[1]).join(' ');const area='M0 '+h+' '+pts.map(p=>'L'+p[0]+' '+p[1]).join(' ')+' L'+w+' '+h+' Z';return {line,area,last:pts[pts.length-1]};}
+function _dArrow(d){return d>0?`<span class="hd up">▲ ${d}</span>`:(d<0?`<span class="hd dn">▼ ${Math.abs(d)}</span>`:`<span class="hd fl">– 0</span>`);}
 VIEWS.kantoor.health = ()=>{
-  const base=state.clients.filter(c=>c.actief);const hs=base.map(c=>({c,h:clientHealth(c.naam)}));
-  const avg=Math.round(hs.reduce((a,x)=>a+x.h.score,0)/Math.max(1,hs.length));const risk=hs.filter(x=>x.h.tone==='r'),att=hs.filter(x=>x.h.tone==='a'),ok=hs.filter(x=>x.h.tone==='g');
+  let base=state.clients.filter(c=>c.actief);
+  if(hcMw!=='alle')base=base.filter(c=>c.mw===hcMw);
+  if(hcGroep!=='alle')base=base.filter(c=>clientGroupId(c)===hcGroep);
+  const hs=base.map(c=>({c,h:clientHealth(c.naam),d:healthDelta(c.naam)}));
+  const avg=Math.round(hs.reduce((a,x)=>a+x.h.score,0)/Math.max(1,hs.length));
+  const risk=hs.filter(x=>x.h.tone==='r'),att=hs.filter(x=>x.h.tone==='a'),ok=hs.filter(x=>x.h.tone==='g');
   const band=[['Risico (0–54)','r',risk.length],['Aandacht (55–79)','a',att.length],['Gezond (80–100)','g',ok.length]];
-  const rows=arr=>arr.slice().sort((a,b)=>a.h.score-b.h.score).map(x=>`<div class="wkrow" onclick="openClient('${gJs(x.c.naam)}','overzicht')"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div class="id"><b>${x.c.naam}</b><div class="t">${x.c.mw} · ${x.h.factors.length?x.h.factors[0].l:'—'}</div></div>${healthBadge(x.c.naam)}</div>`).join('');
+  const series=healthTrendSeries(avg,hcTrend);const sp=_spark(series,260,64);const trendDelta=avg-series[0];
+  const row=x=>`<div class="wkrow" onclick="openClient('${gJs(x.c.naam)}','overzicht')"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div class="id"><b>${x.c.naam}</b><div class="t">${x.c.mw} · ${x.h.factors.length?x.h.factors[0].l:'—'}</div></div><div style="display:flex;gap:8px;align-items:center">${_dArrow(x.d)}${healthBadge(x.c.naam)}</div></div>`;
+  const action=hs.filter(x=>x.h.tone==='r'||clientDeadlines(x.c.naam).some(d=>d.bucket==='overdue'));
+  const improving=hs.filter(x=>x.d>0).sort((a,b)=>b.d-a.d).slice(0,6);
+  const mwChips=`<span class="hc-chip ${hcMw==='alle'?'on':''}" onclick="hcMw='alle';renderView()">Alle medewerkers</span>`+MEDEWERKERS.map(m=>`<span class="hc-chip ${hcMw===m?'on':''}" onclick="hcMw='${m}';renderView()">${m}</span>`).join('');
+  const grChips=`<span class="hc-chip ${hcGroep==='alle'?'on':''}" onclick="hcGroep='alle';renderView()">Alle groepen</span>`+state.groups.map(g=>`<span class="hc-chip ${hcGroep===g.id?'on':''}" onclick="hcGroep='${g.id}';renderView()"><span class="d" style="background:${g.kleur}"></span>${gEsc(g.naam)}</span>`).join('');
+  const tw=[[3,'3 mnd'],[6,'6 mnd'],[12,'12 mnd']];
   return `<div class="row-between"><h1 class="title">Client Health Center</h1><div style="display:flex;gap:8px;align-items:center">${expBar('k_health')}<button class="btn ghost" onclick="go('overzicht')">← Dashboard</button></div></div>
-  <div class="sub">Gezondheids- en risico-overzicht over alle ${base.length} actieve klanten — prioriteer op health.</div>
-  <div class="sgrid c4"><div class="scard"><div class="sl">Gem. health</div><div class="sv">${avg}</div></div><div class="scard"><div class="sl">Risico</div><div class="sv r">${risk.length}</div></div><div class="scard"><div class="sl">Aandacht</div><div class="sv a">${att.length}</div></div><div class="scard"><div class="sl">Gezond</div><div class="sv g">${ok.length}</div></div></div>
-  <div class="panel" style="margin-bottom:14px"><div class="mod-sub">Verdeling</div><div class="hbar">${band.map(b=>{const pct=Math.round(b[2]/Math.max(1,hs.length)*100);return pct?`<div class="hbar-seg ${b[1]}" style="width:${pct}%"></div>`:'';}).join('')}</div><div class="hbar-lbl">${band.map(b=>`<span class="hbar-k ${b[1]}"><span class="d"></span>${b[0]} · ${b[2]}</span>`).join('')}</div></div>
-  <div class="grid2" style="align-items:start;gap:16px"><div class="panel"><div class="mod-sub">Risicoklanten</div>${risk.length?rows(risk):'<div class="empty" style="padding:18px">Geen risicoklanten 🎉</div>'}</div><div class="panel"><div class="mod-sub">Aandacht nodig</div>${att.length?rows(att):'<div class="empty" style="padding:18px">Geen aandachtsklanten</div>'}</div></div>`;
+  <div class="sub">Managementoverzicht van klantgezondheid — trends, risico's en verbeteringen over ${base.length} klanten.</div>
+  <div class="hc-filters"><div class="hc-fg">${mwChips}</div><div class="hc-fg">${grChips}</div></div>
+  <div class="sgrid c4"><div class="scard"><div class="sl">Gem. health</div><div class="sv">${avg}${trendDelta?` <span class="sv-d ${trendDelta>0?'up':'dn'}">${trendDelta>0?'+':''}${trendDelta}</span>`:''}</div></div><div class="scard"><div class="sl">Risico</div><div class="sv r">${risk.length}</div></div><div class="scard"><div class="sl">Aandacht</div><div class="sv a">${att.length}</div></div><div class="scard"><div class="sl">Gezond</div><div class="sv g">${ok.length}</div></div></div>
+  <div class="grid2" style="align-items:start;gap:16px;margin-bottom:14px">
+    <div class="panel"><div class="row-between"><div class="mod-sub" style="margin:0">Health-trend</div><div class="ftabs" style="margin:0">${tw.map(t=>`<div class="ftab ${hcTrend===t[0]?'active':''}" onclick="hcTrend=${t[0]};renderView()">${t[1]}</div>`).join('')}</div></div>
+      <div class="trend-wrap"><svg viewBox="0 0 260 64" preserveAspectRatio="none" class="trend-svg"><defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--brand-2)" stop-opacity="0.22"/><stop offset="1" stop-color="var(--brand-2)" stop-opacity="0"/></linearGradient></defs><path d="${sp.area}" fill="url(#tg)"/><path d="${sp.line}" fill="none" stroke="var(--brand-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${sp.last[0]}" cy="${sp.last[1]}" r="3.2" fill="var(--brand-2)"/></svg></div>
+      <div class="trend-foot"><span>${series[0]} <small>start</small></span><span class="${trendDelta>=0?'up':'dn'}">${trendDelta>=0?'▲':'▼'} ${Math.abs(trendDelta)} punten</span><span>${avg} <small>nu</small></span></div></div>
+    <div class="panel"><div class="mod-sub">Verdeling</div><div class="hbar">${band.map(b=>{const pct=Math.round(b[2]/Math.max(1,hs.length)*100);return pct?`<div class="hbar-seg ${b[1]}" style="width:${pct}%"></div>`:'';}).join('')}</div><div class="hbar-lbl">${band.map(b=>`<span class="hbar-k ${b[1]}"><span class="d"></span>${b[0]} · ${b[2]}</span>`).join('')}</div>
+      <div class="hc-mini">${[['Actie vereist',action.length,'r'],['Verbeterend',improving.length,'g'],['Klanten',base.length,'']].map(m=>`<div class="hc-mini-c"><div class="hc-mini-n ${m[2]}">${m[1]}</div><div class="hc-mini-l">${m[0]}</div></div>`).join('')}</div></div>
+  </div>
+  <div class="grid3 hc-cols">
+    <div class="panel"><div class="mod-sub">Hoogste risico</div>${risk.length?risk.slice().sort((a,b)=>a.h.score-b.h.score).slice(0,8).map(row).join(''):'<div class="empty" style="padding:18px">Geen risicoklanten 🎉</div>'}</div>
+    <div class="panel"><div class="mod-sub">Snelst verbeterend</div>${improving.length?improving.map(row).join(''):'<div class="empty" style="padding:18px">Nog geen stijgers</div>'}</div>
+    <div class="panel"><div class="mod-sub">Actie vereist</div>${action.length?action.slice().sort((a,b)=>a.h.score-b.h.score).slice(0,8).map(row).join(''):'<div class="empty" style="padding:18px">Geen acties open</div>'}</div>
+  </div>`;
 };
+function werkCard(x,stats,win){const cap=Math.round(38*win/7);const used=Math.round(cap*Math.min(100,x.pct)/100);const avail=Math.max(0,cap-used);
+  const seed=x.mw.charCodeAt(0);const fc=Math.max(5,Math.min(125,x.pct+((seed%9)-4)));
+  const st=x.pct>80?['Overbelast','r']:(x.pct>55?['Druk','a']:['Gebalanceerd','g']);
+  const m=(l,v,t)=>`<div class="wc-m"><div class="wc-mv ${t||''}">${v}</div><div class="wc-ml">${l}</div></div>`;
+  return `<div class="wc" onclick="mwFilter='${x.mw}';go('klanten')">
+    <div class="wc-top"><span class="wc-av">${x.mw[0]}</span><div style="flex:1;min-width:0"><div class="wc-nm">${x.mw}</div><div class="wc-sub">${x.n} klanten · ${stats.completion}% afgerond</div></div><span class="wc-badge ${st[1]}">${st[0]}</span></div>
+    <div class="wc-cap"><div class="wc-cap-h"><span>Bezetting</span><span class="wc-cap-p ${st[1]}">${x.pct}%</span></div><div class="wc-bar"><div class="wc-fill ${st[1]}" style="width:${Math.min(100,x.pct)}%"></div></div></div>
+    <div class="wc-grid">${m('Beschikbaar',avail+'u')}${m('Prognose',fc+'%',fc>x.pct?'a':'')}${m('Deadlines',stats.dl+stats.overdue,stats.overdue?'r':'')}${m('Open docs',x.docs,x.docs?'a':'')}${m('Signalen',stats.sig,stats.sig?'a':'')}${m('OB/IB',x.ob+'/'+x.ib)}</div>
+  </div>`;}
 VIEWS.kantoor.workload = ()=>{
+  const wins=[[7,'7 dagen'],[30,'30 dagen'],[90,'Dit kwartaal']];const wd=werkdruk(wdWindow);
+  const stats={};MEDEWERKERS.forEach(m=>stats[m]=mwStats(m));
+  const counts={g:wd.filter(x=>x.pct<=55).length,a:wd.filter(x=>x.pct>55&&x.pct<=80).length,r:wd.filter(x=>x.pct>80).length};
+  const teamCompl=Math.round(MEDEWERKERS.reduce((a,m)=>a+stats[m].completion,0)/Math.max(1,MEDEWERKERS.length));
   return `<div class="row-between"><h1 class="title">Team &amp; werkdruk</h1><button class="btn ghost" onclick="go('overzicht')">← Dashboard</button></div>
-  <div class="sub">Capaciteit, voltooiing en werkdrukprognose per medewerker.</div>
-  <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Workload-center · medewerkers</h3><span style="font-size:11.5px;color:var(--grey)">klanten · docs · signalen · deadlines · werkdruk</span></div><div style="margin-top:12px">${workloadCenterHTML()}</div></div>
-  <div class="panel">${werkdrukHTML()}</div>`;
+  <div class="sub">Capaciteit, voltooiing en werkdrukprognose per medewerker — operationele werkverdeling.</div>
+  <div class="sgrid c4"><div class="scard"><div class="sl">Teamvoltooiing</div><div class="sv">${teamCompl}%</div></div><div class="scard"><div class="sl">Gebalanceerd</div><div class="sv g">${counts.g}</div></div><div class="scard"><div class="sl">Druk</div><div class="sv a">${counts.a}</div></div><div class="scard"><div class="sl">Overbelast</div><div class="sv r">${counts.r}</div></div></div>
+  <div class="row-between" style="margin:4px 0 10px"><div class="mod-sub" style="margin:0">Werkdruk per medewerker</div><div class="ftabs" style="margin:0">${wins.map(w=>`<div class="ftab ${wdWindow===w[0]?'active':''}" onclick="wdWindow=${w[0]};renderView()">${w[1]}</div>`).join('')}</div></div>
+  <div class="wc-wrap">${wd.map(x=>werkCard(x,stats[x.mw],wdWindow)).join('')}</div>
+  <div class="panel" style="margin-top:14px"><div class="wd-sugg" style="margin:0"><div class="wd-sugg-h">✨ AI-suggesties · werkverdeling</div>${werkdrukSugg(wd).map(s=>`<div class="wd-s">${s}</div>`).join('')}</div></div>`;
 };
+let kopSys='alle';
+function _synSync(seed,tone){if(tone==='r')return ((seed%3)+2)+' dagen geleden';if(tone==='a')return ((seed%9)+2)+' uur geleden';return ((seed%50)+3)+' min geleden';}
+function kSystems(){const base=state.clients.filter(c=>c.actief);
+  const agg=(clients,filt)=>{let crit=0,warn=0,topArea='',topTone='g';const aff=new Set();clients.forEach(c=>{exactIssues(c.naam).forEach(i=>{if(filt&&!filt(i))return;if(i.tone==='r'){crit++;if(topTone!=='r'){topTone='r';topArea=i.area;}}else{warn++;if(topTone==='g'){topTone='a';topArea=i.area;}}aff.add(c.naam);});});return {crit,warn,aff:aff.size,topArea,topTone};};
+  const ex=base.filter(c=>c.prog==='ex'),sn=base.filter(c=>c.prog==='sn');
+  const defs=[{key:'ex',name:'Exact Online',ic:'ex',clients:ex.length,a:agg(ex)},{key:'sn',name:'SnelStart',ic:'sn',clients:sn.length,a:agg(sn)},{key:'bank',name:'Bankkoppelingen',ic:'bank',clients:base.length,a:agg(base,i=>i.area==='Bankkoppeling')},{key:'fg',name:'Fiscaal Gemak',ic:'fg',clients:base.length,a:{crit:0,warn:0,aff:0,topArea:'',topTone:'g'}}];
+  return defs.map(s=>{const a=s.a;const tone=a.crit?'r':(a.warn?'a':'g');const seed=s.name.charCodeAt(0)+s.clients;const rate=Math.max(82,Math.min(99.9,100-a.crit*4-a.warn*1.2)).toFixed(1);
+    return {key:s.key,name:s.name,ic:s.ic,clients:s.clients,tone,crit:a.crit,warn:a.warn,aff:a.aff,sync:_synSync(seed,tone),rate,action:tone==='g'?'Geen actie nodig — koppeling gezond':(EX_ACTION[a.topArea]||'Controleer de koppeling')};});}
 VIEWS.kantoor.koppelingen = ()=>{
-  const base=state.clients.filter(c=>c.actief);const all=[];base.forEach(c=>{exactIssues(c.naam).forEach(i=>all.push({c,i}));});
-  all.sort((a,b)=>(a.i.tone==='r'?0:1)-(b.i.tone==='r'?0:1));
+  const base=state.clients.filter(c=>c.actief);const sys=kSystems();
+  const all=[];base.forEach(c=>{exactIssues(c.naam).forEach(i=>all.push({c,i,sysk:c.prog==='ex'?'ex':'sn'}));});
+  const selFilter=x=>kopSys==='alle'?true:(kopSys==='bank'?x.i.area==='Bankkoppeling':kopSys==='fg'?false:x.sysk===kopSys);
+  const shown=all.filter(selFilter).sort((a,b)=>(a.i.tone==='r'?0:1)-(b.i.tone==='r'?0:1));
   const probl=all.filter(x=>x.i.tone==='r').length;const affC=new Set(all.map(x=>x.c.naam)).size;
+  const statLbl=t=>t==='r'?'Kritiek':(t==='a'?'Waarschuwing':'Gezond');
+  const ico=s=>s.ic==='fg'?'FG':(s.ic==='bank'?'🏦':'<span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span>');
+  const sysCard=s=>`<div class="ks ${s.tone} ${kopSys===s.key?'sel':''}" onclick="kopSys=(kopSys==='${s.key}'?'alle':'${s.key}');renderView()">
+    <div class="ks-top"><span class="ks-ic ${s.ic}">${ico(s)}</span><div style="flex:1;min-width:0"><div class="ks-nm">${s.name}</div><div class="ks-cl">${s.clients} klanten</div></div><span class="ks-st ${s.tone}">${statLbl(s.tone)}</span></div>
+    <div class="ks-metr"><div><div class="ks-mv ${s.crit?'r':''}">${s.crit}</div><div class="ks-ml">Kritiek</div></div><div><div class="ks-mv ${s.warn?'a':''}">${s.warn}</div><div class="ks-ml">Waarsch.</div></div><div><div class="ks-mv">${s.aff}</div><div class="ks-ml">Klanten</div></div><div><div class="ks-mv">${s.rate}%</div><div class="ks-ml">Sync-succes</div></div></div>
+    <div class="ks-foot">⟳ Laatste sync: ${s.sync}</div>
+    <div class="ks-act">${s.action}</div></div>`;
   return `<div class="row-between"><h1 class="title">Koppelingen-monitoring</h1><div style="display:flex;gap:8px;align-items:center">${expBar('k_kopp')}<button class="btn ghost" onclick="go('overzicht')">← Dashboard</button></div></div>
-  <div class="sub">Exact Online / SnelStart, bankkoppelingen en synchronisatie — operationeel monitoringoverzicht over alle klanten.</div>
-  <div class="sgrid c4"><div class="scard"><div class="sl">Gezonde koppelingen</div><div class="sv g">${base.length-affC}</div></div><div class="scard"><div class="sl">Met problemen</div><div class="sv r">${probl}</div></div><div class="scard"><div class="sl">Attentiepunten</div><div class="sv a">${all.length-probl}</div></div><div class="scard"><div class="sl">Totaal koppelingen</div><div class="sv">${base.length}</div></div></div>
-  <div class="panel" style="margin-bottom:14px"><div class="mod-sub">Actieve meldingen</div>
-  ${all.length?`<div class="cm-head"><div>Klant</div><div>Onderdeel</div><div>Ernst</div><div class="kb-hide">Verantw.</div><div class="kb-hide2">Aanbevolen actie</div></div>${all.map(x=>`<div class="cm-row" onclick="openClient('${gJs(x.c.naam)}','overzicht')"><div class="cm-cli"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div style="min-width:0"><div class="cm-nm">${x.c.naam}</div><div class="cm-sub">${PROG[x.c.prog]}</div></div></div><div class="cm-a"><div class="cm-an">${x.i.area}</div><div class="cm-m">${x.i.msg}</div></div><div><span class="pill ${x.i.tone}">${x.i.tone==='r'?'Hoog':'Midden'}</span></div><div class="cm-resp kb-hide">${x.c.mw}</div><div class="cm-act kb-hide2">${EX_ACTION[x.i.area]||'Controleren'}</div></div>`).join('')}`:'<div class="empty" style="padding:22px"><div class="big">✅</div>Alle koppelingen zijn gezond — geen meldingen.</div>'}</div>
-  <div class="panel"><h3>Gekoppelde programma's</h3>
-    <div class="intg"><div class="ico ex"><span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span></div><div><div class="nm">Exact Online</div><div class="ds">${base.filter(c=>c.prog==='ex').length} klanten · OAuth2-koppeling</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
-    <div class="intg"><div class="ico sn"><span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span></div><div><div class="nm">SnelStart</div><div class="ds">${base.filter(c=>c.prog==='sn').length} klanten · B2B API</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
-    <div class="intg"><div class="ico fg">FG</div><div><div class="nm">Fiscaal Gemak</div><div class="ds">Aangiften &amp; jaarwerk · kantoorbreed</div></div><span class="st"><span class="gd"></span>Verbonden</span></div></div>`;
+  <div class="sub">Operationeel monitoringcentrum — status, synchronisatie en aanbevolen acties per integratie.</div>
+  <div class="sgrid c4"><div class="scard"><div class="sl">Gezonde koppelingen</div><div class="sv g">${base.length-affC}</div></div><div class="scard"><div class="sl">Met problemen</div><div class="sv r">${probl}</div></div><div class="scard"><div class="sl">Attentiepunten</div><div class="sv a">${all.length-probl}</div></div><div class="scard"><div class="sl">Integraties</div><div class="sv">${sys.length}</div></div></div>
+  <div class="ks-grid">${sys.map(sysCard).join('')}</div>
+  <div class="panel" style="margin-top:14px"><div class="row-between"><div class="mod-sub" style="margin:0">Actieve meldingen${kopSys!=='alle'?' · '+((sys.find(s=>s.key===kopSys)||{}).name||''):''}</div>${kopSys!=='alle'?`<button class="btn ghost sm" onclick="kopSys='alle';renderView()">Alle integraties</button>`:''}</div>
+  ${shown.length?`<div class="cm-head" style="margin-top:10px"><div>Klant</div><div>Onderdeel</div><div>Ernst</div><div class="kb-hide">Verantw.</div><div class="kb-hide2">Aanbevolen actie</div></div>${shown.map(x=>`<div class="cm-row" onclick="openClient('${gJs(x.c.naam)}','overzicht')"><div class="cm-cli"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div style="min-width:0"><div class="cm-nm">${x.c.naam}</div><div class="cm-sub">${PROG[x.c.prog]}</div></div></div><div class="cm-a"><div class="cm-an">${x.i.area}</div><div class="cm-m">${x.i.msg}</div></div><div><span class="pill ${x.i.tone}">${x.i.tone==='r'?'Hoog':'Midden'}</span></div><div class="cm-resp kb-hide">${x.c.mw}</div><div class="cm-act kb-hide2">${EX_ACTION[x.i.area]||'Controleren'}</div></div>`).join('')}`:'<div class="empty" style="padding:22px"><div class="big">✅</div>Geen meldingen voor deze selectie.</div>'}</div>`;
 };
 VIEWS.kantoor.klanten = ()=>{
   const tab=(k,l,n)=>`<div class="ftab ${mwFilter===k?'active':''}" onclick="setMwFilter('${k}')">${l}<span class="c">${n}</span></div>`;
