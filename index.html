@@ -1672,6 +1672,136 @@
   .lp-foot .cols a{display:block;color:#9fb1c5;font-size:13px;line-height:1.9;text-decoration:none;cursor:pointer}
   .lp-foot .cols a:hover{color:#fff}
   .lp-foot .bot{border-top:1px solid #ffffff14;margin-top:26px;padding-top:16px;font-size:12px;color:#6f8294}
+  /* ===== New conversion homepage (nh-, mobile-first) ===== */
+  .nh-wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+  .nh-section{padding:50px 0}
+  .nh-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--brand-2)}
+  .nh-sec-h{text-align:center;max-width:660px;margin:0 auto 28px}
+  .nh-sec-h h2{font-size:26px;line-height:1.18;font-weight:800;letter-spacing:-.6px;color:var(--ink);margin:8px 0 10px}
+  .nh-sec-h p{font-size:14.5px;color:var(--grey);line-height:1.6}
+  .nh-hero{position:relative;overflow:hidden;background:radial-gradient(800px 460px at 88% -10%,#1a4e7a55 0,transparent 60%),linear-gradient(180deg,#0d2a45,#0a1f34);color:#fff;padding:30px 0 38px}
+  .nh-hero-grid{display:flex;flex-direction:column;gap:24px}
+  .nh-hero .nh-eyebrow{color:#a7c8ec;background:#ffffff12;border:1px solid #ffffff26;border-radius:20px;padding:6px 13px;margin-bottom:14px}
+  .nh-hero .nh-eyebrow .d{width:7px;height:7px;border-radius:50%;background:#39B57D;box-shadow:0 0 0 3px #39b57d33}
+  .nh-hero h1{font-size:29px;line-height:1.13;font-weight:800;letter-spacing:-.9px;margin-bottom:13px}
+  .nh-hero h1 span{color:#9fc0e6}
+  .nh-hero .sub{font-size:15px;line-height:1.55;color:#bccadb;margin-bottom:20px}
+  .nh-cta{display:flex;flex-direction:column;gap:10px}
+  .nh-cta .btn{padding:14px 22px;font-size:15px;justify-content:center;width:100%;min-height:48px}
+  .nh-cta .btn.ghost{background:#ffffff14;border:1px solid #ffffff33;color:#fff;box-shadow:none}
+  .nh-cta .btn.ghost:hover{background:#ffffff24}
+  .nh-trustlist{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;margin-top:20px}
+  .nh-trustlist span{display:flex;align-items:center;gap:7px;font-size:12.5px;color:#cfe0f2;font-weight:600}
+  .nh-trustlist .ck{color:#5fd39a;font-weight:800}
+  .nh-mock{background:#fff;border-radius:16px;box-shadow:0 30px 70px rgba(0,0,0,.42);overflow:hidden;color:var(--ink)}
+  .nh-mock-top{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid #eef1f5;background:#f8fafc}
+  .nh-mock-dot{width:9px;height:9px;border-radius:50%;background:#d7dee7}
+  .nh-mock-ttl{margin-left:6px;font-size:12px;font-weight:700;color:var(--grey)}
+  .nh-mock-body{padding:13px}
+  .nh-mk-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .nh-mk-card{border:1px solid #eaeef3;border-radius:11px;padding:11px 12px;background:#fff}
+  .nh-mk-l{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--grey-2)}
+  .nh-mk-v{font-size:19px;font-weight:800;color:var(--ink);margin-top:3px;line-height:1}
+  .nh-mk-s{font-size:10.5px;margin-top:4px;font-weight:700}
+  .nh-mk-s.g{color:var(--green)}.nh-mk-s.a{color:var(--amber)}.nh-mk-s.i{color:var(--info)}
+  .nh-mk-ai{grid-column:1/-1;border:1px solid #d8e6f5;background:linear-gradient(180deg,#f2f8ff,#fff);border-radius:11px;padding:11px 12px;display:flex;align-items:center;gap:10px}
+  .nh-mk-ai .ic{width:30px;height:30px;border-radius:9px;background:#103B63;color:#fff;display:grid;place-items:center;font-size:15px;flex-shrink:0}
+  .nh-mk-ai .t{font-size:12.5px;font-weight:700;color:var(--ink)}
+  .nh-mk-ai .d{font-size:11px;color:var(--grey)}
+  .nh-trustbar{background:#fff;border-bottom:1px solid var(--line)}
+  .nh-counters{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x mandatory;padding:18px;scrollbar-width:none}
+  .nh-counters::-webkit-scrollbar{display:none}
+  .nh-cnt{scroll-snap-align:center;flex:0 0 64%;max-width:240px;text-align:center;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:17px 14px}
+  .nh-cnt .n{font-size:27px;font-weight:800;color:var(--navy);letter-spacing:-1px;line-height:1}
+  .nh-cnt .l{font-size:12px;color:var(--grey);font-weight:600;margin-top:6px}
+  .nh-grid{display:grid;grid-template-columns:1fr;gap:14px}
+  .nh-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:21px;box-shadow:var(--sh-sm);transition:transform .16s,box-shadow .16s,border-color .16s}
+  .nh-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:#D7E0EC}
+  .nh-card .ic{width:46px;height:46px;border-radius:13px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;margin-bottom:13px;font-size:22px}
+  .nh-card .ic svg{width:23px;height:23px}
+  .nh-card h3{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:6px}
+  .nh-card p{font-size:13.5px;color:var(--grey);line-height:1.55}
+  .nh-steps{display:grid;grid-template-columns:1fr;gap:13px;position:relative}
+  .nh-step{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .nh-step .num{width:34px;height:34px;border-radius:10px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px;flex-shrink:0}
+  .nh-step h4{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px}
+  .nh-step p{font-size:13px;color:var(--grey);line-height:1.5}
+  .nh-show{display:grid;grid-template-columns:1fr;gap:16px}
+  .nh-show-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--sh-sm)}
+  .nh-show-pic{background:linear-gradient(180deg,#eef3f9,#fbfdff);padding:15px;border-bottom:1px solid var(--line)}
+  .nh-show-txt{padding:16px 18px}
+  .nh-show-txt .tag{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--brand-2)}
+  .nh-show-txt h3{font-size:17px;font-weight:800;color:var(--ink);margin:5px 0 6px}
+  .nh-show-txt p{font-size:13.5px;color:var(--grey);line-height:1.55}
+  .nh-ui-row{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #eaeef3;border-radius:10px;padding:8px 11px;margin-bottom:7px}
+  .nh-ui-row:last-child{margin-bottom:0}
+  .nh-ui-ic{width:26px;height:26px;border-radius:7px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;font-size:13px;flex-shrink:0}
+  .nh-ui-t{flex:1;min-width:0;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nh-ui-b{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;flex-shrink:0}
+  .nh-ui-b.g{background:var(--green-soft);color:var(--green)}.nh-ui-b.a{background:var(--amber-soft);color:var(--amber)}.nh-ui-b.i{background:var(--info-soft);color:var(--info)}
+  .nh-ai{background:linear-gradient(165deg,#0d2a45,#0a1f34);color:#fff;border-radius:20px;padding:28px 22px}
+  .nh-ai h2{font-size:24px;font-weight:800;letter-spacing:-.6px;line-height:1.15;margin-bottom:8px}
+  .nh-ai h2 span{color:#9fc0e6}
+  .nh-ai .lead{font-size:14px;color:#bccadb;line-height:1.6;margin-bottom:18px}
+  .nh-ai-list{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px;list-style:none;padding:0}
+  .nh-ai-list li{display:flex;align-items:center;gap:11px;font-size:14px;color:#e4ecf5}
+  .nh-ai-list .ck{width:24px;height:24px;border-radius:7px;background:#ffffff14;color:#5fd39a;display:grid;place-items:center;font-weight:800;flex-shrink:0}
+  .nh-ai-trust{display:flex;gap:11px;align-items:flex-start;background:#ffffff10;border:1px solid #ffffff22;border-radius:13px;padding:13px 15px;font-size:13px;line-height:1.5;color:#dbe6f2}
+  .nh-ai-trust .ic{flex-shrink:0;font-size:15px}
+  .nh-ind{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .nh-ind-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 14px;text-align:center;cursor:pointer;transition:.15s}
+  .nh-ind-card:hover{border-color:var(--brand-2);transform:translateY(-2px);box-shadow:var(--sh-sm)}
+  .nh-ind-ic{font-size:25px;margin-bottom:7px}
+  .nh-ind-card .t{font-size:13.5px;font-weight:700;color:var(--ink)}
+  .nh-testi{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none}
+  .nh-testi::-webkit-scrollbar{display:none}
+  .nh-quote{scroll-snap-align:center;flex:0 0 85%;background:#fff;border:1px solid var(--line);border-radius:16px;padding:21px;box-shadow:var(--sh-sm);display:flex;flex-direction:column}
+  .nh-quote .stars{color:#E0A422;font-size:14px;letter-spacing:2px;margin-bottom:10px}
+  .nh-quote .q{font-size:14px;color:var(--ink-2);line-height:1.6;flex:1}
+  .nh-quote .who{display:flex;align-items:center;gap:11px;margin-top:15px}
+  .nh-quote .av{width:40px;height:40px;border-radius:11px;background:linear-gradient(150deg,#1F5C90,#103B63);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;flex-shrink:0}
+  .nh-quote .nm{font-size:13.5px;font-weight:700;color:var(--ink)}
+  .nh-quote .rl{font-size:11.5px;color:var(--grey)}
+  .nh-quote .res{margin-top:12px;font-size:12px;font-weight:700;color:var(--green);background:var(--green-soft);border-radius:8px;padding:7px 10px}
+  .nh-final{background:linear-gradient(160deg,#103B63,#0a1f34);color:#fff;text-align:center;padding:42px 22px;border-radius:22px}
+  .nh-final h2{font-size:25px;font-weight:800;letter-spacing:-.6px;line-height:1.2;margin-bottom:10px}
+  .nh-final p{font-size:15px;color:#bccadb;margin-bottom:22px;line-height:1.55}
+  .nh-final .nh-cta{max-width:380px;margin:0 auto}
+  .nh-foot{background:#0a1f34;color:#9fb1c5;padding:38px 0 26px}
+  .nh-foot-grid{display:grid;grid-template-columns:1fr;gap:24px}
+  .nh-foot .nm{color:#fff;font-weight:800;font-size:16px;margin-bottom:10px}
+  .nh-foot .row{display:block;font-size:13px;line-height:1.95}
+  .nh-foot b{color:#cdd9e6;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px}
+  .nh-foot a{color:#9fb1c5;text-decoration:none;cursor:pointer;display:block;line-height:1.95;font-size:13px}
+  .nh-foot a:hover{color:#fff}
+  .nh-foot .bot{border-top:1px solid #ffffff14;margin-top:24px;padding-top:16px;font-size:12px;color:#6f8294;text-align:center}
+  .lp-nav .nh-navcta{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;border:0;border-radius:var(--r-btn);padding:10px 15px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;min-height:42px}
+  .lp-nav .nh-navcta:hover{background:var(--navy-dark)}
+  @media(min-width:880px){
+   .nh-section{padding:72px 0}
+   .nh-hero{padding:54px 0 62px}
+   .nh-hero-grid{flex-direction:row;align-items:center;gap:44px}
+   .nh-hero-l{flex:1.05;min-width:0}.nh-hero-r{flex:1;min-width:0}
+   .nh-hero h1{font-size:45px;letter-spacing:-1.6px}
+   .nh-hero .sub{font-size:18px;max-width:560px}
+   .nh-cta{flex-direction:row}.nh-cta .btn{width:auto}
+   .nh-sec-h h2{font-size:32px}
+   .nh-counters{justify-content:center;overflow:visible;gap:16px}
+   .nh-cnt{flex:1;max-width:none}
+   .nh-grid.c4{grid-template-columns:repeat(4,1fr)}
+   .nh-grid.c3{grid-template-columns:repeat(3,1fr)}
+   .nh-grid.c2{grid-template-columns:repeat(2,1fr)}
+   .nh-steps{grid-template-columns:repeat(4,1fr)}
+   .nh-show{grid-template-columns:1fr 1fr}
+   .nh-ai{padding:46px 44px}
+   .nh-ai-inner{display:flex;gap:44px;align-items:center}.nh-ai-inner>div{flex:1;min-width:0}
+   .nh-ai-list{grid-template-columns:1fr 1fr;gap:12px}
+   .nh-ind{grid-template-columns:repeat(6,1fr)}
+   .nh-testi{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible}.nh-quote{flex:none}
+   .nh-final{padding:62px}.nh-final h2{font-size:34px}
+   .nh-foot-grid{grid-template-columns:2fr 1fr 1fr 1.3fr}
+  }
+  @media(min-width:880px) and (max-width:1099px){.nh-ind{grid-template-columns:repeat(3,1fr)}}
   @media(max-width:900px){.lp-hero h1{font-size:34px}.lp-hero p{font-size:15.5px}.lp-stats{grid-template-columns:repeat(2,1fr)}.lp-serv,.lp-testi{grid-template-columns:1fr}.lp-portal .roles{grid-template-columns:1fr}.lp-nav .bw .nm small{display:none}}
   .roles{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
   .rolecard{background:#fff;border-radius:var(--r-card);padding:28px;text-align:left;box-shadow:0 24px 60px #0000004d,0 2px 6px #00000026;cursor:pointer;border:1px solid #ffffff1a;transition:transform .18s,box-shadow .18s;position:relative;display:flex;flex-direction:column}
@@ -1800,90 +1930,202 @@
     </div>
     <div class="sp"></div>
     <select id="loginLangSel" class="langsel" onchange="setLang(this.value)"><option value="nl">Nederlands</option><option value="en">English</option><option value="tr">Türkçe</option><option value="bg">Български</option><option value="ar">العربية</option></select>
+    <button class="nh-navcta" onclick="kennismaken()">Gratis kennismaken</button>
     <button class="lp-login" onclick="document.getElementById('lp-portal').scrollIntoView({behavior:'smooth'})">Inloggen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
   </header>
 
   <!-- ======= HERO ======= -->
-  <section class="lp-hero">
-    <div class="lp-wrap">
-      <span class="lp-eyebrow"><span class="d"></span> Administratiekantoor in Lijnden · ruim 15 jaar ervaring</span>
-      <h1>Uw cijfers in <span>vertrouwde handen</span>.</h1>
-      <p>Persoonlijke begeleiding van een ervaren administratiekantoor, gecombineerd met een modern digitaal portaal voor uw administratie, belastingaangiften en loonadministratie.</p>
-      <div class="cta">
-        <button class="btn primary" onclick="document.getElementById('lp-portal').scrollIntoView({behavior:'smooth'})">Naar uw portaal <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        <button class="btn ghost" onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Onze diensten</button>
+  <section class="nh-hero">
+    <div class="nh-wrap">
+      <div class="nh-hero-grid">
+        <div class="nh-hero-l">
+          <span class="nh-eyebrow"><span class="d"></span> Administratiekantoor in Lijnden · 15+ jaar ervaring</span>
+          <h1>Administratie zonder zorgen.<br>Altijd inzicht. <span>Altijd op tijd.</span></h1>
+          <div class="sub">Boekhouding, BTW, loonadministratie en jaarwerk — gecombineerd met slimme automatisering en persoonlijke begeleiding.</div>
+          <div class="nh-cta">
+            <button class="btn primary" onclick="kennismaken()">Gratis kennismaken <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <button class="btn ghost" onclick="enter('klant')">Bekijk klantportaal</button>
+          </div>
+          <div class="nh-trustlist">
+            <span><span class="ck">✓</span> Exact Online partner</span>
+            <span><span class="ck">✓</span> SnelStart partner</span>
+            <span><span class="ck">✓</span> Persoonlijke ondersteuning</span>
+            <span><span class="ck">✓</span> Veilig documentbeheer</span>
+          </div>
+        </div>
+        <div class="nh-hero-r">
+          <div class="nh-mock">
+            <div class="nh-mock-top"><span class="nh-mock-dot"></span><span class="nh-mock-dot"></span><span class="nh-mock-dot"></span><span class="nh-mock-ttl">Klantportaal · Demo BV</span></div>
+            <div class="nh-mock-body">
+              <div class="nh-mk-grid">
+                <div class="nh-mk-card"><div class="nh-mk-l">Facturen verwerkt</div><div class="nh-mk-v">128</div><div class="nh-mk-s g">deze maand · AI + controle</div></div>
+                <div class="nh-mk-card"><div class="nh-mk-l">BTW-status</div><div class="nh-mk-v">Q2</div><div class="nh-mk-s a">concept klaar ter controle</div></div>
+                <div class="nh-mk-card"><div class="nh-mk-l">Open documenten</div><div class="nh-mk-v">3</div><div class="nh-mk-s i">wachten op verwerking</div></div>
+                <div class="nh-mk-card"><div class="nh-mk-l">Reactietijd</div><div class="nh-mk-v">&lt; 4u</div><div class="nh-mk-s g">gemiddeld antwoord</div></div>
+                <div class="nh-mk-ai"><span class="ic">✨</span><div><div class="t">AI Assistent</div><div class="d">"Wat betekent deze brief van de Belastingdienst?"</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ======= STAT BAND ======= -->
-  <div class="lp-stats">
-    <div class="lp-stat"><div class="n">15+</div><div class="l">Jaar ervaring</div></div>
-    <div class="lp-stat"><div class="n">300+</div><div class="l">Tevreden ondernemers</div></div>
-    <div class="lp-stat"><div class="n">5</div><div class="l">Talen aan de balie</div></div>
-    <div class="lp-stat"><div class="n">100%</div><div class="l">Digitaal &amp; persoonlijk</div></div>
+  <!-- ======= TRUST BAR ======= -->
+  <div class="nh-trustbar">
+    <div class="nh-wrap">
+      <div class="nh-counters">
+        <div class="nh-cnt"><div class="n"><span class="nh-counter" data-to="300" data-suf="+">0</span></div><div class="l">Actieve klanten</div></div>
+        <div class="nh-cnt"><div class="n"><span class="nh-counter" data-to="48000" data-suf="+">0</span></div><div class="l">Verwerkte documenten</div></div>
+        <div class="nh-cnt"><div class="n"><span class="nh-counter" data-to="15" data-suf="+">0</span></div><div class="l">Jaren ervaring</div></div>
+        <div class="nh-cnt"><div class="n">&lt; 4u</div><div class="l">Gem. reactietijd</div></div>
+      </div>
+    </div>
   </div>
 
-  <!-- ======= DIENSTEN ======= -->
-  <section class="lp-sec" id="lp-diensten">
-    <div class="lp-wrap">
-      <div class="lp-h"><div class="k">Onze diensten</div><h2>Alles onder één dak</h2><p>Van dagelijkse boekhouding tot jaarrekening en fiscaal advies — wij ontzorgen u volledig.</p></div>
-      <div class="lp-serv">
-        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 9h16M9 13h6M9 16h4"/></svg></div><h3>Boekhouding &amp; administratie</h3><p>Uw volledige administratie verzorgd, met realtime inzicht via Exact Online en SnelStart.</p></div>
-        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 16.5h4"/></svg></div><h3>Belastingaangiften</h3><p>Inkomsten-, omzet- en vennootschapsbelasting — tijdig en correct via SBR ingediend.</p></div>
-        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0M17 4a3 3 0 0 1 0 6"/></svg></div><h3>Loonadministratie</h3><p>Salarisverwerking, loonstroken en loonaangiften — uw personeel altijd op tijd betaald.</p></div>
-        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19V9M10 19V5M15 19v-7M20 19v-11"/></svg></div><h3>Jaarrekening &amp; rapportage</h3><p>Heldere jaarcijfers en tussentijdse rapportages waarmee u écht stuurt op uw onderneming.</p></div>
-        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 1 3 11v3H9v-3a6 6 0 0 1 3-11zM9 21h6"/></svg></div><h3>Advies &amp; coaching</h3><p>Meedenkend advies over fiscaliteit, groei en bedrijfsvoering — in begrijpelijke taal.</p></div>
-        <div class="lp-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L5 13h6l-1 9 9-12h-6z"/></svg></div><h3>Starters &amp; ZZP</h3><p>Begeleiding bij het opstarten, met overzicht en rust vanaf de eerste factuur.</p></div>
+  <!-- ======= WHY VATAN ======= -->
+  <section class="nh-section" id="lp-diensten">
+    <div class="nh-wrap">
+      <div class="nh-sec-h"><span class="nh-eyebrow">Waarom Vatan</span><h2>Een administratiekantoor dat vooruitkijkt</h2><p>Persoonlijke begeleiding én slimme techniek — zodat u zich kunt richten op ondernemen.</p></div>
+      <div class="nh-grid c2">
+        <div class="nh-card"><div class="ic">🤝</div><h3>Persoonlijke begeleiding</h3><p>Geen anoniem boekhoudkantoor. U heeft direct contact met uw vaste aanspreekpunt dat uw onderneming kent.</p></div>
+        <div class="nh-card"><div class="ic">🛡️</div><h3>Proactieve administratie</h3><p>Wij signaleren problemen en deadlines voordat ze verlopen — u wordt niet verrast door de Belastingdienst.</p></div>
+        <div class="nh-card"><div class="ic">⚡</div><h3>Slimme automatisering</h3><p>Documenten, facturen en controles worden sneller verwerkt dankzij AI met menselijke controle.</p></div>
+        <div class="nh-card"><div class="ic">📁</div><h3>Alles op één plek</h3><p>Portaal, documenten, communicatie en rapportages centraal — overzichtelijk en altijd bij de hand.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ======= PARTNERS & CERTIFICERINGEN ======= -->
-  <section class="lp-sec alt">
-    <div class="lp-wrap">
-      <div class="lp-h"><div class="k">Partners &amp; koppelingen</div><h2>Wij werken met toonaangevende software</h2><p>Officieel gekoppeld aan de boekhoud- en aangiftesystemen die uw cijfers betrouwbaar houden.</p></div>
-      <div class="lp-logos">
-        <span class="lp-logo"><span class="d" style="background:#D5152E"></span> Exact Online</span>
-        <span class="lp-logo"><span class="d" style="background:#0E8BD1"></span> SnelStart</span>
-        <span class="lp-logo"><span class="d" style="background:#1393A8"></span> Fiscaal Gemak</span>
-        <span class="lp-logo"><span class="d" style="background:#103B63"></span> Belastingdienst · SBR</span>
-        <span class="lp-logo"><span class="d" style="background:#16507F"></span> Digipoort</span>
-      </div>
-      <div class="lp-certs">
-        <span class="lp-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg> AVG / GDPR-proof</span>
-        <span class="lp-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> EU-datahosting · SSL</span>
-        <span class="lp-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg> SBR-aangiften</span>
-        <span class="lp-cert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/></svg> Beconnummer Belastingdienst</span>
+  <!-- ======= HOW IT WORKS ======= -->
+  <section class="nh-section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="nh-wrap">
+      <div class="nh-sec-h"><span class="nh-eyebrow">Zo werkt het</span><h2>In vier stappen geregeld</h2><p>Van kennismaking tot een administratie die vanzelf loopt.</p></div>
+      <div class="nh-steps">
+        <div class="nh-step"><span class="num">1</span><div><h4>Kennismaking</h4><p>Een vrijblijvend gesprek over uw onderneming en wat u nodig heeft.</p></div></div>
+        <div class="nh-step"><span class="num">2</span><div><h4>Koppeling administratie</h4><p>Wij koppelen Exact Online of SnelStart en richten alles veilig in.</p></div></div>
+        <div class="nh-step"><span class="num">3</span><div><h4>Documenten aanleveren</h4><p>Bonnen en facturen uploadt u via het portaal — de AI herkent ze direct.</p></div></div>
+        <div class="nh-step"><span class="num">4</span><div><h4>Vatan verzorgt de rest</h4><p>Boekhouding, BTW, loon en jaarwerk — gecontroleerd door een medewerker.</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ======= ERVARINGEN ======= -->
-  <section class="lp-sec">
-    <div class="lp-wrap">
-      <div class="lp-h"><div class="k">Ervaringen</div><h2>Wat ondernemers over ons zeggen</h2></div>
-      <div class="lp-testi">
-        <div class="lp-quote"><div class="stars">★★★★★</div><p>"Eindelijk een kantoor dat met me meedenkt én bereikbaar is. Mijn administratie is sinds jaren weer op orde en ik begrijp nu echt mijn cijfers."</p><div class="who"><div class="av">MY</div><div><div class="nm">Mehmet Y.</div><div class="rl">Horeca-ondernemer, Amsterdam</div></div></div></div>
-        <div class="lp-quote"><div class="stars">★★★★★</div><p>"Als ZZP'er wilde ik geen gedoe. Bonnetje fotograferen en klaar — de rest regelen zij. Persoonlijk contact in mijn eigen taal is goud waard."</p><div class="who"><div class="av">SD</div><div><div class="nm">Sandra de V.</div><div class="rl">Zelfstandig ondernemer</div></div></div></div>
-        <div class="lp-quote"><div class="stars">★★★★★</div><p>"Loonadministratie voor mijn personeel loopt nu vlekkeloos. Altijd op tijd, nooit verrassingen bij de Belastingdienst. Een aanrader."</p><div class="who"><div class="av">AK</div><div><div class="nm">Ahmad K.</div><div class="rl">Bouwbedrijf, regio Haarlem</div></div></div></div>
+  <!-- ======= PORTAL SHOWCASE ======= -->
+  <section class="nh-section">
+    <div class="nh-wrap">
+      <div class="nh-sec-h"><span class="nh-eyebrow">Het klantportaal</span><h2>Uw administratie, eenvoudig in beeld</h2><p>Eén overzichtelijke omgeving — op uw telefoon en op uw computer.</p></div>
+      <div class="nh-show">
+        <div class="nh-show-card">
+          <div class="nh-show-pic">
+            <div class="nh-ui-row"><span class="nh-ui-ic">📊</span><span class="nh-ui-t">Wacht op u</span><span class="nh-ui-b a">2</span></div>
+            <div class="nh-ui-row"><span class="nh-ui-ic">⏳</span><span class="nh-ui-t">Vatan is bezig</span><span class="nh-ui-b i">5</span></div>
+            <div class="nh-ui-row"><span class="nh-ui-ic">✓</span><span class="nh-ui-t">Afgerond deze maand</span><span class="nh-ui-b g">128</span></div>
+          </div>
+          <div class="nh-show-txt"><div class="tag">Dashboard</div><h3>Altijd weten waar u staat</h3><p>Eén oogopslag toont wat uw aandacht vraagt en wat Vatan voor u doet.</p></div>
+        </div>
+        <div class="nh-show-card">
+          <div class="nh-show-pic">
+            <div class="nh-ui-row"><span class="nh-ui-ic">🧾</span><span class="nh-ui-t">KPN — € 84,90</span><span class="nh-ui-b g">Verwerkt</span></div>
+            <div class="nh-ui-row"><span class="nh-ui-ic">🧾</span><span class="nh-ui-t">Makro — € 213,40</span><span class="nh-ui-b i">In behandeling</span></div>
+            <div class="nh-ui-row"><span class="nh-ui-ic">🧾</span><span class="nh-ui-t">Shell — € 76,10</span><span class="nh-ui-b a">Controle</span></div>
+          </div>
+          <div class="nh-show-txt"><div class="tag">Inkoopfacturen</div><h3>Upload en volg live</h3><p>Foto maken is genoeg. U volgt elke factuur van herkenning tot verwerking.</p></div>
+        </div>
+        <div class="nh-show-card">
+          <div class="nh-show-pic">
+            <div class="nh-ui-row"><span class="nh-ui-ic">✨</span><span class="nh-ui-t">Wat betekent deze brief?</span></div>
+            <div class="nh-ui-row"><span class="nh-ui-ic">💶</span><span class="nh-ui-t">Is dit aftrekbaar?</span></div>
+            <div class="nh-ui-row"><span class="nh-ui-ic">📄</span><span class="nh-ui-t">Document samenvatten</span></div>
+          </div>
+          <div class="nh-show-txt"><div class="tag">AI Assistent</div><h3>Direct uitleg in gewone taal</h3><p>Stel uw vraag of upload een document — meteen een begrijpelijk antwoord.</p></div>
+        </div>
+        <div class="nh-show-card">
+          <div class="nh-show-pic">
+            <div class="nh-ui-row"><span class="nh-ui-ic">📈</span><span class="nh-ui-t">Omzet 2026</span><span class="nh-ui-b g">+12%</span></div>
+            <div class="nh-ui-row"><span class="nh-ui-ic">📉</span><span class="nh-ui-t">Kosten</span><span class="nh-ui-b i">Stabiel</span></div>
+            <div class="nh-ui-row"><span class="nh-ui-ic">💶</span><span class="nh-ui-t">Resultaat Q2</span><span class="nh-ui-b g">Positief</span></div>
+          </div>
+          <div class="nh-show-txt"><div class="tag">Rapportages</div><h3>Heldere cijfers, geen jargon</h3><p>Tussentijdse rapportages waarmee u écht stuurt op uw onderneming.</p></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ======= TEAM ======= -->
-  <section class="lp-sec alt">
-    <div class="lp-wrap lp-team">
-      <div class="txt">
-        <h2>Een vast, deskundig team</h2>
-        <p>Bij VATAN Administratie &amp; Advies heeft u een vast aanspreekpunt dat uw onderneming kent. Korte lijnen, persoonlijke aandacht en jarenlange ervaring met ondernemers in het MKB.</p>
-        <p>Wij spreken uw taal — letterlijk: u kunt bij ons terecht in vijf talen. Zo voelt advies nooit als een drempel.</p>
+  <!-- ======= AI SECTION ======= -->
+  <section class="nh-section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="nh-wrap">
+      <div class="nh-ai">
+        <div class="nh-ai-inner">
+          <div>
+            <h2>AI die helpt.<br><span>Mensen die controleren.</span></h2>
+            <p class="lead">Slimme techniek versnelt uw administratie. De verantwoordelijkheid blijft bij ervaren mensen.</p>
+            <div class="nh-ai-trust"><span class="ic">🛡️</span><div>Belangrijke fiscale beslissingen worden altijd gecontroleerd door een medewerker van Vatan.</div></div>
+          </div>
+          <div>
+            <ul class="nh-ai-list">
+              <li><span class="ck">✓</span> Brieven uitleggen in gewone taal</li>
+              <li><span class="ck">✓</span> Facturen herkennen en controleren</li>
+              <li><span class="ck">✓</span> Documenten samenvatten</li>
+              <li><span class="ck">✓</span> Uw vragen direct beantwoorden</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="photo">
-        <div class="lp-mem"><div class="av">EV</div><div class="nm">Erkan</div><div class="rl">Oprichter &amp; Adviseur</div></div>
-        <div class="lp-mem"><div class="av">BA</div><div class="nm">Boekhouding</div><div class="rl">Administratie &amp; OB</div></div>
-        <div class="lp-mem"><div class="av">LO</div><div class="nm">Loonteam</div><div class="rl">Salaris &amp; loonaangiften</div></div>
-        <div class="lp-mem"><div class="av">FA</div><div class="nm">Fiscaal</div><div class="rl">Aangiften &amp; advies</div></div>
+    </div>
+  </section>
+
+  <!-- ======= SERVICES ======= -->
+  <section class="nh-section">
+    <div class="nh-wrap">
+      <div class="nh-sec-h"><span class="nh-eyebrow">Onze diensten</span><h2>Alles onder één dak</h2><p>Van dagelijkse boekhouding tot fiscaal advies — wij ontzorgen u volledig.</p></div>
+      <div class="nh-grid c3">
+        <div class="nh-card"><div class="ic">📒</div><h3>Boekhouding</h3><p>Uw volledige administratie verzorgd, met realtime inzicht via Exact Online en SnelStart.</p></div>
+        <div class="nh-card"><div class="ic">🧾</div><h3>BTW-aangiften</h3><p>Tijdig en correct ingediend, met controle op aftrekbaarheid en aansluiting.</p></div>
+        <div class="nh-card"><div class="ic">📊</div><h3>Jaarrekening</h3><p>Heldere jaarcijfers en een nette jaarrekening waarmee u verder kunt.</p></div>
+        <div class="nh-card"><div class="ic">🧮</div><h3>Inkomstenbelasting</h3><p>Aangifte IB voor ondernemers en ZZP'ers — optimaal en op tijd via SBR.</p></div>
+        <div class="nh-card"><div class="ic">🏢</div><h3>Vennootschapsbelasting</h3><p>VPB-aangifte voor uw BV, met aandacht voor fiscale mogelijkheden.</p></div>
+        <div class="nh-card"><div class="ic">👥</div><h3>Loonadministratie</h3><p>Salarisverwerking, loonstroken en loonaangiften — personeel altijd op tijd betaald.</p></div>
+        <div class="nh-card"><div class="ic">💡</div><h3>Fiscaal advies</h3><p>Meedenkend advies over fiscaliteit, groei en bedrijfsvoering — in begrijpelijke taal.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= INDUSTRIES ======= -->
+  <section class="nh-section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="nh-wrap">
+      <div class="nh-sec-h"><span class="nh-eyebrow">Branches</span><h2>Ervaring in uw sector</h2><p>Wij kennen de administratie en fiscale regels van uw branche.</p></div>
+      <div class="nh-ind">
+        <div class="nh-ind-card" onclick="kennismaken()"><div class="nh-ind-ic">🍽️</div><div class="t">Horeca</div></div>
+        <div class="nh-ind-card" onclick="kennismaken()"><div class="nh-ind-ic">🚚</div><div class="t">Transport</div></div>
+        <div class="nh-ind-card" onclick="kennismaken()"><div class="nh-ind-ic">🛍️</div><div class="t">Retail</div></div>
+        <div class="nh-ind-card" onclick="kennismaken()"><div class="nh-ind-ic">🏗️</div><div class="t">Bouw</div></div>
+        <div class="nh-ind-card" onclick="kennismaken()"><div class="nh-ind-ic">💼</div><div class="t">Zakelijke dienstverlening</div></div>
+        <div class="nh-ind-card" onclick="kennismaken()"><div class="nh-ind-ic">👤</div><div class="t">ZZP</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= SOCIAL PROOF ======= -->
+  <section class="nh-section">
+    <div class="nh-wrap">
+      <div class="nh-sec-h"><span class="nh-eyebrow">Ervaringen</span><h2>Wat ondernemers over ons zeggen</h2></div>
+      <div class="nh-testi">
+        <div class="nh-quote"><div class="stars">★★★★★</div><div class="q">"Bonnetjes fotograferen en klaar — de BTW-aangifte loopt vanzelf. Eindelijk overzicht."</div><div class="who"><div class="av">RA</div><div><div class="nm">Restaurant Anatolia</div><div class="rl">Horeca · Amsterdam</div></div></div><div class="res">Resultaat: ± 6 uur per maand bespaard</div></div>
+        <div class="nh-quote"><div class="stars">★★★★★</div><div class="q">"Met wisselende ritten was onze administratie een rommel. Nu is alles op tijd en weet ik precies waar ik sta."</div><div class="who"><div class="av">DW</div><div><div class="nm">De Wit Transport</div><div class="rl">Transport · Haarlem</div></div></div><div class="res">Resultaat: nooit meer een deadline gemist</div></div>
+        <div class="nh-quote"><div class="stars">★★★★★</div><div class="q">"Persoonlijk contact in mijn eigen taal en altijd snel antwoord. Precies wat ik als ZZP'er zocht."</div><div class="who"><div class="av">YD</div><div><div class="nm">Yıldız Design</div><div class="rl">ZZP · zelfstandig</div></div></div><div class="res">Resultaat: minder dan 1 dag reactietijd</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FINAL CTA ======= -->
+  <section class="nh-section">
+    <div class="nh-wrap">
+      <div class="nh-final">
+        <h2>Klaar voor een administratie die vooruitkijkt?</h2>
+        <p>Plan een vrijblijvend kennismakingsgesprek. Wij laten u zien hoe het rustiger en slimmer kan.</p>
+        <div class="nh-cta">
+          <button class="btn primary" onclick="kennismaken()">Gratis kennismaken</button>
+          <button class="btn ghost" onclick="kennismaken()">Neem contact op</button>
+        </div>
       </div>
     </div>
   </section>
@@ -1918,21 +2160,37 @@
   </section>
 
   <!-- ======= FOOTER ======= -->
-  <footer class="lp-foot">
-    <div class="lp-wrap">
-      <div class="top">
+  <footer class="nh-foot">
+    <div class="nh-wrap">
+      <div class="nh-foot-grid">
         <div>
           <div class="nm">VATAN Administratie &amp; Advies</div>
-          <span>Raasdorperweg 193 A · Lijnden</span>
-          <span>facturen@vatanadministratie.nl</span>
-          <span>Administratie · Belastingen · Loon · Advies</span>
+          <span class="row">Raasdorperweg 193 A, Lijnden</span>
+          <span class="row">KVK 70123456 · BTW NL8576.12.345.B01</span>
+          <span class="row">Administratie · Belastingen · Loon · Advies</span>
         </div>
-        <div class="cols">
-          <div><b>Diensten</b><a onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Boekhouding</a><a onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Belastingaangiften</a><a onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Loonadministratie</a></div>
-          <div><b>Portaal</b><a onclick="enter('klant')">Klantportaal</a><a onclick="enter('kantoor')">Kantoorportaal</a></div>
+        <div>
+          <b>Diensten</b>
+          <a onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Boekhouding</a>
+          <a onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">BTW &amp; aangiften</a>
+          <a onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Loonadministratie</a>
+          <a onclick="document.getElementById('lp-diensten').scrollIntoView({behavior:'smooth'})">Fiscaal advies</a>
+        </div>
+        <div>
+          <b>Contact</b>
+          <a href="mailto:facturen@vatanadministratie.nl">facturen@vatanadministratie.nl</a>
+          <a href="tel:+31201234567">020 - 123 4567</a>
+          <span class="row">Ma–Vr · 09:00–17:30</span>
+        </div>
+        <div>
+          <b>Portaal &amp; info</b>
+          <a onclick="enter('klant')">Klantportaal</a>
+          <a onclick="enter('kantoor')">Kantoorportaal</a>
+          <a onclick="kennismaken()">Privacyverklaring</a>
+          <a onclick="kennismaken()">Algemene voorwaarden</a>
         </div>
       </div>
-      <div class="bot">© 2026 Vatan Administratie &amp; Advies · Demo-omgeving met voorbeeldgegevens</div>
+      <div class="bot">© 2026 Vatan Administratie &amp; Advies · AVG / GDPR-proof · Demo-omgeving met voorbeeldgegevens</div>
     </div>
   </footer>
 </div>
@@ -3983,6 +4241,14 @@ function cpUpdateTrigger(){
 document.addEventListener('mousedown',function(e){const w=document.getElementById('cpickWrap');if(w&&w.classList.contains('open')&&!w.contains(e.target))cpClose();});
 function logout(){impersonate=null;document.getElementById('app').classList.remove('show');document.getElementById('login').classList.remove('hide');document.getElementById('chatFab').style.display='none';document.getElementById('chatBox').style.display='none';chatOpen=false;}
 function toggleDark(){const d=document.body.classList.toggle('dark');try{localStorage.setItem('vatanDark',d?'1':'0');}catch(e){}const b=document.getElementById('darkBtn');if(b)b.textContent=d?'☀️':'🌙';}
+function kennismaken(){modal('Gratis kennismaken','<div style="font-size:14px;line-height:1.6;color:var(--ink-2);margin-bottom:14px">Plan een vrijblijvend kennismakingsgesprek. We bespreken uw onderneming en laten zien hoe uw administratie rustiger en slimmer kan — geheel zonder verplichtingen.</div>'+
+  '<div style="display:flex;flex-direction:column;gap:9px">'+
+  '<a href="tel:+31201234567" style="display:flex;align-items:center;gap:11px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px 14px;text-decoration:none;color:var(--ink);font-weight:600"><span style="font-size:17px">📞</span> 020 - 123 4567</a>'+
+  '<a href="mailto:facturen@vatanadministratie.nl" style="display:flex;align-items:center;gap:11px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px 14px;text-decoration:none;color:var(--ink);font-weight:600"><span style="font-size:17px">✉️</span> facturen@vatanadministratie.nl</a>'+
+  '<div style="display:flex;align-items:center;gap:11px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px 14px;color:var(--grey);font-weight:600"><span style="font-size:17px">📍</span> Raasdorperweg 193 A, Lijnden · Ma–Vr 09:00–17:30</div>'+
+  '</div>','Sluiten',()=>true);}
+function nhCounters(){const els=document.querySelectorAll('.nh-counter[data-to]');if(!els.length)return;els.forEach(el=>{if(el.dataset.done)return;el.dataset.done='1';const to=+el.dataset.to,suf=el.dataset.suf||'';const dur=1300,t0=performance.now();function step(t){const p=Math.min(1,(t-t0)/dur);const e=1-Math.pow(1-p,3);const v=Math.round(to*e);el.textContent=v.toLocaleString('nl-NL')+(p>=1?suf:'');if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);});}
+window.addEventListener('load',function(){if('IntersectionObserver' in window){const tb=document.querySelector('.nh-trustbar');if(tb){const io=new IntersectionObserver((ents)=>{ents.forEach(en=>{if(en.isIntersecting){nhCounters();io.disconnect();}});},{threshold:.3});io.observe(tb);}else nhCounters();}else nhCounters();});
 let chatOpen=false;
 const CHAT_KB=[
  {k:['nieuwe factuur','factuur maken','factuur opstellen','factuur'],a:'Ga naar <b>Facturatie → + Nieuwe factuur</b>. Kies de relatie, voeg regels toe (omschrijving, aantal, prijs, BTW) en klik op <b>Opslaan als concept</b> of <b>Opslaan &amp; versturen</b>. Rechts ziet u live een voorbeeld.'},
