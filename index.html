@@ -846,6 +846,65 @@
   .af-meta{text-align:right;flex-shrink:0}
   .af-type{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--grey-2);background:var(--line-2);padding:2px 7px;border-radius:20px}
   .af-d{font-size:11px;color:var(--grey-2);margin-top:3px;font-variant-numeric:tabular-nums}
+  /* purchase-invoice workflow */
+  .ink-list{display:flex;flex-direction:column;gap:11px;margin-top:14px}
+  .ink-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;transition:.14s}
+  .ink-card:hover{border-color:var(--brand-2);box-shadow:var(--sh-md)}
+  .ink-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+  .ink-nm{font-weight:700;color:var(--ink);font-size:14px}
+  .ink-meta{font-size:11.5px;color:var(--grey-2)}
+  .ink-r{text-align:right;flex-shrink:0}
+  .ink-amt{font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;margin-bottom:4px}
+  .ink-stages{display:flex;align-items:flex-start;gap:0}
+  .ink-st{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative}
+  .ink-st .ink-dot{width:13px;height:13px;border-radius:50%;background:var(--line-2);border:2px solid var(--line);z-index:1}
+  .ink-st.on .ink-dot{background:#22A565;border-color:#22A565}
+  .ink-st.cur .ink-dot{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-soft,#fdf1dc)}
+  .ink-st:not(:last-child)::after{content:'';position:absolute;top:6px;left:50%;width:100%;height:2px;background:var(--line-2);z-index:0}
+  .ink-st.on:not(:last-child)::after{background:#22A565}
+  .ink-sl{font-size:9.5px;color:var(--grey-2);text-align:center;line-height:1.2}
+  .ink-st.on .ink-sl{color:var(--ink);font-weight:600}
+  .ink-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:13px;padding-top:11px;border-top:1px solid var(--line-2);font-size:11.5px;color:var(--grey)}
+  .ink-foot b{color:var(--ink)}.ink-prog{margin-left:auto}
+  .ink-hist{display:flex;flex-direction:column;margin-top:4px}
+  .ink-hrow{display:flex;gap:10px;padding:6px 0;position:relative}
+  .ink-hdot{width:9px;height:9px;border-radius:50%;background:var(--brand-2);flex-shrink:0;margin-top:3px;box-shadow:0 0 0 2px var(--card),0 0 0 3px var(--line)}
+  .ink-hrow:not(:last-child)::before{content:'';position:absolute;left:4px;top:14px;bottom:-2px;width:2px;background:var(--line-2)}
+  .ink-ht{font-size:12.5px;color:var(--ink);font-weight:600}.ink-hd{font-size:11px;color:var(--grey-2)}
+  /* secure chat */
+  .chatw{max-width:720px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--sh-sm)}
+  .chatw-head{display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:var(--hover)}
+  .chatw-av{width:38px;height:38px;border-radius:11px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px;flex-shrink:0}
+  .chatw-id{flex:1;min-width:0}
+  .chatw-nm{font-weight:700;color:var(--ink);font-size:13.5px}
+  .chatw-st{font-size:11px;color:var(--grey);display:flex;align-items:center;gap:6px}
+  .chatw-on{width:8px;height:8px;border-radius:50%;background:#22A565;flex-shrink:0}
+  .chatw-lock{font-size:11px;color:var(--grey-2);font-weight:600;flex-shrink:0}
+  .chatw-body{padding:16px;display:flex;flex-direction:column;gap:11px;max-height:52vh;overflow-y:auto;background:var(--bg)}
+  .cmsg{display:flex}.cmsg.me{justify-content:flex-end}
+  .cmsg-b{max-width:74%}
+  .cmsg-t{padding:10px 13px;border-radius:13px;font-size:13.5px;line-height:1.45;color:var(--ink)}
+  .cmsg.them .cmsg-t{background:var(--card);border:1px solid var(--line);border-top-left-radius:4px}
+  .cmsg.me .cmsg-t{background:var(--brand-soft);border:1px solid var(--brand-soft);border-top-right-radius:4px}
+  .cmsg-att{margin-top:6px;font-size:12px;color:var(--brand-2);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:5px 8px}
+  .cmsg-m{font-size:10.5px;color:var(--grey-2);margin-top:4px;padding:0 4px}
+  .cmsg.me .cmsg-m{text-align:right}
+  .cmsg-stat{color:var(--grey-2)}.cmsg-stat.ok{color:#1A8F54}
+  .chatw-drop{margin:12px 16px 0;border:1.5px dashed var(--line);border-radius:10px;padding:9px;text-align:center;font-size:11.5px;color:var(--grey-2);cursor:pointer;transition:.12s}
+  .chatw-drop:hover{border-color:var(--brand-2);color:var(--brand-2)}
+  .chatw-foot{display:flex;gap:9px;align-items:center;padding:12px 16px;border-top:1px solid var(--line)}
+  .chatw-attach{width:40px;height:42px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;font-size:16px;flex-shrink:0}
+  .chatw-attach:hover{border-color:var(--brand-2)}
+  /* AI quick actions */
+  .aiq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin-top:10px}
+  .aiq-btn{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;cursor:pointer;font-size:13px;font-weight:700;color:var(--ink);font-family:inherit;text-align:left;transition:.14s}
+  .aiq-btn:hover{border-color:var(--brand-2);transform:translateY(-2px);box-shadow:var(--sh-sm)}
+  .aiq-bic{width:34px;height:34px;border-radius:9px;background:var(--brand-soft);display:grid;place-items:center;font-size:16px;flex-shrink:0}
+  .aiq-card{display:flex;gap:13px;align-items:flex-start;background:var(--brand-tint);border:1px solid var(--brand-soft);border-radius:12px;padding:14px 16px}
+  .aiq-ic{font-size:26px;flex-shrink:0}
+  .aiq-body{font-size:13.5px;color:var(--ink);line-height:1.55}
+  .aiq-note{font-size:11.5px;color:var(--grey);margin-top:11px}
+  @media(max-width:600px){.ink-sl{font-size:8px}.cmsg-b{max-width:86%}}
   @media(max-width:560px){.cc-ops{flex-wrap:wrap}.cc-op{flex:1 1 44%}}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
@@ -2706,6 +2765,39 @@ const I18N_ADD24={
  "Volledige chronologische activiteitenlog van dit dossier — alleen zichtbaar voor kantoor.":{en:"Full chronological activity log of this dossier — office-only.",tr:"Bu dosyanın tam kronolojik aktivite günlüğü — yalnızca ofis.",bg:"Пълен хронологичен дневник на това досие — само за офиса.",ar:"سجل نشاط زمني كامل لهذا الملف — للمكتب فقط."}
 };
 Object.keys(I18N_ADD24).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD24[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD24[k][l];});});
+/* ===== Client portal: invoice workflow · chat · AI quick actions ===== */
+const I18N_ADD25={
+ "Af te handelen":{en:"To handle",tr:"İşlenecek",bg:"За обработка",ar:"للمعالجة"},
+ "Categorie":{en:"Category",tr:"Kategori",bg:"Категория",ar:"الفئة"},
+ "Verwerking door Vatan":{en:"Processing by Vatan",tr:"Vatan tarafından işleme",bg:"Обработка от Vatan",ar:"المعالجة بواسطة Vatan"},
+ "Verwerkingsstatus":{en:"Processing status",tr:"İşleme durumu",bg:"Статус на обработка",ar:"حالة المعالجة"},
+ "Gegevens":{en:"Details",tr:"Bilgiler",bg:"Данни",ar:"التفاصيل"},
+ "Verwerkingsgeschiedenis":{en:"Processing history",tr:"İşleme geçmişi",bg:"История на обработката",ar:"سجل المعالجة"},
+ "Geüpload":{en:"Uploaded",tr:"Yüklendi",bg:"Качено",ar:"تم الرفع"},
+ "Herkend":{en:"Recognized",tr:"Tanındı",bg:"Разпознато",ar:"تم التعرّف"},
+ "Gecontroleerd":{en:"Reviewed",tr:"Kontrol edildi",bg:"Прегледано",ar:"تمت المراجعة"},
+ "Afgerond":{en:"Completed",tr:"Tamamlandı",bg:"Завършено",ar:"اكتمل"},
+ "Geüpload door u":{en:"Uploaded by you",tr:"Sizin tarafınızdan yüklendi",bg:"Качено от вас",ar:"رفعته أنت"},
+ "Automatisch herkend":{en:"Automatically recognized",tr:"Otomatik tanındı",bg:"Автоматично разпознато",ar:"تم التعرّف تلقائيًا"},
+ "Gecontroleerd door Vatan":{en:"Reviewed by Vatan",tr:"Vatan tarafından kontrol edildi",bg:"Прегледано от Vatan",ar:"تمت المراجعة بواسطة Vatan"},
+ "Definitief afgerond":{en:"Finalized",tr:"Kesinleştirildi",bg:"Финализирано",ar:"تم الإنهاء"},
+ "Snelle vragen":{en:"Quick questions",tr:"Hızlı sorular",bg:"Бързи въпроси",ar:"أسئلة سريعة"},
+ "Beveiligd":{en:"Secure",tr:"Güvenli",bg:"Защитено",ar:"آمن"},
+ "Verzonden":{en:"Sent",tr:"Gönderildi",bg:"Изпратено",ar:"تم الإرسال"},
+ "Beantwoord":{en:"Replied",tr:"Yanıtlandı",bg:"Отговорено",ar:"تم الرد"},
+ "Wacht op antwoord van Vatan":{en:"Waiting for Vatan's reply",tr:"Vatan'ın yanıtı bekleniyor",bg:"Изчаква отговор от Vatan",ar:"بانتظار رد Vatan"},
+ "Beveiligde chat · reageert meestal binnen 1 werkdag":{en:"Secure chat · usually replies within 1 business day",tr:"Güvenli sohbet · genellikle 1 iş günü içinde yanıtlar",bg:"Защитен чат · обикновено отговаря до 1 работен ден",ar:"محادثة آمنة · يرد عادة خلال يوم عمل"},
+ "Geen facturen in deze weergave.":{en:"No invoices in this view.",tr:"Bu görünümde fatura yok.",bg:"Няма фактури в този изглед.",ar:"لا فواتير في هذا العرض."},
+ "Bon uploaden":{en:"Upload receipt",tr:"Fiş yükle",bg:"Качи бележка",ar:"رفع إيصال"},
+ "Leg dit document uit":{en:"Explain this document",tr:"Bu belgeyi açıkla",bg:"Обясни този документ",ar:"اشرح هذا المستند"},
+ "Wat moet ik doen?":{en:"What should I do?",tr:"Ne yapmalıyım?",bg:"Какво да направя?",ar:"ماذا يجب أن أفعل؟"},
+ "Mag ik dit aftrekken?":{en:"Can I deduct this?",tr:"Bunu düşebilir miyim?",bg:"Мога ли да приспадна това?",ar:"هل يمكنني خصم هذا؟"},
+ "Welke categorie is deze factuur?":{en:"Which category is this invoice?",tr:"Bu fatura hangi kategoride?",bg:"Коя категория е тази фактура?",ar:"ما فئة هذه الفاتورة؟"},
+ "Vraag het Vatan":{en:"Ask Vatan",tr:"Vatan'a sor",bg:"Попитай Vatan",ar:"اسأل Vatan"},
+ "Sleep een bestand hierheen of klik om bij te voegen":{en:"Drag a file here or click to attach",tr:"Bir dosyayı buraya sürükleyin veya eklemek için tıklayın",bg:"Плъзнете файл тук или щракнете за прикачване",ar:"اسحب ملفًا هنا أو انقر للإرفاق"}
+};
+Object.keys(I18N_ADD25).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD25[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD25[k][l];});});
+(function(){const more={en:[['Verwerkt in','Processed in'],['Categorie:','Category:']],tr:[['Verwerkt in','İşlendi:'],['Categorie:','Kategori:']],bg:[['Verwerkt in','Обработено в'],['Categorie:','Категория:']],ar:[['Verwerkt in','تمت المعالجة في'],['Categorie:','الفئة:']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={en:[['activiteiten','activities'],['AI-signaal','AI signal'],['AI-samenvatting','AI summary']],tr:[['activiteiten','aktivite'],['AI-signaal','AI sinyali'],['AI-samenvatting','AI özeti']],bg:[['activiteiten','активности'],['AI-signaal','AI сигнал'],['AI-samenvatting','AI обобщение']],ar:[['activiteiten','أنشطة'],['AI-signaal','إشارة ذكاء'],['AI-samenvatting','ملخص ذكي']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[['BTW-aangifte','VAT return'],['Aangifte inkomstenbelasting','Income tax return'],['uiterlijk','due by'],['te laat','overdue']],
@@ -3753,6 +3845,14 @@ VIEWS.klant.regeling = ()=>{
   <div class="sub">${t('wd_s').split('.')[0]}. Vatan stelt de officiële brief op; uw aanvraag en de aanslag worden bewaard en zijn later terug te zien.</div>
   <div class="tablewrap"><table><thead><tr><th>Kenmerk</th><th>Bedrag</th><th>Termijnen</th><th>Aangevraagd</th><th>Status</th></tr></thead><tbody>${rows||`<tr><td colspan="5"><div class="empty"><div class="big">📭</div>Nog geen aanvragen.</div></td></tr>`}</tbody></table></div>`;
 };
+const AI_QA={
+ explain:['📄','Leg dit document uit','Upload uw brief, aanslag of factuur bij <b>Wat is dit?</b> en u krijgt in gewone taal uitleg: wat het is, van wie het komt en of u iets moet doen.',['watisdit','Document uploaden']],
+ todo:['✅','Wat moet ik doen?','Vertel kort wat u ontving — een brief, factuur of aanslag. Vatan legt uit of u moet betalen, bewaren, doorsturen of reageren, en vóór welke datum.',['watisdit','Uitleg vragen']],
+ deduct:['💶','Mag ik dit aftrekken?','Voor de meeste zakelijke kosten geldt: is het echt voor uw onderneming, dan is het vaak (deels) aftrekbaar. Twijfelt u? Upload de bon, dan kijken wij met u mee. Voor eten, drinken en privé-uitgaven gelden aparte regels.',['inkoop','Bon bekijken']],
+ category:['🗂','Welke categorie is deze factuur?','Upload de factuur — Vatan herkent automatisch de leverancier en plaatst hem in de juiste categorie, bijvoorbeeld telefoon, huur of software. U hoeft zelf niets te kiezen.',['inkoop','Naar inkoopfacturen']],
+ ask:['💬','Vraag het Vatan','Stel uw vraag rechtstreeks aan uw vaste contactpersoon bij Vatan. U krijgt meestal binnen één werkdag antwoord.',['berichten','Bericht sturen']]
+};
+function aiQuick(k){const q=AI_QA[k];if(!q)return;modal('✨ '+q[1],`<div class="aiq-card"><div class="aiq-ic">${q[0]}</div><div class="aiq-body">${q[2]}</div></div><div class="aiq-note">🔒 Eenvoudige uitleg in gewone taal — Vatan houdt uw administratie veilig bij.</div>`,q[3][1]+' →',()=>{closeM();go(q[3][0]);return true;});}
 VIEWS.klant.aihulp = ()=>`
   <h1 class="title">AI Assistent</h1>
   <div class="sub">Slimme hulp van Vatan Administratie &amp; Advies. Begrijpt u een brief, aanslag of factuur niet? Upload hem en krijg direct eenvoudige uitleg — of stel gewoon een vraag.</div>
@@ -3761,6 +3861,8 @@ VIEWS.klant.aihulp = ()=>`
     <div class="lp-card click" onclick="go('watisdit')"><div class="ic">${_svg('<path d="M20 7L10 17l-5-5"/><path d="M4 20h16"/>')}</div><h3>Wat moet ik doen?</h3><p>Laat de assistent uitleggen welke actie nodig is: betalen, bewaren, doorsturen of reageren.</p></div>
     <div class="lp-card click" onclick="toggleChat()"><div class="ic">${_svg('<path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 12.5h5"/>')}</div><h3>Stel een vraag</h3><p>Stel een eenvoudige vraag over een document, belastingbrief, factuur of uw administratie.</p></div>
   </div>
+  <div class="mod-sub" style="margin-top:22px">Snelle vragen</div>
+  <div class="aiq-grid">${Object.keys(AI_QA).map(k=>`<button class="aiq-btn" onclick="aiQuick('${k}')"><span class="aiq-bic">${AI_QA[k][0]}</span><span>${AI_QA[k][1]}</span></button>`).join('')}</div>
   <div class="feedback" style="margin-top:18px"><span>🔒</span><div>Uw documenten in <b>Wat is dit?</b> worden alleen gebruikt voor uitleg en worden niet opgeslagen in uw administratie.</div></div>`;
 VIEWS.klant.belasting = ()=>`
   <h1 class="title">Belastingzaken</h1>
@@ -3889,12 +3991,22 @@ VIEWS.klant.offertes = ()=>{
 };
 function setQuoteFilter(f){quoteFilter=f;renderView();}
 
+let inkFilter='alle';
+function inkBucket(i){return i.state==='sent'?'done':(i.state==='queue'?'prog':'todo');}
+function inkCat(i){if(i.cat)return i.cat;const g=String(i.gl||'').replace(/^\d+\s*/,'').trim();return g||'Algemene kosten';}
+function inkStages(i){const b=inkBucket(i);const done=b==='done'?5:(b==='prog'?3:1);const labs=['Geüpload','Herkend','Gecontroleerd','Verwerkt in '+PROG[i.prog],'Afgerond'];return `<div class="ink-stages">${labs.map((l,idx)=>`<div class="ink-st ${idx<done?'on':''} ${idx===done-1?'cur':''}"><span class="ink-dot"></span><span class="ink-sl">${l}</span></div>`).join('')}</div>`;}
+function inkHistory(i){const b=inkBucket(i);const out=[['Geüpload door u',i.date],['Automatisch herkend',addDays(i.date,0)]];if(b!=='todo')out.push(['Gecontroleerd door Vatan',addDays(i.date,1)]);if(b==='done'){out.push(['Verwerkt in '+PROG[i.prog],addDays(i.date,1)]);out.push(['Definitief afgerond',addDays(i.date,2)]);}return out.map(s=>`<div class="ink-hrow"><span class="ink-hdot"></span><div class="ink-hc"><div class="ink-ht">${s[0]}</div><div class="ink-hd">${s[1]}</div></div></div>`).join('');}
 VIEWS.klant.inkoop = ()=>{
   const mine = state.inbox.filter(i=>i.client==='Demo BV');
-  return listView('Inkoopfacturen','Geüploade bonnen en inkoopfacturen. Klik op een regel om het document én de door Vatan voorbereide boeking te bekijken.','Bon uploaden','uploadBon()',
-  `<th>Leverancier</th><th>Datum</th><th class="r">Bedrag</th><th>Programma</th><th>Status</th>`,
-  mine.map(i=>{const st=i.state==='sent'?'Verwerkt':i.state==='queue'?'In verwerking':'Nieuw';
-    return `<tr class="clickable" onclick="openInkoop(${i.id})"><td><b>${i.sup}</b><br><span style="color:var(--grey);font-size:12px">${i.no}</span></td><td>${i.date}</td><td class="r">${money(i.amt)}</td><td>${progPill(i.prog)}</td><td>${statusPill(st)}</td></tr>`;}).join(''));
+  const counts={todo:mine.filter(i=>inkBucket(i)==='todo').length,prog:mine.filter(i=>inkBucket(i)==='prog').length,done:mine.filter(i=>inkBucket(i)==='done').length};
+  const filt=mine.filter(i=>inkFilter==='alle'||inkBucket(i)===inkFilter);
+  const tab=(k,l,n)=>`<div class="ftab ${inkFilter===k?'active':''}" onclick="inkFilter='${k}';renderView()">${l}<span class="c">${n}</span></div>`;
+  const card=i=>{const b=inkBucket(i);const stTxt=b==='done'?'Afgehandeld':(b==='prog'?'In behandeling':'Af te handelen');const tone=b==='done'?'g':(b==='prog'?'a':'r');
+    return `<div class="ink-card" onclick="openInkoop(${i.id})"><div class="ink-top"><div class="ink-sup"><div class="ink-nm">${i.sup}</div><div class="ink-meta">${i.no} · ${i.date}</div></div><div class="ink-r"><div class="ink-amt">${money(i.amt)}</div><span class="pill ${tone}">${stTxt}</span></div></div>${inkStages(i)}<div class="ink-foot"><span>Categorie: <b>${inkCat(i)}</b></span><span>BTW: <b>${i.btw||'—'}</b></span><span class="ink-prog">${progPill(i.prog)}</span></div></div>`;};
+  return `<div class="row-between"><h1 class="title">Inkoopfacturen</h1><button class="btn primary" onclick="uploadBon()">⤓ Bon uploaden</button></div>
+  <div class="sub">Geüploade bonnen en inkoopfacturen — Vatan verwerkt ze stap voor stap. Klik op een factuur voor de volledige verwerking.</div>
+  <div class="ftabs">${tab('alle','Alle',mine.length)}${tab('todo','Af te handelen',counts.todo)}${tab('prog','In behandeling',counts.prog)}${tab('done','Afgehandeld',counts.done)}</div>
+  ${filt.length?`<div class="ink-list">${filt.map(card).join('')}</div>`:'<div class="empty"><div class="big">📥</div>Geen facturen in deze weergave.</div>'}`;
 };
 function openInkoop(id){const d=state.inbox.find(x=>x.id===id); if(!d)return;
   const st=d.state==='sent'?'Verwerkt':d.state==='queue'?'In verwerking':'Nieuw';
@@ -3910,14 +4022,17 @@ function openInkoop(id){const d=state.inbox.find(x=>x.id===id); if(!d)return;
           <table class="lines"><thead><tr><th>Omschrijving</th><th class="r">Bedrag</th></tr></thead><tbody>${linesHtml}</tbody></table>
           <div class="inv-tot"><div class="tr"><span>Subtotaal excl.</span><span>${d.excl?money(d.excl):'—'}</span></div><div class="tr"><span>BTW ${d.btw}</span><span>${d.btwAmt?money(d.btwAmt):'—'}</span></div><div class="tr grand"><span>Totaal</span><span>${money(d.amt)}</span></div></div>
         </div></div>
-      <div><div class="col-h">🤖 Boeking</div>
-        <div class="boeking"><div class="bk-head"><span class="t">Inkoopboeking</span><span>${progPill(d.prog)} <span style="color:var(--grey);font-size:12px">${PROG[d.prog]}</span></span></div>
-          <div class="bk-sec"><div class="sh">Status</div><div class="frow"><span class="k">Verwerking</span><b>${statusPill(st)}</b></div><div class="frow"><span class="k">Leverancier</span><b>${d.sup}</b></div><div class="frow"><span class="k">Bedrag incl. BTW</span><b>${money(d.amt)}</b></div></div>
-          <div class="bk-sec"><div class="sh">Boekingsregel (door Vatan)</div>
-            <div class="frow"><span class="k">Grootboekrekening</span><b>${d.gl}</b></div>
-            <div class="frow"><span class="k">BTW-code</span><b>${d.btw}</b></div>
-            <div class="ai-note">🤖 ${d.state==='sent'?'Deze inkoopfactuur is door Vatan Administratie geboekt in '+PROG[d.prog]+'.':'Vatan Administratie controleert en boekt dit document. U hoeft niets te doen.'}</div>
+      <div><div class="col-h">✅ Verwerking door Vatan</div>
+        <div class="boeking"><div class="bk-head"><span class="t">Verwerkingsstatus</span><span>${progPill(d.prog)} <span style="color:var(--grey);font-size:12px">${PROG[d.prog]}</span></span></div>
+          <div class="bk-sec">${inkStages(d)}</div>
+          <div class="bk-sec"><div class="sh">Gegevens</div>
+            <div class="frow"><span class="k">Leverancier</span><b>${d.sup}</b></div>
+            <div class="frow"><span class="k">Categorie</span><b>${inkCat(d)}</b></div>
+            <div class="frow"><span class="k">BTW</span><b>${d.btw||'—'}</b></div>
+            <div class="frow"><span class="k">Bedrag incl. BTW</span><b>${money(d.amt)}</b></div>
           </div>
+          <div class="bk-sec"><div class="sh">Verwerkingsgeschiedenis</div><div class="ink-hist">${inkHistory(d)}</div></div>
+          <div class="ai-note">Deze factuur is herkend als <b>${inkCat(d)}</b> van <b>${d.sup}</b>. De BTW (${d.btw||'—'}) is overgenomen van het document. ${d.state==='sent'?'Vatan heeft de factuur verwerkt in '+PROG[d.prog]+' — u hoeft niets te doen.':'Vatan controleert en verwerkt dit document zorgvuldig. U hoeft niets te doen.'}</div>
         </div></div>
     </div>`;
 }
@@ -4106,13 +4221,18 @@ VIEWS.klant.statistieken = ()=>{
   </div>`;
 };
 
+function msgAttach(){toast('Bijlage toevoegen — sleep een bestand hierheen of kies een bestand (demo)');}
 VIEWS.klant.berichten = ()=>{
   state.messages.forEach(m=>m.read=true); setTimeout(renderNav,0);
+  const last=state.messages[state.messages.length-1];
+  const waiting=last&&last.from==='klant';
   return `<h1 class="title">Berichten</h1>
   <div class="sub">Veilige communicatie met Vatan Administratie. Uw scan-&amp;-herken e-mailadres: <b>${state.emailIn}</b> — stuur facturen hierheen en ze verschijnen automatisch bij Inkoopfacturen.</div>
-  <div class="panel" style="max-width:720px">
-    ${state.messages.map(m=>`<div style="display:flex;justify-content:${m.from==='klant'?'flex-end':'flex-start'};margin-bottom:10px"><div style="max-width:72%;background:${m.from==='klant'?'var(--red-soft)':'var(--bg)'};border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-size:13.5px"><div style="font-size:11px;color:var(--grey);font-weight:700;margin-bottom:3px">${m.from==='klant'?'U':'Vatan Administratie'} · ${m.date}</div>${m.text}</div></div>`).join('')}
-    <div style="display:flex;gap:9px;margin-top:14px"><input id="msgInput" class="gl" placeholder="Typ een bericht…" style="flex:1"><button class="btn primary" onclick="sendMessage()">Versturen</button></div>
+  <div class="chatw">
+    <div class="chatw-head"><div class="chatw-av">VA</div><div class="chatw-id"><div class="chatw-nm">Vatan Administratie &amp; Advies</div><div class="chatw-st"><span class="chatw-on"></span>${waiting?'Wacht op antwoord van Vatan':'Beveiligde chat · reageert meestal binnen 1 werkdag'}</div></div><span class="chatw-lock">🔒 Beveiligd</span></div>
+    <div class="chatw-body">${state.messages.map((m,idx)=>{const mine=m.from==='klant';const replied=mine&&state.messages.slice(idx+1).some(x=>x.from==='kantoor');const status=mine?(replied?'Beantwoord':'Verzonden'):'';return `<div class="cmsg ${mine?'me':'them'}"><div class="cmsg-b"><div class="cmsg-t">${m.text}${m.attach?`<div class="cmsg-att">📎 ${gEsc(m.attach)}</div>`:''}</div><div class="cmsg-m">${mine?'U':'Vatan'} · ${m.date}${status?` · <span class="cmsg-stat ${replied?'ok':''}">${status}${replied?' ✓✓':' ✓'}</span>`:''}</div></div></div>`;}).join('')}</div>
+    <div class="chatw-drop" onclick="msgAttach()">📎 Sleep een bestand hierheen of klik om bij te voegen</div>
+    <div class="chatw-foot"><button class="chatw-attach" onclick="msgAttach()" title="Bijlage toevoegen">📎</button><input id="msgInput" class="gl" placeholder="Typ een bericht…" style="flex:1" onkeydown="if(event.key==='Enter')sendMessage()"><button class="btn primary" onclick="sendMessage()">Versturen</button></div>
   </div>`;
 };
 
