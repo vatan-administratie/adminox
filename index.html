@@ -496,6 +496,20 @@
   .coach-ul li b{color:var(--red);flex-shrink:0}
   .coach-flag{margin-top:10px;background:var(--amber-soft);color:var(--amber);border-radius:9px;padding:9px 12px;font-size:12px;font-weight:600}
   .coach-list{display:flex;flex-direction:column;gap:2px}
+  /* premium polish (phase 1-3 components) */
+  .hs-ring{box-shadow:0 1px 3px rgba(0,0,0,.10)}
+  .hs-card .hs-factors{margin-top:2px}
+  .seg-chip{letter-spacing:.01em;line-height:1.4}
+  .dr-row{border-radius:6px;padding:3px 4px;margin:0 -4px}
+  .dr-row:hover{background:var(--hover)}.dr-row:hover .dr-l{color:var(--brand-2)}
+  .coach-q{position:relative}
+  .coach-q::before{content:'›';color:var(--brand-2);margin-right:9px;font-weight:800}
+  .coach-ans b{font-weight:800}
+  .wl-row:hover{background:var(--hover);border-radius:9px}
+  .ex-row:hover .ex-a{color:var(--brand-2)}
+  .jc-row .jc-box{transition:.12s}
+  body.dark .jc-box.open{border-color:var(--line)}
+  .hsum-c{transition:.12s}.panel .hsum-c:hover{border-color:var(--brand-2)}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
@@ -2056,6 +2070,29 @@ const I18N_ADD12={
  "Geen risicofactoren — deze klant is gezond.":{en:"No risk factors — this client is healthy.",tr:"Risk faktörü yok — bu müşteri sağlıklı.",bg:"Няма рискови фактори — клиентът е здрав.",ar:"لا عوامل خطر — هذا العميل سليم."}
 };
 Object.keys(I18N_ADD12).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD12[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD12[k][l];});});
+/* ===== Coach-acties + PDF-labels ===== */
+const I18N_ADD13={
+ "Wat moet ik nu als eerste doen?":{en:"What should I do first?",tr:"Önce ne yapmalıyım?",bg:"Какво да направя първо?",ar:"ماذا أفعل أولاً؟"},
+ "Aanbevolen eerstvolgende actie":{en:"Recommended next action",tr:"Önerilen sonraki adım",bg:"Препоръчано следващо действие",ar:"الإجراء التالي الموصى به"},
+ "Open dossier":{en:"Open dossier",tr:"Dosyayı aç",bg:"Отвори досие",ar:"فتح الملف"},
+ "Open checklist":{en:"Open checklist",tr:"Kontrol listesini aç",bg:"Отвори чеклист",ar:"فتح قائمة التحقق"},
+ "Open OB-aansluiting":{en:"Open VAT reconciliation",tr:"KDV mutabakatını aç",bg:"Отвори ДДС равнение",ar:"فتح تسوية ض.ق.م"},
+ "Ga ernaartoe":{en:"Go there",tr:"Oraya git",bg:"Отиди там",ar:"اذهب هناك"},
+ "Geen OB-aansluitingsgegevens beschikbaar.":{en:"No VAT reconciliation data available.",tr:"KDV mutabakatı verisi yok.",bg:"Няма данни за ДДС равнение.",ar:"لا تتوفر بيانات تسوية ض.ق.م."},
+ "Geen openstaande documentopvragingen.":{en:"No open document requests.",tr:"Açık belge talebi yok.",bg:"Няма отворени заявки за документи.",ar:"لا طلبات مستندات مفتوحة."},
+ "Saldo jaar":{en:"Year balance",tr:"Yıl bakiyesi",bg:"Годишно салдо",ar:"رصيد السنة"},
+ "Balanspositie OB":{en:"VAT balance position",tr:"KDV bilanço pozisyonu",bg:"ДДС салдо позиция",ar:"وضع رصيد ض.ق.م"},
+ "Som":{en:"Sum",tr:"Toplam",bg:"Сума",ar:"المجموع"},
+ "Balans (jaarcijfers)":{en:"Balance (annual figures)",tr:"Bilanço (yıllık rakamlar)",bg:"Баланс (годишни данни)",ar:"الميزانية (أرقام سنوية)"},
+ "Status per maand — boekjaar 2026":{en:"Status per month — book year 2026",tr:"Aylık durum — defter yılı 2026",bg:"Статус по месеци — 2026",ar:"الحالة الشهرية — 2026"}
+};
+Object.keys(I18N_ADD13).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD13[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD13[k][l];});});
+(function(){const more={
+ en:[[" controlepunten"," control points"],["openstaande opvraging(en):","open request(s):"],["Compliance ontbreekt: ","Compliance missing: "],["De OB-aansluiting vergelijkt de ","The VAT reconciliation compares the "],["som van de kwartaalaangiften","sum of the quarterly returns"],["Het verschil — de ","The difference — the "],[" is verstreken ("," has passed ("],[" wachten op verwerking — boek deze eerst."," awaiting processing — book these first."],["Geen urgente acties — deze klant is bij.","No urgent actions — this client is up to date."],[" document(en) te laat aangeleverd"," document(s) delivered late"],["Huidige restschuld","Current remaining debt"]],
+ tr:[[" controlepunten"," kontrol noktası"],["openstaande opvraging(en):","açık talep(ler):"],["Compliance ontbreekt: ","Uyum eksik: "],["De OB-aansluiting vergelijkt de ","KDV mutabakatı şunları karşılaştırır: "],["som van de kwartaalaangiften","çeyrek beyanların toplamı"],["Het verschil — de ","Fark — "],[" is verstreken ("," geçti ("],[" wachten op verwerking — boek deze eerst."," işlenmeyi bekliyor — önce bunları kaydedin."],["Geen urgente acties — deze klant is bij.","Acil işlem yok — bu müşteri güncel."],[" document(en) te laat aangeleverd"," belge geç teslim edildi"],["Huidige restschuld","Mevcut kalan borç"]],
+ bg:[[" controlepunten"," контролни точки"],["openstaande opvraging(en):","отворени заявки:"],["Compliance ontbreekt: ","Липсва съответствие: "],["De OB-aansluiting vergelijkt de ","ДДС равнението сравнява "],["som van de kwartaalaangiften","сумата на тримесечните декларации"],["Het verschil — de ","Разликата — "],[" is verstreken ("," е изтекъл ("],[" wachten op verwerking — boek deze eerst."," чакат обработка — осчетоводете първо тях."],["Geen urgente acties — deze klant is bij.","Няма спешни действия — клиентът е наред."],[" document(en) te laat aangeleverd"," документа доставени със закъснение"],["Huidige restschuld","Текущ остатъчен дълг"]],
+ ar:[[" controlepunten"," نقاط تحقق"],["openstaande opvraging(en):","طلبات مفتوحة:"],["Compliance ontbreekt: ","الامتثال ناقص: "],["De OB-aansluiting vergelijkt de ","تقارن تسوية ض.ق.م "],["som van de kwartaalaangiften","مجموع الإقرارات الربعية"],["Het verschil — de ","الفرق — "],[" is verstreken ("," انقضى ("],[" wachten op verwerking — boek deze eerst."," بانتظار المعالجة — سجّلها أولاً."],["Geen urgente acties — deze klant is bij.","لا إجراءات عاجلة — هذا العميل محدّث."],[" document(en) te laat aangeleverd"," مستند سُلّم متأخرًا"],["Huidige restschuld","الدين المتبقي الحالي"]]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[[" — koppeling health"," — connection health"],[" issues"," issues"],[" issue"," issue"],[" klanten · health "," clients · health "],[" afgerond"," completed"]],
  tr:[[" — koppeling health"," — bağlantı sağlığı"],[" issues"," sorun"],[" issue"," sorun"],[" klanten · health "," müşteri · sağlık "],[" afgerond"," tamamlandı"]],
@@ -2405,7 +2442,7 @@ function factuurResult(d,fname){const incl=parseFloat(String(d.bedragIncl).repla
     </div>
   </div>`;}
 function factuurBoek(){if(!curFactuur)return;const gl=document.getElementById('fbGl').value;const lev=curFactuur.leverancier||'Onbekend';const h=glHist();if(!h[lev])h[lev]={};h[lev][gl]=(h[lev][gl]||0)+1;if(typeof monthlyDone!=='undefined')monthlyDone++;toast(`"${lev}" geboekt op ${gl} — het systeem leert van deze keuze`);renderNav();go('verwerken');}
-function printDoc(title,body){const w=window.open('','_blank','width=820,height=1040');if(!w){toast('Sta pop-ups toe om te printen');return;}w.document.write(`<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>${String(title).replace(/[<>]/g,'')}</title><style>body{font-family:Arial,Helvetica,sans-serif;padding:40px;color:#1c1f24;font-size:13px}h2{font-size:18px;margin:0 0 4px}h3{font-size:14px;margin:18px 0 6px}p{margin:4px 0}table{width:100%;border-collapse:collapse;margin-bottom:8px}td,th{padding:5px 7px;border-bottom:1px solid #e6e9ef;text-align:right}td.l,th.l{text-align:left}th{color:#5C6675;font-weight:600}tr.tot td{font-weight:bold;border-top:2px solid #15171a}@media print{body{padding:0}}</style></head><body><div style="font-weight:900;color:#C8102E;font-size:16px;margin-bottom:14px">VATAN <span style="color:#111;font-weight:700">Administratie &amp; Advies</span></div>${body}<script>window.onload=function(){setTimeout(function(){window.print();},300);}<\/script></body></html>`);w.document.close();toast('Afdrukvenster geopend — kies "Opslaan als PDF"');}
+function printDoc(title,body){body=tHtml(body);title=tStr(title);const w=window.open('','_blank','width=820,height=1040');if(!w){toast('Sta pop-ups toe om te printen');return;}w.document.write(`<!DOCTYPE html><html lang="${LANG}" dir="${LANG==='ar'?'rtl':'ltr'}"><head><meta charset="utf-8"><title>${String(title).replace(/[<>]/g,'')}</title><style>body{font-family:Arial,Helvetica,sans-serif;padding:40px;color:#1c1f24;font-size:13px}h2{font-size:18px;margin:0 0 4px}h3{font-size:14px;margin:18px 0 6px}p{margin:4px 0}table{width:100%;border-collapse:collapse;margin-bottom:8px}td,th{padding:5px 7px;border-bottom:1px solid #e6e9ef;text-align:right}td.l,th.l{text-align:left}th{color:#5C6675;font-weight:600}tr.tot td{font-weight:bold;border-top:2px solid #15171a}@media print{body{padding:0}}</style></head><body><div style="font-weight:900;color:#C8102E;font-size:16px;margin-bottom:14px">VATAN <span style="color:#111;font-weight:700">Administratie &amp; Advies</span></div>${body}<script>window.onload=function(){setTimeout(function(){window.print();},300);}<\/script></body></html>`);w.document.close();toast('Afdrukvenster geopend — kies "Opslaan als PDF"');}
 function printOB(naam){const d=aanslGet(naam,aanslJaar);if(!d)return;const jaar=aanslJaar;
  const bh=d.b.oh*0.21,bl=d.b.ol*0.09,bo=d.b.oa*0.21,vb=d.b.vbl+d.b.vbh,saldoJaar=bh+bl+bo-vb;
  const qn=['1e kw','2e kw','3e kw','4e kw'];let sumS=0,q4s=0,sumBt=0,sumM=0;
@@ -2646,6 +2683,7 @@ Met vriendelijke groet,
 /* ============ HELPERS ============ */
 function money(n){return '€ '+Number(n).toLocaleString('nl-NL',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function tStr(s){if(LANG==='nl'||s==null)return s;const map=I18N[LANG];let k=String(s).trim();if(map&&map[k]!==undefined&&map[k]!==k)return String(s).replace(k,map[k]);const sub=I18N_SUB&&I18N_SUB[LANG];if(sub){let r=String(s),ch=false;for(let i=0;i<sub.length;i++){if(r.indexOf(sub[i][0])>=0){r=r.split(sub[i][0]).join(sub[i][1]);ch=true;}}if(ch)return r;}return s;}
+function tHtml(html){if(LANG==='nl'||!html)return html;return String(html).replace(/>([^<>]+)</g,(m,txt)=>'>'+tStr(txt)+'<');}
 function toast(m){const t=document.getElementById('toast');t.textContent=tStr(m);t.classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),2600);}
 function val(id){const e=document.getElementById(id);return e?e.value:'';}
 function num(s){return parseFloat(String(s).replace(/\./g,'').replace(',','.'))||0;}
@@ -3901,14 +3939,21 @@ function exactHealth(naam){const c=state.clients.find(x=>x.naam===naam)||{};cons
 function exactIssues(naam){return exactHealth(naam).filter(x=>x.tone!=='g');}
 function exactHealthSection(naam){const ex=exactHealth(naam);const iss=ex.filter(x=>x.tone!=='g');const c=state.clients.find(x=>x.naam===naam)||{};const prog=c.prog==='ex'?'Exact Online':'SnelStart';
   return `<div class="cc-sec"><div class="cc-h">${prog} — koppeling health</div>${iss.length?`<div class="exl">${iss.map(x=>`<div class="ex-row"><span class="ex-dot ${x.tone}"></span><div style="min-width:0"><div class="ex-a">${x.area}</div><div class="ex-m">${x.msg}</div></div></div>`).join('')}</div>`:`<div class="cc-clear"><span class="cc-ok">✓</span> Koppeling gezond — geen problemen gevonden.</div>`}</div>`;}
-function coachAsk(naam,key){const h=clientHealth(naam);
-  if(key==='risk')return `<div class="coach-h">Health: <b class="hs-status ${h.tone}">${h.score} / 100 · ${h.status}</b></div>${h.factors.length?`<ul class="coach-ul">${h.factors.map(f=>`<li><span>${f.l}</span> <b>−${f.p}</b></li>`).join('')}</ul>`:'<p>Geen risicofactoren — deze klant is gezond.</p>'}`;
-  if(key==='jaar'){const open=JAARCHECK.filter(it=>{const s=jcStatus(naam,it[0]);return s!=='done'&&s!=='na';});const gaps=recurringCheck(naam).filter(x=>!x.ok);return `<p><b>${open.length} controlepunten</b> nog te doen vóór de jaarafsluiting:</p><ul class="coach-ul">${open.slice(0,8).map(it=>`<li>${it[1]}</li>`).join('')}</ul>${gaps.length?`<div class="coach-flag">⚠ AI-signaal: mogelijk ontbrekende terugkerende kosten — ${gaps.map(g=>g.cat+' ('+g.missing.join(', ')+')').join('; ')}</div>`:''}`;}
-  if(key==='docs'){const reqs=docReqs(naam).filter(r=>r.status!=='completed');const d=DOSSIER[naam]||{};const comp=[];if(!d.wwft||d.wwft==='Actie vereist')comp.push('WWFT-onderzoek');if(d.ubo==='Ontbreekt')comp.push('UBO-registratie');return `${reqs.length?`<p><b>${reqs.length} openstaande opvraging(en):</b></p><ul class="coach-ul">${reqs.map(r=>`<li>${r.item} <span class="pill ${DR_TONE[r.status]}">${DR_LBL[r.status]}</span></li>`).join('')}</ul>`:'<p>Geen openstaande documentopvragingen.</p>'}${comp.length?`<div class="coach-flag">Compliance ontbreekt: ${comp.join(', ')}.</div>`:''}`;}
-  if(key==='ob'){const dd=(typeof aanslGet==='function')?aanslGet(naam,'2025'):null;if(!dd)return '<p>Geen OB-aansluitingsgegevens beschikbaar.</p>';const bh=dd.b.oh*0.21,bl=dd.b.ol*0.09,bo=dd.b.oa*0.21,vb=dd.b.vbl+dd.b.vbh,saldoJaar=bh+bl+bo-vb;let sumS=0;dd.q.forEach(q=>{sumS+=q.oh*0.21+q.ol*0.09+q.oa*0.21-q.vb;});const sup=saldoJaar-sumS;return `<p>De OB-aansluiting vergelijkt de <b>jaarcijfers</b> (€ ${m2(saldoJaar)}) met de <b>som van de kwartaalaangiften</b> (€ ${m2(sumS)}).</p><p>Het verschil — de <b>suppletie</b> — is <b>€ ${m2(sup)}</b>.${Math.abs(sup)>=1000?' Dit overschrijdt de €1.000-grens; een suppletie is vereist.':(Math.abs(sup)<1?' Er is geen verschil; de aansluiting klopt.':' Het verschil is klein en kan in de eerstvolgende aangifte worden gecorrigeerd.')}</p>`;}
+function coachAsk(naam,key){const h=clientHealth(naam);const go=(tab,lbl)=>`<div style="margin-top:12px"><button class="btn primary sm" onclick="closeM();openClient('${gJs(naam)}','${tab}')">${lbl} →</button></div>`;
+  if(key==='next'){const _dl=clientDeadlines(naam);const tv=state.inbox.filter(x=>x.client===naam&&x.state!=='sent').length;const ov=_dl.filter(x=>x.bucket==='overdue');const w=state.werk[naam];let act,tab='overzicht';
+    if(ov.length){act=`Deadline <b>${ov[0].l}</b> is verstreken (${ov[0].d}) — handel dit als eerste af.`;tab=ov[0].type==='OB'?'ob':ov[0].type==='IB'?'ib':ov[0].type==='Loon'?'loon':'regeling';}
+    else if(tv){act=`<b>${tv} document(en)</b> wachten op verwerking — boek deze eerst.`;tab='verwerken';}
+    else if(!w.ob['Q1 2026'].ingediend){act='OB Q1 2026 is nog niet ingediend — rond de aangifte af.';tab='ob';}
+    else if(!w.ib[IBYEAR].ingediend){act=`IB ${IBYEAR} is nog niet ingediend — werk de jaarrekening/aangifte af.`;tab='ib';}
+    else{act='Geen urgente acties — deze klant is bij. 🎉';}
+    return `<div class="coach-h">Aanbevolen eerstvolgende actie</div><p>${act}</p>${tab!=='overzicht'?go(tab,'Ga ernaartoe'):''}`;}
+  if(key==='risk')return `<div class="coach-h">Health: <b class="hs-status ${h.tone}">${h.score} / 100 · ${h.status}</b></div>${h.factors.length?`<ul class="coach-ul">${h.factors.map(f=>`<li><span>${f.l}</span> <b>−${f.p}</b></li>`).join('')}</ul>`:'<p>Geen risicofactoren — deze klant is gezond.</p>'}${go('overzicht','Open dossier')}`;
+  if(key==='jaar'){const open=JAARCHECK.filter(it=>{const s=jcStatus(naam,it[0]);return s!=='done'&&s!=='na';});const gaps=recurringCheck(naam).filter(x=>!x.ok);return `<p><b>${open.length} controlepunten</b> nog te doen vóór de jaarafsluiting:</p><ul class="coach-ul">${open.slice(0,8).map(it=>`<li>${it[1]}</li>`).join('')}</ul>${gaps.length?`<div class="coach-flag">⚠ AI-signaal: mogelijk ontbrekende terugkerende kosten — ${gaps.map(g=>g.cat+' ('+g.missing.join(', ')+')').join('; ')}</div>`:''}${go('jaarcheck','Open checklist')}`;}
+  if(key==='docs'){const reqs=docReqs(naam).filter(r=>r.status!=='completed');const d=DOSSIER[naam]||{};const comp=[];if(!d.wwft||d.wwft==='Actie vereist')comp.push('WWFT-onderzoek');if(d.ubo==='Ontbreekt')comp.push('UBO-registratie');return `${reqs.length?`<p><b>${reqs.length} openstaande opvraging(en):</b></p><ul class="coach-ul">${reqs.map(r=>`<li>${r.item} <span class="pill ${DR_TONE[r.status]}">${DR_LBL[r.status]}</span></li>`).join('')}</ul>`:'<p>Geen openstaande documentopvragingen.</p>'}${comp.length?`<div class="coach-flag">Compliance ontbreekt: ${comp.join(', ')}.</div>`:''}<div style="margin-top:12px"><button class="btn primary sm" onclick="closeM();docReqAdd('${gJs(naam)}')">+ Document opvragen</button></div>`;}
+  if(key==='ob'){const dd=(typeof aanslGet==='function')?aanslGet(naam,'2025'):null;if(!dd)return '<p>Geen OB-aansluitingsgegevens beschikbaar.</p>';const bh=dd.b.oh*0.21,bl=dd.b.ol*0.09,bo=dd.b.oa*0.21,vb=dd.b.vbl+dd.b.vbh,saldoJaar=bh+bl+bo-vb;let sumS=0;dd.q.forEach(q=>{sumS+=q.oh*0.21+q.ol*0.09+q.oa*0.21-q.vb;});const sup=saldoJaar-sumS;return `<p>De OB-aansluiting vergelijkt de <b>jaarcijfers</b> (€ ${m2(saldoJaar)}) met de <b>som van de kwartaalaangiften</b> (€ ${m2(sumS)}).</p><p>Het verschil — de <b>suppletie</b> — is <b>€ ${m2(sup)}</b>.${Math.abs(sup)>=1000?' Dit overschrijdt de €1.000-grens; een suppletie is vereist.':(Math.abs(sup)<1?' Er is geen verschil; de aansluiting klopt.':' Het verschil is klein en kan in de eerstvolgende aangifte worden gecorrigeerd.')}</p>${go('obaansl','Open OB-aansluiting')}`;}
   return '';}
-function coachClient(naam){const qs=[['risk','Waarom is deze klant risicovol?'],['jaar','Wat moet ik checken vóór de jaarafsluiting?'],['docs','Welke documenten ontbreken?'],['ob','Waarom verschilt de OB-aansluiting?']];
-  modal('✨ AI-coach · '+naam,`<div class="sub" style="margin:-4px 0 12px">Stel een vraag — de coach gebruikt de actuele gegevens, statussen, deadlines en signalen van deze klant.</div><div class="coach-qs">${qs.map(q=>`<button class="coach-q" onclick="document.getElementById('coachAns').innerHTML=coachAsk('${gJs(naam)}','${q[0]}')">${q[1]}</button>`).join('')}</div><div id="coachAns" class="coach-ans">${coachAsk(naam,'risk')}</div>`,'Sluiten',()=>true);}
+function coachClient(naam){const qs=[['next','Wat moet ik nu als eerste doen?'],['risk','Waarom is deze klant risicovol?'],['jaar','Wat moet ik checken vóór de jaarafsluiting?'],['docs','Welke documenten ontbreken?'],['ob','Waarom verschilt de OB-aansluiting?']];
+  modal('✨ AI-coach · '+naam,`<div class="sub" style="margin:-4px 0 12px">Stel een vraag — de coach gebruikt de actuele gegevens, statussen, deadlines en signalen van deze klant.</div><div class="coach-qs">${qs.map(q=>`<button class="coach-q" onclick="document.getElementById('coachAns').innerHTML=coachAsk('${gJs(naam)}','${q[0]}')">${q[1]}</button>`).join('')}</div><div id="coachAns" class="coach-ans">${coachAsk(naam,'next')}</div>`,'Sluiten',()=>true);}
 function coachOffice(){const risky=state.clients.filter(c=>c.actief).map(c=>({c,h:clientHealth(c.naam)})).filter(x=>x.h.tone!=='g').sort((a,b)=>a.h.score-b.h.score).slice(0,8);
   modal('✨ AI-coach · Welke klanten vragen vandaag aandacht?',`<div class="sub" style="margin:-4px 0 12px">Gesorteerd op risico — op basis van openstaand werk, signalen, deadlines en compliance.</div>${risky.length?`<div class="coach-list">${risky.map(x=>`<div class="wkrow" onclick="closeM();openClient('${gJs(x.c.naam)}','overzicht')"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div class="id"><b>${x.c.naam}</b><div class="t">${x.c.mw} · ${x.h.factors.length?x.h.factors[0].l:'—'}</div></div>${healthBadge(x.c.naam)}</div>`).join('')}</div>`:'<p>Alle actieve klanten zijn gezond 🎉</p>'}`,'Sluiten',()=>true);}
 /* ===== Client intelligence (health · segmentatie · deadlines) ===== */
@@ -3930,6 +3975,8 @@ function clientHealth(naam){
   if((d.machtiging||'').indexOf('Verloopt')>=0){score-=4;F.push({l:'Machtiging verloopt binnenkort',p:4});}
   const reg=state.regelingen.filter(r=>r.client===naam&&r.status!=='afgehandeld').length;
   if(reg){score-=5;F.push({l:`${reg} betalingsregeling in behandeling`,p:5});}
+  const odr=(state.docRequests||[]).filter(r=>r.client===naam&&r.status==='overdue').length;
+  if(odr){const p=Math.min(10,odr*4);score-=p;F.push({l:`${odr} document(en) te laat aangeleverd`,p});}
   score=Math.max(0,Math.min(100,Math.round(score)));
   const tone=score>=80?'g':(score>=55?'a':'r');
   const status=score>=80?'Gezond':(score>=55?'Aandacht nodig':'Risico');
