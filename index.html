@@ -871,6 +871,30 @@
   .ink-hdot{width:9px;height:9px;border-radius:50%;background:var(--brand-2);flex-shrink:0;margin-top:3px;box-shadow:0 0 0 2px var(--card),0 0 0 3px var(--line)}
   .ink-hrow:not(:last-child)::before{content:'';position:absolute;left:4px;top:14px;bottom:-2px;width:2px;background:var(--line-2)}
   .ink-ht{font-size:12.5px;color:var(--ink);font-weight:600}.ink-hd{font-size:11px;color:var(--grey-2)}
+  /* invoice intelligence 2.0 */
+  .ink-statusrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .ink-prog2{font-size:12px;color:var(--grey);display:flex;align-items:center;gap:6px}
+  .ink-sup-card{background:var(--brand-tint);border:1px solid var(--brand-soft);border-radius:13px;padding:13px 15px;margin-top:14px}
+  .ink-sup-h{font-size:11px;font-weight:800;color:var(--brand-2);text-transform:uppercase;letter-spacing:.03em;margin-bottom:10px}
+  .ink-sup-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px 14px}
+  .ink-sl2{font-size:10.5px;color:var(--grey-2)}
+  .ink-sv2{font-size:13px;font-weight:700;color:var(--ink);margin-top:1px}
+  .ink-sv2.g{color:#1A8F54}.ink-sv2.a{color:#B4791B}
+  .ink-qc{margin-top:16px}
+  .ink-qc-h{font-size:11px;font-weight:800;color:var(--grey-2);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+  .ink-qc-row{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--ink);padding:5px 0;line-height:1.4}
+  .ink-qc-ic{flex-shrink:0;font-weight:800}
+  .ink-qc-row.ok .ink-qc-ic{color:#22A565}
+  .ink-qc-row.warn .ink-qc-ic{color:var(--amber)}.ink-qc-row.warn{color:#8a6d3b}
+  body.dark .ink-qc-row.warn{color:#e7b766}
+  .ink-qc-row.pending,.ink-qc-row.pending .ink-qc-ic{color:var(--grey-2)}
+  .ink-hdot.warn{background:var(--amber)}
+  .ink-warn{display:flex;gap:10px;align-items:flex-start;background:#FDF4E3;border:1px solid #F2DFB8;border-radius:11px;padding:11px 13px;margin-top:14px;font-size:12.5px;color:#7a5b1a;line-height:1.45}
+  body.dark .ink-warn{background:rgba(217,147,32,.13);border-color:rgba(217,147,32,.3);color:#e7b766}
+  .ink-warn-ic{font-size:16px;flex-shrink:0}
+  .ink-warn b{display:block;margin-bottom:2px;color:inherit}
+  .ink-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  @media(max-width:600px){.ink-sup-grid{grid-template-columns:1fr}}
   /* secure chat */
   .chatw{max-width:720px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--sh-sm)}
   .chatw-head{display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:var(--hover)}
@@ -2877,6 +2901,30 @@ const I18N_ADD27={
  "Versturen":{en:"Send",tr:"Gönder",bg:"Изпрати",ar:"إرسال"}
 };
 Object.keys(I18N_ADD27).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD27[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD27[k][l];});});
+/* ===== Inkoopfacturen 2.0 (invoice intelligence) ===== */
+const I18N_ADD28={
+ "Leverancier-inzicht":{en:"Supplier insight",tr:"Tedarikçi içgörüsü",bg:"Информация за доставчик",ar:"رؤى المورّد"},
+ "Eerdere facturen":{en:"Previous invoices",tr:"Önceki faturalar",bg:"Предишни фактури",ar:"الفواتير السابقة"},
+ "Laatst verwerkt":{en:"Last processed",tr:"Son işlenen",bg:"Последно обработено",ar:"آخر معالجة"},
+ "Meestal verwerkt als":{en:"Usually processed as",tr:"Genellikle işlendiği kategori",bg:"Обикновено обработено като",ar:"يُعالَج عادة كـ"},
+ "Consistent met eerdere facturen":{en:"Consistent with previous invoices",tr:"Önceki faturalarla tutarlı",bg:"Съответства на предишни фактури",ar:"متّسق مع الفواتير السابقة"},
+ "Afwijkend — extra gecontroleerd":{en:"Differs — additionally reviewed",tr:"Farklı — ek olarak kontrol edildi",bg:"Различава се — допълнително проверено",ar:"مختلف — تمت مراجعته إضافيًا"},
+ "Kwaliteitscontrole":{en:"Quality control",tr:"Kalite kontrolü",bg:"Контрол на качеството",ar:"مراقبة الجودة"},
+ "Leverancier herkend":{en:"Supplier recognized",tr:"Tedarikçi tanındı",bg:"Доставчикът разпознат",ar:"تم التعرّف على المورّد"},
+ "BTW-behandeling gecontroleerd":{en:"VAT treatment reviewed",tr:"KDV işlemi kontrol edildi",bg:"ДДС третиране проверено",ar:"تمت مراجعة معالجة ض.ق.م"},
+ "Verwerking komt overeen met eerdere facturen":{en:"Processing matches previous invoices",tr:"İşleme önceki faturalarla eşleşiyor",bg:"Обработката съвпада с предишни фактури",ar:"المعالجة تطابق الفواتير السابقة"},
+ "Extra controle uitgevoerd omdat deze factuur afwijkt van eerdere facturen":{en:"Additional review performed because this invoice differs from previous invoices",tr:"Bu fatura öncekilerden farklı olduğu için ek kontrol yapıldı",bg:"Извършена допълнителна проверка, защото фактурата се различава",ar:"أُجريت مراجعة إضافية لاختلاف هذه الفاتورة عن السابقة"},
+ "Geüpload door klant":{en:"Uploaded by client",tr:"Müşteri tarafından yüklendi",bg:"Качено от клиента",ar:"رفعه العميل"},
+ "Document herkend":{en:"Document recognized",tr:"Belge tanındı",bg:"Документът разпознат",ar:"تم التعرّف على المستند"},
+ "Aanvullende controle":{en:"Additional review",tr:"Ek kontrol",bg:"Допълнителна проверка",ar:"مراجعة إضافية"},
+ "Aanvullende controle vereist":{en:"Additional review required",tr:"Ek kontrol gerekli",bg:"Изисква допълнителна проверка",ar:"يلزم مراجعة إضافية"},
+ "Definitief verwerkt":{en:"Finalized",tr:"Kesinleştirildi",bg:"Финализирано",ar:"تم الإنهاء"},
+ "Vraag Vatan":{en:"Ask Vatan",tr:"Vatan'a sor",bg:"Попитай Vatan",ar:"اسأل Vatan"},
+ "Aanvullende info":{en:"Additional info",tr:"Ek bilgi",bg:"Допълнителна информация",ar:"معلومات إضافية"},
+ "Factuur — aanvullende controle":{en:"Invoice — additional review",tr:"Fatura — ek kontrol",bg:"Фактура — допълнителна проверка",ar:"فاتورة — مراجعة إضافية"}
+};
+Object.keys(I18N_ADD28).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD28[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD28[k][l];});});
+(function(){const more={en:[['dagen geleden','days ago'],['Verwerkt in','Processed in']],tr:[['dagen geleden','gün önce'],['Verwerkt in','İşlendi:']],bg:[['dagen geleden','дни преди'],['Verwerkt in','Обработено в']],ar:[['dagen geleden','منذ أيام'],['Verwerkt in','تمت المعالجة في']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>{if(!I18N_SUB[l].some(e=>e[0]===p[0]))I18N_SUB[l].push(p);});});})();
 (function(){const more={
  en:[['Medewerker','Employee'],['Bericht','Message'],['Herinnering','Reminder'],['Ontvangen','Received'],['Afronden','Complete'],['Gecontroleerd','Reviewed'],['Opvragen','Request'],['Export','Export']],
  tr:[['Medewerker','Çalışan'],['Bericht','Mesaj'],['Herinnering','Hatırlatma'],['Ontvangen','Alındı'],['Afronden','Tamamla'],['Gecontroleerd','Kontrol edildi'],['Opvragen','Talep et'],['Export','Dışa aktar']],
@@ -3994,6 +4042,8 @@ VIEWS.klant.overzicht = ()=>{
   const apRows=[];
   drClient.forEach(r=>apRows.push({ic:icon('documenten'),cls:'warn',t:'Document aanleveren',s:gEsc(r.item),v:'Upload',oc:"go('documenten')"}));
   if(btwConcept) apRows.push({ic:icon('documenten'),cls:'',t:'BTW-aangifte goedkeuren',s:`${btwConcept} concept klaar ter controle`,v:'',oc:"go('btw')"});
+  const inkAttn=state.inbox.filter(x=>x.client==='Demo BV'&&x.state!=='sent'&&typeof inkException==='function'&&inkException(x)).length;
+  if(inkAttn) apRows.push({ic:icon('inkoop'),cls:'warn',t:'Factuur — aanvullende controle',s:inkAttn+' factuur(en) worden extra gecontroleerd door Vatan',v:'',oc:"go('inkoop')"});
   if(inkCount) apRows.push({ic:icon('inkoop'),cls:'pay',t:'Te betalen',s:`${inkCount} ${inkCount===1?'rekening':'rekeningen'} openstaand`,v:money(inkoopOpen),oc:"go('inkoop')"});
   if(unread) apRows.push({ic:icon('berichten'),cls:'warn',t:'Nieuwe berichten',s:'van Vatan Administratie',v:unread,oc:"go('berichten')"});
   if(openCount) apRows.push({ic:icon('facturatie'),cls:'',t:'Openstaande facturen',s:`${openCount} nog niet betaald door uw klanten`,v:money(open),oc:"go('facturatie')"});
@@ -4095,6 +4145,12 @@ VIEWS.klant.inkoop = ()=>{
   <div class="ftabs">${tab('alle','Alle',mine.length)}${tab('todo','Af te handelen',counts.todo)}${tab('prog','In behandeling',counts.prog)}${tab('done','Afgehandeld',counts.done)}</div>
   ${filt.length?`<div class="ink-list">${filt.map(card).join('')}</div>`:'<div class="empty"><div class="big">📥</div>Geen facturen in deze weergave.</div>'}`;
 };
+function inkException(i){return (Number(i.id)*7)%5===0;}
+function inkSupStats(d){const prev=state.inbox.filter(x=>x.sup===d.sup&&x.id!==d.id);const sent=prev.filter(x=>x.state==='sent');const base=((d.sup||'').split('').reduce((a,ch)=>a+ch.charCodeAt(0),0))%26+4;const count=prev.length+base;const last=sent.length?sent.map(x=>x.date).sort((a,b)=>pkDate(b)-pkDate(a))[0]:(prev.length?prev[0].date:d.date);const ago=last?-daysUntil(last):null;return {count,last,ago,cat:inkCat(d)};}
+function inkQC(i){const b=inkBucket(i),exc=inkException(i),prog=b!=='todo',done=b==='done';return [{s:'ok',t:'Leverancier herkend'},{s:prog?'ok':'pending',t:'BTW-behandeling gecontroleerd'},{s:!prog?'pending':(exc?'warn':'ok'),t:exc?'Extra controle uitgevoerd omdat deze factuur afwijkt van eerdere facturen':'Verwerking komt overeen met eerdere facturen'},{s:done?'ok':'pending',t:'Gecontroleerd door Vatan'}];}
+function inkAudit(i){const b=inkBucket(i),exc=inkException(i),d=i.date,out=[{d,s:'ok',t:'Geüpload door klant'},{d,s:'ok',t:'Document herkend'},{d,s:'ok',t:'Leverancier herkend: '+i.sup}];if(b!=='todo'){out.push({d:addDays(d,1),s:'ok',t:'BTW-behandeling gecontroleerd'});if(exc)out.push({d:addDays(d,1),s:'warn',t:'Extra controle — factuur wijkt af van eerdere facturen'});out.push({d:addDays(d,1),s:'ok',t:'Gecontroleerd door Vatan'});}if(b==='done'){out.push({d:addDays(d,2),s:'ok',t:'Verwerkt in '+PROG[i.prog]});out.push({d:addDays(d,2),s:'ok',t:'Definitief afgerond'});}return out;}
+function inkStatusLabel(i){const b=inkBucket(i),exc=inkException(i);if(b==='done')return 'Definitief verwerkt';if(b==='prog')return exc?'Aanvullende controle':'In behandeling';return exc?'Aanvullende controle vereist':'Geüpload';}
+function inkStatusTone(i){const b=inkBucket(i);return b==='done'?'g':(b==='prog'?'a':'r');}
 function openInkoop(id){const d=state.inbox.find(x=>x.id===id); if(!d)return;
   const st=d.state==='sent'?'Verwerkt':d.state==='queue'?'In verwerking':'Nieuw';
   const linesHtml=d.lines.map(l=>`<tr><td${d.messy?' class="handwrite"':''}>${l[0]}</td><td class="r">${l[1]}</td></tr>`).join('');
@@ -4110,17 +4166,26 @@ function openInkoop(id){const d=state.inbox.find(x=>x.id===id); if(!d)return;
           <div class="inv-tot"><div class="tr"><span>Subtotaal excl.</span><span>${d.excl?money(d.excl):'—'}</span></div><div class="tr"><span>BTW ${d.btw}</span><span>${d.btwAmt?money(d.btwAmt):'—'}</span></div><div class="tr grand"><span>Totaal</span><span>${money(d.amt)}</span></div></div>
         </div></div>
       <div><div class="col-h">✅ Verwerking door Vatan</div>
-        <div class="boeking"><div class="bk-head"><span class="t">Verwerkingsstatus</span><span>${progPill(d.prog)} <span style="color:var(--grey);font-size:12px">${PROG[d.prog]}</span></span></div>
-          <div class="bk-sec">${inkStages(d)}</div>
-          <div class="bk-sec"><div class="sh">Gegevens</div>
-            <div class="frow"><span class="k">Leverancier</span><b>${d.sup}</b></div>
-            <div class="frow"><span class="k">Categorie</span><b>${inkCat(d)}</b></div>
-            <div class="frow"><span class="k">BTW</span><b>${d.btw||'—'}</b></div>
-            <div class="frow"><span class="k">Bedrag incl. BTW</span><b>${money(d.amt)}</b></div>
-          </div>
-          <div class="bk-sec"><div class="sh">Verwerkingsgeschiedenis</div><div class="ink-hist">${inkHistory(d)}</div></div>
-          <div class="ai-note">Deze factuur is herkend als <b>${inkCat(d)}</b> van <b>${d.sup}</b>. De BTW (${d.btw||'—'}) is overgenomen van het document. ${d.state==='sent'?'Vatan heeft de factuur verwerkt in '+PROG[d.prog]+' — u hoeft niets te doen.':'Vatan controleert en verwerkt dit document zorgvuldig. U hoeft niets te doen.'}</div>
-        </div></div>
+        ${(()=>{const exc=inkException(d);const ss=inkSupStats(d);const qc=inkQC(d);const audit=inkAudit(d);const lab=inkStatusLabel(d);const tn=inkStatusTone(d);
+          const why=exc?`Deze factuur wijkt af van eerdere facturen van <b>${d.sup}</b>. Daarom voert Vatan een extra controle uit voordat de factuur definitief wordt verwerkt.`:`Deze factuur komt overeen met eerdere facturen van <b>${d.sup}</b> in uw administratie. Eerdere facturen van ${d.sup} werden meestal verwerkt als <b>${ss.cat}</b> met <b>${d.btw||'—'}</b> BTW. Daarom is deze factuur na controle op dezelfde manier verwerkt.`;
+          return `<div class="ink-detail">
+            <div class="ink-statusrow"><span class="pill ${tn}">${lab}</span><span class="ink-prog2">${progPill(d.prog)} <span style="color:var(--grey);font-size:12px">${PROG[d.prog]}</span></span></div>
+            <div class="bk-sec" style="margin-top:12px">${inkStages(d)}</div>
+            <div class="ink-sup-card"><div class="ink-sup-h">📇 Leverancier-inzicht</div><div class="ink-sup-grid">
+              <div><div class="ink-sl2">Leverancier</div><div class="ink-sv2">${d.sup}</div></div>
+              <div><div class="ink-sl2">Eerdere facturen</div><div class="ink-sv2">${ss.count}</div></div>
+              <div><div class="ink-sl2">Laatst verwerkt</div><div class="ink-sv2">${ss.ago!=null&&ss.ago>=0?ss.ago+' dagen geleden':ss.last}</div></div>
+              <div><div class="ink-sl2">Meestal verwerkt als</div><div class="ink-sv2">${ss.cat}</div></div>
+              <div><div class="ink-sl2">BTW</div><div class="ink-sv2">${d.btw||'—'}</div></div>
+              <div><div class="ink-sl2">Status</div><div class="ink-sv2 ${exc?'a':'g'}">${exc?'Afwijkend — extra gecontroleerd':'Consistent met eerdere facturen'}</div></div>
+            </div></div>
+            <div class="ink-qc"><div class="ink-qc-h">Kwaliteitscontrole</div>${qc.map(q=>`<div class="ink-qc-row ${q.s}"><span class="ink-qc-ic">${q.s==='ok'?'✓':q.s==='warn'?'⚠':'○'}</span><span>${q.t}</span></div>`).join('')}</div>
+            <div class="ink-qc"><div class="ink-qc-h">Verwerkingsgeschiedenis</div><div class="ink-hist">${audit.map(a=>`<div class="ink-hrow"><span class="ink-hdot ${a.s}"></span><div class="ink-hc"><div class="ink-ht">${a.t}</div><div class="ink-hd">${a.d}</div></div></div>`).join('')}</div></div>
+            ${exc?`<div class="ink-warn"><span class="ink-warn-ic">⚠</span><div><b>Aanvullende controle</b><div>Deze factuur wijkt af van eerdere facturen van ${d.sup}. Vatan controleert hem zorgvuldig vóór definitieve verwerking.</div></div></div>`:''}
+            <div class="ai-note">${why}</div>
+            <div class="ink-actions"><button class="btn ghost sm" onclick="toast('Download (demo)')">⬇ Download</button><button class="btn ghost sm" onclick="go('berichten')">💬 Vraag Vatan</button><button class="btn ghost sm" onclick="uploadBon()">⤓ Aanvullende info</button></div>
+          </div>`;})()}
+      </div>
     </div>`;
 }
 
