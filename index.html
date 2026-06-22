@@ -1288,6 +1288,14 @@ const NAVT={
  ar:{overzicht:'نظرة عامة',facturatie:'الفوترة',offertes:'عروض الأسعار',inkoop:'فواتير الشراء',relaties:'جهات الاتصال',producten:'المنتجات',betalingen:'المدفوعات والتذكير',statistieken:'الأرقام وضريبة القيمة المضافة',tijd:'تسجيل الوقت',km:'الكيلومترات',personeel:'الموظفون',documenten:'المستندات والتقارير',berichten:'الرسائل',instellingen:'الإعدادات',watisdit:'ما هذا؟',regeling:'طلب تقسيط'}
 };
 const GRPT={en:{WERKRUIMTE:'WORKSPACE',FINANCIEEL:'FINANCE',REGISTRATIE:'REGISTRATION',OVERIG:'OTHER'},tr:{WERKRUIMTE:'ÇALIŞMA ALANI',FINANCIEEL:'FİNANS',REGISTRATIE:'KAYIT',OVERIG:'DİĞER'},bg:{WERKRUIMTE:'РАБОТНО ПРОСТРАНСТВО',FINANCIEEL:'ФИНАНСИ',REGISTRATIE:'РЕГИСТРАЦИЯ',OVERIG:'ДРУГИ'},ar:{WERKRUIMTE:'مساحة العمل',FINANCIEEL:'المالية',REGISTRATIE:'التسجيل',OVERIG:'أخرى'}};
+Object.assign(NAVT.en,{klanten:'Clients',klantbeheer:'Clients & groups',obwerk:'VAT worklist',ibwerk:'Income-tax worklist',fg:'Fiscaal Gemak',uren:'Subscriptions',aihulp:'AI Assistant',belasting:'Tax matters'});
+Object.assign(NAVT.tr,{klanten:'Müşteriler',klantbeheer:'Müşteriler & gruplar',obwerk:'KDV iş listesi',ibwerk:'Gelir vergisi iş listesi',fg:'Fiscaal Gemak',uren:'Abonelikler',aihulp:'AI Asistan',belasting:'Vergi işleri'});
+Object.assign(NAVT.bg,{klanten:'Клиенти',klantbeheer:'Клиенти и групи',obwerk:'ДДС списък',ibwerk:'Списък данък доход',fg:'Fiscaal Gemak',uren:'Абонаменти',aihulp:'AI асистент',belasting:'Данъчни въпроси'});
+Object.assign(NAVT.ar,{klanten:'العملاء',klantbeheer:'العملاء والمجموعات',obwerk:'قائمة عمل ض.ق.م',ibwerk:'قائمة عمل ضريبة الدخل',fg:'Fiscaal Gemak',uren:'الاشتراكات',aihulp:'مساعد الذكاء الاصطناعي',belasting:'الشؤون الضريبية'});
+Object.assign(GRPT.en,{'FACTUREN & KLANTEN':'INVOICES & CLIENTS','DOCUMENTEN & CONTACT':'DOCUMENTS & CONTACT','BELASTING & GELD':'TAX & MONEY','KANTOOR':'OFFICE','FISCAAL':'TAX','DIENSTEN':'SERVICES','BEHEER':'MANAGEMENT'});
+Object.assign(GRPT.tr,{'FACTUREN & KLANTEN':'FATURALAR & MÜŞTERİLER','DOCUMENTEN & CONTACT':'BELGELER & İLETİŞİM','BELASTING & GELD':'VERGİ & PARA','KANTOOR':'OFİS','FISCAAL':'VERGİ','DIENSTEN':'HİZMETLER','BEHEER':'YÖNETİM'});
+Object.assign(GRPT.bg,{'FACTUREN & KLANTEN':'ФАКТУРИ И КЛИЕНТИ','DOCUMENTEN & CONTACT':'ДОКУМЕНТИ И КОНТАКТ','BELASTING & GELD':'ДАНЪЦИ И ПАРИ','KANTOOR':'ОФИС','FISCAAL':'ДАНЪЦИ','DIENSTEN':'УСЛУГИ','BEHEER':'УПРАВЛЕНИЕ'});
+Object.assign(GRPT.ar,{'FACTUREN & KLANTEN':'الفواتير والعملاء','DOCUMENTEN & CONTACT':'المستندات والتواصل','BELASTING & GELD':'الضرائب والمال','KANTOOR':'المكتب','FISCAAL':'الضرائب','DIENSTEN':'الخدمات','BEHEER':'الإدارة'});
 const UIT={
  nl:{wd_t:'Wat is dit voor brief?',wd_s:'Upload of fotografeer een brief en de AI legt in uw taal uit wat het is en wat u moet doen. Geen volledige vertaling, maar duidelijke uitleg.',wd_priv:'Dit document wordt niet opgeslagen en komt niet in uw administratie. Het is alleen voor uitleg en wordt automatisch verwijderd.',wd_drop:'Sleep een brief of foto hierheen',wd_kies:'…of kies een voorbeeldbrief:',wd_vrij:'Of plak/typ de tekst van de brief:',wd_vrijbtn:'Uitleggen',wd_lees:'De AI leest de brief…',wd_soort:'Wat is dit?',wd_van:'Afzender',wd_tax:'Belastinggerelateerd?',wd_ja:'Ja',wd_nee:'Nee',wd_belang:'Belang',wd_hoog:'Hoog',wd_mid:'Gemiddeld',wd_laag:'Laag',wd_actie:'Wat moet u doen?',wd_twijfel:'Twijfelt u of klopt iets niet? Stuur de brief naar Vatan via Berichten — wij kijken met u mee.',wd_vrijres:'Op basis van uw tekst lijkt dit een officiële brief. Voor een zekere beoordeling kunt u de brief het beste naar Vatan sturen via Berichten.',wd_demo:'In deze demo kan de AI uw eigen document nog niet echt inlezen, daarom worden er geen bedragen getoond. In de live versie leest de AI uw brief en legt deze hier in uw taal uit. Klik hieronder op een voorbeeldbrief om te zien hoe de uitleg eruitziet.',wissel:'↩ Wissel van portaal'},
  en:{wd_t:'What kind of letter is this?',wd_s:'Upload or photograph a letter and the AI explains, in your language, what it is and what to do. Not a full translation, but a clear explanation.',wd_priv:'This document is not saved and does not enter your administration. It is for explanation only and is automatically deleted.',wd_drop:'Drag a letter or photo here',wd_kies:'…or choose a sample letter:',wd_vrij:'Or paste/type the text of the letter:',wd_vrijbtn:'Explain',wd_lees:'The AI is reading the letter…',wd_soort:'What is this?',wd_van:'Sender',wd_tax:'Tax-related?',wd_ja:'Yes',wd_nee:'No',wd_belang:'Importance',wd_hoog:'High',wd_mid:'Medium',wd_laag:'Low',wd_actie:'What should you do?',wd_twijfel:'Not sure, or something seems off? Send the letter to Vatan via Messages — we will look at it with you.',wd_vrijres:'Based on your text this looks like an official letter. For a reliable assessment, please send the letter to Vatan via Messages.',wd_demo:'In this demo the AI cannot actually read your own document yet, so no amounts are shown. In the live version the AI reads your letter and explains it here in your language. Tap a sample letter below to see what the explanation looks like.',wissel:'↩ Switch portal'},
@@ -1305,7 +1313,7 @@ const DOCS_EXPLAIN=[
 function t(k){return (UIT[LANG]&&UIT[LANG][k])||UIT.nl[k]||k;}
 function navL(id,fb){return LANG==='nl'?fb:((NAVT[LANG]&&NAVT[LANG][id])||fb);}
 function grpL(g){return LANG==='nl'?g:((GRPT[LANG]&&GRPT[LANG][g])||g);}
-function setLang(l){LANG=l;document.documentElement.lang=l;document.body.dir=(l==='ar')?'rtl':'ltr';try{localStorage.setItem('vatanLang',l);}catch(e){}renderLangUI();renderNav();if(document.getElementById('app').classList.contains('show'))renderView();}
+function setLang(l){LANG=l;document.documentElement.lang=l;document.body.dir=(l==='ar')?'rtl':'ltr';try{localStorage.setItem('vatanLang',l);}catch(e){}renderLangUI();renderNav();if(document.getElementById('app').classList.contains('show'))renderView();startI18nObserver();applyI18n();}
 function renderLangUI(){['langSel','loginLangSel'].forEach(id=>{const s=document.getElementById(id);if(s)s.value=LANG;});const sb=document.getElementById('switchBtn');if(sb)sb.textContent=t('wissel');}
 /* ===== Volledige paginavertaling (woordenboek over de hele DOM) ===== */
 const I18N={
@@ -1314,19 +1322,154 @@ const I18N={
  bg:{"In ontwikkeling":"В разработка","Inkoopfactuur — AI-herkenning":"Фактура за покупка — AI разпознаване","Facturatie":"Фактуриране","Offertes":"Оферти","Relaties":"Контакти","Tijdregistratie":"Отчитане на часове","KM-registratie":"Километри","Documenten & rapporten":"Документи и отчети","Cijfers & BTW":"Числа и ДДС","Berichten":"Съобщения","Bankkoppeling":"Банкова връзка","Betalingen & aanmaningen":"Плащания и напомняния","Instellingen":"Настройки","Uren factureren":"Фактуриране на часове","Kantooroverzicht":"Офис преглед","Klanten":"Клиенти","Goedkeuren · Boekingen":"Одобряване · Записи","OB-werklijst":"ДДС списък","IB-werklijst":"Списък данък доход","Deadlines & taken":"Срокове и задачи","Loonadministratie":"Заплати","Rapporten & documenten":"Отчети и документи","Abonnementen & facturatie":"Абонаменти и фактуриране","Statistieken":"Статистика","Post":"Позиция","Bedrag":"Сума","Btw":"ДДС","BTW":"ДДС","Kwartaal":"Тримесечие","Omzet hoog":"Оборот висок","Omzet laag":"Оборот нисък","Omzet 0%":"Оборот 0%","Onderaann.":"Подизпълн.","Voorbel.":"Входящо ДДС","Aangegeven":"Деклариран","Saldo":"Салдо","Verschil":"Разлика","Omschrijving":"Описание","Kenteken":"Рег. номер","Maandtermijn":"Месечна вноска","Looptijd":"Срок","Start":"Начало","Schuld huidig jaar":"Дълг тази година","Jaar":"Година","Maanden":"Месеци","Rente":"Лихва","Aflossing":"Главница","Schuld per 31-12":"Дълг към 31-12","Grootboek":"Главна книга","Debet":"Дебит","Credit":"Кредит","Kenmerk":"Референция","Termijnen":"Вноски","Aangevraagd":"Заявено","Status":"Статус","Nummer":"Номер","Relatie":"Контакт","Datum":"Дата","Vervaldatum":"Падеж","Openstaand":"Дължимо","Geldig tot":"Валидно до","Leverancier":"Доставчик","Programma":"Програма","Naam":"Име","Plaats":"Град","E-mail":"Имейл","Prijs":"Цена","Project":"Проект","Uren":"Часове","Km":"Км","Vergoeding":"Възнаграждение","Doel":"Цел","Boeking":"Запис","Functie":"Длъжност","Contractvorm":"Вид договор","Loon":"Заплата","Verlof/Ziek":"Отпуск/Болен","Rubriek":"Категория","Omzetbelasting":"ДДС","Periode":"Период","Te betalen":"За плащане","Gekoppeld aan":"Свързано с","Factuur":"Фактура","Aantal":"Брой","Totaal":"Общо","Wijze":"Начин","Eenheid":"Единица","Datum / week":"Дата / седмица","Route":"Маршрут","Betaald":"Платено","Concept":"Чернова","Verzonden":"Изпратено","Verlopen":"Изтекло","Open":"Отворено","Goedgekeurd":"Одобрено","Te laat":"Просрочено","Nieuw":"Ново","Opslaan":"Запази","Annuleren":"Отказ","Verzenden":"Изпрати","Downloaden":"Изтегли","Bewerken":"Редактирай","Verwijderen":"Изтрий","Toevoegen":"Добави","Sluiten":"Затвори","Afhandelen":"Обработи","Goedkeuren":"Одобри","Terug":"Назад"},
  ar:{"In ontwikkeling":"قيد التطوير","Inkoopfactuur — AI-herkenning":"فاتورة شراء — تعرّف AI","Facturatie":"الفوترة","Offertes":"عروض الأسعار","Relaties":"جهات الاتصال","Tijdregistratie":"تسجيل الوقت","KM-registratie":"تسجيل الكيلومترات","Documenten & rapporten":"المستندات والتقارير","Cijfers & BTW":"الأرقام وضريبة القيمة المضافة","Berichten":"الرسائل","Bankkoppeling":"ربط البنك","Betalingen & aanmaningen":"المدفوعات والتذكيرات","Instellingen":"الإعدادات","Uren factureren":"فوترة الساعات","Kantooroverzicht":"نظرة عامة على المكتب","Klanten":"العملاء","Goedkeuren · Boekingen":"موافقة · قيود","OB-werklijst":"قائمة عمل ض.ق.م","IB-werklijst":"قائمة عمل ضريبة الدخل","Deadlines & taken":"المواعيد والمهام","Loonadministratie":"الرواتب","Rapporten & documenten":"التقارير والمستندات","Abonnementen & facturatie":"الاشتراكات والفوترة","Statistieken":"الإحصاءات","Post":"بند","Bedrag":"المبلغ","Btw":"ض.ق.م","BTW":"ض.ق.م","Kwartaal":"الربع","Omzet hoog":"إيراد مرتفع","Omzet laag":"إيراد منخفض","Omzet 0%":"إيراد 0%","Onderaann.":"مقاول باطن","Voorbel.":"ض.ق.م المدخلات","Aangegeven":"مُصرّح","Saldo":"الرصيد","Verschil":"الفرق","Omschrijving":"الوصف","Kenteken":"اللوحة","Maandtermijn":"القسط الشهري","Looptijd":"المدة","Start":"البداية","Schuld huidig jaar":"دين هذه السنة","Jaar":"السنة","Maanden":"أشهر","Rente":"الفائدة","Aflossing":"السداد","Schuld per 31-12":"الدين في 31-12","Grootboek":"دفتر الأستاذ","Debet":"مدين","Credit":"دائن","Kenmerk":"المرجع","Termijnen":"الأقساط","Aangevraagd":"مطلوب","Status":"الحالة","Nummer":"الرقم","Relatie":"جهة الاتصال","Datum":"التاريخ","Vervaldatum":"تاريخ الاستحقاق","Openstaand":"مستحق","Geldig tot":"صالح حتى","Leverancier":"المورّد","Programma":"البرنامج","Naam":"الاسم","Plaats":"المدينة","E-mail":"البريد الإلكتروني","Prijs":"السعر","Project":"المشروع","Uren":"ساعات","Km":"كم","Vergoeding":"البدل","Doel":"الغرض","Boeking":"القيد","Functie":"الوظيفة","Contractvorm":"نوع العقد","Loon":"الراتب","Verlof/Ziek":"إجازة/مرض","Rubriek":"الفئة","Omzetbelasting":"ض.ق.م","Periode":"الفترة","Te betalen":"للدفع","Gekoppeld aan":"مرتبط بـ","Factuur":"فاتورة","Aantal":"الكمية","Totaal":"الإجمالي","Wijze":"الطريقة","Eenheid":"الوحدة","Datum / week":"التاريخ / الأسبوع","Route":"المسار","Betaald":"مدفوع","Concept":"مسودة","Verzonden":"مُرسل","Verlopen":"منتهٍ","Open":"مفتوح","Goedgekeurd":"موافَق","Te laat":"متأخر","Nieuw":"جديد","Opslaan":"حفظ","Annuleren":"إلغاء","Verzenden":"إرسال","Downloaden":"تنزيل","Bewerken":"تعديل","Verwijderen":"حذف","Toevoegen":"إضافة","Sluiten":"إغلاق","Afhandelen":"معالجة","Goedkeuren":"موافقة","Terug":"رجوع"}
 };
+/* ===== Woordenboek-uitbreiding (beide portalen) ===== */
+const I18N_ADD={
+ "Klanten & groepen":{en:"Clients & groups",tr:"Müşteriler & gruplar",bg:"Клиенти и групи",ar:"العملاء والمجموعات"},
+ "Klantbeheer":{en:"Client management",tr:"Müşteri yönetimi",bg:"Управление на клиенти",ar:"إدارة العملاء"},
+ "OB-aansluiting & suppletie":{en:"VAT reconciliation & supplement",tr:"KDV mutabakatı & suppletie",bg:"ДДС равнение и допълнение",ar:"تسوية ض.ق.م والتكملة"},
+ "Inkomstenbelasting & Jaarrekening":{en:"Income tax & Annual accounts",tr:"Gelir vergisi & Yıllık hesaplar",bg:"Данък доход и Годишен отчет",ar:"ضريبة الدخل والحسابات السنوية"},
+ "OB / BTW-aangifte":{en:"VAT return",tr:"KDV beyannamesi",bg:"ДДС декларация",ar:"إقرار ض.ق.م"},
+ "Personeel & loonadministratie":{en:"Personnel & payroll",tr:"Personel & bordro",bg:"Персонал и заплати",ar:"الموظفون والرواتب"},
+ "Betalingsregelingen":{en:"Payment arrangements",tr:"Ödeme planları",bg:"Споразумения за плащане",ar:"ترتيبات الدفع"},
+ "Inloggegevens":{en:"Login details",tr:"Giriş bilgileri",bg:"Данни за вход",ar:"بيانات الدخول"},
+ "Documentmappen":{en:"Document folders",tr:"Belge klasörleri",bg:"Папки с документи",ar:"مجلدات المستندات"},
+ "Compliance & gegevens":{en:"Compliance & data",tr:"Uyum & veriler",bg:"Съответствие и данни",ar:"الامتثال والبيانات"},
+ "Lease-overeenkomst":{en:"Lease agreement",tr:"Leasing sözleşmesi",bg:"Лизингов договор",ar:"عقد الإيجار"},
+ "Lease-overzicht":{en:"Lease overview",tr:"Leasing genel bakış",bg:"Лизинг преглед",ar:"نظرة عامة على الإيجار"},
+ "Lease-overeenkomsten":{en:"Lease agreements",tr:"Leasing sözleşmeleri",bg:"Лизингови договори",ar:"عقود الإيجار"},
+ "Wat vraagt vandaag aandacht?":{en:"What needs attention today?",tr:"Bugün neye dikkat gerekiyor?",bg:"Какво изисква внимание днес?",ar:"ما الذي يحتاج انتباهًا اليوم؟"},
+ "Statusoverzicht":{en:"Status overview",tr:"Durum özeti",bg:"Преглед на статуса",ar:"نظرة عامة على الحالة"},
+ "Recente activiteit":{en:"Recent activity",tr:"Son etkinlik",bg:"Скорошна активност",ar:"النشاط الأخير"},
+ "Klantgegevens":{en:"Client details",tr:"Müşteri bilgileri",bg:"Данни за клиента",ar:"بيانات العميل"},
+ "Vandaag":{en:"Today",tr:"Bugün",bg:"Днес",ar:"اليوم"},
+ "Gisteren":{en:"Yesterday",tr:"Dün",bg:"Вчера",ar:"أمس"},
+ "Eerder":{en:"Earlier",tr:"Daha önce",bg:"По-рано",ar:"سابقًا"},
+ "Verantwoordelijke":{en:"Responsible",tr:"Sorumlu",bg:"Отговорник",ar:"المسؤول"},
+ "Laatste activiteit":{en:"Last activity",tr:"Son etkinlik",bg:"Последна активност",ar:"آخر نشاط"},
+ "Volgende deadline":{en:"Next deadline",tr:"Sonraki son tarih",bg:"Следващ краен срок",ar:"الموعد التالي"},
+ "Grootste verschillen per kwartaal":{en:"Largest differences per quarter",tr:"Çeyrek başına en büyük farklar",bg:"Най-големи разлики по тримесечие",ar:"أكبر الفروق لكل ربع"},
+ "Balans — jaarcijfers":{en:"Balance — annual figures",tr:"Bilanço — yıllık rakamlar",bg:"Баланс — годишни данни",ar:"الميزانية — أرقام سنوية"},
+ "Openstaande balansposten":{en:"Open balance items",tr:"Açık bilanço kalemleri",bg:"Отворени балансови позиции",ar:"بنود الرصيد المفتوحة"},
+ "Opbouw balanspositie":{en:"Balance position build-up",tr:"Bilanço pozisyonu oluşumu",bg:"Изграждане на салдо",ar:"تكوين الرصيد"},
+ "Risico":{en:"Risk",tr:"Risk",bg:"Риск",ar:"المخاطر"},
+ "Open balansposten":{en:"Open balance items",tr:"Açık bilanço kalemleri",bg:"Отворени позиции",ar:"بنود مفتوحة"},
+ "Suppletie vereist":{en:"Supplement required",tr:"Suppletie gerekli",bg:"Изисква допълнение",ar:"تكملة مطلوبة"},
+ "Op schema":{en:"On schedule",tr:"Programda",bg:"По график",ar:"حسب الجدول"},
+ "Verwerkte maanden":{en:"Processed months",tr:"İşlenen aylar",bg:"Обработени месеци",ar:"الأشهر المعالجة"},
+ "Laatste aangifte":{en:"Last filing",tr:"Son beyan",bg:"Последна декларация",ar:"آخر إقرار"},
+ "Voltooid":{en:"Completed",tr:"Tamamlandı",bg:"Завършено",ar:"مكتمل"},
+ "Resterend":{en:"Remaining",tr:"Kalan",bg:"Оставащо",ar:"المتبقي"},
+ "Voltooiing":{en:"Completion",tr:"Tamamlanma",bg:"Завършеност",ar:"الإنجاز"},
+ "Laatste maand":{en:"Last month",tr:"Son ay",bg:"Последен месец",ar:"آخر شهر"},
+ "Medewerkers":{en:"Employees",tr:"Çalışanlar",bg:"Служители",ar:"الموظفون"},
+ "Vast contract":{en:"Permanent contract",tr:"Belirsiz sözleşme",bg:"Постоянен договор",ar:"عقد دائم"},
+ "Tijdelijk":{en:"Temporary",tr:"Geçici",bg:"Временен",ar:"مؤقت"},
+ "Contract loopt af":{en:"Contract ending",tr:"Sözleşme bitiyor",bg:"Договор изтича",ar:"العقد ينتهي"},
+ "Laatste loonrun":{en:"Last payroll run",tr:"Son bordro",bg:"Последна заплата",ar:"آخر تشغيل رواتب"},
+ "Huidige schuld":{en:"Current debt",tr:"Mevcut borç",bg:"Текущ дълг",ar:"الدين الحالي"},
+ "Rente / maand":{en:"Interest / month",tr:"Faiz / ay",bg:"Лихва / месец",ar:"فائدة / شهر"},
+ "Aflossing / maand":{en:"Repayment / month",tr:"Anapara / ay",bg:"Главница / месец",ar:"سداد / شهر"},
+ "Boekjaar journaalpost":{en:"Book-year entry",tr:"Defter yılı kaydı",bg:"Запис за година",ar:"قيد السنة المالية"},
+ "Leasegegevens bewerken":{en:"Edit lease details",tr:"Leasing bilgilerini düzenle",bg:"Редакция на лизинг",ar:"تعديل بيانات الإيجار"},
+ "Rente & aflossing per jaar":{en:"Interest & repayment per year",tr:"Yıllık faiz & anapara",bg:"Лихва и главница годишно",ar:"الفائدة والسداد سنويًا"},
+ "Overzicht":{en:"Overview",tr:"Genel bakış",bg:"Преглед",ar:"نظرة عامة"},
+ "Verwerken":{en:"Process",tr:"İşle",bg:"Обработка",ar:"معالجة"},
+ "Controle":{en:"Review",tr:"Kontrol",bg:"Проверка",ar:"مراجعة"},
+ "Jaarafsluiting":{en:"Year-end",tr:"Yıl sonu",bg:"Годишно приключване",ar:"إقفال السنة"},
+ "Loonaangifte":{en:"Payroll",tr:"Bordro",bg:"Заплати",ar:"الرواتب"},
+ "Personeel":{en:"Personnel",tr:"Personel",bg:"Персонал",ar:"الموظفون"},
+ "Betalingsregeling":{en:"Payment arrangement",tr:"Ödeme planı",bg:"Споразумение",ar:"ترتيب الدفع"},
+ "Mappen":{en:"Folders",tr:"Klasörler",bg:"Папки",ar:"المجلدات"},
+ "Compliance":{en:"Compliance",tr:"Uyum",bg:"Съответствие",ar:"الامتثال"},
+ "OB-aangifte":{en:"VAT return",tr:"KDV beyanı",bg:"ДДС декларация",ar:"إقرار ض.ق.م"},
+ "IB & Jaarrekening":{en:"Income tax & accounts",tr:"Gelir vergisi & hesaplar",bg:"Данък доход и отчет",ar:"ضريبة الدخل والحسابات"},
+ "OB-aansluiting":{en:"VAT reconciliation",tr:"KDV mutabakatı",bg:"ДДС равнение",ar:"تسوية ض.ق.م"},
+ "+ Nieuwe klant":{en:"+ New client",tr:"+ Yeni müşteri",bg:"+ Нов клиент",ar:"+ عميل جديد"},
+ "+ Klant":{en:"+ Client",tr:"+ Müşteri",bg:"+ Клиент",ar:"+ عميل"},
+ "Nieuwe klant":{en:"New client",tr:"Yeni müşteri",bg:"Нов клиент",ar:"عميل جديد"},
+ "Groepen beheren":{en:"Manage groups",tr:"Grupları yönet",bg:"Управление на групи",ar:"إدارة المجموعات"},
+ "+ Nieuwe groep":{en:"+ New group",tr:"+ Yeni grup",bg:"+ Нова група",ar:"+ مجموعة جديدة"},
+ "Archiveren":{en:"Archive",tr:"Arşivle",bg:"Архивирай",ar:"أرشفة"},
+ "Heractiveren":{en:"Reactivate",tr:"Yeniden etkinleştir",bg:"Активирай отново",ar:"إعادة تفعيل"},
+ "Wijzigingen opslaan":{en:"Save changes",tr:"Değişiklikleri kaydet",bg:"Запази промените",ar:"حفظ التغييرات"},
+ "Klant aanmaken":{en:"Create client",tr:"Müşteri oluştur",bg:"Създай клиент",ar:"إنشاء عميل"},
+ "Aanmaken":{en:"Create",tr:"Oluştur",bg:"Създай",ar:"إنشاء"},
+ "Dossier openen":{en:"Open dossier",tr:"Dosyayı aç",bg:"Отвори досие",ar:"فتح الملف"},
+ "Alle":{en:"All",tr:"Tümü",bg:"Всички",ar:"الكل"},
+ "Actief":{en:"Active",tr:"Aktif",bg:"Активен",ar:"نشط"},
+ "Niet-actief":{en:"Inactive",tr:"Pasif",bg:"Неактивен",ar:"غير نشط"},
+ "Klant":{en:"Client",tr:"Müşteri",bg:"Клиент",ar:"العميل"},
+ "Groep":{en:"Group",tr:"Grup",bg:"Група",ar:"المجموعة"},
+ "Beheerder":{en:"Manager",tr:"Sorumlu",bg:"Мениджър",ar:"المسؤول"},
+ "Klantnr":{en:"Client no.",tr:"Müşteri no",bg:"Клиент №",ar:"رقم العميل"},
+ "Tijdvak":{en:"Period",tr:"Dönem",bg:"Период",ar:"الفترة"},
+ "Ingeleverd":{en:"Delivered",tr:"Teslim",bg:"Предадено",ar:"مُسلَّم"},
+ "Ingevoerd":{en:"Entered",tr:"Girildi",bg:"Въведено",ar:"مُدخَل"},
+ "Ingediend":{en:"Filed",tr:"Beyan edildi",bg:"Подадено",ar:"مُقدَّم"},
+ "In behandeling":{en:"In progress",tr:"İşlemde",bg:"В процес",ar:"قيد المعالجة"},
+ "Actie vereist":{en:"Action required",tr:"İşlem gerekli",bg:"Изисква действие",ar:"إجراء مطلوب"},
+ "Geen actie nodig":{en:"No action needed",tr:"İşlem gerekmiyor",bg:"Няма нужда от действие",ar:"لا حاجة لإجراء"},
+ "Jaarrekening":{en:"Annual accounts",tr:"Yıllık hesap",bg:"Годишен отчет",ar:"الحسابات السنوية"},
+ "Suppletie":{en:"Supplement",tr:"Suppletie",bg:"Допълнение",ar:"تكملة"},
+ "Uitstel":{en:"Extension",tr:"Erteleme",bg:"Отсрочка",ar:"تأجيل"},
+ "Maand":{en:"Month",tr:"Ay",bg:"Месец",ar:"الشهر"},
+ "Documenten":{en:"Documents",tr:"Belgeler",bg:"Документи",ar:"المستندات"},
+ "Systeem":{en:"System",tr:"Sistem",bg:"Система",ar:"النظام"},
+ "Gebruikersnaam":{en:"Username",tr:"Kullanıcı adı",bg:"Потребител",ar:"اسم المستخدم"},
+ "Wachtwoord":{en:"Password",tr:"Şifre",bg:"Парола",ar:"كلمة المرور"},
+ "Opmerking":{en:"Note",tr:"Not",bg:"Бележка",ar:"ملاحظة"},
+ "Type":{en:"Type",tr:"Tür",bg:"Тип",ar:"النوع"},
+ "Signaal":{en:"Signal",tr:"Sinyal",bg:"Сигнал",ar:"إشارة"},
+ "Ernst":{en:"Severity",tr:"Önem",bg:"Тежест",ar:"الخطورة"},
+ "Dagelijks":{en:"Daily",tr:"Günlük",bg:"Ежедневно",ar:"يومي"},
+ "Maandelijks":{en:"Monthly",tr:"Aylık",bg:"Месечно",ar:"شهري"},
+ "Per kwartaal":{en:"Quarterly",tr:"Üç aylık",bg:"Тримесечно",ar:"ربع سنوي"},
+ "Jaarlijks":{en:"Yearly",tr:"Yıllık",bg:"Годишно",ar:"سنوي"},
+ "Documentverwerking":{en:"Document processing",tr:"Belge işleme",bg:"Обработка на документи",ar:"معالجة المستندات"},
+ "Gedeeld":{en:"Shared",tr:"Paylaşıldı",bg:"Споделено",ar:"مُشارَك"},
+ "Intern":{en:"Internal",tr:"Dahili",bg:"Вътрешно",ar:"داخلي"},
+ "Bedrijfsnaam":{en:"Company name",tr:"Şirket adı",bg:"Име на фирма",ar:"اسم الشركة"},
+ "Klantnummer":{en:"Client number",tr:"Müşteri numarası",bg:"Клиентски номер",ar:"رقم العميل"},
+ "KvK-nummer":{en:"Chamber of Commerce no.",tr:"Ticaret sicil no",bg:"Търговски номер",ar:"رقم الغرفة التجارية"},
+ "BTW-nummer":{en:"VAT number",tr:"KDV numarası",bg:"ДДС номер",ar:"الرقم الضريبي"},
+ "Contactpersoon":{en:"Contact person",tr:"İletişim kişisi",bg:"Лице за контакт",ar:"جهة الاتصال"},
+ "E-mailadres":{en:"Email address",tr:"E-posta adresi",bg:"Имейл адрес",ar:"البريد الإلكتروني"},
+ "Telefoon":{en:"Phone",tr:"Telefon",bg:"Телефон",ar:"الهاتف"},
+ "Klantgroep":{en:"Client group",tr:"Müşteri grubu",bg:"Клиентска група",ar:"مجموعة العميل"},
+ "Boekhoudpakket":{en:"Accounting package",tr:"Muhasebe paketi",bg:"Счетоводен пакет",ar:"حزمة المحاسبة"},
+ "Groepsnaam":{en:"Group name",tr:"Grup adı",bg:"Име на група",ar:"اسم المجموعة"},
+ "Kleur":{en:"Color",tr:"Renk",bg:"Цвят",ar:"اللون"},
+ "Klantgroepen beheren":{en:"Manage client groups",tr:"Müşteri gruplarını yönet",bg:"Управление на клиентски групи",ar:"إدارة مجموعات العملاء"},
+ "Groep bewerken":{en:"Edit group",tr:"Grubu düzenle",bg:"Редактирай група",ar:"تعديل المجموعة"},
+ "Nieuwe klantgroep":{en:"New client group",tr:"Yeni müşteri grubu",bg:"Нова клиентска група",ar:"مجموعة عملاء جديدة"},
+ "Groep verwijderen":{en:"Delete group",tr:"Grubu sil",bg:"Изтрий група",ar:"حذف المجموعة"},
+ "Klant verwijderen":{en:"Delete client",tr:"Müşteriyi sil",bg:"Изтрий клиент",ar:"حذف العميل"},
+ "Definitief verwijderen":{en:"Delete permanently",tr:"Kalıcı olarak sil",bg:"Изтрий окончателно",ar:"حذف نهائي"}
+};
+Object.keys(I18N_ADD).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD[k][l];});});
+/* substring-laag voor dynamische strings (curated, distinctief) */
+const I18N_SUB={
+ en:[[" document(en) te verwerken"," document(s) to process"],["document(en) te verwerken","document(s) to process"],[" maand(en) openstaand"," month(s) outstanding"],["Achter op schema — ","Behind schedule — "],["Nog in te dienen: ","Still to file: "],["Nog te doen voor ","Still to do for "],["Loopt af: ","Ending: "],[" klant(en)"," client(s)"],[" met werk"," with work"],[" te verwerken"," to process"],["Geen openstaande acties — alles is bij.","No open actions — everything is up to date."],["Nog geen recente activiteit.","No recent activity yet."],["Geen klanten gevonden met deze filters.","No clients found with these filters."]],
+ tr:[[" document(en) te verwerken"," belge işlenecek"],["document(en) te verwerken","belge işlenecek"],[" maand(en) openstaand"," ay açık"],["Achter op schema — ","Programın gerisinde — "],["Nog in te dienen: ","Beyan edilecek: "],["Nog te doen voor ","Yapılacak: "],["Loopt af: ","Bitiyor: "],[" klant(en)"," müşteri"],[" met werk"," işi olan"],[" te verwerken"," işlenecek"],["Geen openstaande acties — alles is bij.","Açık işlem yok — her şey güncel."],["Nog geen recente activiteit.","Henüz son etkinlik yok."],["Geen klanten gevonden met deze filters.","Bu filtrelerle müşteri bulunamadı."]],
+ bg:[[" document(en) te verwerken"," документа за обработка"],["document(en) te verwerken","документа за обработка"],[" maand(en) openstaand"," месеца оставащи"],["Achter op schema — ","Извън график — "],["Nog in te dienen: ","За подаване: "],["Nog te doen voor ","За изпълнение: "],["Loopt af: ","Изтича: "],[" klant(en)"," клиента"],[" met werk"," с работа"],[" te verwerken"," за обработка"],["Geen openstaande acties — alles is bij.","Няма отворени действия — всичко е наред."],["Nog geen recente activiteit.","Все още няма активност."],["Geen klanten gevonden met deze filters.","Няма намерени клиенти с тези филтри."]],
+ ar:[[" document(en) te verwerken"," مستند للمعالجة"],["document(en) te verwerken","مستند للمعالجة"],[" maand(en) openstaand"," شهر مستحق"],["Achter op schema — ","متأخر عن الجدول — "],["Nog in te dienen: ","بانتظار التقديم: "],["Nog te doen voor ","المتبقي: "],["Loopt af: ","ينتهي: "],[" klant(en)"," عميل"],[" met werk"," لديه عمل"],[" te verwerken"," للمعالجة"],["Geen openstaande acties — alles is bij.","لا إجراءات معلقة — كل شيء محدّث."],["Nog geen recente activiteit.","لا يوجد نشاط حديث بعد."],["Geen klanten gevonden met deze filters.","لا يوجد عملاء بهذه المرشحات."]]
+};
 function translateDOM(root){
-  if(LANG==='nl'||!root)return;const map=I18N[LANG];if(!map)return;
+  if(LANG==='nl'||!root)return;const map=I18N[LANG];if(!map)return;const sub=(I18N_SUB&&I18N_SUB[LANG])||null;
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);const ns=[];let nn;while(nn=w.nextNode())ns.push(nn);
   ns.forEach(node=>{
     if(node.parentElement&&node.parentElement.closest('[contenteditable=true],[contenteditable=""]'))return;
     const raw=node.nodeValue,k=raw.trim();
-    if(k&&map[k]!==undefined&&map[k]!==k){node.nodeValue=raw.replace(k,map[k]);}
+    if(!k)return;
+    if(map[k]!==undefined&&map[k]!==k){node.nodeValue=raw.replace(k,map[k]);return;}
+    if(sub){let s=raw,ch=false;for(let i=0;i<sub.length;i++){if(s.indexOf(sub[i][0])>=0){s=s.split(sub[i][0]).join(sub[i][1]);ch=true;}}if(ch)node.nodeValue=s;}
   });
   root.querySelectorAll('[placeholder]').forEach(el=>{const k=(el.getAttribute('placeholder')||'').trim();if(k&&map[k]!==undefined)el.setAttribute('placeholder',map[k]);});
+  root.querySelectorAll('[title]').forEach(el=>{const k=(el.getAttribute('title')||'').trim();if(k&&map[k]!==undefined)el.setAttribute('title',map[k]);});
 }
 let _i18nBusy=false,_i18nObs=null;
-function applyI18n(){if(LANG==='nl'||_i18nBusy)return;const el=document.getElementById('view');if(!el)return;_i18nBusy=true;try{translateDOM(el);}catch(e){}_i18nBusy=false;}
-function startI18nObserver(){if(_i18nObs)return;const el=document.getElementById('view');if(!el)return;_i18nObs=new MutationObserver(()=>{if(_i18nBusy)return;applyI18n();});_i18nObs.observe(el,{childList:true,subtree:true});}
+function applyI18n(){if(LANG==='nl'||_i18nBusy)return;_i18nBusy=true;try{['view','modalBody','mOverlay'].forEach(id=>{const el=document.getElementById(id);if(el)translateDOM(el);});}catch(e){}_i18nBusy=false;}
+function startI18nObserver(){if(_i18nObs)return;const el=document.getElementById('view');if(!el)return;_i18nObs=new MutationObserver(()=>{if(_i18nBusy)return;applyI18n();});_i18nObs.observe(el,{childList:true,subtree:true});const ov=document.getElementById('mOverlay');if(ov)new MutationObserver(()=>{if(_i18nBusy)return;applyI18n();}).observe(ov,{childList:true,subtree:true});}
 /* ===== Wat is dit (uitlegger, niets opgeslagen) ===== */
 function showExplain(id){const d=DOCS_EXPLAIN.find(x=>x.id===id);if(!d)return;const r=document.getElementById('wdResult');r.innerHTML=`<div class="boeking"><div class="bk-proc"><div class="steps"><div class="step active"><div class="sic"><span class="spin"></span></div>${t('wd_lees')}</div></div></div></div>`;setTimeout(()=>{r.innerHTML=explainCard(d);},900);}
 function explainCard(d){const u=(d.u[LANG]||d.u.nl);const urg=d.urg==='hoog'?t('wd_hoog'):d.urg==='midden'?t('wd_mid'):t('wd_laag');const up=d.urg==='hoog'?'r':d.urg==='midden'?'a':'g';
