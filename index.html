@@ -819,6 +819,33 @@
     .cl-bar{flex-wrap:wrap}
     .mh-kpis{flex-wrap:wrap}
   }
+  /* AI summary block */
+  .ai-sum{background:var(--brand-tint);border:1px solid var(--brand-soft)}
+  .ai-sum-t{font-size:12.5px;color:var(--ink);line-height:1.5;margin:8px 0 11px}
+  .ai-sum-chips{display:flex;flex-wrap:wrap;gap:7px}
+  .ai-chip{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:var(--card);border:1px solid var(--line);color:var(--grey);cursor:pointer;transition:border-color .12s,color .12s}
+  .ai-chip:hover{border-color:var(--brand-2);color:var(--ink)}
+  .ai-chip.g{color:#1A8F54}.ai-chip.a{color:#B4791B}.ai-chip.r{color:var(--red);border-color:#f3c0c4}
+  body.dark .ai-chip.r{border-color:rgba(220,70,70,.34)}
+  /* internal notes (office-only) */
+  .inote-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+  .inote{background:var(--line-2);border-radius:10px;padding:9px 11px}
+  .inote-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+  .inote-meta{font-size:10.5px;color:var(--grey-2);font-weight:600}
+  .inote-acts span{cursor:pointer;opacity:.7;font-size:12px}.inote-acts span:hover{opacity:1}
+  .inote-t{font-size:12px;color:var(--ink);line-height:1.4;white-space:pre-wrap;word-break:break-word}
+  /* activity feed tab */
+  .af-list{display:flex;flex-direction:column}
+  .af-row{display:flex;align-items:flex-start;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line-2)}
+  .af-row:last-child{border-bottom:0}
+  .af-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;margin-top:3px;box-shadow:0 0 0 2px var(--card),0 0 0 3px var(--line)}
+  .af-dot.g{background:#22A565}.af-dot.navy{background:var(--brand-2)}.af-dot.a{background:var(--amber)}.af-dot.r{background:var(--red)}
+  .af-c{flex:1;min-width:0}
+  .af-t{font-size:13px;font-weight:600;color:var(--ink)}
+  .af-s{font-size:11.5px;color:var(--grey)}
+  .af-meta{text-align:right;flex-shrink:0}
+  .af-type{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--grey-2);background:var(--line-2);padding:2px 7px;border-radius:20px}
+  .af-d{font-size:11px;color:var(--grey-2);margin-top:3px;font-variant-numeric:tabular-nums}
   @media(max-width:560px){.cc-ops{flex-wrap:wrap}.cc-op{flex:1 1 44%}}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
@@ -2658,6 +2685,28 @@ const I18N_ADD23={
  "U levert aan op verzoek van Vatan":{en:"You are providing this at Vatan's request",tr:"Bunu Vatan'ın talebi üzerine gönderiyorsunuz",bg:"Предоставяте това по искане на Vatan",ar:"أنت تقدّم هذا بناءً على طلب Vatan"}
 };
 Object.keys(I18N_ADD23).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD23[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD23[k][l];});});
+/* ===== Dossier intelligence: timeline · AI summary · internal notes ===== */
+const I18N_ADD24={
+ "Activiteiten":{en:"Activities",tr:"Aktiviteler",bg:"Активности",ar:"الأنشطة"},
+ "AI-samenvatting":{en:"AI summary",tr:"AI özeti",bg:"AI обобщение",ar:"ملخص الذكاء الاصطناعي"},
+ "Open details →":{en:"Open details →",tr:"Detayları aç →",bg:"Отвори детайли →",ar:"فتح التفاصيل →"},
+ "Interne notities":{en:"Internal notes",tr:"Dahili notlar",bg:"Вътрешни бележки",ar:"ملاحظات داخلية"},
+ "Interne notitie":{en:"Internal note",tr:"Dahili not",bg:"Вътрешна бележка",ar:"ملاحظة داخلية"},
+ "Notitie bewerken":{en:"Edit note",tr:"Notu düzenle",bg:"Редактирай бележка",ar:"تحرير الملاحظة"},
+ "Notitie":{en:"Note",tr:"Not",bg:"Бележка",ar:"ملاحظة"},
+ "Nog geen interne notities. Alleen zichtbaar voor kantoor.":{en:"No internal notes yet. Office-only.",tr:"Henüz dahili not yok. Yalnızca ofis.",bg:"Все още няма вътрешни бележки. Само за офиса.",ar:"لا ملاحظات داخلية بعد. للمكتب فقط."},
+ "Activiteitenlog":{en:"Activity log",tr:"Aktivite günlüğü",bg:"Дневник на активността",ar:"سجل النشاط"},
+ "Document verwerkt":{en:"Document processed",tr:"Belge işlendi",bg:"Документът обработен",ar:"تمت معالجة المستند"},
+ "Document ontvangen":{en:"Document received",tr:"Belge alındı",bg:"Документът получен",ar:"تم استلام المستند"},
+ "Belastingaangifte":{en:"Tax return",tr:"Vergi beyanı",bg:"Данъчна декларация",ar:"إقرار ضريبي"},
+ "Jaarwerk":{en:"Year-end work",tr:"Yıl sonu işi",bg:"Годишна работа",ar:"عمل سنوي"},
+ "Bericht":{en:"Message",tr:"Mesaj",bg:"Съобщение",ar:"رسالة"},
+ "Signaal":{en:"Signal",tr:"Sinyal",bg:"Сигнал",ar:"إشارة"},
+ "Regeling":{en:"Arrangement",tr:"Düzenleme",bg:"Споразумение",ar:"ترتيب"},
+ "Volledige chronologische activiteitenlog van dit dossier — alleen zichtbaar voor kantoor.":{en:"Full chronological activity log of this dossier — office-only.",tr:"Bu dosyanın tam kronolojik aktivite günlüğü — yalnızca ofis.",bg:"Пълен хронологичен дневник на това досие — само за офиса.",ar:"سجل نشاط زمني كامل لهذا الملف — للمكتب فقط."}
+};
+Object.keys(I18N_ADD24).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD24[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD24[k][l];});});
+(function(){const more={en:[['activiteiten','activities'],['AI-signaal','AI signal'],['AI-samenvatting','AI summary']],tr:[['activiteiten','aktivite'],['AI-signaal','AI sinyali'],['AI-samenvatting','AI özeti']],bg:[['activiteiten','активности'],['AI-signaal','AI сигнал'],['AI-samenvatting','AI обобщение']],ar:[['activiteiten','أنشطة'],['AI-signaal','إشارة ذكاء'],['AI-samenvatting','ملخص ذكي']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[['BTW-aangifte','VAT return'],['Aangifte inkomstenbelasting','Income tax return'],['uiterlijk','due by'],['te laat','overdue']],
  tr:[['BTW-aangifte','KDV beyanı'],['Aangifte inkomstenbelasting','Gelir vergisi beyanı'],['uiterlijk','son tarih'],['te laat','gecikmiş']],
@@ -3756,10 +3805,10 @@ VIEWS.klant.overzicht = ()=>{
   const apRows=[];
   drClient.forEach(r=>apRows.push({ic:icon('documenten'),cls:'warn',t:'Document aanleveren',s:gEsc(r.item),v:'Upload',oc:"go('documenten')"}));
   if(btwConcept) apRows.push({ic:icon('documenten'),cls:'',t:'BTW-aangifte goedkeuren',s:`${btwConcept} concept klaar ter controle`,v:'',oc:"go('btw')"});
-  if(openCount) apRows.push({ic:icon('facturatie'),cls:'',t:'Openstaande facturen',s:`${openCount} nog niet betaald door uw klanten`,v:money(open),oc:"go('facturatie')"});
   if(inkCount) apRows.push({ic:icon('inkoop'),cls:'pay',t:'Te betalen',s:`${inkCount} ${inkCount===1?'rekening':'rekeningen'} openstaand`,v:money(inkoopOpen),oc:"go('inkoop')"});
-  if(docReq) apRows.push({ic:icon('documenten'),cls:'warn',t:'Documenten gevraagd',s:'Vatan vraagt u iets aan te leveren',v:docReq,oc:"go('berichten')"});
   if(unread) apRows.push({ic:icon('berichten'),cls:'warn',t:'Nieuwe berichten',s:'van Vatan Administratie',v:unread,oc:"go('berichten')"});
+  if(openCount) apRows.push({ic:icon('facturatie'),cls:'',t:'Openstaande facturen',s:`${openCount} nog niet betaald door uw klanten`,v:money(open),oc:"go('facturatie')"});
+  if(docReq) apRows.push({ic:icon('documenten'),cls:'warn',t:'Documenten gevraagd',s:'Vatan vraagt u iets aan te leveren',v:docReq,oc:"go('berichten')"});
   return `<div class="row-between"><h1 class="title">Goedemiddag, Demo</h1><div style="display:flex;gap:8px;align-items:center">${expBar('c_omzet')}<button class="btn primary" onclick="newInvoice()">+ Nieuwe factuur</button></div></div>
   <div class="sub">Welkom terug. Hieronder ziet u rustig wat er voor u open staat.</div>
   ${needs?`<div class="panel ap" style="margin-bottom:14px"><h3>Uw aandacht nodig</h3>
@@ -4888,7 +4937,7 @@ function healthTrendChips(naam){const c=state.clients.find(x=>x.naam===naam)||{}
 function healthBreakdownHTML(naam,h){const S=healthStrengths(naam);
   return `${healthTrendChips(naam)}<div class="hs-break"><div class="hs-bk-h">Opbouw score <span>basis 100</span></div>
   ${S.map(s=>`<div class="hs-bk g"><span class="hs-bk-i">✓</span><span class="hs-bk-l">${s}</span></div>`).join('')}
-  ${h.factors.map(f=>`<div class="hs-bk r clk" onclick="openClient('${gJs(naam)}','${factorTab(f.l)}')" title="Open ${factorTab(f.l)}"><span class="hs-bk-i">−${f.p}</span><span class="hs-bk-l">${f.l}</span><span class="hs-bk-go">→</span></div>`).join('')}
+  ${h.factors.map(f=>`<div class="hs-bk r clk" onclick="if(typeof closeM==='function')closeM();openClient('${gJs(naam)}','${factorTab(f.l)}')" title="Open ${factorTab(f.l)}"><span class="hs-bk-i">−${f.p}</span><span class="hs-bk-l">${f.l}</span><span class="hs-bk-go">→</span></div>`).join('')}
   <div class="hs-bk tot"><span class="hs-bk-l">Totaal</span><b class="hs-status ${h.tone}">${h.score} / 100</b></div></div>`;}
 function clientHealth(naam){
   const c=state.clients.find(x=>x.naam===naam),w=state.werk[naam];if(!c||!w)return{score:100,tone:'g',status:'Gezond',factors:[]};
@@ -4940,7 +4989,26 @@ function clientDeadlines(naam){
   return out;
 }
 function healthRing(h,size){const s=size||54;return `<div class="hs-ring ${h.tone}" style="--p:${h.score};width:${s}px;height:${s}px"><span style="font-size:${Math.round(s*0.28)}px">${h.score}</span></div>`;}
-function healthBadge(naam){const h=clientHealth(naam);return `<span class="hs-badge ${h.tone}" title="Client Health ${h.score}/100 · ${h.status}"><span class="hs-dot"></span>${h.score}</span>`;}
+function healthBadge(naam){const h=clientHealth(naam);return `<span class="hs-badge ${h.tone}" title="Client Health ${h.score}/100 · ${h.status}" style="cursor:pointer" onclick="event.stopPropagation();healthModal('${gJs(naam)}')"><span class="hs-dot"></span>${h.score}</span>`;}
+function healthModal(naam){const h=clientHealth(naam);modal('Client Health · '+naam,`<div class="hs-top" style="margin-bottom:2px">${healthRing(h)}<div><div class="hs-status ${h.tone}">${h.status}</div><div class="hs-sub">${h.score} / 100</div></div></div>${healthBreakdownHTML(naam,h)}`,'Sluiten',()=>true);}
+function ensureNotes(naam){if(!state.notes)state.notes={};if(!state.notes[naam])state.notes[naam]=[];return state.notes[naam];}
+let _noteSeq=1;
+function noteAdd(naam){modal('Interne notitie',field('Notitie','inNote','text',''),'Opslaan',()=>{const t=(val('inNote')||'').trim();if(!t){toast('Voer een notitie in');return false;}ensureNotes(naam).unshift({id:_noteSeq++,author:(state.clients.find(x=>x.naam===naam)||{}).mw||'Kantoor',date:TODAY,text:t});toast('Interne notitie toegevoegd ✓');renderClient();return true;});}
+function noteEdit(naam,id){const n=ensureNotes(naam).find(x=>x.id===id);if(!n)return;modal('Notitie bewerken',field('Notitie','inNote','text',String(n.text||'').replace(/"/g,'&quot;')),'Opslaan',()=>{const t=(val('inNote')||'').trim();if(!t){toast('Voer een notitie in');return false;}n.text=t;n.date=TODAY;toast('Notitie bijgewerkt ✓');renderClient();return true;});}
+function noteDel(naam,id){state.notes[naam]=ensureNotes(naam).filter(x=>x.id!==id);toast('Notitie verwijderd');renderClient();}
+function activityFeedContent(naam){const w=state.werk[naam];const c=state.clients.find(x=>x.naam===naam)||{};const pk=s=>{const p=(s||'01-01-2000').split('-');return p[2]+p[1]+p[0];};
+  const F=[];
+  state.inbox.filter(x=>x.client===naam).forEach(x=>F.push({d:x.date,k:pk(x.date),t:x.state==='sent'?'Document verwerkt':'Document ontvangen',s:`${x.sup} · ${money(x.amt)}`,type:'Document',tone:x.state==='sent'?'g':'navy'}));
+  KWARTALEN.forEach(q=>{const o=w.ob[q];if(o.ingediend)F.push({d:o.ingediend,k:pk(o.ingediend),t:`OB ${q} ingediend`,s:'Belastingaangifte',type:'Belasting',tone:'g'});});
+  IBJAREN.forEach(y=>{const o=w.ib[y];if(o.jaarrekening)F.push({d:o.jaarrekening,k:pk(o.jaarrekening),t:`Jaarrekening ${y} opgesteld`,s:'Jaarwerk',type:'Jaarwerk',tone:'navy'});if(o.ingediend)F.push({d:o.ingediend,k:pk(o.ingediend),t:`IB ${y} ingediend`,s:'Belastingaangifte',type:'Belasting',tone:'g'});});
+  state.dossierDocs.filter(x=>x.client===naam&&x.by==='kantoor'&&x.gedeeld).forEach(x=>F.push({d:x.date,k:pk(x.date),t:`Rapport gedeeld: ${x.naam}`,s:x.map,type:'Document',tone:'navy'}));
+  state.regelingen.filter(r=>r.client===naam).forEach(r=>F.push({d:r.datum,k:pk(r.datum),t:`Betalingsregeling ${r.status==='afgehandeld'?'ingediend':'aangevraagd'}`,s:r.kenmerk||'',type:'Regeling',tone:'a'}));
+  state.signals.filter(s=>s.client===naam).forEach(s=>F.push({d:TODAY,k:pk(TODAY),t:`AI-signaal: ${s.type}`,s:s.oms,type:'Signaal',tone:s.state==='resolved'?'g':(s.ernst==='hoog'?'r':'a')}));
+  (state.messages||[]).filter(m=>m.client===naam).forEach(m=>F.push({d:m.date||TODAY,k:pk(m.date||TODAY),t:`Bericht ${m.from==='kantoor'?'verzonden':'ontvangen'}`,s:String(m.text||'').slice(0,60),type:'Bericht',tone:'navy'}));
+  F.sort((a,b)=>b.k.localeCompare(a.k));
+  const rows=F.map(f=>`<div class="af-row"><span class="af-dot ${f.tone}"></span><div class="af-c"><div class="af-t">${f.t}</div><div class="af-s">${f.s}</div></div><div class="af-meta"><span class="af-type">${f.type}</span><div class="af-d">${f.d}</div></div></div>`).join('');
+  return modHead({tone:'g',status:`${F.length} activiteiten`,kpis:[['Verantwoordelijke',c.mw],['Laatste activiteit',F.length?F[0].d:'—'],['Documenten',state.inbox.filter(x=>x.client===naam).length]],missing:'Volledige chronologische activiteitenlog van dit dossier — alleen zichtbaar voor kantoor.',action:false})
+  +`<div class="panel"><div class="mod-sub">Activiteitenlog</div>${F.length?`<div class="af-list">${rows}</div>`:'<div class="empty"><div class="big">🕘</div>Nog geen activiteiten.</div>'}</div>`;}
 function segChipsHTML(naam){const L=clientLabels(naam);if(!L.length)return '';return `<div class="seg-chips">${L.map(x=>`<span class="seg-chip ${x[1]}">${x[0]}</span>`).join('')}</div>`;}
 function signalMeta(s,naam){const low=((s.type||'')+' '+(s.oms||'')).toLowerCase();
   const docs=state.inbox.filter(x=>x.client===naam);const pick=docs.length?docs[((s.type||'').length)%docs.length]:null;
@@ -5012,6 +5080,19 @@ function renderClient(){
     content=`
     <div class="cc-grid">
       <div class="cc-main">
+        <div class="cc-sec ai-sum">
+          <div class="row-between"><div class="cc-h" style="margin:0">✨ AI-samenvatting</div><button class="btn ghost sm" onclick="coachClient('${naam}')">Open details →</button></div>
+          <div class="ai-sum-t">${c.naam} heeft een health van <b>${_hlt.score}/100</b> (${_hlt.status}). ${tv?`<b>${tv} document(en)</b> wachten op verwerking. `:''}${sg.length?`${sg.length} open signaal/signalen. `:''}${(obOpen||ibOpen)?`Fiscaal: ${obOpen?'OB ':''}${ibOpen?'IB ':''}nog open. `:'OB &amp; IB bij. '}${nextDl?`Volgende deadline: <b>${nextDl.l} (${nextDl.d})</b>.`:'Geen openstaande deadlines.'}</div>
+          <div class="ai-sum-chips">
+            <span class="ai-chip ${_hlt.tone}" onclick="healthModal('${gJs(naam)}')">Health ${_hlt.score}</span>
+            <span class="ai-chip ${tv?'r':'g'}" onclick="openClient('${naam}','verwerken')">${tv} docs</span>
+            <span class="ai-chip ${sg.length?'a':'g'}" onclick="openClient('${naam}','signalen')">${sg.length} signalen</span>
+            <span class="ai-chip ${obOpen?'a':'g'}" onclick="openClient('${naam}','ob')">OB ${obc.ingediend?'✓':'open'}</span>
+            <span class="ai-chip ${ibOpen?'a':'g'}" onclick="openClient('${naam}','ib')">IB ${ibc.ingediend?'✓':'open'}</span>
+            <span class="ai-chip ${loonPending?'a':'g'}" onclick="openClient('${naam}','loon')">Loon ${loonDone}/12</span>
+            <span class="ai-chip ${(!d.wwft||d.wwft==='Actie vereist'||d.ubo==='Ontbreekt')?'r':'g'}" onclick="openClient('${naam}','compliance')">Compliance</span>
+          </div>
+        </div>
         <div class="cc-ops">
           <div class="cc-op"><div class="cc-opl">Client Health</div><div class="cc-opv"><span class="hs-status ${_hlt.tone}">${_hlt.score}</span><span style="font-weight:600;color:var(--grey-2);font-size:11px"> / 100</span></div></div>
           <div class="cc-op"><div class="cc-opl">Open taken</div><div class="cc-opv">${acts.length}</div></div>
@@ -5040,6 +5121,10 @@ function renderClient(){
           <div class="cc-comp">${comp.map(r=>`<div class="cc-crow" onclick="openClient('${naam}','${r.tab}')"><span class="cc-cdot ${r.tone}"></span><div class="cc-cl"><div class="cc-cn">${r.l}<span class="cc-cad">${r.cad}</span></div><div class="cc-cs">${r.sub}</div></div><span class="pill ${r.tone}">${r.st}</span></div>`).join('')}</div>
         </div>
         ${exactHealthSection(naam)}
+        <div class="cc-sec inote-sec">
+          <div class="row-between"><div class="cc-h" style="margin:0">🔒 Interne notities</div><button class="btn ghost sm" onclick="noteAdd('${gJs(naam)}')">+ Notitie</button></div>
+          <div class="inote-list">${(state.notes&&state.notes[naam]||[]).length?(state.notes[naam]).map(n=>`<div class="inote"><div class="inote-h"><span class="inote-meta">${n.author} · ${n.date}</span><span class="inote-acts"><span onclick="noteEdit('${gJs(naam)}',${n.id})" title="Bewerken">✎</span> <span onclick="noteDel('${gJs(naam)}',${n.id})" title="Verwijderen">🗑</span></span></div><div class="inote-t">${gEsc(n.text)}</div></div>`).join(''):'<div class="cc-empty">Nog geen interne notities. Alleen zichtbaar voor kantoor.</div>'}</div>
+        </div>
         <div class="cc-sec">
           <div class="cc-h">Tijdlijn</div>
           <div class="cc-feed">${(gT.length||gY.length||gE.length)?`${fGrp('Vandaag',gT)}${fGrp('Gisteren',gY)}${fGrp('Eerder',gE)}`:'<div class="cc-empty">Nog geen recente activiteit.</div>'}</div>
@@ -5181,6 +5266,8 @@ function renderClient(){
     content=leaseContent(naam);
   } else if(clientTab==='jaarcheck'){
     content=jaarCheckContent(naam);
+  } else if(clientTab==='activiteiten'){
+    content=activityFeedContent(naam);
   } else {
     const ci=[['KvK-nummer','KvK',d.kvk],['BTW-nummer','BTW',d.btw],['Machtiging','Machtiging',d.machtiging],['WWFT-onderzoek','WWFT',d.wwft],['UBO-registratie','UBO',d.ubo],['Contactpersoon','Contact',d.contact]];
     const has=x=>!!(x[2]&&x[2]!=='—');
@@ -5214,7 +5301,7 @@ function renderClient(){
         </div>
         <button class="btn dark sm cl-imp" onclick="openAsKlant('${naam}')">↪ Klantportaal</button>
       </div>
-      <div class="tabs">${tabBtn('overzicht','Overzicht')}${tabBtn('verwerken','Verwerken')}${tabBtn('signalen','Controle')}<div class="tab ${['ob','obaansl','ib','lease','jaarcheck'].includes(clientTab)?'active':''}" onclick="openClient('${naam}','ob')">Jaarafsluiting</div>${tabBtn('loon','Loonaangifte')}${tabBtn('personeel','Personeel')}${tabBtn('regeling','Betalingsregeling')}${tabBtn('mappen','Mappen')}${tabBtn('logins','Inloggegevens')}${tabBtn('compliance','Compliance')}</div>
+      <div class="tabs">${tabBtn('overzicht','Overzicht')}${tabBtn('activiteiten','Activiteiten')}${tabBtn('verwerken','Verwerken')}${tabBtn('signalen','Controle')}<div class="tab ${['ob','obaansl','ib','lease','jaarcheck'].includes(clientTab)?'active':''}" onclick="openClient('${naam}','ob')">Jaarafsluiting</div>${tabBtn('loon','Loonaangifte')}${tabBtn('personeel','Personeel')}${tabBtn('regeling','Betalingsregeling')}${tabBtn('mappen','Mappen')}${tabBtn('logins','Inloggegevens')}${tabBtn('compliance','Compliance')}</div>
       ${['ob','obaansl','ib','lease','jaarcheck'].includes(clientTab)?`<div class="tabs subtabs">${tabBtn('ob','OB-aangifte')}${tabBtn('ib','IB & Jaarrekening')}${tabBtn('obaansl','OB-aansluiting')}<div class="tab ${clientTab==='lease'?'active':''}" onclick="leaseOpen('${naam}')">Lease</div>${tabBtn('jaarcheck','Checklist')}</div>`:''}
     </div>
     <div style="padding-top:16px">${content}</div>`;
