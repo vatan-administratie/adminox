@@ -1454,6 +1454,98 @@ const I18N_SUB={
  bg:[[" document(en) te verwerken"," документа за обработка"],["document(en) te verwerken","документа за обработка"],[" maand(en) openstaand"," месеца оставащи"],["Achter op schema — ","Извън график — "],["Nog in te dienen: ","За подаване: "],["Nog te doen voor ","За изпълнение: "],["Loopt af: ","Изтича: "],[" klant(en)"," клиента"],[" met werk"," с работа"],[" te verwerken"," за обработка"],["Geen openstaande acties — alles is bij.","Няма отворени действия — всичко е наред."],["Nog geen recente activiteit.","Все още няма активност."],["Geen klanten gevonden met deze filters.","Няма намерени клиенти с тези филтри."]],
  ar:[[" document(en) te verwerken"," مستند للمعالجة"],["document(en) te verwerken","مستند للمعالجة"],[" maand(en) openstaand"," شهر مستحق"],["Achter op schema — ","متأخر عن الجدول — "],["Nog in te dienen: ","بانتظار التقديم: "],["Nog te doen voor ","المتبقي: "],["Loopt af: ","ينتهي: "],[" klant(en)"," عميل"],[" met werk"," لديه عمل"],[" te verwerken"," للمعالجة"],["Geen openstaande acties — alles is bij.","لا إجراءات معلقة — كل شيء محدّث."],["Nog geen recente activiteit.","لا يوجد نشاط حديث بعد."],["Geen klanten gevonden met deze filters.","لا يوجد عملاء بهذه المرشحات."]]
 };
+/* ===== Klantportaal dashboard + gedeelde teksten ===== */
+const I18N_ADD2={
+ "Welkom terug. Hieronder ziet u rustig wat er voor u open staat.":{en:"Welcome back. Below is a calm overview of what's open for you.",tr:"Tekrar hoş geldiniz. Aşağıda sizin için açık olanları sakince görebilirsiniz.",bg:"Добре дошли отново. По-долу виждате какво е отворено за вас.",ar:"مرحبًا بعودتك. أدناه نظرة هادئة على ما هو معلّق لديك."},
+ "Uw aandacht nodig":{en:"Needs your attention",tr:"Dikkatiniz gerekiyor",bg:"Изисква вашето внимание",ar:"يحتاج انتباهك"},
+ "Openstaande facturen":{en:"Outstanding invoices",tr:"Açık faturalar",bg:"Неплатени фактури",ar:"فواتير مستحقة"},
+ "Documenten gevraagd":{en:"Documents requested",tr:"İstenen belgeler",bg:"Изискани документи",ar:"مستندات مطلوبة"},
+ "Vatan vraagt u iets aan te leveren":{en:"Vatan is asking you to provide something",tr:"Vatan sizden bir şey iletmenizi istiyor",bg:"Vatan ви моли да предоставите нещо",ar:"تطلب منك Vatan تقديم شيء"},
+ "Nieuwe berichten":{en:"New messages",tr:"Yeni mesajlar",bg:"Нови съобщения",ar:"رسائل جديدة"},
+ "van Vatan Administratie":{en:"from Vatan Administratie",tr:"Vatan Administratie'den",bg:"от Vatan Administratie",ar:"من Vatan Administratie"},
+ "Snel aan de slag":{en:"Quick actions",tr:"Hızlı başla",bg:"Бързи действия",ar:"إجراءات سريعة"},
+ "Factuur maken":{en:"Create invoice",tr:"Fatura oluştur",bg:"Създай фактура",ar:"إنشاء فاتورة"},
+ "Bon uploaden":{en:"Upload receipt",tr:"Fiş yükle",bg:"Качи бележка",ar:"رفع إيصال"},
+ "Uren boeken":{en:"Log hours",tr:"Saat gir",bg:"Запиши часове",ar:"تسجيل الساعات"},
+ "Rit registreren":{en:"Log trip",tr:"Sürüş kaydet",bg:"Запиши пътуване",ar:"تسجيل رحلة"},
+ "Recent door Vatan":{en:"Recent by Vatan",tr:"Vatan tarafından son",bg:"Скоро от Vatan",ar:"حديثًا بواسطة Vatan"},
+ "Alle activiteiten →":{en:"All activity →",tr:"Tüm etkinlikler →",bg:"Цялата активност →",ar:"كل النشاط →"},
+ "Slimme hulp van Vatan":{en:"Smart help from Vatan",tr:"Vatan'dan akıllı yardım",bg:"Умна помощ от Vatan",ar:"مساعدة ذكية من Vatan"},
+ "Een brief niet duidelijk of niet in één keer kunnen betalen? Wij helpen.":{en:"A letter unclear, or can't pay in one go? We help.",tr:"Bir mektup belirsiz mi ya da tek seferde ödeyemiyor musunuz? Yardımcı oluruz.",bg:"Неясно писмо или не можете да платите наведнъж? Помагаме.",ar:"رسالة غير واضحة أو لا تستطيع الدفع دفعة واحدة؟ نساعدك."},
+ "Document uitleggen":{en:"Explain document",tr:"Belgeyi açıkla",bg:"Обясни документ",ar:"اشرح المستند"},
+ "Vraag stellen":{en:"Ask a question",tr:"Soru sor",bg:"Задай въпрос",ar:"اطرح سؤالاً"},
+ "+ Nieuwe factuur":{en:"+ New invoice",tr:"+ Yeni fatura",bg:"+ Нова фактура",ar:"+ فاتورة جديدة"},
+ "Alles is up-to-date ✨":{en:"Everything is up to date ✨",tr:"Her şey güncel ✨",bg:"Всичко е актуално ✨",ar:"كل شيء محدّث ✨"},
+ "Er is op dit moment niets dat uw aandacht nodig heeft — Vatan houdt uw administratie voor u bij.":{en:"There's nothing that needs your attention right now — Vatan keeps your administration up to date for you.",tr:"Şu anda dikkatinizi gerektiren bir şey yok — Vatan muhasebenizi sizin için güncel tutuyor.",bg:"В момента няма нищо, което да изисква вниманието ви — Vatan поддържа администрацията ви.",ar:"لا يوجد ما يحتاج انتباهك الآن — تحافظ Vatan على إدارتك محدّثة."},
+ "Bon verwerkt":{en:"Receipt processed",tr:"Fiş işlendi",bg:"Бележката е обработена",ar:"تمت معالجة الإيصال"},
+ "vandaag":{en:"today",tr:"bugün",bg:"днес",ar:"اليوم"},
+ "Bon / inkoopfactuur uploaden":{en:"Upload receipt / purchase invoice",tr:"Fiş / alış faturası yükle",bg:"Качи бележка / фактура за покупка",ar:"رفع إيصال / فاتورة شراء"}
+};
+Object.keys(I18N_ADD2).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD2[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD2[k][l];});});
+/* ===== Pagina-titels & sectiekoppen (alle schermen, beide portalen) ===== */
+const I18N_ADD3={
+ "Boekhouding & administratie":{en:"Bookkeeping & administration",tr:"Defter tutma & idare",bg:"Счетоводство и администрация",ar:"المحاسبة والإدارة"},
+ "Belastingaangiften":{en:"Tax returns",tr:"Vergi beyannameleri",bg:"Данъчни декларации",ar:"الإقرارات الضريبية"},
+ "Jaarrekening & rapportage":{en:"Annual accounts & reporting",tr:"Yıllık hesaplar & raporlama",bg:"Годишен отчет и отчитане",ar:"الحسابات السنوية والتقارير"},
+ "Advies & coaching":{en:"Advice & coaching",tr:"Danışmanlık & koçluk",bg:"Съвети и коучинг",ar:"الاستشارة والتدريب"},
+ "Starters & ZZP":{en:"Start-ups & freelancers",tr:"Yeni başlayanlar & serbest",bg:"Стартиращи и самонаети",ar:"المبتدئون والمستقلون"},
+ "Controleer de gegevens":{en:"Check the details",tr:"Bilgileri kontrol edin",bg:"Проверете данните",ar:"تحقق من البيانات"},
+ "In hoeveel termijnen wilt u betalen?":{en:"In how many instalments do you want to pay?",tr:"Kaç taksitte ödemek istersiniz?",bg:"На колко вноски искате да платите?",ar:"بكم قسط تريد الدفع؟"},
+ "Klaar voor controle & verzending":{en:"Ready for review & sending",tr:"Kontrol & gönderim için hazır",bg:"Готово за проверка и изпращане",ar:"جاهز للمراجعة والإرسال"},
+ "Nieuwe betalingsregeling":{en:"New payment arrangement",tr:"Yeni ödeme planı",bg:"Ново споразумение за плащане",ar:"ترتيب دفع جديد"},
+ "Herkende gegevens":{en:"Recognized details",tr:"Tanınan bilgiler",bg:"Разпознати данни",ar:"البيانات المتعرّف عليها"},
+ "Grootboek (AI-voorstel)":{en:"Ledger (AI suggestion)",tr:"Defter (AI önerisi)",bg:"Главна книга (AI предложение)",ar:"دفتر الأستاذ (اقتراح AI)"},
+ "Samenvatting":{en:"Summary",tr:"Özet",bg:"Обобщение",ar:"ملخص"},
+ "Balans (jaarcijfers)":{en:"Balance (annual figures)",tr:"Bilanço (yıllık rakamlar)",bg:"Баланс (годишни данни)",ar:"الميزانية (أرقام سنوية)"},
+ "Status per maand — boekjaar 2026":{en:"Status per month — book year 2026",tr:"Aylık durum — defter yılı 2026",bg:"Статус по месеци — година 2026",ar:"الحالة لكل شهر — السنة 2026"},
+ "AI Assistent":{en:"AI Assistant",tr:"AI Asistan",bg:"AI асистент",ar:"مساعد الذكاء الاصطناعي"},
+ "Wat is dit?":{en:"What is this?",tr:"Bu nedir?",bg:"Какво е това?",ar:"ما هذا؟"},
+ "Wat moet ik doen?":{en:"What should I do?",tr:"Ne yapmalıyım?",bg:"Какво да направя?",ar:"ماذا أفعل؟"},
+ "Stel een vraag":{en:"Ask a question",tr:"Bir soru sorun",bg:"Задайте въпрос",ar:"اطرح سؤالاً"},
+ "Belastingzaken":{en:"Tax matters",tr:"Vergi işleri",bg:"Данъчни въпроси",ar:"الشؤون الضريبية"},
+ "Aanslagen":{en:"Assessments",tr:"Tahakkuklar",bg:"Оценки",ar:"التقييمات"},
+ "Bezwaar":{en:"Objection",tr:"İtiraz",bg:"Възражение",ar:"اعتراض"},
+ "Belastingbrieven":{en:"Tax letters",tr:"Vergi mektupları",bg:"Данъчни писма",ar:"الرسائل الضريبية"},
+ "Rubrieken":{en:"Categories",tr:"Kategoriler",bg:"Категории",ar:"الفئات"},
+ "Omzet per maand":{en:"Turnover per month",tr:"Aylık ciro",bg:"Оборот по месеци",ar:"الإيراد الشهري"},
+ "BTW-aangifte":{en:"VAT return",tr:"KDV beyannamesi",bg:"ДДС декларация",ar:"إقرار ض.ق.م"},
+ "Bedrijfsgegevens":{en:"Company details",tr:"Şirket bilgileri",bg:"Фирмени данни",ar:"بيانات الشركة"},
+ "Factuur- & offertelayout":{en:"Invoice & quote layout",tr:"Fatura & teklif düzeni",bg:"Оформление на фактури и оферти",ar:"تخطيط الفواتير والعروض"},
+ "E-mailsjablonen":{en:"Email templates",tr:"E-posta şablonları",bg:"Имейл шаблони",ar:"قوالب البريد"},
+ "Boekhoudkoppeling":{en:"Accounting link",tr:"Muhasebe bağlantısı",bg:"Счетоводна връзка",ar:"ربط المحاسبة"},
+ "Betaalstatus":{en:"Payment status",tr:"Ödeme durumu",bg:"Статус на плащане",ar:"حالة الدفع"},
+ "Betalingen":{en:"Payments",tr:"Ödemeler",bg:"Плащания",ar:"المدفوعات"},
+ "Verkoopfacturen":{en:"Sales invoices",tr:"Satış faturaları",bg:"Фактури за продажби",ar:"فواتير المبيعات"},
+ "Inkoopfacturen van deze leverancier":{en:"Purchase invoices from this supplier",tr:"Bu tedarikçinin alış faturaları",bg:"Фактури за покупки от този доставчик",ar:"فواتير الشراء من هذا المورّد"},
+ "Urenregistratie":{en:"Time registration",tr:"Saat kaydı",bg:"Отчитане на часове",ar:"تسجيل الوقت"},
+ "Verlof & ziekte":{en:"Leave & sickness",tr:"İzin & hastalık",bg:"Отпуск и болест",ar:"الإجازات والمرض"},
+ "Loonstroken & aangiften":{en:"Payslips & filings",tr:"Bordrolar & beyanlar",bg:"Фишове и декларации",ar:"كشوف الرواتب والإقرارات"},
+ "Te verwerken per klant":{en:"To process per client",tr:"Müşteri başına işlenecek",bg:"За обработка по клиент",ar:"للمعالجة لكل عميل"},
+ "Aankomende deadlines":{en:"Upcoming deadlines",tr:"Yaklaşan son tarihler",bg:"Предстоящи срокове",ar:"المواعيد القادمة"},
+ "Werklast per medewerker":{en:"Workload per employee",tr:"Çalışan başına iş yükü",bg:"Натоварване по служител",ar:"عبء العمل لكل موظف"},
+ "AI & automatisering":{en:"AI & automation",tr:"AI & otomasyon",bg:"AI и автоматизация",ar:"الذكاء الاصطناعي والأتمتة"},
+ "Gekoppelde programma's":{en:"Linked programs",tr:"Bağlı programlar",bg:"Свързани програми",ar:"البرامج المرتبطة"},
+ "Abonnementen per klant":{en:"Subscriptions per client",tr:"Müşteri başına abonelik",bg:"Абонаменти по клиент",ar:"الاشتراكات لكل عميل"},
+ "Kantoormedewerkers & rollen":{en:"Office staff & roles",tr:"Ofis çalışanları & roller",bg:"Служители и роли",ar:"موظفو المكتب والأدوار"},
+ "Voortgang per klantmanager":{en:"Progress per client manager",tr:"Müşteri yöneticisi başına ilerleme",bg:"Напредък по мениджър",ar:"التقدم لكل مدير عملاء"},
+ "Verwerkte boekingen per maand":{en:"Processed entries per month",tr:"Aylık işlenen kayıtlar",bg:"Обработени записи по месеци",ar:"القيود المعالجة شهريًا"},
+ "Kantoor":{en:"Office",tr:"Ofis",bg:"Офис",ar:"المكتب"},
+ "Koppelingen":{en:"Integrations",tr:"Bağlantılar",bg:"Интеграции",ar:"التكاملات"},
+ "Gedeelde rapporten":{en:"Shared reports",tr:"Paylaşılan raporlar",bg:"Споделени отчети",ar:"التقارير المشتركة"},
+ "Maak een foto of upload uw document":{en:"Take a photo or upload your document",tr:"Bir fotoğraf çekin veya belgenizi yükleyin",bg:"Снимайте или качете документа си",ar:"التقط صورة أو ارفع مستندك"},
+ "Maak foto":{en:"Take photo",tr:"Fotoğraf çek",bg:"Снимай",ar:"التقط صورة"},
+ "Upload bestand":{en:"Upload file",tr:"Dosya yükle",bg:"Качи файл",ar:"رفع ملف"},
+ "Documenten van deze klant":{en:"Documents from this client",tr:"Bu müşterinin belgeleri",bg:"Документи на този клиент",ar:"مستندات هذا العميل"},
+ "AI-controles & signalen":{en:"AI checks & signals",tr:"AI kontrolleri & sinyaller",bg:"AI проверки и сигнали",ar:"فحوصات AI والإشارات"},
+ "Personeel & loonadministratie":{en:"Personnel & payroll",tr:"Personel & bordro",bg:"Персонал и заплати",ar:"الموظفون والرواتب"}
+};
+Object.keys(I18N_ADD3).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD3[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD3[k][l];});});
+(function(){const more={
+ en:[["Goedemiddag, ","Good afternoon, "],["Goedemorgen, ","Good morning, "],["Goedenavond, ","Good evening, "],[" nog niet betaald door uw klanten"," not yet paid by your clients"],[" rekeningen openstaand"," bills outstanding"],[" rekening openstaand"," bill outstanding"],["KPN-factuur automatisch geboekt","KPN invoice booked automatically"],["BTW-aangifte","VAT return"],["Factuur ","Invoice "],[" verstuurd"," sent"],[" voorbereid"," prepared"]],
+ tr:[["Goedemiddag, ","İyi günler, "],["Goedemorgen, ","Günaydın, "],["Goedenavond, ","İyi akşamlar, "],[" nog niet betaald door uw klanten"," müşterileriniz tarafından henüz ödenmedi"],[" rekeningen openstaand"," fatura açık"],[" rekening openstaand"," fatura açık"],["KPN-factuur automatisch geboekt","KPN faturası otomatik kaydedildi"],["BTW-aangifte","KDV beyanı"],["Factuur ","Fatura "],[" verstuurd"," gönderildi"],[" voorbereid"," hazırlandı"]],
+ bg:[["Goedemiddag, ","Добър ден, "],["Goedemorgen, ","Добро утро, "],["Goedenavond, ","Добър вечер, "],[" nog niet betaald door uw klanten"," все още неплатени от клиентите ви"],[" rekeningen openstaand"," сметки дължими"],[" rekening openstaand"," сметка дължима"],["KPN-factuur automatisch geboekt","Фактура KPN осчетоводена автоматично"],["BTW-aangifte","ДДС декларация"],["Factuur ","Фактура "],[" verstuurd"," изпратено"],[" voorbereid"," подготвено"]],
+ ar:[["Goedemiddag, ","مساء الخير، "],["Goedemorgen, ","صباح الخير، "],["Goedenavond, ","مساء الخير، "],[" nog niet betaald door uw klanten"," لم تُدفع بعد من عملائك"],[" rekeningen openstaand"," فواتير مستحقة"],[" rekening openstaand"," فاتورة مستحقة"],["KPN-factuur automatisch geboekt","تم تسجيل فاتورة KPN تلقائيًا"],["BTW-aangifte","إقرار ض.ق.م"],["Factuur ","فاتورة "],[" verstuurd"," أُرسلت"],[" voorbereid"," تم التحضير"]]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 function translateDOM(root){
   if(LANG==='nl'||!root)return;const map=I18N[LANG];if(!map)return;const sub=(I18N_SUB&&I18N_SUB[LANG])||null;
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);const ns=[];let nn;while(nn=w.nextNode())ns.push(nn);
