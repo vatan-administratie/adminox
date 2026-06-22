@@ -905,6 +905,37 @@
   .aiq-body{font-size:13.5px;color:var(--ink);line-height:1.55}
   .aiq-note{font-size:11.5px;color:var(--grey);margin-top:11px}
   @media(max-width:600px){.ink-sl{font-size:8px}.cmsg-b{max-width:86%}}
+  /* office document request center */
+  .drc-head,.drc-row{display:grid;grid-template-columns:1.5fr 1.7fr .9fr 1fr .9fr .9fr 1fr;align-items:center;gap:12px}
+  .drc-head{padding:0 14px 8px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2);margin-top:12px}
+  .drc-row{padding:11px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:var(--card);cursor:pointer;transition:.12s}
+  .drc-row:hover{border-color:var(--brand-2);box-shadow:var(--sh-sm)}
+  .drc-cli{display:flex;align-items:center;gap:10px;min-width:0}
+  .drc-cli .av{width:32px;height:32px;border-radius:9px;color:#fff;display:grid;place-items:center;font-weight:800;font-size:12px;flex-shrink:0}
+  .drc-nm{font-weight:700;color:var(--ink);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .drc-sub{font-size:11px;color:var(--grey-2)}
+  .drc-it{font-size:12.5px;color:var(--ink)}
+  .drc-d{font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums}
+  .drc-d .r{color:var(--red);font-weight:600}.drc-d .a{color:#B4791B}
+  .drc-rel{font-size:10.5px;color:var(--grey-2)}.drc-rel.r{color:var(--red)}.drc-rel.a{color:#B4791B}
+  .drc-mw{font-size:12px;color:var(--grey)}
+  .drc-acts{display:flex;gap:5px;justify-content:flex-end}
+  @media(max-width:860px){.drc-head,.drc-row{grid-template-columns:1.5fr 1.5fr 1fr .9fr 1fr}.drc-head>.kb-hide,.drc-row>.kb-hide,.drc-head>.kb-hide2,.drc-row>.kb-hide2{display:none}}
+  /* planning command center */
+  .pl-grp{margin-top:16px}
+  .pl-gh{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .pl-gh span{background:var(--line-2);border-radius:20px;padding:1px 9px;font-size:11px}
+  .pl-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;margin-bottom:8px;background:var(--card);cursor:pointer;transition:.12s}
+  .pl-row:hover{border-color:var(--brand-2);box-shadow:var(--sh-sm)}
+  .pl-row.r{border-left-color:var(--red)}.pl-row.a{border-left-color:var(--amber)}.pl-row.navy{border-left-color:var(--brand-2)}.pl-row.g{border-left-color:#22A565}
+  .pl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}.pl-dot.r{background:var(--red)}.pl-dot.a{background:var(--amber)}.pl-dot.navy{background:var(--brand-2)}.pl-dot.g{background:#22A565}
+  .pl-c{flex:1;min-width:0}
+  .pl-t{font-weight:600;color:var(--ink);font-size:13px}
+  .pl-s{font-size:11.5px;color:var(--grey-2)}
+  .pl-meta{text-align:right;flex-shrink:0}
+  .pl-type{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--grey-2);background:var(--line-2);padding:2px 8px;border-radius:20px}
+  .pl-d{font-size:11px;color:var(--grey-2);margin-top:3px;font-variant-numeric:tabular-nums}
+  @media(max-width:600px){.pl-type{display:none}}
   @media(max-width:560px){.cc-ops{flex-wrap:wrap}.cc-op{flex:1 1 44%}}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
@@ -1837,10 +1868,10 @@ Object.assign(GRPT.en,{'FACTUREN & KLANTEN':'INVOICES & CLIENTS','DOCUMENTEN & C
 Object.assign(GRPT.tr,{'FACTUREN & KLANTEN':'FATURALAR & MÜŞTERİLER','DOCUMENTEN & CONTACT':'BELGELER & İLETİŞİM','BELASTING & GELD':'VERGİ & PARA','KANTOOR':'OFİS','FISCAAL':'VERGİ','DIENSTEN':'HİZMETLER','BEHEER':'YÖNETİM'});
 Object.assign(GRPT.bg,{'FACTUREN & KLANTEN':'ФАКТУРИ И КЛИЕНТИ','DOCUMENTEN & CONTACT':'ДОКУМЕНТИ И КОНТАКТ','BELASTING & GELD':'ДАНЪЦИ И ПАРИ','KANTOOR':'ОФИС','FISCAAL':'ДАНЪЦИ','DIENSTEN':'УСЛУГИ','BEHEER':'УПРАВЛЕНИЕ'});
 Object.assign(GRPT.ar,{'FACTUREN & KLANTEN':'الفواتير والعملاء','DOCUMENTEN & CONTACT':'المستندات والتواصل','BELASTING & GELD':'الضرائب والمال','KANTOOR':'المكتب','FISCAAL':'الضرائب','DIENSTEN':'الخدمات','BEHEER':'الإدارة'});
-Object.assign(NAVT.en,{health:'Client Health',workload:'Team & workload',koppelingen:'Connections'});
-Object.assign(NAVT.tr,{health:'Müşteri Sağlığı',workload:'Takım & iş yükü',koppelingen:'Bağlantılar'});
-Object.assign(NAVT.bg,{health:'Здраве на клиенти',workload:'Екип & натоварване',koppelingen:'Връзки'});
-Object.assign(NAVT.ar,{health:'صحة العملاء',workload:'الفريق وعبء العمل',koppelingen:'الروابط'});
+Object.assign(NAVT.en,{health:'Client Health',workload:'Team & workload',koppelingen:'Connections',planning:'Planning',docreq:'Requests'});
+Object.assign(NAVT.tr,{health:'Müşteri Sağlığı',workload:'Takım & iş yükü',koppelingen:'Bağlantılar',planning:'Planlama',docreq:'Talepler'});
+Object.assign(NAVT.bg,{health:'Здраве на клиенти',workload:'Екип & натоварване',koppelingen:'Връзки',planning:'Планиране',docreq:'Заявки'});
+Object.assign(NAVT.ar,{health:'صحة العملاء',workload:'الفريق وعبء العمل',koppelingen:'الروابط',planning:'التخطيط',docreq:'الطلبات'});
 Object.assign(GRPT.en,{INZICHT:'INSIGHT'});Object.assign(GRPT.tr,{INZICHT:'İÇGÖRÜ'});Object.assign(GRPT.bg,{INZICHT:'АНАЛИЗ'});Object.assign(GRPT.ar,{INZICHT:'رؤى'});
 const UIT={
  nl:{wd_t:'Wat is dit voor brief?',wd_s:'Upload of fotografeer een brief en de AI legt in uw taal uit wat het is en wat u moet doen. Geen volledige vertaling, maar duidelijke uitleg.',wd_priv:'Dit document wordt niet opgeslagen en komt niet in uw administratie. Het is alleen voor uitleg en wordt automatisch verwijderd.',wd_drop:'Sleep een brief of foto hierheen',wd_kies:'…of kies een voorbeeldbrief:',wd_vrij:'Of plak/typ de tekst van de brief:',wd_vrijbtn:'Uitleggen',wd_lees:'De AI leest de brief…',wd_soort:'Wat is dit?',wd_van:'Afzender',wd_tax:'Belastinggerelateerd?',wd_ja:'Ja',wd_nee:'Nee',wd_belang:'Belang',wd_hoog:'Hoog',wd_mid:'Gemiddeld',wd_laag:'Laag',wd_actie:'Wat moet u doen?',wd_twijfel:'Twijfelt u of klopt iets niet? Stuur de brief naar Vatan via Berichten — wij kijken met u mee.',wd_vrijres:'Op basis van uw tekst lijkt dit een officiële brief. Voor een zekere beoordeling kunt u de brief het beste naar Vatan sturen via Berichten.',wd_demo:'In deze demo kan de AI uw eigen document nog niet echt inlezen, daarom worden er geen bedragen getoond. In de live versie leest de AI uw brief en legt deze hier in uw taal uit. Klik hieronder op een voorbeeldbrief om te zien hoe de uitleg eruitziet.',wissel:'↩ Wissel van portaal'},
@@ -2797,6 +2828,32 @@ const I18N_ADD25={
  "Sleep een bestand hierheen of klik om bij te voegen":{en:"Drag a file here or click to attach",tr:"Bir dosyayı buraya sürükleyin veya eklemek için tıklayın",bg:"Плъзнете файл тук или щракнете за прикачване",ar:"اسحب ملفًا هنا أو انقر للإرفاق"}
 };
 Object.keys(I18N_ADD25).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD25[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD25[k][l];});});
+/* ===== Office-wide: document request center + planning ===== */
+const I18N_ADD26={
+ "Planning":{en:"Planning",tr:"Planlama",bg:"Планиране",ar:"التخطيط"},
+ "Documentopvragingen":{en:"Document requests",tr:"Belge talepleri",bg:"Заявки за документи",ar:"طلبات المستندات"},
+ "Wacht op klant":{en:"Waiting for client",tr:"Müşteri bekleniyor",bg:"Чака клиента",ar:"بانتظار العميل"},
+ "Beoordeeld":{en:"Reviewed",tr:"İncelendi",bg:"Прегледано",ar:"تمت المراجعة"},
+ "Ontvangen":{en:"Received",tr:"Alındı",bg:"Получено",ar:"تم الاستلام"},
+ "Alle deadlines":{en:"All deadlines",tr:"Tüm son tarihler",bg:"Всички срокове",ar:"كل المواعيد"},
+ "Binnen 7 dagen":{en:"Within 7 days",tr:"7 gün içinde",bg:"До 7 дни",ar:"خلال 7 أيام"},
+ "Later":{en:"Later",tr:"Sonra",bg:"По-късно",ar:"لاحقًا"},
+ "Vandaag":{en:"Today",tr:"Bugün",bg:"Днес",ar:"اليوم"},
+ "Deze week":{en:"This week",tr:"Bu hafta",bg:"Тази седмица",ar:"هذا الأسبوع"},
+ "Volgende week":{en:"Next week",tr:"Gelecek hafta",bg:"Следваща седмица",ar:"الأسبوع القادم"},
+ "Deze maand":{en:"This month",tr:"Bu ay",bg:"Този месец",ar:"هذا الشهر"},
+ "Alle taaktypes":{en:"All task types",tr:"Tüm görev türleri",bg:"Всички видове задачи",ar:"كل أنواع المهام"},
+ "Alle urgenties":{en:"All urgencies",tr:"Tüm aciliyetler",bg:"Всички спешности",ar:"كل درجات الأهمية"},
+ "Alle periodes":{en:"All periods",tr:"Tüm dönemler",bg:"Всички периоди",ar:"كل الفترات"},
+ "Urgent":{en:"Urgent",tr:"Acil",bg:"Спешно",ar:"عاجل"},
+ "Binnenkort":{en:"Soon",tr:"Yakında",bg:"Скоро",ar:"قريبًا"},
+ "Compliance bijwerken":{en:"Update compliance",tr:"Uyumu güncelle",bg:"Обнови съответствие",ar:"تحديث الامتثال"},
+ "Geen opvragingen in deze selectie.":{en:"No requests in this selection.",tr:"Bu seçimde talep yok.",bg:"Няма заявки в тази селекция.",ar:"لا طلبات في هذا التحديد."},
+ "Geen geplande taken in deze selectie.":{en:"No planned tasks in this selection.",tr:"Bu seçimde planlı görev yok.",bg:"Няма планирани задачи в тази селекция.",ar:"لا مهام مخطط لها في هذا التحديد."},
+ "Deadline":{en:"Deadline",tr:"Son tarih",bg:"Краен срок",ar:"الموعد النهائي"}
+};
+Object.keys(I18N_ADD26).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD26[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD26[k][l];});});
+(function(){const more={en:[['Opvraging:','Request:']],tr:[['Opvraging:','Talep:']],bg:[['Opvraging:','Заявка:']],ar:[['Opvraging:','طلب:']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={en:[['Verwerkt in','Processed in'],['Categorie:','Category:']],tr:[['Verwerkt in','İşlendi:'],['Categorie:','Kategori:']],bg:[['Verwerkt in','Обработено в'],['Categorie:','Категория:']],ar:[['Verwerkt in','تمت المعالجة في'],['Categorie:','الفئة:']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={en:[['activiteiten','activities'],['AI-signaal','AI signal'],['AI-samenvatting','AI summary']],tr:[['activiteiten','aktivite'],['AI-signaal','AI sinyali'],['AI-samenvatting','AI özeti']],bg:[['activiteiten','активности'],['AI-signaal','AI сигнал'],['AI-samenvatting','AI обобщение']],ar:[['activiteiten','أنشطة'],['AI-signaal','إشارة ذكاء'],['AI-samenvatting','ملخص ذكي']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
@@ -3616,7 +3673,7 @@ const NAV = {
   ],
   kantoor:[
     ['__g','KANTOOR'],['overzicht','▦','Overzicht'],['klanten','◑','Klanten'],['obwerk','%','OB-werklijst'],['ibwerk','%','IB-werklijst'],
-    ['__g','INZICHT'],['health','♥','Client Health'],['workload','▤','Team & werkdruk'],['koppelingen','◇','Koppelingen'],
+    ['__g','INZICHT'],['planning','◷','Planning'],['docreq','▣','Opvragingen'],['health','♥','Client Health'],['workload','▤','Team & werkdruk'],['koppelingen','◇','Koppelingen'],
     ['__g','FISCAAL'],['fg','▦','Fiscaal Gemak'],
     ['__g','DIENSTEN'],['uren','€','Abonnementen'],
     ['__g','BEHEER'],['klantbeheer','◔','Klanten & groepen'],['statistieken','▥','Statistieken'],['instellingen','⚙','Instellingen'],
@@ -4646,6 +4703,8 @@ VIEWS.kantoor.overzicht = ()=>{
     ${(()=>{const hs=base.map(c=>clientHealth(c.naam));const avg=Math.round(hs.reduce((a,x)=>a+x.score,0)/Math.max(1,hs.length));const risk=hs.filter(x=>x.tone==='r').length;const att=hs.filter(x=>x.tone==='a').length;return `<div class="ic-card" onclick="go('health')"><div class="ic-top"><span class="ic-ic">♥</span><span class="ic-arr">→</span></div><div class="ic-h">Client Health Center</div><div class="ic-m"><b>${avg}</b> gem. · <b class="r">${risk}</b> risico · <b class="a">${att}</b> aandacht</div></div>`;})()}
     ${(()=>{const md=werkdruk(30);const hi=md.filter(x=>x.pct>75).length;const peak=[...md].sort((a,b)=>b.pct-a.pct)[0];return `<div class="ic-card" onclick="go('workload')"><div class="ic-top"><span class="ic-ic">▤</span><span class="ic-arr">→</span></div><div class="ic-h">Team & werkdruk</div><div class="ic-m">${peak?`piek <b>${peak.mw}</b> ${peak.pct}% · `:''}<b class="${hi?'r':'g'}">${hi}</b> onder druk</div></div>`;})()}
     ${(()=>{const probl=base.filter(c=>exactIssues(c.naam).some(i=>i.tone==='r')).length;const aff=base.filter(c=>exactIssues(c.naam).length).length;return `<div class="ic-card" onclick="go('koppelingen')"><div class="ic-top"><span class="ic-ic">◇</span><span class="ic-arr">→</span></div><div class="ic-h">Koppelingen-monitoring</div><div class="ic-m"><b class="${probl?'r':'g'}">${probl}</b> probleem · <b class="a">${aff-probl}</b> attentie</div></div>`;})()}
+    ${(()=>{const pl=allPlanning();const tdy=pl.filter(x=>x.period==='today').length;const wk=pl.filter(x=>x.period==='week').length;const urg=pl.filter(x=>x.urg==='r').length;return `<div class="ic-card" onclick="go('planning')"><div class="ic-top"><span class="ic-ic">◷</span><span class="ic-arr">→</span></div><div class="ic-h">Planning</div><div class="ic-m"><b class="${tdy?'r':'g'}">${tdy}</b> vandaag · <b class="a">${wk}</b> deze week · <b class="${urg?'r':'g'}">${urg}</b> urgent</div></div>`;})()}
+    ${(()=>{const dr=allDocReqs();const wait=dr.filter(x=>x.st==='requested').length;const over=dr.filter(x=>x.st==='overdue').length;return `<div class="ic-card" onclick="go('docreq')"><div class="ic-top"><span class="ic-ic">▣</span><span class="ic-arr">→</span></div><div class="ic-h">Documentopvragingen</div><div class="ic-m"><b class="a">${wait}</b> wachtend · <b class="${over?'r':'g'}">${over}</b> te laat</div></div>`;})()}
   </div>
   <div class="panel" style="margin-bottom:14px"><h3>AI &amp; automatisering</h3>
     <div class="ai-grid">
@@ -4972,8 +5031,52 @@ function branchAdvies(naam){const c=state.clients.find(x=>x.naam===naam)||{};con
 function recurSt(naam,cat){const w=state.werk[naam];if(!w.recurCheck)w.recurCheck={};return w.recurCheck[cat]||'';}
 function recurSet(naam,cat,s){const w=state.werk[naam];if(!w.recurCheck)w.recurCheck={};w.recurCheck[cat]=s;toast(s==='checked'?'Gemarkeerd als gecontroleerd ✓':s==='resolved'?'Gemarkeerd als opgelost ✓':'Gemarkeerd als n.v.t. ✓');renderClient();}
 let seqDR=10;
-function ensureDocReq(){if(!state.docRequests)state.docRequests=[{id:1,client:'Demo BV',item:'Bankafschriften Q2 2026',status:'requested',requested:'10-06-2026',reminder:false},{id:2,client:'Demo BV',item:'Inkoopfacturen mei 2026',status:'received',requested:'01-06-2026',reminder:false},{id:3,client:'Yılmaz Horeca VOF',item:'Kasadministratie 2025',status:'overdue',requested:'20-05-2026',reminder:true}];return state.docRequests;}
+function ensureDocReq(){if(!state.docRequests)state.docRequests=[{id:1,client:'Demo BV',item:'Bankafschriften Q2 2026',status:'requested',requested:'10-06-2026',reminder:false},{id:2,client:'Demo BV',item:'Inkoopfacturen mei 2026',status:'received',requested:'01-06-2026',reminder:false},{id:3,client:'Yılmaz Horeca VOF',item:'Kasadministratie 2025',status:'overdue',requested:'20-05-2026',reminder:true},{id:4,client:'De Vries Bouw BV',item:'Loonstroken mei 2026',status:'requested',requested:'08-06-2026',reminder:false},{id:5,client:'Janssen Advies',item:'Jaarcijfers 2025 — saldibalans',status:'received',requested:'28-05-2026',reminder:false},{id:6,client:'Bakkerij Demir',item:'Kassabonnen juni 2026',status:'requested',requested:'02-06-2026',reminder:true},{id:7,client:'De Vries Bouw BV',item:'Verzekeringspolis bedrijfsauto',status:'overdue',requested:'12-05-2026',reminder:true},{id:8,client:'Janssen Advies',item:'Bankafschriften Q1 2026',status:'completed',requested:'15-04-2026',reminder:false}];return state.docRequests;}
 function docReqs(naam){return ensureDocReq().filter(r=>r.client===naam);}
+/* ===== Office-wide: document request center + planning command center ===== */
+const DRC_LBL={requested:'Wacht op klant',overdue:'Te laat',received:'Ontvangen',completed:'Beoordeeld'};
+const DRC_TONE={requested:'a',overdue:'r',received:'navy',completed:'g'};
+function allDocReqs(){return ensureDocReq().map(r=>{const c=state.clients.find(x=>x.naam===r.client)||{};const due=r.due||addDays(r.requested||TODAY,14);const days=daysUntil(due);let st=r.status;if(st==='requested'&&days<0)st='overdue';const g=(typeof clientGroupId==='function'&&typeof groupById==='function'&&c.naam)?(groupById(clientGroupId(c))||{}):{};return {r,client:r.client,item:r.item,requested:r.requested,due,days,st,mw:c.mw||'—',groep:g.naam||'',groepId:c.groep||'',c};});}
+function drcSet(id,s){const r=ensureDocReq().find(x=>x.id===id);if(r){r.status=s;toast('Status bijgewerkt ✓');renderView();}}
+function drcRemind(id){const r=ensureDocReq().find(x=>x.id===id);if(r){r.reminder=true;toast('Herinnering verstuurd naar klant ✓');renderView();}}
+let drcStatus='alle',drcMw='alle',drcGroep='alle',drcDue='alle';
+VIEWS.kantoor.docreq=()=>{
+  let rows=allDocReqs();
+  const counts={alle:rows.length,requested:rows.filter(x=>x.st==='requested').length,overdue:rows.filter(x=>x.st==='overdue').length,received:rows.filter(x=>x.st==='received').length,completed:rows.filter(x=>x.st==='completed').length};
+  rows=rows.filter(x=>(drcStatus==='alle'||x.st===drcStatus)&&(drcMw==='alle'||x.mw===drcMw)&&(drcGroep==='alle'||x.groepId===drcGroep)&&(drcDue==='alle'||(drcDue==='overdue'?x.days<0:drcDue==='week'?(x.days>=0&&x.days<=7):x.days>7)));
+  rows.sort((a,b)=>a.days-b.days);
+  const sel=(opts,cur,fn)=>`<select class="gl" style="width:auto" onchange="${fn}">${opts.map(o=>`<option value="${o[0]}" ${o[0]===cur?'selected':''}>${o[1]}</option>`).join('')}</select>`;
+  const chip=(k,l,n,tn)=>`<div class="ftab ${drcStatus===k?'active':''}" onclick="drcStatus='${k}';renderView()">${l}<span class="c ${tn||''}">${n}</span></div>`;
+  return `<div class="row-between"><h1 class="title">Documentopvragingen</h1><button class="btn ghost" onclick="go('overzicht')">← Dashboard</button></div>
+  <div class="sub">Alle documentopvragingen over alle klanten — operationeel overzicht voor het hele kantoor.</div>
+  <div class="sgrid c4"><div class="scard"><div class="sl">Wacht op klant</div><div class="sv a">${counts.requested}</div></div><div class="scard"><div class="sl">Te laat</div><div class="sv r">${counts.overdue}</div></div><div class="scard"><div class="sl">Ontvangen</div><div class="sv">${counts.received}</div></div><div class="scard"><div class="sl">Beoordeeld</div><div class="sv g">${counts.completed}</div></div></div>
+  <div class="ftabs">${chip('alle','Alle',counts.alle)}${chip('requested','Wacht op klant',counts.requested,'a')}${chip('overdue','Te laat',counts.overdue,'r')}${chip('received','Ontvangen',counts.received)}${chip('completed','Beoordeeld',counts.completed,'g')}</div>
+  <div class="ftabs" style="margin-top:-4px">${sel([['alle','Alle medewerkers'],...MEDEWERKERS.map(m=>[m,m])],drcMw,"drcMw=this.value;renderView()")}${sel([['alle','Alle groepen'],...state.groups.map(g=>[g.id,g.naam])],drcGroep,"drcGroep=this.value;renderView()")}${sel([['alle','Alle deadlines'],['overdue','Te laat'],['week','Binnen 7 dagen'],['later','Later']],drcDue,"drcDue=this.value;renderView()")}</div>
+  ${rows.length?`<div class="drc-head"><div>Klant</div><div>Document</div><div class="kb-hide">Aangevraagd</div><div>Deadline</div><div>Status</div><div class="kb-hide2">Medewerker</div><div></div></div>${rows.map(x=>`<div class="drc-row" onclick="openClient('${gJs(x.client)}','mappen')"><div class="drc-cli"><span class="av" style="background:${x.c.prog?cpAvColor(x.c):'#94a3b8'}">${cpInitials(x.client)}</span><div style="min-width:0"><div class="drc-nm">${x.client}</div><div class="drc-sub">${x.groep||PROG[x.c.prog]||''}</div></div></div><div class="drc-it">${gEsc(x.item)}</div><div class="drc-d kb-hide">${x.requested}</div><div class="drc-d"><div class="${x.days<0?'r':(x.days<=7?'a':'')}">${x.due}</div><div class="drc-rel ${x.days<0?'r':(x.days<=7?'a':'')}">${relTime(x.days)}</div></div><div><span class="pill ${DRC_TONE[x.st]}">${DRC_LBL[x.st]}</span></div><div class="kb-hide2 drc-mw">${x.mw}</div><div class="drc-acts">${x.st!=='completed'?`<button class="dact" title="Herinnering" onclick="event.stopPropagation();drcRemind(${x.r.id})">🔔</button><button class="dact" title="Ontvangen" onclick="event.stopPropagation();drcSet(${x.r.id},'received')">📥</button><button class="dact" title="Afronden" onclick="event.stopPropagation();drcSet(${x.r.id},'completed')">✓</button>`:'<span class="pill g">✓</span>'}</div></div>`).join('')}`:'<div class="empty"><div class="big">✅</div>Geen opvragingen in deze selectie.</div>'}`;
+};
+let plMw='alle',plType='alle',plUrg='alle',plPeriod='alle';
+function planPeriod(days){if(days<=0)return 'today';if(days<=7)return 'week';if(days<=14)return 'next';if(days<=31)return 'month';return 'later';}
+function allPlanning(){const out=[];const base=state.clients.filter(c=>c.actief);
+  base.forEach(c=>{clientDeadlines(c.naam).forEach(dl=>out.push({client:c.naam,mw:c.mw,type:dl.type,l:dl.l,d:dl.d,days:dl.days,tab:dl.type==='OB'?'ob':dl.type==='IB'?'ib':dl.type==='Loon'?'loon':'regeling'}));});
+  allDocReqs().filter(r=>r.st==='requested'||r.st==='overdue').forEach(r=>out.push({client:r.client,mw:r.mw,type:'Document',l:'Opvraging: '+r.item,d:r.due,days:r.days,tab:'mappen'}));
+  base.forEach(c=>{const d=DOSSIER[c.naam]||{};if(!d.wwft||d.wwft==='Actie vereist'||d.ubo==='Ontbreekt')out.push({client:c.naam,mw:c.mw,type:'Compliance',l:'Compliance bijwerken',d:'—',days:25,tab:'compliance'});});
+  base.forEach(c=>{const jc=jcCount(c.naam);if(jc.done<jc.total)out.push({client:c.naam,mw:c.mw,type:'Jaarafsluiting',l:`Jaarafsluiting (${jc.done}/${jc.total})`,d:'—',days:28,tab:'jaarcheck'});});
+  out.forEach(x=>{x.period=planPeriod(x.days);x.urg=x.days<0?'r':(x.days<=2?'r':(x.days<=7?'a':(x.days<=30?'navy':'g')));});
+  return out;}
+VIEWS.kantoor.planning=()=>{
+  let items=allPlanning();const types=[...new Set(items.map(x=>x.type))];
+  const counts={today:items.filter(x=>x.period==='today').length,week:items.filter(x=>x.period==='week').length,next:items.filter(x=>x.period==='next').length,month:items.filter(x=>x.period==='month').length};
+  items=items.filter(x=>(plMw==='alle'||x.mw===plMw)&&(plType==='alle'||x.type===plType)&&(plUrg==='alle'||x.urg===plUrg)&&(plPeriod==='alle'||x.period===plPeriod));
+  items.sort((a,b)=>a.days-b.days);
+  const PER=[['today','Vandaag'],['week','Deze week'],['next','Volgende week'],['month','Deze maand']];
+  const sel=(opts,cur,fn)=>`<select class="gl" style="width:auto" onchange="${fn}">${opts.map(o=>`<option value="${o[0]}" ${o[0]===cur?'selected':''}>${o[1]}</option>`).join('')}</select>`;
+  const grp=PER.map(p=>{const its=items.filter(x=>x.period===p[0]);if(!its.length)return '';return `<div class="pl-grp"><div class="pl-gh">${p[1]} <span>${its.length}</span></div>${its.map(x=>`<div class="pl-row ${x.urg}" onclick="openClient('${gJs(x.client)}','${x.tab}')"><span class="pl-dot ${x.urg}"></span><div class="pl-c"><div class="pl-t">${x.l}</div><div class="pl-s">${x.client} · ${x.mw}</div></div><div class="pl-meta"><span class="pl-type">${x.type}</span><div class="pl-d">${x.d}${x.d!=='—'?` · ${relTime(x.days)}`:''}</div></div></div>`).join('')}</div>`;}).join('');
+  return `<div class="row-between"><h1 class="title">Planning</h1><button class="btn ghost" onclick="go('overzicht')">← Dashboard</button></div>
+  <div class="sub">Alle deadlines en taken over alle klanten — gegroepeerd op periode, voor de hele dagplanning.</div>
+  <div class="sgrid c4"><div class="scard"><div class="sl">Vandaag</div><div class="sv r">${counts.today}</div></div><div class="scard"><div class="sl">Deze week</div><div class="sv a">${counts.week}</div></div><div class="scard"><div class="sl">Volgende week</div><div class="sv">${counts.next}</div></div><div class="scard"><div class="sl">Deze maand</div><div class="sv">${counts.month}</div></div></div>
+  <div class="ftabs">${sel([['alle','Alle medewerkers'],...MEDEWERKERS.map(m=>[m,m])],plMw,"plMw=this.value;renderView()")}${sel([['alle','Alle taaktypes'],...types.map(t=>[t,t])],plType,"plType=this.value;renderView()")}${sel([['alle','Alle urgenties'],['r','Urgent'],['a','Binnenkort'],['navy','Later']],plUrg,"plUrg=this.value;renderView()")}${sel([['alle','Alle periodes'],['today','Vandaag'],['week','Deze week'],['next','Volgende week'],['month','Deze maand']],plPeriod,"plPeriod=this.value;renderView()")}</div>
+  ${grp||'<div class="empty"><div class="big">✅</div>Geen geplande taken in deze selectie.</div>'}`;
+};
 function docReqAdd(naam){modal('Document opvragen bij klant',field('Welk document heeft u nodig?','drItem','text','')+`<div class="ai-note" style="margin-top:10px">De klant ziet dit verzoek in het klantportaal en bij Berichten en kan het document direct aanleveren.</div>`,'Verzoek versturen',()=>{const it=(val('drItem')||'').trim();if(!it){toast('Geef een document op');return false;}ensureDocReq().push({id:++seqDR,client:naam,item:it,status:'requested',requested:TODAY,reminder:false});toast('Verzoek verstuurd naar klant ✓');renderClient();return true;});}
 function docReqSet(id,s){const r=ensureDocReq().find(x=>x.id===id);if(r){r.status=s;toast('Status bijgewerkt ✓');renderClient();}}
 function docReqRemind(id){const r=ensureDocReq().find(x=>x.id===id);if(r){r.reminder=true;toast('Herinnering verstuurd naar klant ✓');renderClient();}}
