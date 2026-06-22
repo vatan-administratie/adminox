@@ -936,6 +936,21 @@
   .pl-type{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--grey-2);background:var(--line-2);padding:2px 8px;border-radius:20px}
   .pl-d{font-size:11px;color:var(--grey-2);margin-top:3px;font-variant-numeric:tabular-nums}
   @media(max-width:600px){.pl-type{display:none}}
+  /* bulk select + sticky bar */
+  .bulk-cb{display:inline-flex;align-items:center;flex-shrink:0;margin-right:2px}
+  .bulk-cb input{width:17px;height:17px;cursor:pointer;accent-color:var(--brand-2)}
+  .wsrow.sel,.wf-row.sel,.drc-row.sel{border-color:var(--brand-2);box-shadow:0 0 0 1px var(--brand-2)}
+  .wf-row{align-items:center}
+  .bulkbar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:300;display:flex;align-items:center;gap:16px;background:var(--ink);color:#fff;border-radius:14px;padding:10px 14px 10px 18px;box-shadow:0 12px 34px rgba(0,0,0,.32);max-width:calc(100vw - 32px);flex-wrap:wrap}
+  body.dark .bulkbar{background:#0c0f15;border:1px solid var(--line)}
+  .bulkbar-l{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;white-space:nowrap}
+  .bulkbar-n{background:var(--brand-2);color:#fff;border-radius:20px;padding:2px 9px;font-weight:800;font-size:12px}
+  .bulkbar-x{background:rgba(255,255,255,.15);border:0;color:#fff;width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:12px}
+  .bulkbar-x:hover{background:rgba(255,255,255,.28)}
+  .bulkbar-a{display:flex;gap:7px;flex-wrap:wrap}
+  .bulkbar-a .btn.ghost{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.18);color:#fff}
+  .bulkbar-a .btn.ghost:hover{background:rgba(255,255,255,.22)}
+  @media(max-width:600px){.bulkbar{left:8px;right:8px;transform:none;bottom:8px}.bulkbar-a{width:100%}}
   @media(max-width:560px){.cc-ops{flex-wrap:wrap}.cc-op{flex:1 1 44%}}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
@@ -2853,6 +2868,21 @@ const I18N_ADD26={
  "Deadline":{en:"Deadline",tr:"Son tarih",bg:"Краен срок",ar:"الموعد النهائي"}
 };
 Object.keys(I18N_ADD26).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD26[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD26[k][l];});});
+/* ===== Bulk actions ===== */
+const I18N_ADD27={
+ "geselecteerd":{en:"selected",tr:"seçildi",bg:"избрани",ar:"محدد"},
+ "Alles selecteren":{en:"Select all",tr:"Tümünü seç",bg:"Избери всички",ar:"تحديد الكل"},
+ "Selectie wissen":{en:"Clear selection",tr:"Seçimi temizle",bg:"Изчисти избора",ar:"مسح التحديد"},
+ "Toewijzen":{en:"Assign",tr:"Ata",bg:"Възложи",ar:"تعيين"},
+ "Versturen":{en:"Send",tr:"Gönder",bg:"Изпрати",ar:"إرسال"}
+};
+Object.keys(I18N_ADD27).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD27[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD27[k][l];});});
+(function(){const more={
+ en:[['Medewerker','Employee'],['Bericht','Message'],['Herinnering','Reminder'],['Ontvangen','Received'],['Afronden','Complete'],['Gecontroleerd','Reviewed'],['Opvragen','Request'],['Export','Export']],
+ tr:[['Medewerker','Çalışan'],['Bericht','Mesaj'],['Herinnering','Hatırlatma'],['Ontvangen','Alındı'],['Afronden','Tamamla'],['Gecontroleerd','Kontrol edildi'],['Opvragen','Talep et'],['Export','Dışa aktar']],
+ bg:[['Medewerker','Служител'],['Bericht','Съобщение'],['Herinnering','Напомняне'],['Ontvangen','Получено'],['Afronden','Завърши'],['Gecontroleerd','Прегледано'],['Opvragen','Заявка'],['Export','Експорт']],
+ ar:[['Medewerker','الموظف'],['Bericht','رسالة'],['Herinnering','تذكير'],['Ontvangen','مستلم'],['Afronden','إنهاء'],['Gecontroleerd','تمت المراجعة'],['Opvragen','طلب'],['Export','تصدير']]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={en:[['Opvraging:','Request:']],tr:[['Opvraging:','Talep:']],bg:[['Opvraging:','Заявка:']],ar:[['Opvraging:','طلب:']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={en:[['Verwerkt in','Processed in'],['Categorie:','Category:']],tr:[['Verwerkt in','İşlendi:'],['Categorie:','Kategori:']],bg:[['Verwerkt in','Обработено в'],['Categorie:','Категория:']],ar:[['Verwerkt in','تمت المعالجة في'],['Categorie:','الفئة:']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={en:[['activiteiten','activities'],['AI-signaal','AI signal'],['AI-samenvatting','AI summary']],tr:[['activiteiten','aktivite'],['AI-signaal','AI sinyali'],['AI-samenvatting','AI özeti']],bg:[['activiteiten','активности'],['AI-signaal','AI сигнал'],['AI-samenvatting','AI обобщение']],ar:[['activiteiten','أنشطة'],['AI-signaal','إشارة ذكاء'],['AI-samenvatting','ملخص ذكي']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
@@ -4808,6 +4838,7 @@ VIEWS.kantoor.koppelingen = ()=>{
   ${shown.length?`<div class="cm-head" style="margin-top:10px"><div>Klant</div><div>Onderdeel</div><div>Ernst</div><div class="kb-hide">Verantw.</div><div class="kb-hide2">Aanbevolen actie</div></div>${shown.map(x=>`<div class="cm-row" onclick="openClient('${gJs(x.c.naam)}','overzicht')"><div class="cm-cli"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div style="min-width:0"><div class="cm-nm">${x.c.naam}</div><div class="cm-sub">${PROG[x.c.prog]}</div></div></div><div class="cm-a"><div class="cm-an">${x.i.area}</div><div class="cm-m">${x.i.msg}</div></div><div><span class="pill ${x.i.tone}">${x.i.tone==='r'?'Hoog':'Midden'}</span></div><div class="cm-resp kb-hide">${x.c.mw}</div><div class="cm-act kb-hide2">${EX_ACTION[x.i.area]||'Controleren'}</div></div>`).join('')}`:'<div class="empty" style="padding:22px"><div class="big">✅</div>Geen meldingen voor deze selectie.</div>'}</div>`;
 };
 VIEWS.kantoor.klanten = ()=>{
+  bulkInit('klanten');
   const tab=(k,l,n)=>`<div class="ftab ${mwFilter===k?'active':''}" onclick="setMwFilter('${k}')">${l}<span class="c">${n}</span></div>`;
   const actief=state.clients.filter(c=>c.actief), exit=state.clients.filter(c=>!c.actief);
   const hasWork=c=>{const w=state.werk[c.naam];const tv=state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;const sc=state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length;return tv||sc||!w.ob['Q1 2026'].ingediend||!w.ib[IBYEAR].ingediend||Object.values(w.loon['2026']).filter(Boolean).length<6;};
@@ -4826,7 +4857,7 @@ VIEWS.kantoor.klanten = ()=>{
     const tone=quiet?'quiet':(urgent?'red':'amber');
     const msg=quiet?'Geen open werk':(cnt===1?items[0].m:`${cnt} punten vragen aandacht`);
     const sub=exitMode?`${PROG[c.prog]} · nr ${c.nr} · ${c.mw} · tot ${c.eindDatum||'—'}`:`${PROG[c.prog]} · nr ${c.nr} · ${c.mw}`;
-    return `<div class="wsrow ${quiet?'quiet':''}" onclick="openClient('${c.naam}')"><span class="mono">${cpInitials(c.naam)}</span><div class="wsr-id"><div class="wsr-nm">${c.naam}</div><div class="wsr-sub">${sub}</div><div class="wsr-act">${state.inbox.filter(x=>x.client===c.naam&&x.state==='sent').length} verwerkt · ${sc} signalen · ${(state.docRequests||[]).filter(r=>r.client===c.naam&&r.status!=='completed').length} opvraging(en)</div></div><div class="wsr-st ${tone}">${healthBadge(c.naam)}<span class="wsr-st-t">${msg}</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>`;
+    return `<div class="wsrow ${quiet?'quiet':''} ${bulkSet.has(c.naam)?'sel':''}" onclick="openClient('${c.naam}')">${bulkCb(c.naam)}<span class="mono">${cpInitials(c.naam)}</span><div class="wsr-id"><div class="wsr-nm">${c.naam}</div><div class="wsr-sub">${sub}</div><div class="wsr-act">${state.inbox.filter(x=>x.client===c.naam&&x.state==='sent').length} verwerkt · ${sc} signalen · ${(state.docRequests||[]).filter(r=>r.client===c.naam&&r.status!=='completed').length} opvraging(en)</div></div><div class="wsr-st ${tone}">${healthBadge(c.naam)}<span class="wsr-st-t">${msg}</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>`;
   };
   const sortWork=(a,b)=>(hasWork(b)?1:0)-(hasWork(a)?1:0);
   let body='';
@@ -4853,9 +4884,9 @@ VIEWS.kantoor.klanten = ()=>{
   }
   return `<div class="row-between"><h1 class="title">Klanten</h1><div style="display:flex;gap:8px;align-items:center">${expBar('k_klanten')}<button class="btn ghost" onclick="go('klantbeheer')">Klanten &amp; groepen beheren →</button></div></div>
   <div class="sub">Dagelijkse werkruimte: klik op een klant voor het volledige dossier en de werklijsten. Klanten en groepen aanmaken of bewerken doet u onder <b>Beheer › Klanten &amp; groepen</b>.</div>
-  <div class="ftabs">${tab('alle','Alle',actief.length)}${MEDEWERKERS.map(m=>tab(m,m,actief.filter(c=>c.mw===m).length)).join('')}${tab('exit','🗄️ Exit',exit.length)}</div>
+  <div class="ftabs">${tab('alle','Alle',actief.length)}${MEDEWERKERS.map(m=>tab(m,m,actief.filter(c=>c.mw===m).length)).join('')}${tab('exit','🗄️ Exit',exit.length)}<span style="margin-left:auto">${bulkAllBtn((mwFilter==='exit'?exit:(mwFilter==='alle'?actief:actief.filter(c=>c.mw===mwFilter))).map(c=>c.naam))}</span></div>
   ${summaryHTML}
-  ${body}`;
+  ${body}${bulkBar()}`;
 };
 
 /* ============ KLANTBEHEER — groepen + klanten beheren ============ */
@@ -5041,6 +5072,7 @@ function drcSet(id,s){const r=ensureDocReq().find(x=>x.id===id);if(r){r.status=s
 function drcRemind(id){const r=ensureDocReq().find(x=>x.id===id);if(r){r.reminder=true;toast('Herinnering verstuurd naar klant ✓');renderView();}}
 let drcStatus='alle',drcMw='alle',drcGroep='alle',drcDue='alle';
 VIEWS.kantoor.docreq=()=>{
+  bulkInit('docreq');
   let rows=allDocReqs();
   const counts={alle:rows.length,requested:rows.filter(x=>x.st==='requested').length,overdue:rows.filter(x=>x.st==='overdue').length,received:rows.filter(x=>x.st==='received').length,completed:rows.filter(x=>x.st==='completed').length};
   rows=rows.filter(x=>(drcStatus==='alle'||x.st===drcStatus)&&(drcMw==='alle'||x.mw===drcMw)&&(drcGroep==='alle'||x.groepId===drcGroep)&&(drcDue==='alle'||(drcDue==='overdue'?x.days<0:drcDue==='week'?(x.days>=0&&x.days<=7):x.days>7)));
@@ -5051,8 +5083,8 @@ VIEWS.kantoor.docreq=()=>{
   <div class="sub">Alle documentopvragingen over alle klanten — operationeel overzicht voor het hele kantoor.</div>
   <div class="sgrid c4"><div class="scard"><div class="sl">Wacht op klant</div><div class="sv a">${counts.requested}</div></div><div class="scard"><div class="sl">Te laat</div><div class="sv r">${counts.overdue}</div></div><div class="scard"><div class="sl">Ontvangen</div><div class="sv">${counts.received}</div></div><div class="scard"><div class="sl">Beoordeeld</div><div class="sv g">${counts.completed}</div></div></div>
   <div class="ftabs">${chip('alle','Alle',counts.alle)}${chip('requested','Wacht op klant',counts.requested,'a')}${chip('overdue','Te laat',counts.overdue,'r')}${chip('received','Ontvangen',counts.received)}${chip('completed','Beoordeeld',counts.completed,'g')}</div>
-  <div class="ftabs" style="margin-top:-4px">${sel([['alle','Alle medewerkers'],...MEDEWERKERS.map(m=>[m,m])],drcMw,"drcMw=this.value;renderView()")}${sel([['alle','Alle groepen'],...state.groups.map(g=>[g.id,g.naam])],drcGroep,"drcGroep=this.value;renderView()")}${sel([['alle','Alle deadlines'],['overdue','Te laat'],['week','Binnen 7 dagen'],['later','Later']],drcDue,"drcDue=this.value;renderView()")}</div>
-  ${rows.length?`<div class="drc-head"><div>Klant</div><div>Document</div><div class="kb-hide">Aangevraagd</div><div>Deadline</div><div>Status</div><div class="kb-hide2">Medewerker</div><div></div></div>${rows.map(x=>`<div class="drc-row" onclick="openClient('${gJs(x.client)}','mappen')"><div class="drc-cli"><span class="av" style="background:${x.c.prog?cpAvColor(x.c):'#94a3b8'}">${cpInitials(x.client)}</span><div style="min-width:0"><div class="drc-nm">${x.client}</div><div class="drc-sub">${x.groep||PROG[x.c.prog]||''}</div></div></div><div class="drc-it">${gEsc(x.item)}</div><div class="drc-d kb-hide">${x.requested}</div><div class="drc-d"><div class="${x.days<0?'r':(x.days<=7?'a':'')}">${x.due}</div><div class="drc-rel ${x.days<0?'r':(x.days<=7?'a':'')}">${relTime(x.days)}</div></div><div><span class="pill ${DRC_TONE[x.st]}">${DRC_LBL[x.st]}</span></div><div class="kb-hide2 drc-mw">${x.mw}</div><div class="drc-acts">${x.st!=='completed'?`<button class="dact" title="Herinnering" onclick="event.stopPropagation();drcRemind(${x.r.id})">🔔</button><button class="dact" title="Ontvangen" onclick="event.stopPropagation();drcSet(${x.r.id},'received')">📥</button><button class="dact" title="Afronden" onclick="event.stopPropagation();drcSet(${x.r.id},'completed')">✓</button>`:'<span class="pill g">✓</span>'}</div></div>`).join('')}`:'<div class="empty"><div class="big">✅</div>Geen opvragingen in deze selectie.</div>'}`;
+  <div class="ftabs" style="margin-top:-4px">${sel([['alle','Alle medewerkers'],...MEDEWERKERS.map(m=>[m,m])],drcMw,"drcMw=this.value;renderView()")}${sel([['alle','Alle groepen'],...state.groups.map(g=>[g.id,g.naam])],drcGroep,"drcGroep=this.value;renderView()")}${sel([['alle','Alle deadlines'],['overdue','Te laat'],['week','Binnen 7 dagen'],['later','Later']],drcDue,"drcDue=this.value;renderView()")}<span style="margin-left:auto">${bulkAllBtn(rows.map(x=>x.r.id))}</span></div>
+  ${rows.length?`<div class="drc-head"><div>Klant</div><div>Document</div><div class="kb-hide">Aangevraagd</div><div>Deadline</div><div>Status</div><div class="kb-hide2">Medewerker</div><div></div></div>${rows.map(x=>`<div class="drc-row ${bulkSet.has(String(x.r.id))?'sel':''}" onclick="openClient('${gJs(x.client)}','mappen')"><div class="drc-cli">${bulkCb(x.r.id)}<span class="av" style="background:${x.c.prog?cpAvColor(x.c):'#94a3b8'}">${cpInitials(x.client)}</span><div style="min-width:0"><div class="drc-nm">${x.client}</div><div class="drc-sub">${x.groep||PROG[x.c.prog]||''}</div></div></div><div class="drc-it">${gEsc(x.item)}</div><div class="drc-d kb-hide">${x.requested}</div><div class="drc-d"><div class="${x.days<0?'r':(x.days<=7?'a':'')}">${x.due}</div><div class="drc-rel ${x.days<0?'r':(x.days<=7?'a':'')}">${relTime(x.days)}</div></div><div><span class="pill ${DRC_TONE[x.st]}">${DRC_LBL[x.st]}</span></div><div class="kb-hide2 drc-mw">${x.mw}</div><div class="drc-acts">${x.st!=='completed'?`<button class="dact" title="Herinnering" onclick="event.stopPropagation();drcRemind(${x.r.id})">🔔</button><button class="dact" title="Ontvangen" onclick="event.stopPropagation();drcSet(${x.r.id},'received')">📥</button><button class="dact" title="Afronden" onclick="event.stopPropagation();drcSet(${x.r.id},'completed')">✓</button>`:'<span class="pill g">✓</span>'}</div></div>`).join('')}`:'<div class="empty"><div class="big">✅</div>Geen opvragingen in deze selectie.</div>'}${bulkBar()}`;
 };
 let plMw='alle',plType='alle',plUrg='alle',plPeriod='alle';
 function planPeriod(days){if(days<=0)return 'today';if(days<=7)return 'week';if(days<=14)return 'next';if(days<=31)return 'month';return 'later';}
@@ -5077,6 +5109,29 @@ VIEWS.kantoor.planning=()=>{
   <div class="ftabs">${sel([['alle','Alle medewerkers'],...MEDEWERKERS.map(m=>[m,m])],plMw,"plMw=this.value;renderView()")}${sel([['alle','Alle taaktypes'],...types.map(t=>[t,t])],plType,"plType=this.value;renderView()")}${sel([['alle','Alle urgenties'],['r','Urgent'],['a','Binnenkort'],['navy','Later']],plUrg,"plUrg=this.value;renderView()")}${sel([['alle','Alle periodes'],['today','Vandaag'],['week','Deze week'],['next','Volgende week'],['month','Deze maand']],plPeriod,"plPeriod=this.value;renderView()")}</div>
   ${grp||'<div class="empty"><div class="big">✅</div>Geen geplande taken in deze selectie.</div>'}`;
 };
+/* ===== Bulk actions (office-only) ===== */
+let bulkSet=new Set(), bulkCtx='';
+function bulkInit(ctx){if(bulkCtx!==ctx){bulkCtx=ctx;bulkSet=new Set();}}
+function bulkToggle(id){id=String(id);if(bulkSet.has(id))bulkSet.delete(id);else bulkSet.add(id);renderView();}
+function bulkSelAll(ids){const all=ids.map(String);const allSel=all.length&&all.every(x=>bulkSet.has(x));if(allSel)all.forEach(x=>bulkSet.delete(x));else all.forEach(x=>bulkSet.add(x));renderView();}
+function bulkClear(){bulkSet=new Set();renderView();}
+function bulkCb(id){return `<label class="bulk-cb" onclick="event.stopPropagation()"><input type="checkbox" ${bulkSet.has(String(id))?'checked':''} onchange="bulkToggle('${gJs(String(id))}')"></label>`;}
+function bulkAllBtn(ids){const all=ids.map(String);const allSel=all.length&&all.every(x=>bulkSet.has(x));return `<button class="btn ghost sm" onclick="bulkSelAll([${ids.map(x=>`'${gJs(String(x))}'`).join(',')}])">${allSel?'Selectie wissen':'Alles selecteren'}</button>`;}
+function bulkAssign(){if(!bulkSet.size)return;modal('Medewerker toewijzen aan '+bulkSet.size+' klant(en)',selectFieldKV('Medewerker','baMw',MEDEWERKERS.map(m=>[m,m]),MEDEWERKERS[0]),'Toewijzen',()=>{const mw=val('baMw');let n=0;[...bulkSet].forEach(naam=>{const c=state.clients.find(x=>x.naam===naam);if(c){c.mw=mw;n++;}});toast(n+' klant(en) toegewezen aan '+mw+' ✓');bulkClear();return true;});}
+function bulkDocReq(){if(!bulkSet.size)return;modal('Document opvragen bij '+bulkSet.size+' klant(en)',field('Welk document heeft u nodig?','baItem','text',''),'Versturen',()=>{const it=(val('baItem')||'').trim();if(!it){toast('Geef een document op');return false;}let n=0;[...bulkSet].forEach(naam=>{ensureDocReq().push({id:++seqDR,client:naam,item:it,status:'requested',requested:TODAY,reminder:false});n++;});toast('Verzoek verstuurd naar '+n+' klant(en) ✓');bulkClear();return true;});}
+function bulkMsg(){if(!bulkSet.size)return;const cnt=bulkSet.size;modal('Bericht sturen naar '+cnt+' klant(en)',field('Bericht','baMsg','text',''),'Versturen',()=>{const t=(val('baMsg')||'').trim();if(!t){toast('Typ een bericht');return false;}toast('Bericht verstuurd naar '+cnt+' klant(en) ✓ (demo)');bulkClear();return true;});}
+function bulkReviewed(){if(!bulkSet.size)return;toast(bulkSet.size+' item(s) gemarkeerd als gecontroleerd ✓ (demo)');bulkClear();}
+function bulkDrSet(s){if(!bulkSet.size)return;let n=0;[...bulkSet].forEach(id=>{const r=ensureDocReq().find(x=>String(x.id)===String(id));if(r){r.status=s;n++;}});toast(n+' opvraging(en) bijgewerkt ✓');bulkClear();}
+function bulkDrRemind(){if(!bulkSet.size)return;let n=0;[...bulkSet].forEach(id=>{const r=ensureDocReq().find(x=>String(x.id)===String(id));if(r){r.reminder=true;n++;}});toast(n+' herinnering(en) verstuurd ✓');bulkClear();}
+function bulkExport(){if(!bulkSet.size)return;
+  if(bulkCtx==='docreq'){const sel=allDocReqs().filter(x=>bulkSet.has(String(x.r.id)));const cols=[{h:'Klant',k:'client',t:'text',w:24},{h:'Document',k:'item',t:'text',w:30},{h:'Aangevraagd',k:'requested',t:'date',w:13},{h:'Deadline',k:'due',t:'date',w:13},{h:'Status',k:'stl',t:'text',w:14,tr:true},{h:'Medewerker',k:'mw',t:'text',w:13}];const rows=sel.map(x=>({client:x.client,item:x.item,requested:x.requested,due:x.due,stl:DRC_LBL[x.st],mw:x.mw}));exportXLSX('Opvragingen_selectie',[{name:'Opvragingen',cols,rows}]);}
+  else{const sel=state.clients.filter(c=>bulkSet.has(c.naam));const cols=[{h:'Klant',k:'naam',t:'text',w:26},{h:'Nummer',k:'nr',t:'text',w:10},{h:'Medewerker',k:'mw',t:'text',w:14},{h:'Programma',k:'prog',t:'text',w:14},{h:'Health',k:'health',t:'num',w:9}];const rows=sel.map(c=>({naam:c.naam,nr:c.nr,mw:c.mw,prog:PROG[c.prog],health:clientHealth(c.naam).score}));exportXLSX('Klanten_selectie',[{name:'Selectie',cols,rows}]);}
+  toast('Selectie geëxporteerd ✓');bulkClear();}
+function bulkBar(){if(!bulkSet.size)return '';const isDr=bulkCtx==='docreq';
+  const actions=isDr
+    ?`<button class="btn ghost sm" onclick="bulkMsg()">✉ Bericht</button><button class="btn ghost sm" onclick="bulkDrRemind()">🔔 Herinnering</button><button class="btn ghost sm" onclick="bulkDrSet('received')">📥 Ontvangen</button><button class="btn ghost sm" onclick="bulkDrSet('completed')">✓ Afronden</button><button class="btn primary sm" onclick="bulkExport()">⬇ Export</button>`
+    :`<button class="btn ghost sm" onclick="bulkAssign()">👤 Medewerker</button><button class="btn ghost sm" onclick="bulkDocReq()">📋 Opvragen</button><button class="btn ghost sm" onclick="bulkMsg()">✉ Bericht</button>${(bulkCtx==='ob'||bulkCtx==='ib')?`<button class="btn ghost sm" onclick="bulkReviewed()">✓ Gecontroleerd</button>`:''}<button class="btn primary sm" onclick="bulkExport()">⬇ Export</button>`;
+  return `<div class="bulkbar"><div class="bulkbar-l"><span class="bulkbar-n">${bulkSet.size}</span> ${tStr('geselecteerd')} <button class="bulkbar-x" title="Selectie wissen" onclick="bulkClear()">✕</button></div><div class="bulkbar-a">${actions}</div></div>`;}
 function docReqAdd(naam){modal('Document opvragen bij klant',field('Welk document heeft u nodig?','drItem','text','')+`<div class="ai-note" style="margin-top:10px">De klant ziet dit verzoek in het klantportaal en bij Berichten en kan het document direct aanleveren.</div>`,'Verzoek versturen',()=>{const it=(val('drItem')||'').trim();if(!it){toast('Geef een document op');return false;}ensureDocReq().push({id:++seqDR,client:naam,item:it,status:'requested',requested:TODAY,reminder:false});toast('Verzoek verstuurd naar klant ✓');renderClient();return true;});}
 function docReqSet(id,s){const r=ensureDocReq().find(x=>x.id===id);if(r){r.status=s;toast('Status bijgewerkt ✓');renderClient();}}
 function docReqRemind(id){const r=ensureDocReq().find(x=>x.id===id);if(r){r.reminder=true;toast('Herinnering verstuurd naar klant ✓');renderClient();}}
@@ -5549,6 +5604,7 @@ VIEWS.kantoor.goedkeuren = ()=>{
   <div class="feedback"><span style="font-size:18px">↻</span><div><b>Feedback:</b> elke goedkeuring en correctie traint de voorspelmodule.</div></div>`;
 };
 VIEWS.kantoor.obwerk = ()=>{
+  bulkInit('ob');
   const kw=obKw||KWARTALEN[0];
   const base=state.clients.filter(c=>c.actief&&(obMw==='alle'||c.mw===obMw));
   let cs=base.filter(c=>{const o=state.werk[c.naam].ob[kw];if(obStat==='alle')return true;if(obStat==='todo')return !o.ingediend;if(obStat==='ingeleverd')return o.ingeleverd&&!o.ingelezen;if(obStat==='ingevoerd')return o.ingelezen&&!o.ingediend;if(obStat==='ingediend')return o.ingediend;return true;});
@@ -5562,7 +5618,7 @@ VIEWS.kantoor.obwerk = ()=>{
   const obState=o=>o.ingediend?{t:'Ingediend',tone:'done'}:(o.ingelezen?{t:'Klaar voor indiening',tone:'amber'}:(o.ingeleverd?{t:'Wacht op invoer',tone:'amber'}:{t:'Wacht op documenten',tone:'red'}));
   const wfNode=(v,fn,lbl)=>`<button class="wf-node ${v?'on':''}" title="${lbl}: ${v?'gedaan':'open'}" onclick="event.stopPropagation();${fn}">${v?`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>`:''}</button>`;
   const wfRow=c=>{const o=state.werk[c.naam].ob[kw];const st=stepsOB(o);const pct=Math.round(st/3*100);const sd=obState(o);const note=(o.opm||'').trim();
-    return `<div class="wf-row ${sd.tone}">
+    return `<div class="wf-row ${sd.tone} ${bulkSet.has(c.naam)?'sel':''}">${bulkCb(c.naam)}
       <div class="wf-l" onclick="openClient('${c.naam}','ob')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}</div></div></div>
       <div class="wf-rblock"><div class="wf-step3">${wfNode(o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`,'Ingeleverd')}<span class="wf-conn ${o.ingeleverd?'on':''}"></span>${wfNode(o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`,'Ingevoerd')}<span class="wf-conn ${o.ingelezen?'on':''}"></span>${wfNode(o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`,'Ingediend')}</div><div class="wf-bigst ${sd.tone}">${sd.t}</div><div class="wf-pct2">${pct}% voltooid</div></div>
       <span class="wf-noteic ${note?'has':''}" title="${note?note.replace(/"/g,'&quot;'):'Notitie toevoegen'}" onclick="event.stopPropagation();obNote('${c.naam}','${kw}')">${_svg('<path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3M8 12h8M8 15.5h5"/>')}</span>
@@ -5575,16 +5631,18 @@ VIEWS.kantoor.obwerk = ()=>{
     ${sel([['alle','Alle medewerkers'],...MEDEWERKERS.map(m=>[m,m])],obMw,'obMw=this.value;renderView()')}
     ${sel([['alle','Alle statussen'],['todo','Nog te doen'],['ingeleverd','Alleen ingeleverd'],['ingevoerd','Ingevoerd, niet ingediend'],['ingediend','Ingediend']],obStat,'obStat=this.value;renderView()')}
     <span class="ftab ${obStat==='ingediend'?'active':''}" style="margin-left:auto" title="Filter op ingediend" onclick="obStat=(obStat==='ingediend'?'alle':'ingediend');renderView()">Ingediend: ${ingediend}/${base.length} · ${base.length?Math.round(ingediend/base.length*100):0}%</span>
+    ${bulkAllBtn(cs.map(c=>c.naam))}
   </div>
   <div class="wl-overall">
     <div class="wh"><div class="wl-ov-l"><span class="wl-big">${overallOB}%</span><span class="wt">voltooid · ${kw}</span></div><div class="wl-legend"><span class="wl-lg done"><span class="d"></span>${ingediend} ingediend</span><span class="wl-lg prog"><span class="d"></span>${cntProgOB} bezig</span><span class="wl-lg todo"><span class="d"></span>${cntTodoOB} actie nodig</span></div></div>
     <div class="wl-obar"><span style="width:${overallOB}%"></span></div>
   </div>
-  ${cs.length?`<div class="wf-list">${obBuckets.map(b=>{const rows=cs.filter(b.f);if(!rows.length)return '';const op=obGrpOpen[b.l]!==undefined?obGrpOpen[b.l]:(b.l!=='Ingediend');return `<div class="wf-grp ${op?'':'closed'}" onclick="obToggleGrp('${b.l}')"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>${b.l} <span class="n">· ${rows.length}</span></div>`+(op?rows.map(wfRow).join(''):'');}).join('')}</div>`:`<div class="empty" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:40px 20px"><div class="big">✅</div>Geen klanten in deze selectie.</div>`}`;
+  ${cs.length?`<div class="wf-list">${obBuckets.map(b=>{const rows=cs.filter(b.f);if(!rows.length)return '';const op=obGrpOpen[b.l]!==undefined?obGrpOpen[b.l]:(b.l!=='Ingediend');return `<div class="wf-grp ${op?'':'closed'}" onclick="obToggleGrp('${b.l}')"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>${b.l} <span class="n">· ${rows.length}</span></div>`+(op?rows.map(wfRow).join(''):'');}).join('')}</div>`:`<div class="empty" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:40px 20px"><div class="big">✅</div>Geen klanten in deze selectie.</div>`}${bulkBar()}`;
 };
 function obToggle(naam,kw,f){const o=state.werk[naam].ob[kw];o[f]=o[f]?'':TODAY;renderView();}
 function obNote(naam,kw){const o=state.werk[naam].ob[kw];modal('Notitie · '+naam+' ('+kw+')',field('Notitie','obNoteV','text',(o.opm||'').replace(/"/g,'&quot;')),'Opslaan',()=>{o.opm=val('obNoteV');renderView();});}
 VIEWS.kantoor.ibwerk = ()=>{
+  bulkInit('ib');
   const y=ibwJaar||IBJAREN[0];
   const base=state.clients.filter(c=>c.actief&&(ibwMw==='alle'||c.mw===ibwMw));
   const cs=base.filter(c=>{const o=state.werk[c.naam].ib[y];if(ibwStat==='alle')return true;if(ibwStat==='todo')return !o.ingediend;if(ibwStat==='ingediend')return o.ingediend;if(ibwStat==='uitstel')return !!o.uitstel;if(ibwStat==='geenjr')return !o.jaarrekening;if(ibwStat==='jrklaar')return o.jaarrekening&&!o.ingediend;return true;});
@@ -5600,7 +5658,7 @@ VIEWS.kantoor.ibwerk = ()=>{
   const ibSupIc=_svg('<path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 3.5v4h4"/>'),ibUitIc=_svg('<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 1.8"/>');
   const ibIc=(cls,icon,v,fn,title)=>`<button class="ib-ic ${v?'on':''} ${cls}" title="${title}${v?' (aan)':' — uit'}" onclick="event.stopPropagation();${fn}">${icon}</button>`;
   const ibwRow=c=>{const o=state.werk[c.naam].ib[y];const st=stepsIB(o);const pct=Math.round(st/3*100);const sd=ibState(o);const note=(o.opm||'').trim();
-    return `<div class="wf-row ${sd.tone}">
+    return `<div class="wf-row ${sd.tone} ${bulkSet.has(c.naam)?'sel':''}">${bulkCb(c.naam)}
       <div class="wf-l" onclick="openClient('${c.naam}','ib')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}${ibIc('',ibSupIc,o.suppletie,`ibToggle('${c.naam}','${y}','suppletie')`,'Suppletie (correctie)')}${ibIc('uitstel',ibUitIc,o.uitstel,`ibToggle('${c.naam}','${y}','uitstel')`,'Uitstel')}</div></div></div>
       <div class="wf-rblock"><div class="wf-step3">${ibwNode(o.jaarrekening,`ibToggle('${c.naam}','${y}','jaarrekening')`,'Jaarrekening')}<span class="wf-conn ${o.jaarrekening?'on':''}"></span>${ibwNode(o.ib,`ibToggle('${c.naam}','${y}','ib')`,'IB-aangifte')}<span class="wf-conn ${o.ib?'on':''}"></span>${ibwNode(o.ingediend,`ibToggle('${c.naam}','${y}','ingediend')`,'Ingediend')}</div><div class="wf-bigst ${sd.tone}">${sd.t}</div><div class="wf-pct2">${pct}% voltooid</div></div>
       <span class="wf-noteic ${note?'has':''}" title="${note?note.replace(/"/g,'&quot;'):'Notitie toevoegen'}" onclick="event.stopPropagation();ibNote('${c.naam}','${y}')">${_svg('<path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3M8 12h8M8 15.5h5"/>')}</span>
@@ -5613,12 +5671,13 @@ VIEWS.kantoor.ibwerk = ()=>{
     ${sel([['alle','Alle medewerkers'],...MEDEWERKERS.map(m=>[m,m])],ibwMw,'ibwMw=this.value;renderView()')}
     ${sel([['alle','Alle statussen'],['todo','Nog te doen'],['geenjr','Zonder jaarrekening'],['jrklaar','Jaarrekening klaar, IB open'],['uitstel','Met uitstel'],['ingediend','Ingediend']],ibwStat,'ibwStat=this.value;renderView()')}
     <span class="ftab ${ibwStat==='ingediend'?'active':''}" style="margin-left:auto" title="Filter op ingediend" onclick="ibwStat=(ibwStat==='ingediend'?'alle':'ingediend');renderView()">Ingediend: ${ingediend}/${base.length} · ${base.length?Math.round(ingediend/base.length*100):0}%</span>
+    ${bulkAllBtn(cs.map(c=>c.naam))}
   </div>
   <div class="wl-overall">
     <div class="wh"><div class="wl-ov-l"><span class="wl-big">${overallIB}%</span><span class="wt">voltooid · ${y}</span></div><div class="wl-legend"><span class="wl-lg done"><span class="d"></span>${ingediend} ingediend</span><span class="wl-lg prog"><span class="d"></span>${cntProgIB} bezig</span><span class="wl-lg todo"><span class="d"></span>${cntTodoIB} actie nodig</span></div></div>
     <div class="wl-obar"><span style="width:${overallIB}%"></span></div>
   </div>
-  ${cs.length?`<div class="wf-list">${ibBuckets.map(b=>{const rows=cs.filter(b.f);if(!rows.length)return '';const op=ibGrpOpen[b.l]!==undefined?ibGrpOpen[b.l]:(b.l!=='Ingediend');return `<div class="wf-grp ${op?'':'closed'}" onclick="ibToggleGrp('${b.l}')"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>${b.l} <span class="n">· ${rows.length}</span></div>`+(op?rows.map(ibwRow).join(''):'');}).join('')}</div>`:`<div class="empty" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:40px 20px"><div class="big">✅</div>Geen klanten in deze selectie.</div>`}`;
+  ${cs.length?`<div class="wf-list">${ibBuckets.map(b=>{const rows=cs.filter(b.f);if(!rows.length)return '';const op=ibGrpOpen[b.l]!==undefined?ibGrpOpen[b.l]:(b.l!=='Ingediend');return `<div class="wf-grp ${op?'':'closed'}" onclick="ibToggleGrp('${b.l}')"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>${b.l} <span class="n">· ${rows.length}</span></div>`+(op?rows.map(ibwRow).join(''):'');}).join('')}</div>`:`<div class="empty" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:40px 20px"><div class="big">✅</div>Geen klanten in deze selectie.</div>`}${bulkBar()}`;
 };
 function ibToggle(naam,y,f){const o=state.werk[naam].ib[y];o[f]=o[f]?'':TODAY;renderView();}
 function ibNote(naam,y){const o=state.werk[naam].ib[y];modal('Notitie · '+naam+' ('+y+')',field('Notitie','ibNoteV','text',(o.opm||'').replace(/"/g,'&quot;')),'Opslaan',()=>{o.opm=val('ibNoteV');renderView();});}
