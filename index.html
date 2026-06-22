@@ -341,7 +341,12 @@
   .kb-search{flex:1;min-width:220px;height:40px;border:1px solid var(--line);border-radius:10px;padding:0 13px;font-size:13.5px;background:var(--card);color:var(--ink)}
   .kb-search:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(16,59,99,.12)}
   .kb-sel{height:40px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-size:13px;background:var(--card);color:var(--ink);cursor:pointer}
-  .kb-head,.kb-row{display:grid;grid-template-columns:2.2fr 1.2fr 1fr .9fr auto;align-items:center;gap:12px}
+  .kb-head,.kb-row{display:grid;grid-template-columns:2fr .8fr 1.1fr 1fr .9fr auto;align-items:center;gap:12px}
+  .kb-nr{font-size:12.5px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+  .actsheet{display:flex;flex-direction:column;gap:8px}
+  .actsheet .btn{justify-content:flex-start;width:100%}
+  .kb-kebab{border:1px solid var(--line);background:var(--card);width:30px;height:30px;border-radius:8px;cursor:pointer;color:var(--grey);font-size:15px;line-height:1;padding:0}
+  .kb-kebab:hover{border-color:var(--brand-2);color:var(--ink)}
   .kb-head{padding:0 14px 9px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2)}
   .kb-row{padding:11px 14px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.12s}
   .kb-row:hover{box-shadow:var(--sh-sm);border-color:var(--brand-2)}
@@ -361,7 +366,7 @@
   .colorpick{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
   .cdot{width:26px;height:26px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:.1s}
   .cdot.on{border-color:var(--ink);transform:scale(1.08)}
-  @media(max-width:680px){.kb-hide{display:none}.kb-head,.kb-row{grid-template-columns:1.9fr 1fr .8fr auto}}
+  @media(max-width:680px){.kb-hide,.kb-hide2{display:none}.kb-head,.kb-row{grid-template-columns:2fr 1.1fr .9fr auto}}
   .cc-sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:16px}
   .cc-side .cc-sec{padding:14px 16px}
   .cc-h{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey);margin:0 0 12px}
@@ -1855,10 +1860,10 @@ const NAV = {
     ['__g','OVERIG'],['instellingen','⚙','Instellingen'],
   ],
   kantoor:[
-    ['__g','KANTOOR'],['overzicht','▦','Overzicht'],['klanten','◑','Klanten'],['klantbeheer','◔','Klantbeheer'],['obwerk','%','OB-werklijst'],['ibwerk','%','IB-werklijst'],
+    ['__g','KANTOOR'],['overzicht','▦','Overzicht'],['klanten','◑','Klanten'],['obwerk','%','OB-werklijst'],['ibwerk','%','IB-werklijst'],
     ['__g','FISCAAL'],['fg','▦','Fiscaal Gemak'],
     ['__g','DIENSTEN'],['uren','€','Abonnementen'],
-    ['__g','BEHEER'],['statistieken','▥','Statistieken'],['instellingen','⚙','Instellingen'],
+    ['__g','BEHEER'],['klantbeheer','◔','Klanten & groepen'],['statistieken','▥','Statistieken'],['instellingen','⚙','Instellingen'],
   ]
 };
 let ROLE='klant', VIEW='overzicht';
@@ -2811,8 +2816,8 @@ VIEWS.kantoor.klanten = ()=>{
     const prog=(label,done)=>{const p=tot?Math.round(done/tot*100):0;return `<div class="pcard"><div class="pl">${label}</div><div class="pv">${done}/${tot} <span class="pp">${p}%</span></div><div class="pbar"><div class="pfill" style="width:${p}%"></div></div><div class="pmini">${tot-done} nog te doen</div></div>`;};
     summaryHTML=`<div class="psum">${prog('IB '+IBJAREN[0]+' ingediend',cIB(IBJAREN[0]))}${prog('IB '+IBJAREN[1]+' ingediend',cIB(IBJAREN[1]))}${prog('OB Q1 2026 ingediend',cOB)}${prog('Loon t/m juni bij',cLoon)}</div>`;
   }
-  return `<div class="row-between"><h1 class="title">Klanten</h1><div style="display:flex;gap:8px"><button class="btn ghost" onclick="go('klantbeheer')">⚙ Klantbeheer</button><button class="btn primary" onclick="clientNewModal()">+ Klant</button></div></div>
-  <div class="sub">Actieve klanten verdeeld over de 3 medewerkers. Klik op een klant voor het volledige dossier. Bovenaan ziet u per taak hoeveel klanten al klaar zijn (aantal + percentage), per jaar gesplitst.</div>
+  return `<div class="row-between"><h1 class="title">Klanten</h1><button class="btn ghost" onclick="go('klantbeheer')">Klanten &amp; groepen beheren →</button></div>
+  <div class="sub">Dagelijkse werkruimte: klik op een klant voor het volledige dossier en de werklijsten. Klanten en groepen aanmaken of bewerken doet u onder <b>Beheer › Klanten &amp; groepen</b>.</div>
   <div class="ftabs">${tab('alle','Alle',actief.length)}${MEDEWERKERS.map(m=>tab(m,m,actief.filter(c=>c.mw===m).length)).join('')}${tab('exit','🗄️ Exit',exit.length)}</div>
   ${summaryHTML}
   ${body}`;
@@ -2901,14 +2906,34 @@ function kbListHTML(){const q=(kbSearch||'').toLowerCase().trim();
   const idx=c=>state.clients.indexOf(c);
   list.sort((a,b)=>{if(kbSort==='nr')return (parseInt(a.nr,10)||0)-(parseInt(b.nr,10)||0);if(kbSort==='nieuw')return ((b.created||0)-(a.created||0))||(idx(b)-idx(a));return a.naam.localeCompare(b.naam);});
   if(!list.length)return '<div class="empty"><div class="big">🔍</div>Geen klanten gevonden met deze filters.</div>';
-  const rows=list.map(c=>{const d=DOSSIER[c.naam]||{};const gid=clientGroupId(c);return `<div class="kb-row" onclick="openClient('${gJs(c.naam)}')"><div class="kb-cli"><span class="mono" style="background:${cpAvColor(c)}">${cpInitials(c.naam)}</span><div style="min-width:0"><div class="kb-nm">${gEsc(c.naam)}</div><div class="kb-sub">nr ${gEsc(c.nr)}${d.kvk?' · KvK '+gEsc(d.kvk):''}</div></div></div><div class="kb-c"><span class="grp-chip" style="--gc:${groupColor(gid)}">${gEsc(groupName(gid))}</span></div><div class="kb-c kb-hide">${gEsc(c.mw)}</div><div class="kb-c">${c.actief===false?'<span class="pill n">Niet-actief</span>':'<span class="pill g">Actief</span>'}</div><div class="kb-c kb-act"><button class="btn ghost sm" onclick="event.stopPropagation();clientEditModal('${gJs(c.naam)}')">Bewerken</button></div></div>`;}).join('');
-  return `<div class="kb-head"><div>Klant</div><div>Groep</div><div class="kb-hide">Beheerder</div><div>Status</div><div></div></div>${rows}`;
+  const rows=list.map(c=>{const d=DOSSIER[c.naam]||{};const gid=clientGroupId(c);return `<div class="kb-row" onclick="openClient('${gJs(c.naam)}')"><div class="kb-cli"><span class="mono" style="background:${cpAvColor(c)}">${cpInitials(c.naam)}</span><div style="min-width:0"><div class="kb-nm">${gEsc(c.naam)}</div><div class="kb-sub">${d.kvk?'KvK '+gEsc(d.kvk):PROG[c.prog]}</div></div></div><div class="kb-c kb-hide2"><span class="kb-nr">${gEsc(c.nr)}</span></div><div class="kb-c"><span class="grp-chip" style="--gc:${groupColor(gid)}">${gEsc(groupName(gid))}</span></div><div class="kb-c kb-hide">${gEsc(c.mw)}</div><div class="kb-c">${c.actief===false?'<span class="pill n">Niet-actief</span>':'<span class="pill g">Actief</span>'}</div><div class="kb-c kb-act" style="display:flex;gap:6px;justify-content:flex-end"><button class="btn ghost sm" onclick="event.stopPropagation();clientEditModal('${gJs(c.naam)}')">Bewerken</button><button class="kb-kebab" title="Meer acties" onclick="event.stopPropagation();clientActions('${gJs(c.naam)}')">⋯</button></div></div>`;}).join('');
+  return `<div class="kb-head"><div>Klant</div><div class="kb-hide2">Klantnr</div><div>Groep</div><div class="kb-hide">Beheerder</div><div>Status</div><div></div></div>${rows}`;
 }
 function kbRender(){const el=document.getElementById('kbList');if(el)el.innerHTML=kbListHTML();}
+function clientActions(naam){const c=state.clients.find(x=>x.naam===naam);if(!c)return;const arch=c.actief===false;
+  modal('Acties — '+naam,`<div class="actsheet"><button class="btn ghost" onclick="closeM();openClient('${gJs(naam)}')">📂 Dossier openen</button><button class="btn ghost" onclick="clientEditModal('${gJs(naam)}')">✎ Bewerken</button><button class="btn ghost" onclick="archiveClient('${gJs(naam)}')">${arch?'♻ Heractiveren':'🗄 Archiveren (op niet-actief zetten)'}</button><button class="btn danger" onclick="deleteClientModal('${gJs(naam)}')">🗑 Klant verwijderen</button></div>`,'Sluiten',()=>true);
+}
+function archiveClient(naam){const c=state.clients.find(x=>x.naam===naam);if(!c)return;const toArchive=c.actief!==false;if(toArchive){c.actief=false;c.eindDatum=c.eindDatum||TODAY;toast('"'+naam+'" gearchiveerd (niet-actief) ✓');}else{c.actief=true;c.eindDatum='';toast('"'+naam+'" geheractiveerd ✓');}closeM();renderNav();if(VIEW==='klantbeheer')renderView();}
+function deleteClientModal(naam){const c=state.clients.find(x=>x.naam===naam);if(!c)return;
+  modal('Klant verwijderen',`<div class="ai-note" style="margin:0 0 12px;border-left-color:var(--red)">U staat op het punt <b>${gEsc(naam)}</b> volledig te verwijderen. Alle bijbehorende gegevens (dossier, werklijsten, documenten, signalen, betalingsregelingen) worden verwijderd. Deze actie kan niet ongedaan worden gemaakt.</div>`+field('Typ de bedrijfsnaam ter bevestiging','delConfirm','text',''),'Definitief verwijderen',()=>{if((val('delConfirm')||'').trim()!==naam){toast('De ingevoerde naam komt niet overeen');return false;}deleteClient(naam);return true;});
+}
+function deleteClient(naam){
+  state.clients=state.clients.filter(c=>c.naam!==naam);
+  if(state.werk[naam])delete state.werk[naam];
+  if(DOSSIER[naam])delete DOSSIER[naam];
+  state.dossierDocs=(state.dossierDocs||[]).filter(x=>x.client!==naam);
+  state.employees=(state.employees||[]).filter(x=>x.client!==naam);
+  state.signals=(state.signals||[]).filter(x=>x.client!==naam);
+  state.inbox=(state.inbox||[]).filter(x=>x.client!==naam);
+  state.regelingen=(state.regelingen||[]).filter(x=>x.client!==naam);
+  if(curClient===naam)curClient=null;
+  toast('Klant "'+naam+'" is verwijderd');renderNav();
+  if(VIEW==='klantbeheer')renderView();else go('klantbeheer');
+}
 VIEWS.kantoor.klantbeheer=()=>{
   const chips=`<span class="grp-fchip ${kbGroep==='alle'?'on':''}" onclick="kbGroep='alle';renderView()">Alle <b>${state.clients.length}</b></span>`+state.groups.map(g=>`<span class="grp-fchip ${kbGroep===g.id?'on':''}" onclick="kbGroep='${g.id}';renderView()"><span class="d" style="background:${g.kleur}"></span>${gEsc(g.naam)} <b>${groupCount(g.id)}</b></span>`).join('');
-  return `<div class="row-between"><h1 class="title">Klantbeheer</h1><div style="display:flex;gap:8px"><button class="btn ghost" onclick="manageGroupsModal()">Groepen beheren</button><button class="btn primary" onclick="clientNewModal()">+ Nieuwe klant</button></div></div>
-  <div class="sub">Zoek, filter, bewerk en organiseer alle klanten en klantgroepen — zonder ontwikkelaar.</div>
+  return `<div class="row-between"><h1 class="title">Klanten &amp; groepen</h1><div style="display:flex;gap:8px"><button class="btn ghost" onclick="manageGroupsModal()">Groepen beheren</button><button class="btn primary" onclick="clientNewModal()">+ Nieuwe klant</button></div></div>
+  <div class="sub">Administratie van klanten en groepen — aanmaken, bewerken, archiveren en organiseren. Dagelijks werk doet u onder <b>Kantoor › Klanten</b>.</div>
   <div class="kb-chips">${chips}</div>
   <div class="kb-tools">
     <input class="kb-search" id="kbSearchInp" placeholder="Zoek op naam, klantnummer, KvK of beheerder…" value="${gEsc(kbSearch)}" oninput="kbSearch=this.value;kbRender()">
