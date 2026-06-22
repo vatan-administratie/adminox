@@ -575,6 +575,22 @@
   .rc-bench-ic{font-size:15px;flex-shrink:0}
   .rc-bench-h{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--brand-2);margin-bottom:2px}
   .wsr-act{font-size:10.5px;color:var(--grey-2);margin-top:3px;font-variant-numeric:tabular-nums}
+  /* export dropdown */
+  .exp-wrap{position:relative;display:inline-block}
+  .exp-btn{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+  .exp-dl{font-size:13px;line-height:1}
+  .exp-caret{font-size:10px;opacity:.7;transition:transform .15s}
+  .exp-wrap.open .exp-caret{transform:rotate(180deg)}
+  .exp-menu{position:absolute;top:calc(100% + 6px);right:0;min-width:182px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 34px rgba(15,23,42,.16);padding:6px;z-index:200;opacity:0;visibility:hidden;transform:translateY(-5px);transition:opacity .14s,transform .14s,visibility .14s}
+  .exp-wrap.open .exp-menu{opacity:1;visibility:visible;transform:translateY(0)}
+  [dir=rtl] .exp-menu{right:auto;left:0}
+  .exp-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;padding:9px 11px;border-radius:8px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit;transition:background .1s,color .1s}
+  .exp-item:hover{background:var(--brand-soft);color:var(--brand-2)}
+  .exp-ic{width:22px;height:22px;display:grid;place-items:center;border-radius:6px;background:var(--line-2);font-size:12px;flex-shrink:0;color:var(--grey)}
+  .exp-item:hover .exp-ic{background:#fff;color:var(--brand-2)}
+  body.dark .exp-menu{box-shadow:0 16px 40px rgba(0,0,0,.5)}
+  body.dark .exp-item:hover .exp-ic{background:rgba(255,255,255,.14);color:var(--ink)}
+  body.dark .exp-item:hover{background:var(--hover)}
   @media(max-width:560px){.cc-ops{flex-wrap:wrap}.cc-op{flex:1 1 44%}}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
@@ -2207,6 +2223,74 @@ const I18N_ADD15={
  "Ongecategoriseerde boekingen indelen":{en:"Categorize uncategorized entries",tr:"Kategorisiz kayıtları sınıflandır",bg:"Категоризирайте записите",ar:"صنّف القيود غير المصنّفة"}
 };
 Object.keys(I18N_ADD15).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD15[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD15[k][l];});});
+/* ===== Export systeem ===== */
+const I18N_ADD16={
+ "Exporteren":{en:"Export",tr:"Dışa aktar",bg:"Експорт",ar:"تصدير"},
+ "Export gereed":{en:"Export ready",tr:"Dışa aktarma hazır",bg:"Експортът е готов",ar:"التصدير جاهز"},
+ "Export mislukt":{en:"Export failed",tr:"Dışa aktarma başarısız",bg:"Експортът неуспешен",ar:"فشل التصدير"},
+ "Geëxporteerd":{en:"Exported",tr:"Dışa aktarıldı",bg:"Експортирано",ar:"تم التصدير"},
+ "Vertrouwelijk":{en:"Confidential",tr:"Gizli",bg:"Поверително",ar:"سري"},
+ "Pagina":{en:"Page",tr:"Sayfa",bg:"Страница",ar:"صفحة"},
+ "Geen gegevens":{en:"No data",tr:"Veri yok",bg:"Няма данни",ar:"لا توجد بيانات"},
+ "Klantenoverzicht":{en:"Client overview",tr:"Müşteri listesi",bg:"Преглед на клиенти",ar:"نظرة عامة على العملاء"},
+ "klanten":{en:"clients",tr:"müşteri",bg:"клиенти",ar:"عملاء"},
+ "meldingen":{en:"alerts",tr:"uyarı",bg:"сигнали",ar:"تنبيهات"},
+ "documenten":{en:"documents",tr:"belge",bg:"документа",ar:"مستندات"},
+ "Totaal":{en:"Total",tr:"Toplam",bg:"Общо",ar:"الإجمالي"},
+ "Totale omzet":{en:"Total revenue",tr:"Toplam ciro",bg:"Общ оборот",ar:"إجمالي الإيرادات"},
+ "Te betalen/terug te vragen":{en:"Payable / reclaimable",tr:"Ödenecek / iade",bg:"За плащане / възстановяване",ar:"مستحق / قابل للاسترداد"},
+ "Map als ZIP":{en:"Folder as ZIP",tr:"Klasörü ZIP yap",bg:"Папка като ZIP",ar:"المجلد كـ ZIP"},
+ "Alles als ZIP":{en:"All as ZIP",tr:"Tümünü ZIP yap",bg:"Всичко като ZIP",ar:"الكل كـ ZIP"},
+ "Dossier als ZIP":{en:"Dossier as ZIP",tr:"Dosyayı ZIP yap",bg:"Досие като ZIP",ar:"الملف كـ ZIP"},
+ "Documentenpakket":{en:"Document package",tr:"Belge paketi",bg:"Пакет документи",ar:"حزمة المستندات"},
+ "Geen documenten om te exporteren":{en:"No documents to export",tr:"Dışa aktarılacak belge yok",bg:"Няма документи за експорт",ar:"لا مستندات للتصدير"},
+ "Demobestand — in productie bevat dit het werkelijke document.":{en:"Demo file — in production this contains the actual document.",tr:"Demo dosyası — üretimde burada gerçek belge bulunur.",bg:"Демо файл — в продукция съдържа реалния документ.",ar:"ملف تجريبي — في الإنتاج يحتوي على المستند الفعلي."},
+ "Nummer":{en:"Number",tr:"Numara",bg:"Номер",ar:"الرقم"},
+ "Medewerker":{en:"Employee",tr:"Çalışan",bg:"Служител",ar:"الموظف"},
+ "Programma":{en:"Program",tr:"Program",bg:"Програма",ar:"البرنامج"},
+ "Voortgang":{en:"Progress",tr:"İlerleme",bg:"Напредък",ar:"التقدّم"},
+ "Open acties":{en:"Open actions",tr:"Açık işlemler",bg:"Отворени действия",ar:"إجراءات مفتوحة"},
+ "Notitie":{en:"Note",tr:"Not",bg:"Бележка",ar:"ملاحظة"},
+ "Uitstel":{en:"Extension",tr:"Erteleme",bg:"Отсрочка",ar:"تمديد"},
+ "Suppletie":{en:"Correction",tr:"Düzeltme",bg:"Корекция",ar:"تصحيح"},
+ "Voornaamste factor":{en:"Main factor",tr:"Ana etken",bg:"Основен фактор",ar:"العامل الرئيسي"},
+ "Open signalen":{en:"Open signals",tr:"Açık sinyaller",bg:"Отворени сигнали",ar:"إشارات مفتوحة"},
+ "Relatie":{en:"Contact",tr:"İlişki",bg:"Контрагент",ar:"جهة الاتصال"},
+ "Vervaldatum":{en:"Due date",tr:"Vade tarihi",bg:"Падеж",ar:"تاريخ الاستحقاق"},
+ "Openstaand":{en:"Outstanding",tr:"Açık tutar",bg:"Дължимо",ar:"المستحق"},
+ "Geldig tot":{en:"Valid until",tr:"Geçerlilik",bg:"Валидно до",ar:"صالح حتى"},
+ "Kilometers":{en:"Kilometers",tr:"Kilometre",bg:"Километри",ar:"الكيلومترات"},
+ "Vergoeding":{en:"Allowance",tr:"Ödenek",bg:"Обезщетение",ar:"البدل"},
+ "Doel":{en:"Purpose",tr:"Amaç",bg:"Цел",ar:"الغرض"},
+ "Boeking":{en:"Entry",tr:"Kayıt",bg:"Осчетоводяване",ar:"القيد"},
+ "Route":{en:"Route",tr:"Güzergah",bg:"Маршрут",ar:"المسار"},
+ "Week":{en:"Week",tr:"Hafta",bg:"Седмица",ar:"الأسبوع"},
+ "Project":{en:"Project",tr:"Proje",bg:"Проект",ar:"المشروع"},
+ "Uren":{en:"Hours",tr:"Saat",bg:"Часове",ar:"ساعات"},
+ "Tarief":{en:"Rate",tr:"Tarife",bg:"Ставка",ar:"السعر"},
+ "Periode (maand/jaar)":{en:"Period (month/year)",tr:"Dönem (ay/yıl)",bg:"Период (месец/година)",ar:"الفترة (شهر/سنة)"},
+ "Aantal facturen":{en:"Number of invoices",tr:"Fatura sayısı",bg:"Брой фактури",ar:"عدد الفواتير"},
+ "Omzet (incl. BTW)":{en:"Revenue (incl. VAT)",tr:"Ciro (KDV dahil)",bg:"Оборот (вкл. ДДС)",ar:"الإيرادات (شاملة ض.ق.م)"},
+ "Rubriek":{en:"Box",tr:"Bölüm",bg:"Раздел",ar:"البند"},
+ "Grondslag":{en:"Base amount",tr:"Matrah",bg:"Основа",ar:"الأساس"},
+ "Aantal klanten":{en:"Client count",tr:"Müşteri sayısı",bg:"Брой клиенти",ar:"عدد العملاء"},
+ "Toegewezen medewerkers":{en:"Assigned employees",tr:"Atanan çalışanlar",bg:"Назначени служители",ar:"الموظفون المعيّنون"},
+ "Ja":{en:"Yes",tr:"Evet",bg:"Да",ar:"نعم"},
+ "Nee":{en:"No",tr:"Hayır",bg:"Не",ar:"لا"},
+ "Memoriaal ✓":{en:"Journal ✓",tr:"Mahsup ✓",bg:"Мемориал ✓",ar:"قيد ✓"},
+ "Gefactureerd":{en:"Invoiced",tr:"Faturalandı",bg:"Фактурирано",ar:"تمت الفوترة"},
+ "Te factureren":{en:"To invoice",tr:"Faturalanacak",bg:"За фактуриране",ar:"للفوترة"},
+ "Documenten opvragen":{en:"Request documents",tr:"Belge talep et",bg:"Заявка за документи",ar:"طلب المستندات"},
+ "Invoeren":{en:"Enter",tr:"Gir",bg:"Въвеждане",ar:"إدخال"},
+ "Indienen":{en:"Submit",tr:"Gönder",bg:"Подаване",ar:"تقديم"},
+ "Afgerond":{en:"Completed",tr:"Tamamlandı",bg:"Завършено",ar:"مكتمل"},
+ "Wacht op documenten":{en:"Awaiting documents",tr:"Belge bekleniyor",bg:"Чака документи",ar:"بانتظار المستندات"},
+ "Wacht op invoer":{en:"Awaiting entry",tr:"Giriş bekleniyor",bg:"Чака въвеждане",ar:"بانتظار الإدخال"},
+ "Klaar voor indiening":{en:"Ready to submit",tr:"Göndermeye hazır",bg:"Готово за подаване",ar:"جاهز للتقديم"},
+ "Jaarrekening nodig":{en:"Annual accounts needed",tr:"Yıllık hesap gerekli",bg:"Нужен годишен отчет",ar:"يلزم حساب سنوي"},
+ "Aangifte opstellen":{en:"Prepare return",tr:"Beyan hazırla",bg:"Подготви декларация",ar:"إعداد الإقرار"}
+};
+Object.keys(I18N_ADD16).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD16[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD16[k][l];});});
 (function(){const more={
  en:[[" documenten verwerken"," documents to process"],[" OB-controles"," VAT checks"],[" IB deadline(s)"," income-tax deadline(s)"],[" klanten met signalen"," clients with signals"],[" verstreken"," overdue"],["Wijs nieuwe klanten voorlopig toe aan ","Assign new clients for now to "],[" — laagste werkdruk."," — lowest workload."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," will get a peak in income-tax files — plan extra time."],[" heeft een achterstand in documentverwerking."," has a backlog in document processing."]],
  tr:[[" documenten verwerken"," belge işlenecek"],[" OB-controles"," KDV kontrolü"],[" IB deadline(s)"," gelir vergisi son tarihi"],[" klanten met signalen"," sinyalli müşteri"],[" verstreken"," gecikti"],["Wijs nieuwe klanten voorlopig toe aan ","Yeni müşterileri şimdilik şuna atayın: "],[" — laagste werkdruk."," — en düşük iş yükü."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," gelir vergisi dosyalarında bir zirve yaşayacak — ekstra zaman planlayın."],[" heeft een achterstand in documentverwerking."," belge işlemede geride."]],
@@ -2568,7 +2652,150 @@ function factuurResult(d,fname){const incl=parseFloat(String(d.bedragIncl).repla
     </div>
   </div>`;}
 function factuurBoek(){if(!curFactuur)return;const gl=document.getElementById('fbGl').value;const lev=curFactuur.leverancier||'Onbekend';const h=glHist();if(!h[lev])h[lev]={};h[lev][gl]=(h[lev][gl]||0)+1;if(typeof monthlyDone!=='undefined')monthlyDone++;toast(`"${lev}" geboekt op ${gl} — het systeem leert van deze keuze`);renderNav();go('verwerken');}
-function printDoc(title,body){body=tHtml(body);title=tStr(title);const w=window.open('','_blank','width=820,height=1040');if(!w){toast('Sta pop-ups toe om te printen');return;}w.document.write(`<!DOCTYPE html><html lang="${LANG}" dir="${LANG==='ar'?'rtl':'ltr'}"><head><meta charset="utf-8"><title>${String(title).replace(/[<>]/g,'')}</title><style>body{font-family:Arial,Helvetica,sans-serif;padding:40px;color:#1c1f24;font-size:13px}h2{font-size:18px;margin:0 0 4px}h3{font-size:14px;margin:18px 0 6px}p{margin:4px 0}table{width:100%;border-collapse:collapse;margin-bottom:8px}td,th{padding:5px 7px;border-bottom:1px solid #e6e9ef;text-align:right}td.l,th.l{text-align:left}th{color:#5C6675;font-weight:600}tr.tot td{font-weight:bold;border-top:2px solid #15171a}@media print{body{padding:0}}</style></head><body><div style="font-weight:900;color:#C8102E;font-size:16px;margin-bottom:14px">VATAN <span style="color:#111;font-weight:700">Administratie &amp; Advies</span></div>${body}<script>window.onload=function(){setTimeout(function(){window.print();},300);}<\/script></body></html>`);w.document.close();toast('Afdrukvenster geopend — kies "Opslaan als PDF"');}
+function printDoc(title,body){body=tHtml(body);title=tStr(title);const w=window.open('','_blank','width=820,height=1040');if(!w){toast('Sta pop-ups toe om te printen');return;}w.document.write(`<!DOCTYPE html><html lang="${LANG}" dir="${LANG==='ar'?'rtl':'ltr'}"><head><meta charset="utf-8"><title>${String(title).replace(/[<>]/g,'')}</title><style>body{font-family:Arial,Helvetica,sans-serif;padding:40px;color:#1c1f24;font-size:13px}h2{font-size:18px;margin:0 0 4px}h3{font-size:14px;margin:18px 0 6px}p{margin:4px 0}table{width:100%;border-collapse:collapse;margin-bottom:8px}td,th{padding:5px 7px;border-bottom:1px solid #e6e9ef;text-align:right}td.l,th.l{text-align:left}th{color:#5C6675;font-weight:600}tr.tot td{font-weight:bold;border-top:2px solid #15171a}@media print{body{padding:0}}</style></head><body><div style="font-weight:900;color:#C8102E;font-size:16px;margin-bottom:14px">VATAN <span style="color:#111;font-weight:700">Administratie &amp; Advies</span></div><div style="font-size:11px;color:#7A8290;margin:2px 0 16px;padding-bottom:10px;border-bottom:1px solid #e6e9ef">${String(title).replace(/[<>]/g,'')} · ${tStr('Geëxporteerd')}: ${_expStamp()}</div>${body}<div style="margin-top:26px;padding-top:8px;border-top:1px solid #e6e9ef;font-size:10px;color:#9AA1AC;display:flex;justify-content:space-between"><span>Vatan Administratie &amp; Advies · ${tStr('Vertrouwelijk')}</span><span>${tStr('Pagina')} <span class="pg"></span></span></div><script>window.onload=function(){setTimeout(function(){window.print();},300);}<\/script></body></html>`);w.document.close();toast('Afdrukvenster geopend — kies "Opslaan als PDF"');}
+/* ============================================================
+   EXPORT ENGINE — CSV · XLSX · ZIP · PDF (dependency-free)
+   Permission-aware: exporters read the same visible state the
+   views render, so a user can only export what they can see.
+   ============================================================ */
+function _expStamp(){const d=new Date();const p=n=>String(n).padStart(2,'0');return `${p(d.getDate())}-${p(d.getMonth()+1)}-${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`;}
+function _dlBlob(name,blob){const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(u);a.remove();},1200);}
+function _xe(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function _fname(s){return String(s||'export').replace(/[^\wÀ-ɏ-]+/g,'_').replace(/_+/g,'_').replace(/^_|_$/g,'').slice(0,64)||'export';}
+const _crcTab=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}return t;})();
+function _crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=_crcTab[(c^u8[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function _zipBlob(files,mime){const enc=files.map(f=>({name:f.name,data:typeof f.data==='string'?new TextEncoder().encode(f.data):f.data}));
+  const u16=n=>[n&255,(n>>8)&255],u32=n=>[n&255,(n>>8)&255,(n>>16)&255,(n>>24)&255];
+  const parts=[],central=[];let offset=0;
+  enc.forEach(f=>{const nm=new TextEncoder().encode(f.name),crc=_crc32(f.data),sz=f.data.length;
+    const local=[0x50,0x4b,0x03,0x04,...u16(20),...u16(0),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(sz),...u32(sz),...u16(nm.length),...u16(0)];
+    parts.push(new Uint8Array(local),nm,f.data);
+    const cen=[0x50,0x4b,0x01,0x02,...u16(20),...u16(20),...u16(0),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(sz),...u32(sz),...u16(nm.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(offset)];
+    central.push(new Uint8Array(cen),nm);
+    offset+=local.length+nm.length+sz;});
+  const cenSize=central.reduce((a,b)=>a+b.length,0);
+  const end=[0x50,0x4b,0x05,0x06,...u16(0),...u16(0),...u16(enc.length),...u16(enc.length),...u32(cenSize),...u32(offset),...u16(0)];
+  return new Blob([...parts,...central,new Uint8Array(end)],{type:mime||'application/zip'});}
+function _colName(c){let s='';c++;while(c){s=String.fromCharCode(65+(c-1)%26)+s;c=Math.floor((c-1)/26);}return s;}
+function _cellText(c,v){if(v==null)return '';if(c.t==='eur'&&typeof v==='number')return '€ '+m2(v);if(c.t==='pct'&&typeof v==='number')return (Math.round(v*1000)/10)+'%';let s=String(v);if(c.tr)s=tStr(s);return s;}
+function exportCSV(name,cols,rows){const esc=s=>{s=String(s==null?'':s);return /[";\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
+  const head=cols.map(c=>esc(tStr(c.h))).join(';');
+  const body=rows.map(r=>cols.map(c=>{let v=r[c.k];if(c.t==='eur'&&typeof v==='number')return v.toFixed(2).replace('.',',');if(c.t==='pct'&&typeof v==='number')return (Math.round(v*1000)/10).toString().replace('.',',');return esc(_cellText(c,v));}).join(';')).join('\r\n');
+  _dlBlob(_fname(name)+'.csv',new Blob(['﻿'+head+'\r\n'+body],{type:'text/csv;charset=utf-8'}));}
+function exportXLSX(name,sheetsIn){
+  const sheets=sheetsIn.map(sh=>{
+    const hdr=sh.cols.map((c,ci)=>`<c r="${_colName(ci)}1" t="inlineStr" s="1"><is><t xml:space="preserve">${_xe(tStr(c.h))}</t></is></c>`).join('');
+    let xml=`<row r="1">${hdr}</row>`;
+    sh.rows.forEach((r,ri)=>{const R=ri+2;
+      xml+=`<row r="${R}">`+sh.cols.map((c,ci)=>{const ref=_colName(ci)+R;let v=r[c.k];
+        if((c.t==='eur')&&typeof v==='number')return `<c r="${ref}" s="2"><v>${v}</v></c>`;
+        if((c.t==='num')&&typeof v==='number')return `<c r="${ref}" s="4"><v>${v}</v></c>`;
+        if(c.t==='pct'&&typeof v==='number')return `<c r="${ref}" s="3"><v>${v}</v></c>`;
+        let t=v==null?'':String(v);if(c.tr)t=tStr(t);
+        return `<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${_xe(t)}</t></is></c>`;}).join('')+`</row>`;});
+    const colsXml=`<cols>${sh.cols.map((c,ci)=>`<col min="${ci+1}" max="${ci+1}" width="${c.w||16}" customWidth="1"/>`).join('')}</cols>`;
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>${colsXml}<sheetData>${xml}</sheetData></worksheet>`;});
+  const styles=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="2"><numFmt numFmtId="164" formatCode="&quot;€&quot;\\ #,##0.00"/><numFmt numFmtId="165" formatCode="0.0%"/></numFmts><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF1B2A4A"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="5"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment vertical="center"/></xf><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="3" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+  const wb=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheets.map((_,i)=>`<sheet name="${_xe((sheetsIn[i].name||('Blad'+(i+1))).replace(/[\\\/\?\*\[\]:]/g,' ').slice(0,28))}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')}</sheets></workbook>`;
+  const wbRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((_,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join('')}<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`;
+  const ct=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${sheets.map((_,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`;
+  const rels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`;
+  const files=[{name:'[Content_Types].xml',data:ct},{name:'_rels/.rels',data:rels},{name:'xl/workbook.xml',data:wb},{name:'xl/_rels/workbook.xml.rels',data:wbRels},{name:'xl/styles.xml',data:styles}];
+  sheets.forEach((s,i)=>files.push({name:`xl/worksheets/sheet${i+1}.xml`,data:s}));
+  _dlBlob(_fname(name)+'.xlsx',_zipBlob(files,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'));}
+function _pdfTable(cols,rows){const head=cols.map(c=>`<th class="${(c.t==='text'||c.t==='date')?'l':''}">${_xe(tStr(c.h))}</th>`).join('');
+  const body=rows.length?rows.map(r=>'<tr>'+cols.map(c=>`<td class="${(c.t==='text'||c.t==='date')?'l':''}">${_xe(_cellText(c,r[c.k]))}</td>`).join('')+'</tr>').join(''):`<tr><td class="l" colspan="${cols.length}" style="color:#9AA1AC">${tStr('Geen gegevens')}</td></tr>`;
+  return `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;}
+function exportListPDF(title,cols,rows,sub){printDoc(title,`<h2>${_xe(title)}</h2>${sub?`<p style="color:#5C6675">${_xe(sub)}</p>`:''}${_pdfTable(cols,rows)}`);}
+const _EXP={};
+function expDef(id,fn){_EXP[id]=fn;}
+const EXP_LBL={pdf:'PDF',xlsx:'Excel (.xlsx)',csv:'CSV',zip:'ZIP'};
+const EXP_IC={pdf:'📄',xlsx:'▤',csv:'≡',zip:'🗂'};
+function expBar(id,extraClass){const d=_EXP[id];if(!d)return '';let cfg;try{cfg=d();}catch(e){return '';}
+  const fmts=cfg.formats||['pdf','xlsx','csv'];
+  const items=fmts.map(f=>`<button class="exp-item" onclick="event.stopPropagation();expClose();runExport('${id}','${f}')"><span class="exp-ic">${EXP_IC[f]}</span>${EXP_LBL[f]}</button>`).join('');
+  return `<div class="exp-wrap ${extraClass||''}"><button class="btn ghost exp-btn" onclick="expToggle(event)"><span class="exp-dl">⬇</span> ${tStr('Exporteren')} <span class="exp-caret">▾</span></button><div class="exp-menu" role="menu">${items}</div></div>`;}
+function expToggle(e){e.stopPropagation();const w=e.currentTarget.closest('.exp-wrap');const wasOpen=w.classList.contains('open');document.querySelectorAll('.exp-wrap.open').forEach(x=>x.classList.remove('open'));if(!wasOpen)w.classList.add('open');}
+function expClose(){document.querySelectorAll('.exp-wrap.open').forEach(x=>x.classList.remove('open'));}
+document.addEventListener('click',expClose);
+function runExport(id,fmt){const d=_EXP[id];if(!d)return;let cfg;try{cfg=d();}catch(e){toast('Export mislukt');return;}
+  const fn=_fname(cfg.file||cfg.title||'export');
+  try{
+    if(fmt==='pdf'){cfg.pdf?cfg.pdf(cfg):exportListPDF(cfg.title,cfg.cols,cfg.rows,cfg.sub);}
+    else if(fmt==='xlsx'){cfg.xlsx?cfg.xlsx(cfg):exportXLSX(fn,cfg.sheets||[{name:(cfg.sheet||cfg.title||'Export').slice(0,28),cols:cfg.cols,rows:cfg.rows}]);}
+    else if(fmt==='csv'){cfg.csv?cfg.csv(cfg):exportCSV(fn,cfg.cols,cfg.rows);}
+    else if(fmt==='zip'){if(cfg.zip)cfg.zip(cfg);}
+    if(fmt!=='pdf')toast(tStr('Export gereed')+' · '+fmt.toUpperCase());
+  }catch(e){toast('Export mislukt: '+String(e.message||e));}}
+function _clientStatusMsg(c){const w=state.werk[c.naam];const tv=state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;const sc=state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length;const items=[];if(tv)items.push('docs:'+tv);if(sc)items.push('signalen:'+sc);if(!w.ob['Q1 2026'].ingediend)items.push('OB open');if(!w.ib[IBYEAR].ingediend)items.push('IB open');const ld=Object.values(w.loon['2026']).filter(Boolean).length;if(ld<6)items.push('Loon '+ld+'/12');return items.length?items.join(' · '):'Geen open werk';}
+function _openSignals(naam){return state.signals.filter(s=>s.client===naam&&s.state!=='resolved').length;}
+expDef('k_klanten',()=>{const scope=mwFilter==='exit'?state.clients.filter(c=>!c.actief):state.clients.filter(c=>c.actief&&(mwFilter==='alle'||c.mw===mwFilter));
+  const cols=[{h:'Klant',k:'naam',t:'text',w:26},{h:'Nummer',k:'nr',t:'text',w:10},{h:'Groep',k:'groep',t:'text',w:18,tr:true},{h:'Medewerker',k:'mw',t:'text',w:14},{h:'Health',k:'health',t:'num',w:9},{h:'Status',k:'status',t:'text',w:30,tr:true},{h:'Open signalen',k:'sig',t:'num',w:12}];
+  const rows=scope.map(c=>{const g=groupById(clientGroupId(c));return {naam:c.naam,nr:c.nr,groep:g?g.naam:'—',mw:c.mw,health:clientHealth(c.naam).score,status:_clientStatusMsg(c),sig:_openSignals(c.naam)};});
+  return {title:tStr('Klantenoverzicht')+' · '+(mwFilter==='alle'?tStr('Alle medewerkers'):mwFilter),file:'Klanten_'+mwFilter,sub:tStr('Geëxporteerd')+': '+_expStamp()+' · '+rows.length+' '+tStr('klanten'),cols,rows};});
+expDef('k_groepen',()=>{const cols=[{h:'Groep',k:'groep',t:'text',w:24,tr:true},{h:'Aantal klanten',k:'aantal',t:'num',w:14},{h:'Actief',k:'actief',t:'num',w:10},{h:'Toegewezen medewerkers',k:'mws',t:'text',w:34}];
+  const rows=state.groups.map(g=>{const cl=state.clients.filter(c=>clientGroupId(c)===g.id);return {groep:g.naam,aantal:cl.length,actief:cl.filter(c=>c.actief).length,mws:[...new Set(cl.map(c=>c.mw))].join(', ')||'—'};});
+  const cl2=[{h:'Klant',k:'naam',t:'text',w:26},{h:'Nummer',k:'nr',t:'text',w:10},{h:'Groep',k:'groep',t:'text',w:20,tr:true},{h:'Medewerker',k:'mw',t:'text',w:14},{h:'Status',k:'st',t:'text',w:12,tr:true}];
+  const rows2=state.clients.map(c=>{const g=groupById(clientGroupId(c));return {naam:c.naam,nr:c.nr,groep:g?g.naam:'—',mw:c.mw,st:c.actief?'Actief':'Exit'};});
+  return {title:tStr('Klanten & groepen'),file:'Klanten_en_groepen',sub:tStr('Geëxporteerd')+': '+_expStamp(),cols,rows,sheets:[{name:tStr('Groepen').slice(0,28),cols,rows},{name:tStr('Klanten').slice(0,28),cols:cl2,rows:rows2}],pdf:c=>printDoc(c.title,`<h2>${_xe(c.title)}</h2><p style="color:#5C6675">${_xe(c.sub)}</p><h3>${_xe(tStr('Groepen'))}</h3>${_pdfTable(cols,rows)}<h3>${_xe(tStr('Klanten'))}</h3>${_pdfTable(cl2,rows2)}`)};});
+expDef('k_health',()=>{const base=state.clients.filter(c=>c.actief).map(c=>({c,h:clientHealth(c.naam)})).sort((a,b)=>a.h.score-b.h.score);
+  const band=t=>base.filter(x=>x.h.tone===t).length;
+  const cols=[{h:'Klant',k:'naam',t:'text',w:26},{h:'Medewerker',k:'mw',t:'text',w:14},{h:'Health',k:'score',t:'num',w:9},{h:'Status',k:'status',t:'text',w:16,tr:true},{h:'Voornaamste factor',k:'factor',t:'text',w:34,tr:true},{h:'Open signalen',k:'sig',t:'num',w:12}];
+  const rows=base.map(x=>({naam:x.c.naam,mw:x.c.mw,score:x.h.score,status:x.h.status,factor:x.h.factors.length?x.h.factors[0].l:'—',sig:_openSignals(x.c.naam)}));
+  const avg=Math.round(base.reduce((a,x)=>a+x.h.score,0)/Math.max(1,base.length));
+  return {title:tStr('Client Health Center'),file:'Client_Health',cols,rows,
+    sub:`${tStr('Gem. health')}: ${avg} · ${tStr('Risico')}: ${band('r')} · ${tStr('Aandacht')}: ${band('a')} · ${tStr('Gezond')}: ${band('g')} · ${_expStamp()}`};});
+expDef('k_ob',()=>{const kw=obKw||KWARTALEN[0];const base=state.clients.filter(c=>c.actief&&(obMw==='alle'||c.mw===obMw));
+  const st=o=>o.ingediend?'Ingediend':(o.ingelezen?'Klaar voor indiening':(o.ingeleverd?'Wacht op invoer':'Wacht op documenten'));
+  const cols=[{h:'Klant',k:'naam',t:'text',w:26},{h:'Programma',k:'prog',t:'text',w:14},{h:'Medewerker',k:'mw',t:'text',w:13},{h:'Status',k:'status',t:'text',w:22,tr:true},{h:'Voortgang',k:'pct',t:'pct',w:11},{h:'Open acties',k:'open',t:'text',w:26,tr:true},{h:'Notitie',k:'note',t:'text',w:24}];
+  const rows=base.filter(c=>{const o=state.werk[c.naam].ob[kw];if(obStat==='alle')return true;if(obStat==='todo')return !o.ingediend;if(obStat==='ingeleverd')return o.ingeleverd&&!o.ingelezen;if(obStat==='ingevoerd')return o.ingelezen&&!o.ingediend;if(obStat==='ingediend')return o.ingediend;return true;}).map(c=>{const o=state.werk[c.naam].ob[kw];const steps=(o.ingeleverd?1:0)+(o.ingelezen?1:0)+(o.ingediend?1:0);const open=[];if(!o.ingeleverd)open.push('Documenten opvragen');else if(!o.ingelezen)open.push('Invoeren');else if(!o.ingediend)open.push('Indienen');return {naam:c.naam,prog:PROG[c.prog],mw:c.mw,status:st(o),pct:steps/3,open:open.join(', ')||'Afgerond',note:(o.opm||'').trim()};});
+  return {title:tStr('OB-werklijst')+' · '+kw,file:'OB_werklijst_'+kw,sub:tStr('Geëxporteerd')+': '+_expStamp()+' · '+rows.length+' '+tStr('klanten'),cols,rows};});
+expDef('k_ib',()=>{const y=ibwJaar||IBJAREN[0];const base=state.clients.filter(c=>c.actief&&(ibwMw==='alle'||c.mw===ibwMw));
+  const st=o=>o.ingediend?'Ingediend':(o.ib?'Klaar voor indiening':(o.jaarrekening?'Aangifte opstellen':'Jaarrekening nodig'));
+  const cols=[{h:'Klant',k:'naam',t:'text',w:26},{h:'Programma',k:'prog',t:'text',w:14},{h:'Medewerker',k:'mw',t:'text',w:13},{h:'Status',k:'status',t:'text',w:20,tr:true},{h:'Voortgang',k:'pct',t:'pct',w:11},{h:'Uitstel',k:'uit',t:'text',w:10,tr:true},{h:'Suppletie',k:'sup',t:'text',w:11,tr:true},{h:'Notitie',k:'note',t:'text',w:22}];
+  const rows=base.filter(c=>{const o=state.werk[c.naam].ib[y];if(ibwStat==='alle')return true;if(ibwStat==='todo')return !o.ingediend;if(ibwStat==='ingediend')return o.ingediend;if(ibwStat==='uitstel')return !!o.uitstel;if(ibwStat==='geenjr')return !o.jaarrekening;if(ibwStat==='jrklaar')return o.jaarrekening&&!o.ingediend;return true;}).map(c=>{const o=state.werk[c.naam].ib[y];const steps=(o.jaarrekening?1:0)+(o.ib?1:0)+(o.ingediend?1:0);return {naam:c.naam,prog:PROG[c.prog],mw:c.mw,status:st(o),pct:steps/3,uit:o.uitstel?'Ja':'Nee',sup:o.suppletie?'Ja':'Nee',note:(o.opm||'').trim()};});
+  return {title:tStr('IB-werklijst')+' · '+y,file:'IB_werklijst_'+y,sub:tStr('Geëxporteerd')+': '+_expStamp()+' · '+rows.length+' '+tStr('klanten'),cols,rows};});
+expDef('k_kopp',()=>{const base=state.clients.filter(c=>c.actief);const all=[];base.forEach(c=>{exactIssues(c.naam).forEach(i=>all.push({c,i}));});
+  all.sort((a,b)=>(a.i.tone==='r'?0:1)-(b.i.tone==='r'?0:1));
+  const cols=[{h:'Klant',k:'naam',t:'text',w:24},{h:'Programma',k:'prog',t:'text',w:14},{h:'Onderdeel',k:'area',t:'text',w:18,tr:true},{h:'Ernst',k:'sev',t:'text',w:10,tr:true},{h:'Melding',k:'msg',t:'text',w:30,tr:true},{h:'Verantwoordelijke',k:'mw',t:'text',w:14},{h:'Aanbevolen actie',k:'act',t:'text',w:34,tr:true}];
+  const rows=all.map(x=>({naam:x.c.naam,prog:PROG[x.c.prog],area:x.i.area,sev:x.i.tone==='r'?'Hoog':'Midden',msg:x.i.msg,mw:x.c.mw,act:EX_ACTION[x.i.area]||'Controleren'}));
+  return {title:tStr('Koppelingen-monitoring'),file:'Koppelingen_monitoring',sub:tStr('Geëxporteerd')+': '+_expStamp()+' · '+rows.length+' '+tStr('meldingen'),cols,rows};});
+expDef('c_facturen',()=>{const all=state.invoices;const filt=all.filter(i=>{const s=effStatus(i);if(invFilter==='alle')return true;if(invFilter==='concept')return s==='Concept';if(invFilter==='openstaand')return s!=='Concept'&&invOpen(i)>0.005;if(invFilter==='telaat')return s==='Te laat';if(invFilter==='betaald')return s==='Betaald';return true;});
+  const cols=[{h:'Nummer',k:'nr',t:'text',w:13},{h:'Relatie',k:'rel',t:'text',w:24},{h:'Datum',k:'date',t:'date',w:13},{h:'Vervaldatum',k:'verv',t:'date',w:13},{h:'Bedrag',k:'bedrag',t:'eur',w:14},{h:'Openstaand',k:'open',t:'eur',w:14},{h:'Status',k:'status',t:'text',w:13,tr:true}];
+  const rows=filt.map(i=>({nr:i.nr,rel:i.rel,date:i.date,verv:i.vervaldatum||'—',bedrag:invTotal(i),open:invOpen(i),status:effStatus(i)}));
+  return {title:tStr('Facturen')+(invFilter!=='alle'?' · '+tStr(invFilter):''),file:'Facturen_'+invFilter,sub:tStr('Geëxporteerd')+': '+_expStamp(),cols,rows};});
+expDef('c_offertes',()=>{const all=state.quotes;const filt=all.filter(q=>quoteFilter==='alle'||q.status.toLowerCase()===quoteFilter);
+  const cols=[{h:'Nummer',k:'nr',t:'text',w:13},{h:'Relatie',k:'rel',t:'text',w:24},{h:'Datum',k:'date',t:'date',w:13},{h:'Geldig tot',k:'verv',t:'date',w:13},{h:'Bedrag',k:'bedrag',t:'eur',w:14},{h:'Status',k:'status',t:'text',w:14,tr:true}];
+  const rows=filt.map(q=>({nr:q.nr,rel:q.rel,date:q.date,verv:q.vervaldatum||'—',bedrag:invTotal(q),status:q.status}));
+  return {title:tStr('Offertes'),file:'Offertes',formats:['pdf','xlsx'],sub:tStr('Geëxporteerd')+': '+_expStamp(),cols,rows};});
+expDef('c_km',()=>{const cols=[{h:'Datum',k:'date',t:'date',w:13},{h:'Route',k:'route',t:'text',w:30},{h:'Kilometers',k:'km',t:'num',w:12},{h:'Vergoeding',k:'verg',t:'eur',w:14},{h:'Doel',k:'doel',t:'text',w:18},{h:'Boeking',k:'bk',t:'text',w:14,tr:true}];
+  const rows=state.km.map(k=>({date:k.date,route:k.route,km:k.km,verg:k.km*0.23,doel:k.doel,bk:'Memoriaal ✓'}));
+  const tot=state.km.reduce((a,k)=>a+k.km,0);
+  return {title:tStr('KM-registratie'),file:'KM_registratie',sub:`${tStr('Totaal')}: ${tot} km · €${m2(tot*0.23)} · ${_expStamp()}`,cols,rows};});
+expDef('c_tijd',()=>{const cols=[{h:'Week',k:'week',t:'text',w:12},{h:'Datum',k:'date',t:'date',w:13},{h:'Relatie',k:'rel',t:'text',w:22},{h:'Project',k:'project',t:'text',w:22},{h:'Uren',k:'uren',t:'num',w:9},{h:'Tarief',k:'tarief',t:'eur',w:12},{h:'Bedrag',k:'bedrag',t:'eur',w:13},{h:'Status',k:'status',t:'text',w:15,tr:true}];
+  const rows=state.time.map(t=>({week:t.week,date:t.date,rel:t.rel,project:t.project,uren:t.uren,tarief:t.tarief,bedrag:t.uren*t.tarief,status:t.billed?'Gefactureerd':'Te factureren'}));
+  return {title:tStr('Tijdregistratie'),file:'Tijdregistratie',sub:tStr('Geëxporteerd')+': '+_expStamp(),cols,rows};});
+expDef('c_omzet',()=>{const inv=state.invoices.filter(i=>effStatus(i)!=='Concept');const by={};
+  inv.forEach(i=>{const label=(String(i.date).split('-')[1]||'')+'/'+(String(i.date).split('-')[2]||'');by[label]=by[label]||{omzet:0,aantal:0};by[label].omzet+=invTotal(i);by[label].aantal++;});
+  const cols=[{h:'Periode (maand/jaar)',k:'p',t:'text',w:20},{h:'Aantal facturen',k:'aantal',t:'num',w:14},{h:'Omzet (incl. BTW)',k:'omzet',t:'eur',w:18}];
+  const rows=Object.keys(by).sort().map(k=>({p:k,aantal:by[k].aantal,omzet:by[k].omzet}));
+  const tot=inv.reduce((a,i)=>a+invTotal(i),0);
+  return {title:tStr('Omzet-overzicht'),file:'Omzet_overzicht',formats:['pdf','xlsx','csv'],sub:`${tStr('Totale omzet')}: €${m2(tot)} · ${_expStamp()}`,cols,rows};});
+expDef('c_btw',()=>{const inv=state.invoices.filter(i=>effStatus(i)!=='Concept');let hoog=0,excl=0,btw=0;
+  inv.forEach(i=>{const t=invTotal(i);const e=i.excl!=null?i.excl:t/1.21;const b=t-e;excl+=e;btw+=b;hoog+=b;});
+  const purch=state.inbox.filter(x=>x.client==='Demo BV'&&x.state==='sent');let voorbel=0;purch.forEach(p=>{voorbel+=(p.btwAmt||0);});
+  const cols=[{h:'Rubriek',k:'r',t:'text',w:34,tr:true},{h:'Grondslag',k:'g',t:'eur',w:16},{h:'BTW',k:'b',t:'eur',w:16}];
+  const rows=[{r:'1a Leveringen/diensten 21%',g:excl,b:hoog},{r:'5a Verschuldigde BTW',g:null,b:btw},{r:'5b Voorbelasting',g:null,b:voorbel},{r:'Saldo aangifte',g:null,b:btw-voorbel}];
+  return {title:tStr('BTW-overzicht'),file:'BTW_overzicht',formats:['pdf','xlsx','csv'],sub:`${tStr('Te betalen/terug te vragen')}: €${m2(btw-voorbel)} · ${_expStamp()}`,cols,rows};});
+function _docZip(naam,scope){const docs=(scope||state.dossierDocs.filter(d=>d.client===naam&&(_docOffice||d.gedeeld||d.by==='klant')));
+  if(!docs.length){toast(tStr('Geen documenten om te exporteren'));return;}
+  const root=_fname(naam);const files=docs.map(d=>{const folder=_fname(d.map||'Overig');const fn=_fname(d.naam||'document');
+    return {name:`${root}/${folder}/${fn}.txt`,data:`${d.naam}\nMap: ${d.map||'Overig'}\nDatum: ${d.date||'—'}\nBron: ${d.by==='klant'?'Klant':'Vatan'}\nKlant: ${d.client}\n\n(${tStr('Demobestand — in productie bevat dit het werkelijke document.')})\n`;};});
+  files.push({name:`${root}/_index.txt`,data:`${naam} — ${tStr('Documentenpakket')}\n${tStr('Geëxporteerd')}: ${_expStamp()}\n${docs.length} ${tStr('documenten')}\n\n`+docs.map(d=>`- ${d.map}/${d.naam} (${d.date})`).join('\n')});
+  _dlBlob(_fname(naam+'_documenten')+'.zip',_zipBlob(files));toast(tStr('Export gereed')+' · ZIP ('+docs.length+')');}
+function cDocZipMap(){_docZip('Demo BV',state.dossierDocs.filter(d=>d.client==='Demo BV'&&d.map===docMap&&(d.gedeeld||d.by==='klant')));}
+function oDocZip(naam){_docZip(naam,state.dossierDocs.filter(d=>d.client===naam));}
+function oDocZipMap(naam,mp){_docZip(naam,state.dossierDocs.filter(d=>d.client===naam&&d.map===mp));}
 function printOB(naam){const d=aanslGet(naam,aanslJaar);if(!d)return;const jaar=aanslJaar;
  const bh=d.b.oh*0.21,bl=d.b.ol*0.09,bo=d.b.oa*0.21,vb=d.b.vbl+d.b.vbh,saldoJaar=bh+bl+bo-vb;
  const qn=['1e kw','2e kw','3e kw','4e kw'];let sumS=0,q4s=0,sumBt=0,sumM=0;
@@ -3120,7 +3347,7 @@ VIEWS.klant.overzicht = ()=>{
   if(inkCount) apRows.push({ic:icon('inkoop'),cls:'pay',t:'Te betalen',s:`${inkCount} ${inkCount===1?'rekening':'rekeningen'} openstaand`,v:money(inkoopOpen),oc:"go('inkoop')"});
   if(docReq) apRows.push({ic:icon('documenten'),cls:'warn',t:'Documenten gevraagd',s:'Vatan vraagt u iets aan te leveren',v:docReq,oc:"go('berichten')"});
   if(unread) apRows.push({ic:icon('berichten'),cls:'warn',t:'Nieuwe berichten',s:'van Vatan Administratie',v:unread,oc:"go('berichten')"});
-  return `<div class="row-between"><h1 class="title">Goedemiddag, Demo</h1><button class="btn primary" onclick="newInvoice()">+ Nieuwe factuur</button></div>
+  return `<div class="row-between"><h1 class="title">Goedemiddag, Demo</h1><div style="display:flex;gap:8px;align-items:center">${expBar('c_omzet')}<button class="btn primary" onclick="newInvoice()">+ Nieuwe factuur</button></div></div>
   <div class="sub">Welkom terug. Hieronder ziet u rustig wat er voor u open staat.</div>
   ${needs?`<div class="panel ap" style="margin-bottom:14px"><h3>Uw aandacht nodig</h3>
     ${apRows.map(r=>`<div class="ap-row" onclick="${r.oc}"><span class="ap-ic ${r.cls}">${r.ic}</span><div class="ap-id"><div class="ap-t">${r.t}</div><div class="ap-s">${r.s}</div></div><div class="ap-v">${r.v}</div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>`).join('')}
@@ -3156,7 +3383,7 @@ VIEWS.klant.facturatie = ()=>{
   const counts={alle:all.length,concept:all.filter(i=>effStatus(i)==='Concept').length,openstaand:openInv.length,telaat:all.filter(i=>effStatus(i)==='Te laat').length,betaald:all.filter(i=>effStatus(i)==='Betaald').length};
   const filt=all.filter(i=>{const s=effStatus(i);if(invFilter==='alle')return true;if(invFilter==='concept')return s==='Concept';if(invFilter==='openstaand')return s!=='Concept'&&invOpen(i)>0.005;if(invFilter==='telaat')return s==='Te laat';if(invFilter==='betaald')return s==='Betaald';return true;});
   const tab=(k,l)=>`<div class="ftab ${invFilter===k?'active':''}" onclick="setInvFilter('${k}')">${l}<span class="c">${counts[k]}</span></div>`;
-  return `<div class="row-between"><h1 class="title">Facturatie</h1><button class="btn primary" onclick="newInvoice()">+ Nieuwe factuur</button></div>
+  return `<div class="row-between"><h1 class="title">Facturatie</h1><div style="display:flex;gap:8px;align-items:center">${expBar('c_facturen')}<button class="btn primary" onclick="newInvoice()">+ Nieuwe factuur</button></div></div>
   <div class="sub">Verkoopfacturen — klik om te openen, te versturen of een betaling te registreren.</div>
   ${aiBannerHTML()}
   <div class="stats s3">
@@ -3178,7 +3405,7 @@ VIEWS.klant.offertes = ()=>{
   const tab=(k,l)=>`<div class="ftab ${quoteFilter===k?'active':''}" onclick="setQuoteFilter('${k}')">${l}<span class="c">${counts[k]}</span></div>`;
   const openWaarde=all.filter(q=>q.status==='Verstuurd').reduce((a,q)=>a+invTotal(q),0);
   const accWaarde=all.filter(q=>q.status==='Geaccepteerd').reduce((a,q)=>a+invTotal(q),0);
-  return `<div class="row-between"><h1 class="title">Offertes</h1><button class="btn primary" onclick="newQuote()">+ Nieuwe offerte</button></div>
+  return `<div class="row-between"><h1 class="title">Offertes</h1><div style="display:flex;gap:8px;align-items:center">${expBar('c_offertes')}<button class="btn primary" onclick="newQuote()">+ Nieuwe offerte</button></div></div>
   <div class="sub">Klik om te openen. Geaccepteerde offertes zet u met één klik om naar een factuur.</div>
   <div class="stats s3">
     <div class="stat"><div class="lbl">Open offertes</div><div class="val">${money(openWaarde)}</div></div>
@@ -3255,13 +3482,13 @@ VIEWS.klant.tijd = ()=>{
     body+=`<tr style="background:#FAFAFB"><td colspan="5" style="font-weight:800;color:var(--ink)">${w} — ${wt} uur</td></tr>`;
     body+=rows.map(t=>`<tr><td>${t.date}</td><td>${t.rel}</td><td>${t.project}</td><td class="r"><b>${t.uren}</b> u × ${money(t.tarief)}</td><td>${t.billed?'<span class="pill g">Gefactureerd</span>':'<span class="pill a">Te factureren</span>'}</td></tr>`).join('');
   });
-  return `<div class="row-between"><h1 class="title">Tijdregistratie</h1><div style="display:flex;gap:9px"><button class="btn ghost" onclick="addTime()">+ Uren boeken</button><button class="btn primary" onclick="factureerUren()">€ Uren factureren</button></div></div>
+  return `<div class="row-between"><h1 class="title">Tijdregistratie</h1><div style="display:flex;gap:9px;align-items:center">${expBar('c_tijd')}<button class="btn ghost" onclick="addTime()">+ Uren boeken</button><button class="btn primary" onclick="factureerUren()">€ Uren factureren</button></div></div>
   <div class="sub">Uren per week. Nog te factureren: <b>${money(onbill)}</b>. Gebruik "Uren factureren" om ze automatisch op een factuur te zetten.</div>
   <div class="tablewrap"><table><thead><tr><th>Datum</th><th>Relatie</th><th>Project</th><th class="r">Uren</th><th>Status</th></tr></thead><tbody>${body}</tbody></table></div>`;
 };
 
 VIEWS.klant.km = ()=>{const tot=state.km.reduce((a,k)=>a+k.km,0);
-  return `<div class="row-between"><h1 class="title">KM-registratie</h1><button class="btn primary" onclick="addKm()">+ Rit registreren</button></div>
+  return `<div class="row-between"><h1 class="title">KM-registratie</h1><div style="display:flex;gap:8px;align-items:center">${expBar('c_km')}<button class="btn primary" onclick="addKm()">+ Rit registreren</button></div></div>
   <div class="sub">Zakelijke ritten — totaal: <b>${tot} km</b> (× € 0,23 = ${money(tot*0.23)} onbelaste vergoeding).</div>
   <div class="feedback" style="margin-top:0;margin-bottom:18px;align-items:center"><span style="font-size:18px">🔄</span><div style="flex:1"><b>Automatisch geboekt.</b> Elke geregistreerde rit wordt realtime als <b>memoriaalboeking</b> (kilometervergoeding) doorgezet naar ${PROG[KLANT.prog]} — u hoeft niets door te geven.</div></div>
   <div class="tablewrap"><table><thead><tr><th>Datum</th><th>Route</th><th class="r">Km</th><th class="r">Vergoeding</th><th>Doel</th><th>Boeking</th></tr></thead><tbody>
@@ -3327,11 +3554,11 @@ function docCenterHTML(office,naam,titleHtml){
 VIEWS.klant.documenten = ()=>{
   if(docMap){const docs=state.dossierDocs.filter(d=>d.map===docMap&&d.client==='Demo BV'&&(d.gedeeld||d.by==='klant'));
     return `<div class="backbar"><span class="backbtn" onclick="closeMap()">← Alle mappen</span></div>
-    <div class="row-between"><h1 class="title">${MAP_ICON[docMap]||'📁'} ${docMap}</h1><button class="btn primary" onclick="uploadDoc('${docMap}')">+ Document uploaden</button></div>
+    <div class="row-between"><h1 class="title">${MAP_ICON[docMap]||'📁'} ${docMap}</h1><div style="display:flex;gap:8px;align-items:center"><button class="btn ghost" onclick="cDocZipMap()">🗂 ${tStr('Map als ZIP')}</button><button class="btn primary" onclick="uploadDoc('${docMap}')">+ Document uploaden</button></div></div>
     <div class="sub">Documenten in deze map. Vatan Administratie heeft hier ook inzage.</div>
     ${docs.length?docs.map(d=>`<div class="doc-item"><div class="di">📄</div><div style="flex:1"><div class="dn">${d.naam}</div><div class="dm">Toegevoegd door ${d.by==='kantoor'?'Vatan Administratie':'u'} · ${d.date}</div></div><button class="btn ghost sm" onclick="toast('Download (demo)')">⬇</button></div>`).join(''):'<div class="empty"><div class="big">📂</div>Deze map is nog leeg.</div>'}`;
   }
-  return docCenterHTML(false,'Demo BV',`<div class="row-between"><h1 class="title">Documenten &amp; rapporten</h1><button class="btn primary" onclick="uploadDoc()">+ Document uploaden</button></div>
+  return docCenterHTML(false,'Demo BV',`<div class="row-between"><h1 class="title">Documenten &amp; rapporten</h1><div style="display:flex;gap:8px;align-items:center"><button class="btn ghost" onclick="_docZip('Demo BV')">🗂 ${tStr('Alles als ZIP')}</button><button class="btn primary" onclick="uploadDoc()">+ Document uploaden</button></div></div>
   <div class="sub">Al uw bedrijfsdocumenten op één plek. Documenten van Vatan (jaarrekening, aangiften) verschijnen hier automatisch; u kunt zelf ook contracten en polissen toevoegen.</div>`);
 };
 function openMap(m){docMap=m;renderView();}
@@ -3343,7 +3570,7 @@ function openBtw(periode){const b=state.btwReturns.find(x=>x.periode===periode);
   const sec=t=>`<tr style="background:#EEF0F3"><td colspan="4" style="font-weight:800;color:var(--ink);font-size:12px">${t}</td></tr>`;
   document.getElementById('view').innerHTML=`
   <div class="backbar"><span class="backbtn" onclick="go('statistieken')">← Terug naar Cijfers &amp; BTW</span></div>
-  <div class="row-between"><h1 class="title">BTW-aangifte ${b.periode}</h1><div>${b.status==='Ingediend'?'<span class="pill g">Ingediend</span>':'<span class="pill a">Concept</span>'}</div></div>
+  <div class="row-between"><h1 class="title">BTW-aangifte ${b.periode}</h1><div style="display:flex;gap:8px;align-items:center">${expBar('c_btw')}${b.status==='Ingediend'?'<span class="pill g">Ingediend</span>':'<span class="pill a">Concept</span>'}</div></div>
   <div class="sub">Aangifte omzetbelasting · deadline ${b.deadline}. Automatisch voorbereid uit uw boekingen.</div>
   <div class="split">
     <div class="panel"><h3>Rubrieken</h3>
@@ -3845,7 +4072,7 @@ VIEWS.kantoor.health = ()=>{
   const avg=Math.round(hs.reduce((a,x)=>a+x.h.score,0)/Math.max(1,hs.length));const risk=hs.filter(x=>x.h.tone==='r'),att=hs.filter(x=>x.h.tone==='a'),ok=hs.filter(x=>x.h.tone==='g');
   const band=[['Risico (0–54)','r',risk.length],['Aandacht (55–79)','a',att.length],['Gezond (80–100)','g',ok.length]];
   const rows=arr=>arr.slice().sort((a,b)=>a.h.score-b.h.score).map(x=>`<div class="wkrow" onclick="openClient('${gJs(x.c.naam)}','overzicht')"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div class="id"><b>${x.c.naam}</b><div class="t">${x.c.mw} · ${x.h.factors.length?x.h.factors[0].l:'—'}</div></div>${healthBadge(x.c.naam)}</div>`).join('');
-  return `<div class="row-between"><h1 class="title">Client Health Center</h1><button class="btn ghost" onclick="go('overzicht')">← Dashboard</button></div>
+  return `<div class="row-between"><h1 class="title">Client Health Center</h1><div style="display:flex;gap:8px;align-items:center">${expBar('k_health')}<button class="btn ghost" onclick="go('overzicht')">← Dashboard</button></div></div>
   <div class="sub">Gezondheids- en risico-overzicht over alle ${base.length} actieve klanten — prioriteer op health.</div>
   <div class="sgrid c4"><div class="scard"><div class="sl">Gem. health</div><div class="sv">${avg}</div></div><div class="scard"><div class="sl">Risico</div><div class="sv r">${risk.length}</div></div><div class="scard"><div class="sl">Aandacht</div><div class="sv a">${att.length}</div></div><div class="scard"><div class="sl">Gezond</div><div class="sv g">${ok.length}</div></div></div>
   <div class="panel" style="margin-bottom:14px"><div class="mod-sub">Verdeling</div><div class="hbar">${band.map(b=>{const pct=Math.round(b[2]/Math.max(1,hs.length)*100);return pct?`<div class="hbar-seg ${b[1]}" style="width:${pct}%"></div>`:'';}).join('')}</div><div class="hbar-lbl">${band.map(b=>`<span class="hbar-k ${b[1]}"><span class="d"></span>${b[0]} · ${b[2]}</span>`).join('')}</div></div>
@@ -3861,7 +4088,7 @@ VIEWS.kantoor.koppelingen = ()=>{
   const base=state.clients.filter(c=>c.actief);const all=[];base.forEach(c=>{exactIssues(c.naam).forEach(i=>all.push({c,i}));});
   all.sort((a,b)=>(a.i.tone==='r'?0:1)-(b.i.tone==='r'?0:1));
   const probl=all.filter(x=>x.i.tone==='r').length;const affC=new Set(all.map(x=>x.c.naam)).size;
-  return `<div class="row-between"><h1 class="title">Koppelingen-monitoring</h1><button class="btn ghost" onclick="go('overzicht')">← Dashboard</button></div>
+  return `<div class="row-between"><h1 class="title">Koppelingen-monitoring</h1><div style="display:flex;gap:8px;align-items:center">${expBar('k_kopp')}<button class="btn ghost" onclick="go('overzicht')">← Dashboard</button></div></div>
   <div class="sub">Exact Online / SnelStart, bankkoppelingen en synchronisatie — operationeel monitoringoverzicht over alle klanten.</div>
   <div class="sgrid c4"><div class="scard"><div class="sl">Gezonde koppelingen</div><div class="sv g">${base.length-affC}</div></div><div class="scard"><div class="sl">Met problemen</div><div class="sv r">${probl}</div></div><div class="scard"><div class="sl">Attentiepunten</div><div class="sv a">${all.length-probl}</div></div><div class="scard"><div class="sl">Totaal koppelingen</div><div class="sv">${base.length}</div></div></div>
   <div class="panel" style="margin-bottom:14px"><div class="mod-sub">Actieve meldingen</div>
@@ -3915,7 +4142,7 @@ VIEWS.kantoor.klanten = ()=>{
     const prog=(label,done)=>{const p=tot?Math.round(done/tot*100):0;return `<div class="pcard"><div class="pl">${label}</div><div class="pv">${done}/${tot} <span class="pp">${p}%</span></div><div class="pbar"><div class="pfill" style="width:${p}%"></div></div><div class="pmini">${tot-done} nog te doen</div></div>`;};
     summaryHTML=`<div class="psum">${prog('IB '+IBJAREN[0]+' ingediend',cIB(IBJAREN[0]))}${prog('IB '+IBJAREN[1]+' ingediend',cIB(IBJAREN[1]))}${prog('OB Q1 2026 ingediend',cOB)}${prog('Loon t/m juni bij',cLoon)}</div>`;
   }
-  return `<div class="row-between"><h1 class="title">Klanten</h1><button class="btn ghost" onclick="go('klantbeheer')">Klanten &amp; groepen beheren →</button></div>
+  return `<div class="row-between"><h1 class="title">Klanten</h1><div style="display:flex;gap:8px;align-items:center">${expBar('k_klanten')}<button class="btn ghost" onclick="go('klantbeheer')">Klanten &amp; groepen beheren →</button></div></div>
   <div class="sub">Dagelijkse werkruimte: klik op een klant voor het volledige dossier en de werklijsten. Klanten en groepen aanmaken of bewerken doet u onder <b>Beheer › Klanten &amp; groepen</b>.</div>
   <div class="ftabs">${tab('alle','Alle',actief.length)}${MEDEWERKERS.map(m=>tab(m,m,actief.filter(c=>c.mw===m).length)).join('')}${tab('exit','🗄️ Exit',exit.length)}</div>
   ${summaryHTML}
@@ -4031,7 +4258,7 @@ function deleteClient(naam){
 }
 VIEWS.kantoor.klantbeheer=()=>{
   const chips=`<span class="grp-fchip ${kbGroep==='alle'?'on':''}" onclick="kbGroep='alle';renderView()">Alle <b>${state.clients.length}</b></span>`+state.groups.map(g=>`<span class="grp-fchip ${kbGroep===g.id?'on':''}" onclick="kbGroep='${g.id}';renderView()"><span class="d" style="background:${g.kleur}"></span>${gEsc(g.naam)} <b>${groupCount(g.id)}</b></span>`).join('');
-  return `<div class="row-between"><h1 class="title">Klanten &amp; groepen</h1><div style="display:flex;gap:8px"><button class="btn ghost" onclick="manageGroupsModal()">Groepen beheren</button><button class="btn primary" onclick="clientNewModal()">+ Nieuwe klant</button></div></div>
+  return `<div class="row-between"><h1 class="title">Klanten &amp; groepen</h1><div style="display:flex;gap:8px;align-items:center">${expBar('k_groepen')}<button class="btn ghost" onclick="manageGroupsModal()">Groepen beheren</button><button class="btn primary" onclick="clientNewModal()">+ Nieuwe klant</button></div></div>
   <div class="sub">Administratie van klanten en groepen — aanmaken, bewerken, archiveren en organiseren. Dagelijks werk doet u onder <b>Kantoor › Klanten</b>.</div>
   <div class="kb-chips">${chips}</div>
   <div class="kb-tools">
@@ -4356,7 +4583,7 @@ function renderClient(){
       </div>
       <div class="ai-note" style="margin-top:14px;font-size:11.5px">Klik op een maand om de aangifte als gedaan/niet-gedaan te markeren. Groen = ingediend · amber = openstaand (verstreken) · grijs = toekomstig.</div></div>`;
   } else if(clientTab==='mappen'){
-    content=docCenterHTML(true,naam,`<div class="row-between" style="margin-bottom:8px"><h3 style="margin:0">Documenten</h3><button class="btn primary sm" onclick="uploadDocKantoor('${naam}')">+ Document</button></div><div class="sub" style="margin:-2px 0 14px">Intern = alleen kantoor. Gedeeld = ook zichtbaar voor de klant in het klantportaal.</div>`);
+    content=docCenterHTML(true,naam,`<div class="row-between" style="margin-bottom:8px"><h3 style="margin:0">Documenten</h3><div style="display:flex;gap:8px;align-items:center"><button class="btn ghost sm" onclick="oDocZip('${gJs(naam)}')">🗂 ${tStr('Dossier als ZIP')}</button><button class="btn primary sm" onclick="uploadDocKantoor('${naam}')">+ Document</button></div></div><div class="sub" style="margin:-2px 0 14px">Intern = alleen kantoor. Gedeeld = ook zichtbaar voor de klant in het klantportaal.</div>`);
   } else if(clientTab==='personeel'){
     const emps=state.employees.filter(e=>e.client===naam);
     const isVast=e=>/onbepaald|vast/i.test(e.contract||'');
@@ -4480,7 +4707,7 @@ VIEWS.kantoor.obwerk = ()=>{
       <span class="wf-noteic ${note?'has':''}" title="${note?note.replace(/"/g,'&quot;'):'Notitie toevoegen'}" onclick="event.stopPropagation();obNote('${c.naam}','${kw}')">${_svg('<path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3M8 12h8M8 15.5h5"/>')}</span>
     </div>`;};
   const obBuckets=[{l:'Actie nodig',f:c=>!state.werk[c.naam].ob[kw].ingeleverd},{l:'In behandeling',f:c=>{const o=state.werk[c.naam].ob[kw];return o.ingeleverd&&!o.ingediend;}},{l:'Ingediend',f:c=>state.werk[c.naam].ob[kw].ingediend}];
-  return `<h1 class="title">OB-werklijst</h1>
+  return `<div class="row-between"><h1 class="title">OB-werklijst</h1>${expBar('k_ob')}</div>
   <div class="sub">Per kwartaal en medewerker in één oogopslag zien wat nog moet gebeuren — kleur en voortgang per klant, zonder elke cel te lezen.</div>
   <div class="ftabs" style="align-items:center">
     ${sel(KWARTALEN.map(q=>[q,q]),kw,'obKw=this.value;renderView()')}
@@ -4518,7 +4745,7 @@ VIEWS.kantoor.ibwerk = ()=>{
       <span class="wf-noteic ${note?'has':''}" title="${note?note.replace(/"/g,'&quot;'):'Notitie toevoegen'}" onclick="event.stopPropagation();ibNote('${c.naam}','${y}')">${_svg('<path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3M8 12h8M8 15.5h5"/>')}</span>
     </div>`;};
   const ibBuckets=[{l:'Actie nodig',f:c=>!state.werk[c.naam].ib[y].jaarrekening},{l:'In behandeling',f:c=>{const o=state.werk[c.naam].ib[y];return o.jaarrekening&&!o.ingediend;}},{l:'Ingediend',f:c=>state.werk[c.naam].ib[y].ingediend}];
-  return `<h1 class="title">IB-werklijst</h1>
+  return `<div class="row-between"><h1 class="title">IB-werklijst</h1>${expBar('k_ib')}</div>
   <div class="sub">Inkomstenbelasting &amp; jaarrekening per jaar — kleur en voortgang per klant maken direct zichtbaar wat nog moet. Filter op jaar, medewerker en status.</div>
   <div class="ftabs" style="align-items:center;flex-wrap:wrap">
     ${sel(IBJAREN.map(j=>[j,j]),y,'ibwJaar=this.value;renderView()')}
