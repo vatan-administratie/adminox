@@ -785,6 +785,40 @@
   .cwf-i.a{border-left-color:var(--amber)}.cwf-i.navy{border-left-color:var(--brand-2)}.cwf-i.g{border-left-color:#22A565}
   .cwf-n{font-size:22px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1}
   .cwf-l{font-size:11.5px;color:var(--grey);margin-top:4px}
+  /* client document request center */
+  .creq{background:var(--brand-tint);border:1px solid var(--brand-soft);border-radius:14px;padding:14px 16px;margin-bottom:16px}
+  .creq-h{font-size:12px;font-weight:800;color:var(--brand-2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.03em}
+  .creq-list{display:flex;flex-direction:column;gap:9px}
+  .creq-row{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 13px}
+  .creq-row.r{border-color:#F3C0C4}
+  .creq-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}.creq-dot.r{background:var(--red)}.creq-dot.a{background:var(--amber)}
+  .creq-c{flex:1;min-width:0}
+  .creq-t{font-weight:700;color:var(--ink);font-size:13px}
+  .creq-s{font-size:11px;color:var(--grey-2)}
+  .creq-ok{display:flex;align-items:center;gap:9px;font-size:13px;color:#1A8F54;font-weight:600}
+  .creq-okic{width:22px;height:22px;border-radius:50%;background:var(--green-soft,#E7F6EE);display:grid;place-items:center;flex-shrink:0}
+  .creq-meta{font-size:11px;color:var(--grey);margin-top:10px}
+  /* client deadlines widget */
+  .kdl-list{display:flex;flex-direction:column;gap:2px;margin-top:8px}
+  .kdl-row{display:flex;align-items:center;gap:11px;padding:9px 4px;border-bottom:1px solid var(--line-2)}
+  .kdl-row:last-child{border-bottom:0}
+  .kdl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}.kdl-dot.r{background:var(--red)}.kdl-dot.a{background:var(--amber)}.kdl-dot.g{background:#22A565}
+  .kdl-c{flex:1;min-width:0}
+  .kdl-l{font-weight:600;color:var(--ink);font-size:13px}
+  .kdl-s{font-size:11px;color:var(--grey-2)}
+  .kdl-d{text-align:right;flex-shrink:0}
+  .kdl-date{font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums}
+  .kdl-rel{font-size:11px;font-weight:700}.kdl-rel.r{color:var(--red)}.kdl-rel.a{color:#B4791B}.kdl-rel.g{color:#1A8F54}
+  /* #17 mobile safeguards */
+  @media(max-width:600px){
+    .sgrid.c5,.sgrid.c4{grid-template-columns:1fr 1fr}
+    .do-grid{grid-template-columns:1fr 1fr}
+    .qact{grid-template-columns:1fr 1fr}
+    .creq-row{flex-wrap:wrap}.creq-row .btn{width:100%}
+    .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .cl-bar{flex-wrap:wrap}
+    .mh-kpis{flex-wrap:wrap}
+  }
   @media(max-width:560px){.cc-ops{flex-wrap:wrap}.cc-op{flex:1 1 44%}}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
@@ -2602,6 +2636,25 @@ const I18N_ADD21={
  "Vatan is bezig":{en:"Vatan in progress",tr:"Vatan üzerinde çalışıyor",bg:"Vatan работи",ar:"Vatan قيد العمل"}
 };
 Object.keys(I18N_ADD21).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD21[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD21[k][l];});});
+/* ===== Client portal: document request center · deadlines · office doc-meta ===== */
+const I18N_ADD22={
+ "Aankomende deadlines":{en:"Upcoming deadlines",tr:"Yaklaşan son tarihler",bg:"Предстоящи срокове",ar:"المواعيد النهائية القادمة"},
+ "Laatst beoordeeld":{en:"Last reviewed",tr:"Son inceleme",bg:"Последно прегледано",ar:"آخر مراجعة"},
+ "Beoordelaar":{en:"Reviewer",tr:"İnceleyen",bg:"Проверяващ",ar:"المراجِع"},
+ "Wacht op beoordeling":{en:"Awaiting review",tr:"İnceleme bekliyor",bg:"Чака преглед",ar:"بانتظار المراجعة"},
+ "Wacht op klant":{en:"Awaiting client",tr:"Müşteri bekleniyor",bg:"Чака клиента",ar:"بانتظار العميل"},
+ "Interne status":{en:"Internal status",tr:"İç durum",bg:"Вътрешен статус",ar:"الحالة الداخلية"},
+ "Bijgewerkt":{en:"Up to date",tr:"Güncel",bg:"Актуално",ar:"محدّث"},
+ "Achterstand":{en:"Behind",tr:"Gecikme",bg:"Изоставане",ar:"متأخر"},
+ "Te beoordelen":{en:"To review",tr:"İncelenecek",bg:"За преглед",ar:"للمراجعة"}
+};
+Object.keys(I18N_ADD22).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD22[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD22[k][l];});});
+(function(){const more={
+ en:[['Wat Vatan van u nodig heeft','What Vatan needs from you'],['U heeft alles aangeleverd — er staat niets open.','You have provided everything — nothing outstanding.'],['Aanleveren','Provide'],['recent geüpload','recently uploaded'],['mogelijk nog nodig','possibly still needed'],['dagen te laat','days overdue'],['Aangevraagd','Requested']],
+ tr:[['Wat Vatan van u nodig heeft','Vatan sizden ne istiyor'],['U heeft alles aangeleverd — er staat niets open.','Her şeyi gönderdiniz — bekleyen yok.'],['Aanleveren','Gönder'],['recent geüpload','yakın zamanda yüklendi'],['mogelijk nog nodig','muhtemelen hâlâ gerekli'],['dagen te laat','gün gecikmiş'],['Aangevraagd','Talep edildi']],
+ bg:[['Wat Vatan van u nodig heeft','Какво Vatan очаква от вас'],['U heeft alles aangeleverd — er staat niets open.','Предоставихте всичко — няма чакащо.'],['Aanleveren','Предоставете'],['recent geüpload','наскоро качено'],['mogelijk nog nodig','възможно все още нужно'],['dagen te laat','дни закъснение'],['Aangevraagd','Заявено']],
+ ar:[['Wat Vatan van u nodig heeft','ما يحتاجه Vatan منك'],['U heeft alles aangeleverd — er staat niets open.','لقد قدّمت كل شيء — لا شيء معلّق.'],['Aanleveren','تقديم'],['recent geüpload','رُفع مؤخرًا'],['mogelijk nog nodig','ربما لا يزال مطلوبًا'],['dagen te laat','أيام تأخير'],['Aangevraagd','مطلوب']]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={en:[['moet worden ingediend','must be submitted'],['Risico: Hoog','Risk: High'],['Risico: Midden','Risk: Medium'],['% automatisch','% automatic'],['controle aanbevolen','review recommended']],tr:[['moet worden ingediend','gönderilmeli'],['Risico: Hoog','Risk: Yüksek'],['Risico: Midden','Risk: Orta'],['% automatisch','% otomatik'],['controle aanbevolen','kontrol önerilir']],bg:[['moet worden ingediend','трябва да се подаде'],['Risico: Hoog','Риск: Висок'],['Risico: Midden','Риск: Среден'],['% automatisch','% автоматично'],['controle aanbevolen','препоръчва се проверка']],ar:[['moet worden ingediend','يجب تقديمه'],['Risico: Hoog','المخاطر: عالية'],['Risico: Midden','المخاطر: متوسطة'],['% automatisch','% تلقائي'],['controle aanbevolen','يُوصى بالمراجعة']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[[" documenten verwerken"," documents to process"],[" OB-controles"," VAT checks"],[" IB deadline(s)"," income-tax deadline(s)"],[" klanten met signalen"," clients with signals"],[" verstreken"," overdue"],["Wijs nieuwe klanten voorlopig toe aan ","Assign new clients for now to "],[" — laagste werkdruk."," — lowest workload."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," will get a peak in income-tax files — plan extra time."],[" heeft een achterstand in documentverwerking."," has a backlog in document processing."]],
@@ -3677,6 +3730,12 @@ VIEWS.klant.overzicht = ()=>{
   const docReq=state.messages.filter(m=>m.from==='kantoor'&&!m.read&&/document|bon|stuk|aanlever|upload/i.test(m.text||'')).length;
   const drClient=(state.docRequests||[]).filter(r=>r.client==='Demo BV'&&r.status!=='completed');
   const btwConcept=(state.btwReturns||[]).filter(b=>b.status!=='Ingediend').length;
+  const kdl=[];
+  (state.btwReturns||[]).filter(b=>b.status!=='Ingediend').forEach(b=>kdl.push({l:'BTW-aangifte '+b.periode,d:b.deadline,cat:'Belasting'}));
+  kdl.push({l:'Aangifte inkomstenbelasting 2025',d:'01-05-2026',cat:'Belasting'});
+  drClient.forEach(r=>kdl.push({l:'Aanleveren: '+r.item,d:r.requested,cat:'Document'}));
+  kdl.forEach(x=>{x.days=(typeof daysUntil==='function')?daysUntil(x.d):0;x.tone=x.days<=7?'r':(x.days<=30?'a':'g');});
+  kdl.sort((a,b)=>a.days-b.days);
   const needs=openCount||inkCount||docReq||unread||drClient.length||btwConcept;
   const apRows=[];
   drClient.forEach(r=>apRows.push({ic:icon('documenten'),cls:'warn',t:'Document aanleveren',s:gEsc(r.item),v:'Upload',oc:"go('documenten')"}));
@@ -3694,6 +3753,9 @@ VIEWS.klant.overzicht = ()=>{
     <div class="cwf-i a"><div class="cwf-n">${drClient.length+docReq}</div><div class="cwf-l">Wacht op u</div></div>
     <div class="cwf-i navy"><div class="cwf-n">${inkCount+btwConcept}</div><div class="cwf-l">Vatan is bezig</div></div>
     <div class="cwf-i g"><div class="cwf-n">${state.inbox.filter(i=>i.client==='Demo BV'&&i.state==='sent').length}</div><div class="cwf-l">Afgerond</div></div>
+  </div>
+  <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Aankomende deadlines</h3><span style="font-size:11px;color:var(--grey-2)">🔴 binnen 7 dagen · 🟠 binnen 30 · 🟢 later</span></div>
+    ${kdl.length?`<div class="kdl-list">${kdl.slice(0,6).map(x=>`<div class="kdl-row"><span class="kdl-dot ${x.tone}"></span><div class="kdl-c"><div class="kdl-l">${x.l}</div><div class="kdl-s">${x.cat}</div></div><div class="kdl-d"><div class="kdl-date">${x.d}</div><div class="kdl-rel ${x.tone}">${x.days<0?Math.abs(x.days)+' dagen te laat':x.days===0?'vandaag':'over '+x.days+' dagen'}</div></div></div>`).join('')}</div>`:'<div class="cc-empty" style="padding:18px">Geen aankomende deadlines — alles is op tijd.</div>'}
   </div>
   <div class="grid2">
     <div class="panel"><h3>Snel aan de slag</h3>
@@ -3878,10 +3940,11 @@ function docCenterHTML(office,naam,titleHtml){
   const byMap={};MAPPEN.forEach(m=>byMap[m]=scoped.filter(x=>x.d.map===m));
   const fcards=MAPPEN.map(m=>{const arr=byMap[m];const cnt=arr.length;const days=cnt?Math.min.apply(null,arr.map(x=>docDays(x.d.date))):99999;const dot=cnt&&days<=7?'g':'q';const open=office?`openClient('${gJs(naam)}','map:${gJs(m)}')`:`openMap('${gJs(m)}')`;
     return `<div class="fcard" onclick="${open}"><div class="fcard-top"><div class="fcard-ic">${MAP_ICON[m]||'📁'}</div>${cnt?`<span class="fcard-dot ${dot}"></span>`:''}</div><div class="fcard-nm">${gEsc(m)}</div><div class="fcard-meta">${cnt} document(en)</div><div class="fcard-act">${cnt?'Laatste activiteit '+docRel(days):'Nog leeg'}</div></div>`;}).join('');
-  const officeMeta=office?(()=>{const dates=scoped.map(x=>x.d.date).filter(Boolean);const last=dates.length?dates.slice().sort((a,b)=>pkDate(b)-pkDate(a))[0]:'—';const expected=['Omzetbelasting (BTW)','Loonadministratie','Inkomstenbelasting','Jaarrekening'];const missing=expected.filter(m=>!byMap[m]||!byMap[m].length);const classified=total?(total-((total%4===0)?0:1)):0;const aiPct=total?Math.round(classified/total*100):100;return `<div class="doc-office"><div class="do-h">🏢 Kantooroverzicht <span>alleen zichtbaar voor kantoor</span></div><div class="do-grid"><div class="do-item"><div class="do-l">Laatste document</div><div class="do-v">${last}</div></div><div class="do-item"><div class="do-l">Ontbrekende verwachte stukken</div><div class="do-v ${missing.length?'r':'g'}">${missing.length?missing.join(', '):'Compleet'}</div></div><div class="do-item"><div class="do-l">Verwachte stukken</div><div class="do-v">${expected.length} categorieën</div></div><div class="do-item"><div class="do-l">AI-classificatie</div><div class="do-v ${aiPct>=90?'g':'a'}">${aiPct}% automatisch</div></div></div></div>`;})():'';
+  const officeMeta=office?(()=>{const dates=scoped.map(x=>x.d.date).filter(Boolean);const last=dates.length?dates.slice().sort((a,b)=>pkDate(b)-pkDate(a))[0]:'—';const kDates=scoped.filter(x=>x.d.by==='kantoor').map(x=>x.d.date).filter(Boolean);const lastReview=kDates.length?kDates.slice().sort((a,b)=>pkDate(b)-pkDate(a))[0]:'—';const reviewer=(state.clients.find(cc=>cc.naam===naam)||{}).mw||'—';const expected=['Omzetbelasting (BTW)','Loonadministratie','Inkomstenbelasting','Jaarrekening'];const missing=expected.filter(m=>!byMap[m]||!byMap[m].length);const awaitReview=scoped.filter(x=>x.d.by==='klant'&&docDays(x.d.date)<14).length;const awaitClient=(state.docRequests||[]).filter(r=>r.client===naam&&r.status!=='completed').length;const classified=total?(total-((total%4===0)?0:1)):0;const aiPct=total?Math.round(classified/total*100):100;const intStatus=(missing.length||awaitClient)?'Achterstand':(awaitReview?'Te beoordelen':'Bijgewerkt');const it=(l,v,tn)=>`<div class="do-item"><div class="do-l">${l}</div><div class="do-v ${tn||''}">${v}</div></div>`;return `<div class="doc-office"><div class="do-h">🏢 Kantooroverzicht <span>alleen zichtbaar voor kantoor</span></div><div class="do-grid">${it('Laatste document',last)}${it('Laatst beoordeeld',lastReview)}${it('Beoordelaar',reviewer)}${it('Ontbrekende verwachte stukken',missing.length?missing.join(', '):'Compleet',missing.length?'r':'g')}${it('Wacht op beoordeling',awaitReview,awaitReview?'a':'')}${it('Wacht op klant',awaitClient,awaitClient?'a':'')}${it('AI-classificatie',aiPct+'% automatisch',aiPct>=90?'g':'a')}${it('Interne status',intStatus,intStatus==='Bijgewerkt'?'g':'a')}</div></div>`;})():'';
+  const clientReq=!office?(()=>{const reqs=(state.docRequests||[]).filter(r=>r.client==='Demo BV');const open=reqs.filter(r=>r.status!=='completed');const recent=scoped.filter(x=>x.d.by==='klant'&&docDays(x.d.date)<14).length;const expected=['Omzetbelasting (BTW)','Loonadministratie','Contracten'];const missing=expected.filter(m=>!byMap[m]||!byMap[m].length);return `<div class="creq"><div class="creq-h">📋 Wat Vatan van u nodig heeft</div>${open.length?`<div class="creq-list">${open.map(r=>`<div class="creq-row ${r.status==='overdue'?'r':'a'}"><span class="creq-dot ${r.status==='overdue'?'r':'a'}"></span><div class="creq-c"><div class="creq-t">${gEsc(r.item)}</div><div class="creq-s">Aangevraagd ${r.requested}${r.status==='overdue'?' · te laat':''}</div></div><button class="btn primary sm" onclick="uploadDoc()">⤓ Aanleveren</button></div>`).join('')}</div>`:'<div class="creq-ok"><span class="creq-okic">✓</span> U heeft alles aangeleverd — er staat niets open.</div>'}<div class="creq-meta">${recent} recent geüpload${missing.length?` · mogelijk nog nodig: <b>${missing.join(', ')}</b>`:''}</div></div>`;})():'';
   return `${titleHtml}
   <div class="sgrid c5">${sum.map(s=>`<div class="scard"><div class="sl">${s[0]}</div><div class="sv ${s[2]}">${s[1]}</div></div>`).join('')}</div>
-  ${officeMeta}
+  ${officeMeta}${clientReq}
   <div class="doc-up" onclick="${uploadJs}" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="event.preventDefault();this.classList.remove('drag');${uploadJs}"><span class="doc-up-ic">⤓</span><div><b>Document uploaden</b><div class="s">Klik of sleep een bestand hierheen — foto, scan of PDF.</div></div><button class="btn primary sm" onclick="event.stopPropagation();${uploadJs}">+ Uploaden</button></div>
   <div class="mod-sub">Mappen</div>
   <div class="fgrid">${fcards}</div>
