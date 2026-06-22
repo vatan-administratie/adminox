@@ -195,31 +195,36 @@
   .wl-ov-l{display:flex;align-items:baseline;gap:9px}
   .wl-big{font-size:23px;font-weight:800;color:var(--navy);letter-spacing:-.8px;line-height:1}
   .wf-list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--sh-sm)}
-  .wf-grp{display:flex;align-items:center;gap:8px;padding:11px 20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-2);background:var(--bg);border-bottom:1px solid var(--line-2);cursor:pointer;user-select:none;transition:color .12s}
+  .wf-grp{display:flex;align-items:center;gap:8px;padding:6px 16px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-2);background:var(--bg);border-bottom:1px solid var(--line-2);cursor:pointer;user-select:none;transition:color .12s}
   .wf-grp:hover{color:var(--ink)}
   .wf-grp .chev{width:13px;height:13px;color:var(--grey-2);transition:transform .15s;flex-shrink:0}
   .wf-grp.closed .chev{transform:rotate(-90deg)}
   .wf-grp .n{font-weight:500;text-transform:none;letter-spacing:0}
-  .wf-row{display:grid;grid-template-columns:1fr auto 30px;align-items:center;gap:18px;padding:14px 20px;border-bottom:1px solid var(--line-2);transition:background .12s,opacity .12s}
+  .wf-row{display:grid;grid-template-columns:18px minmax(0,1.5fr) minmax(0,1.25fr) auto minmax(0,.75fr) 22px;align-items:center;gap:14px;padding:6px 14px;border-bottom:1px solid var(--line-2);transition:background .12s,opacity .12s}
   .wf-row:last-child{border-bottom:0}
   .wf-row:hover{background:var(--hover)}
-  .wf-l{display:flex;align-items:center;gap:12px;min-width:0;cursor:pointer}
+  .wf-l{display:flex;align-items:center;gap:9px;min-width:0;cursor:pointer}
+  .wf-l .mono{width:24px;height:24px;font-size:10px;border-radius:6px}
   .wf-id{min-width:0}
-  .wf-nm{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .wf-sub{font-size:11.5px;color:var(--grey-2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-nm{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
+  .wf-sub{font-size:10.5px;color:var(--grey-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
+  .wf-stat{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+  .wf-statt{font-size:12.5px;font-weight:700;letter-spacing:-.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-statt.red{color:var(--danger)}.wf-statt.amber{color:#b07d18}.wf-statt.done{color:#15803D}
+  .wf-emp{font-size:11.5px;color:var(--grey);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .wf-rblock{display:flex;flex-direction:column;align-items:flex-end;gap:4px;min-width:0}
-  .wf-step3{display:flex;align-items:center;justify-content:flex-end}
-  .wf-node{width:18px;height:18px;border-radius:50%;border:2px solid #d7dee7;background:var(--card);display:grid;place-items:center;cursor:pointer;padding:0;flex-shrink:0;transition:.14s;color:#fff}
+  .wf-step3{display:flex;align-items:center;justify-content:flex-start}
+  .wf-node{width:17px;height:17px;border-radius:50%;border:2px solid #d7dee7;background:var(--card);display:grid;place-items:center;cursor:pointer;padding:0;flex-shrink:0;transition:.14s;color:#fff}
   .wf-node:hover{border-color:var(--brand-2)}
   .wf-node.on{background:#15803D;border-color:#15803D}
-  .wf-node svg{width:11px;height:11px}
-  .wf-conn{width:22px;height:2px;background:#e2e8f0;flex-shrink:0}
+  .wf-node svg{width:10px;height:10px}
+  .wf-conn{width:16px;height:2px;background:#e2e8f0;flex-shrink:0}
   .wf-conn.on{background:#15803D}
   .wf-bigst{font-size:14.5px;font-weight:800;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
   .wf-bigst.red{color:var(--danger)}.wf-bigst.amber{color:#b07d18}.wf-bigst.done{color:#15803D}
-  .wf-pct2{font-size:11px;color:var(--grey);font-weight:600}
-  .wf-noteic{width:28px;height:28px;display:grid;place-items:center;border-radius:8px;color:var(--grey-2);cursor:pointer;opacity:0;transition:.13s}
-  .wf-noteic svg{width:16px;height:16px}
+  .wf-pct2{font-size:10px;color:var(--grey);font-weight:600}
+  .wf-noteic{width:22px;height:22px;display:grid;place-items:center;border-radius:7px;color:var(--grey-2);cursor:pointer;opacity:0;transition:.13s}
+  .wf-noteic svg{width:14px;height:14px}
   .wf-row:hover .wf-noteic{opacity:.6}
   .wf-noteic:hover{background:var(--hover);color:var(--ink);opacity:1}
   .wf-noteic.has{opacity:1;color:#c08a1c}
@@ -1068,7 +1073,7 @@
   .bulkbar-a .btn.ghost:hover{background:rgba(255,255,255,.22)}
   @media(max-width:600px){.bulkbar{left:8px;right:8px;transform:none;bottom:8px}.bulkbar-a{width:100%}}
   @media(max-width:560px){.cc-ops{flex-wrap:wrap}.cc-op{flex:1 1 44%}}
-  @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
+  @media(max-width:760px){.wf-row{grid-template-columns:18px minmax(0,1.4fr) minmax(0,1fr) 22px;gap:10px;padding:7px 12px}.wf-step3,.wf-emp{display:none}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
   tbody tr.wl-prog{background:#FFFCF4}tbody tr.wl-prog:hover{background:#FFF7E6}
@@ -5878,8 +5883,10 @@ VIEWS.kantoor.obwerk = ()=>{
   const wfNode=(v,fn,lbl)=>`<button class="wf-node ${v?'on':''}" title="${lbl}: ${v?'gedaan':'open'}" onclick="event.stopPropagation();${fn}">${v?`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>`:''}</button>`;
   const wfRow=c=>{const o=state.werk[c.naam].ob[kw];const st=stepsOB(o);const pct=Math.round(st/3*100);const sd=obState(o);const note=(o.opm||'').trim();
     return `<div class="wf-row ${sd.tone} ${bulkSet.has(c.naam)?'sel':''}">${bulkCb(c.naam)}
-      <div class="wf-l" onclick="openClient('${c.naam}','ob')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}</div></div></div>
-      <div class="wf-rblock"><div class="wf-step3">${wfNode(o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`,'Ingeleverd')}<span class="wf-conn ${o.ingeleverd?'on':''}"></span>${wfNode(o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`,'Ingevoerd')}<span class="wf-conn ${o.ingelezen?'on':''}"></span>${wfNode(o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`,'Ingediend')}</div><div class="wf-bigst ${sd.tone}">${sd.t}</div><div class="wf-pct2">${pct}% voltooid</div></div>
+      <div class="wf-l" onclick="openClient('${c.naam}','ob')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr}</div></div></div>
+      <div class="wf-stat"><span class="wf-statt ${sd.tone}">${sd.t}</span><span class="wf-pct2">${pct}% voltooid</span></div>
+      <div class="wf-step3">${wfNode(o.ingeleverd,`obToggle('${c.naam}','${kw}','ingeleverd')`,'Ingeleverd')}<span class="wf-conn ${o.ingeleverd?'on':''}"></span>${wfNode(o.ingelezen,`obToggle('${c.naam}','${kw}','ingelezen')`,'Ingevoerd')}<span class="wf-conn ${o.ingelezen?'on':''}"></span>${wfNode(o.ingediend,`obToggle('${c.naam}','${kw}','ingediend')`,'Ingediend')}</div>
+      <div class="wf-emp">${c.mw}</div>
       <span class="wf-noteic ${note?'has':''}" title="${note?note.replace(/"/g,'&quot;'):'Notitie toevoegen'}" onclick="event.stopPropagation();obNote('${c.naam}','${kw}')">${_svg('<path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3M8 12h8M8 15.5h5"/>')}</span>
     </div>`;};
   const obBuckets=[{l:'Actie nodig',f:c=>!state.werk[c.naam].ob[kw].ingeleverd},{l:'In behandeling',f:c=>{const o=state.werk[c.naam].ob[kw];return o.ingeleverd&&!o.ingediend;}},{l:'Ingediend',f:c=>state.werk[c.naam].ob[kw].ingediend}];
@@ -5918,8 +5925,10 @@ VIEWS.kantoor.ibwerk = ()=>{
   const ibIc=(cls,icon,v,fn,title)=>`<button class="ib-ic ${v?'on':''} ${cls}" title="${title}${v?' (aan)':' — uit'}" onclick="event.stopPropagation();${fn}">${icon}</button>`;
   const ibwRow=c=>{const o=state.werk[c.naam].ib[y];const st=stepsIB(o);const pct=Math.round(st/3*100);const sd=ibState(o);const note=(o.opm||'').trim();
     return `<div class="wf-row ${sd.tone} ${bulkSet.has(c.naam)?'sel':''}">${bulkCb(c.naam)}
-      <div class="wf-l" onclick="openClient('${c.naam}','ib')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr} · ${c.mw}${ibIc('',ibSupIc,o.suppletie,`ibToggle('${c.naam}','${y}','suppletie')`,'Suppletie (correctie)')}${ibIc('uitstel',ibUitIc,o.uitstel,`ibToggle('${c.naam}','${y}','uitstel')`,'Uitstel')}</div></div></div>
-      <div class="wf-rblock"><div class="wf-step3">${ibwNode(o.jaarrekening,`ibToggle('${c.naam}','${y}','jaarrekening')`,'Jaarrekening')}<span class="wf-conn ${o.jaarrekening?'on':''}"></span>${ibwNode(o.ib,`ibToggle('${c.naam}','${y}','ib')`,'IB-aangifte')}<span class="wf-conn ${o.ib?'on':''}"></span>${ibwNode(o.ingediend,`ibToggle('${c.naam}','${y}','ingediend')`,'Ingediend')}</div><div class="wf-bigst ${sd.tone}">${sd.t}</div><div class="wf-pct2">${pct}% voltooid</div></div>
+      <div class="wf-l" onclick="openClient('${c.naam}','ib')"><span class="mono">${cpInitials(c.naam)}</span><div class="wf-id"><div class="wf-nm">${c.naam}</div><div class="wf-sub">${PROG[c.prog]} · nr ${c.nr}${ibIc('',ibSupIc,o.suppletie,`ibToggle('${c.naam}','${y}','suppletie')`,'Suppletie (correctie)')}${ibIc('uitstel',ibUitIc,o.uitstel,`ibToggle('${c.naam}','${y}','uitstel')`,'Uitstel')}</div></div></div>
+      <div class="wf-stat"><span class="wf-statt ${sd.tone}">${sd.t}</span><span class="wf-pct2">${pct}% voltooid</span></div>
+      <div class="wf-step3">${ibwNode(o.jaarrekening,`ibToggle('${c.naam}','${y}','jaarrekening')`,'Jaarrekening')}<span class="wf-conn ${o.jaarrekening?'on':''}"></span>${ibwNode(o.ib,`ibToggle('${c.naam}','${y}','ib')`,'IB-aangifte')}<span class="wf-conn ${o.ib?'on':''}"></span>${ibwNode(o.ingediend,`ibToggle('${c.naam}','${y}','ingediend')`,'Ingediend')}</div>
+      <div class="wf-emp">${c.mw}</div>
       <span class="wf-noteic ${note?'has':''}" title="${note?note.replace(/"/g,'&quot;'):'Notitie toevoegen'}" onclick="event.stopPropagation();ibNote('${c.naam}','${y}')">${_svg('<path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3M8 12h8M8 15.5h5"/>')}</span>
     </div>`;};
   const ibBuckets=[{l:'Actie nodig',f:c=>!state.werk[c.naam].ib[y].jaarrekening},{l:'In behandeling',f:c=>{const o=state.werk[c.naam].ib[y];return o.jaarrekening&&!o.ingediend;}},{l:'Ingediend',f:c=>state.werk[c.naam].ib[y].ingediend}];
