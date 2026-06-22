@@ -1700,6 +1700,47 @@ const I18N_ADD6={
  "Intern":{en:"Internal",tr:"Dahili",bg:"Вътрешно",ar:"داخلي"}
 };
 Object.keys(I18N_ADD6).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD6[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD6[k][l];});});
+/* ===== Empty states, statussen, resterende labels ===== */
+const I18N_ADD7={
+ "Geen facturen in deze weergave.":{en:"No invoices in this view.",tr:"Bu görünümde fatura yok.",bg:"Няма фактури в този изглед.",ar:"لا فواتير في هذا العرض."},
+ "Geen offertes in deze weergave.":{en:"No quotes in this view.",tr:"Bu görünümde teklif yok.",bg:"Няма оферти в този изглед.",ar:"لا عروض في هذا العرض."},
+ "Nog geen items.":{en:"No items yet.",tr:"Henüz öğe yok.",bg:"Все още няма елементи.",ar:"لا عناصر بعد."},
+ "Nog geen aanvragen.":{en:"No requests yet.",tr:"Henüz başvuru yok.",bg:"Все още няма заявки.",ar:"لا طلبات بعد."},
+ "Geen openstaande facturen.":{en:"No outstanding invoices.",tr:"Açık fatura yok.",bg:"Няма неплатени фактури.",ar:"لا فواتير مستحقة."},
+ "Nog geen betalingen geregistreerd.":{en:"No payments recorded yet.",tr:"Henüz ödeme kaydı yok.",bg:"Все още няма записани плащания.",ar:"لا مدفوعات مسجلة بعد."},
+ "Geen open uren voor deze relatie.":{en:"No open hours for this contact.",tr:"Bu cari için açık saat yok.",bg:"Няма отворени часове за този контакт.",ar:"لا ساعات مفتوحة لهذا العميل."},
+ "Nog geen uren.":{en:"No hours yet.",tr:"Henüz saat yok.",bg:"Все още няма часове.",ar:"لا ساعات بعد."},
+ "Nog geen loonstroken of aangiften.":{en:"No payslips or filings yet.",tr:"Henüz bordro veya beyan yok.",bg:"Все още няма фишове или декларации.",ar:"لا كشوف أو إقرارات بعد."},
+ "Geen documenten te verwerken.":{en:"No documents to process.",tr:"İşlenecek belge yok.",bg:"Няма документи за обработка.",ar:"لا مستندات للمعالجة."},
+ "Geen boekingen in de wachtrij.":{en:"No entries in the queue.",tr:"Kuyrukta kayıt yok.",bg:"Няма записи в опашката.",ar:"لا قيود في القائمة."},
+ "Geen opgaven in deze selectie.":{en:"No filings in this selection.",tr:"Bu seçimde beyan yok.",bg:"Няма декларации в тази селекция.",ar:"لا إقرارات في هذا التحديد."},
+ "Geen open signalen.":{en:"No open signals.",tr:"Açık sinyal yok.",bg:"Няма отворени сигнали.",ar:"لا إشارات مفتوحة."},
+ "Nog geen rapporten gedeeld.":{en:"No reports shared yet.",tr:"Henüz rapor paylaşılmadı.",bg:"Все още няма споделени отчети.",ar:"لا تقارير مُشارَكة بعد."},
+ "Deze map is nog leeg.":{en:"This folder is still empty.",tr:"Bu klasör henüz boş.",bg:"Тази папка е още празна.",ar:"هذا المجلد لا يزال فارغًا."},
+ "Lege map.":{en:"Empty folder.",tr:"Boş klasör.",bg:"Празна папка.",ar:"مجلد فارغ."},
+ "Nog geen lease-overeenkomsten.":{en:"No lease agreements yet.",tr:"Henüz leasing sözleşmesi yok.",bg:"Все още няма лизингови договори.",ar:"لا عقود إيجار بعد."},
+ "Geen gegevens.":{en:"No data.",tr:"Veri yok.",bg:"Няма данни.",ar:"لا بيانات."},
+ "Hoog":{en:"High",tr:"Yüksek",bg:"Висок",ar:"عالٍ"},
+ "Midden":{en:"Medium",tr:"Orta",bg:"Среден",ar:"متوسط"},
+ "Laag":{en:"Low",tr:"Düşük",bg:"Нисък",ar:"منخفض"},
+ "Midden/Laag":{en:"Medium/Low",tr:"Orta/Düşük",bg:"Среден/Нисък",ar:"متوسط/منخفض"},
+ "Schuld huidig jaar":{en:"Debt this year",tr:"Bu yıl borç",bg:"Дълг тази година",ar:"دين هذا العام"},
+ "Schuld 31-12":{en:"Debt at 31-12",tr:"31-12 borç",bg:"Дълг към 31-12",ar:"الدين في 31-12"},
+ "Schuld per 31-12":{en:"Debt as at 31-12",tr:"31-12 itibarıyla borç",bg:"Дълг към 31-12",ar:"الدين كما في 31-12"},
+ "Mnd":{en:"Mo",tr:"Ay",bg:"Мес",ar:"شهر"},
+ "Week":{en:"Week",tr:"Hafta",bg:"Седмица",ar:"الأسبوع"},
+ "Gewerkte uren":{en:"Hours worked",tr:"Çalışılan saat",bg:"Изработени часове",ar:"ساعات العمل"},
+ "Verkoopfacturen":{en:"Sales invoices",tr:"Satış faturaları",bg:"Фактури за продажби",ar:"فواتير المبيعات"},
+ "Loonstrook":{en:"Payslip",tr:"Bordro",bg:"Фиш",ar:"كشف الراتب"},
+ "Aangifte loonheffing":{en:"Payroll tax filing",tr:"Bordro vergisi beyanı",bg:"Декларация осигуровки",ar:"إقرار ضريبة الرواتب"}
+};
+Object.keys(I18N_ADD7).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD7[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD7[k][l];});});
+(function(){const more={
+ en:[[" bijgewerkt ✓"," updated ✓"],[" aangemaakt ✓"," created ✓"],[" is verwijderd"," has been deleted"],[" verwijderd"," deleted"],[" is al in gebruik"," is already in use"],[" is verplicht"," is required"],["Verplaatst naar ","Moved to "],["Gedeeld met klant ✓","Shared with client ✓"],["Niet meer gedeeld","No longer shared"],["Gearchiveerd","Archived"],["Geheractiveerd","Reactivated"],["Opgeslagen","Saved"],["Download (demo)","Download (demo)"],["Geopend in Fiscaal Gemak (demo)","Opened in Fiscaal Gemak (demo)"]],
+ tr:[[" bijgewerkt ✓"," güncellendi ✓"],[" aangemaakt ✓"," oluşturuldu ✓"],[" is verwijderd"," silindi"],[" verwijderd"," silindi"],[" is al in gebruik"," zaten kullanımda"],[" is verplicht"," zorunlu"],["Verplaatst naar ","Taşındı: "],["Gedeeld met klant ✓","Müşteriyle paylaşıldı ✓"],["Niet meer gedeeld","Artık paylaşılmıyor"],["Gearchiveerd","Arşivlendi"],["Geheractiveerd","Yeniden etkinleştirildi"],["Opgeslagen","Kaydedildi"],["Download (demo)","İndir (demo)"],["Geopend in Fiscaal Gemak (demo)","Fiscaal Gemak'ta açıldı (demo)"]],
+ bg:[[" bijgewerkt ✓"," обновено ✓"],[" aangemaakt ✓"," създадено ✓"],[" is verwijderd"," е изтрито"],[" verwijderd"," изтрито"],[" is al in gebruik"," вече се използва"],[" is verplicht"," е задължително"],["Verplaatst naar ","Преместено в "],["Gedeeld met klant ✓","Споделено с клиента ✓"],["Niet meer gedeeld","Вече не е споделено"],["Gearchiveerd","Архивирано"],["Geheractiveerd","Активирано отново"],["Opgeslagen","Запазено"],["Download (demo)","Изтегляне (демо)"],["Geopend in Fiscaal Gemak (demo)","Отворено в Fiscaal Gemak (демо)"]],
+ ar:[[" bijgewerkt ✓"," تم التحديث ✓"],[" aangemaakt ✓"," تم الإنشاء ✓"],[" is verwijderd"," تم حذفه"],[" verwijderd"," محذوف"],[" is al in gebruik"," مستخدَم بالفعل"],[" is verplicht"," مطلوب"],["Verplaatst naar ","نُقل إلى "],["Gedeeld met klant ✓","تمت المشاركة مع العميل ✓"],["Niet meer gedeeld","لم يعد مُشارَكًا"],["Gearchiveerd","مؤرشف"],["Geheractiveerd","أُعيد تفعيله"],["Opgeslagen","تم الحفظ"],["Download (demo)","تنزيل (نسخة تجريبية)"],["Geopend in Fiscaal Gemak (demo)","فُتح في Fiscaal Gemak (تجريبي)"]]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[["Laatste activiteit ","Last activity "],[" document(en)"," document(s)"],[" dagen geleden"," days ago"],[" weken geleden"," weeks ago"],[" maanden geleden"," months ago"],[" jaar geleden"," years ago"],["1 week geleden","1 week ago"]],
  tr:[["Laatste activiteit ","Son etkinlik "],[" document(en)"," belge"],[" dagen geleden"," gün önce"],[" weken geleden"," hafta önce"],[" maanden geleden"," ay önce"],[" jaar geleden"," yıl önce"],["1 week geleden","1 hafta önce"]],
@@ -2265,7 +2306,8 @@ Met vriendelijke groet,
 
 /* ============ HELPERS ============ */
 function money(n){return '€ '+Number(n).toLocaleString('nl-NL',{minimumFractionDigits:2,maximumFractionDigits:2});}
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),2600);}
+function tStr(s){if(LANG==='nl'||s==null)return s;const map=I18N[LANG];let k=String(s).trim();if(map&&map[k]!==undefined&&map[k]!==k)return String(s).replace(k,map[k]);const sub=I18N_SUB&&I18N_SUB[LANG];if(sub){let r=String(s),ch=false;for(let i=0;i<sub.length;i++){if(r.indexOf(sub[i][0])>=0){r=r.split(sub[i][0]).join(sub[i][1]);ch=true;}}if(ch)return r;}return s;}
+function toast(m){const t=document.getElementById('toast');t.textContent=tStr(m);t.classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),2600);}
 function val(id){const e=document.getElementById(id);return e?e.value:'';}
 function num(s){return parseFloat(String(s).replace(/\./g,'').replace(',','.'))||0;}
 function statusPill(s){const map={'Concept':'n','Open':'a','Verstuurd':'a','Definitief':'n','Geaccepteerd':'g','Afgewezen':'r','Betaald':'g','Deels betaald':'a','Te laat':'r','Nieuw':'r','In verwerking':'a','Verwerkt':'g'};return `<span class="pill ${map[s]||'n'}">${s}</span>`;}
