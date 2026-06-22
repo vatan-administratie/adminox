@@ -330,6 +330,38 @@
   .lmc-i{font-size:14px;font-weight:800;margin-top:3px;color:var(--grey-2)}
   .lmc.done{background:#DCFCE7;border-color:#bbf7d0}.lmc.done .lmc-m{color:#166534}.lmc.done .lmc-i{color:#166534}
   .lmc.due{background:#FEF3C7;border-color:#fde68a}.lmc.due .lmc-m{color:#92400E}.lmc.due .lmc-i{color:#92400E}
+  /* ===== Klantbeheer ===== */
+  .kb-chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 12px}
+  .grp-fchip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--grey);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;transition:.12s}
+  .grp-fchip .d{width:9px;height:9px;border-radius:50%}
+  .grp-fchip b{color:var(--ink);font-weight:800}
+  .grp-fchip:hover{border-color:var(--brand-2)}
+  .grp-fchip.on{background:var(--brand-soft);border-color:var(--brand-2);color:var(--navy)}
+  .kb-tools{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:14px}
+  .kb-search{flex:1;min-width:220px;height:40px;border:1px solid var(--line);border-radius:10px;padding:0 13px;font-size:13.5px;background:var(--card);color:var(--ink)}
+  .kb-search:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(16,59,99,.12)}
+  .kb-sel{height:40px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-size:13px;background:var(--card);color:var(--ink);cursor:pointer}
+  .kb-head,.kb-row{display:grid;grid-template-columns:2.2fr 1.2fr 1fr .9fr auto;align-items:center;gap:12px}
+  .kb-head{padding:0 14px 9px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2)}
+  .kb-row{padding:11px 14px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.12s}
+  .kb-row:hover{box-shadow:var(--sh-sm);border-color:var(--brand-2)}
+  .kb-cli{display:flex;align-items:center;gap:11px;min-width:0}
+  .kb-cli .mono{width:36px;height:36px;border-radius:10px;color:#fff;display:grid;place-items:center;font-size:12.5px;font-weight:800;flex-shrink:0}
+  .kb-nm{font-size:13.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .kb-sub{font-size:11.5px;color:var(--grey-2)}
+  .kb-c{font-size:12.5px;color:var(--grey)}
+  .kb-act{text-align:right}
+  .grp-chip{display:inline-block;font-size:10.5px;font-weight:700;color:#fff;background:var(--gc,#64748B);border-radius:6px;padding:3px 9px;white-space:nowrap}
+  .grp-mlist{display:flex;flex-direction:column;gap:8px}
+  .grp-mrow{display:flex;align-items:center;gap:11px;padding:10px 12px;border:1px solid var(--line);border-radius:11px}
+  .grp-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+  .grp-mn{flex:1;font-size:13.5px;font-weight:700;color:var(--ink)}
+  .grp-mc{font-size:11.5px;font-weight:600;color:var(--grey-2);margin-left:8px}
+  .grp-macts{display:flex;gap:6px}
+  .colorpick{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+  .cdot{width:26px;height:26px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:.1s}
+  .cdot.on{border-color:var(--ink);transform:scale(1.08)}
+  @media(max-width:680px){.kb-hide{display:none}.kb-head,.kb-row{grid-template-columns:1.9fr 1fr .8fr auto}}
   .cc-sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:16px}
   .cc-side .cc-sec{padding:14px 16px}
   .cc-h{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey);margin:0 0 12px}
@@ -1823,7 +1855,7 @@ const NAV = {
     ['__g','OVERIG'],['instellingen','⚙','Instellingen'],
   ],
   kantoor:[
-    ['__g','KANTOOR'],['overzicht','▦','Overzicht'],['klanten','◑','Klanten'],['obwerk','%','OB-werklijst'],['ibwerk','%','IB-werklijst'],
+    ['__g','KANTOOR'],['overzicht','▦','Overzicht'],['klanten','◑','Klanten'],['klantbeheer','◔','Klantbeheer'],['obwerk','%','OB-werklijst'],['ibwerk','%','IB-werklijst'],
     ['__g','FISCAAL'],['fg','▦','Fiscaal Gemak'],
     ['__g','DIENSTEN'],['uren','€','Abonnementen'],
     ['__g','BEHEER'],['statistieken','▥','Statistieken'],['instellingen','⚙','Instellingen'],
@@ -2779,11 +2811,112 @@ VIEWS.kantoor.klanten = ()=>{
     const prog=(label,done)=>{const p=tot?Math.round(done/tot*100):0;return `<div class="pcard"><div class="pl">${label}</div><div class="pv">${done}/${tot} <span class="pp">${p}%</span></div><div class="pbar"><div class="pfill" style="width:${p}%"></div></div><div class="pmini">${tot-done} nog te doen</div></div>`;};
     summaryHTML=`<div class="psum">${prog('IB '+IBJAREN[0]+' ingediend',cIB(IBJAREN[0]))}${prog('IB '+IBJAREN[1]+' ingediend',cIB(IBJAREN[1]))}${prog('OB Q1 2026 ingediend',cOB)}${prog('Loon t/m juni bij',cLoon)}</div>`;
   }
-  return `<div class="row-between"><h1 class="title">Klanten</h1><button class="btn primary" onclick="toast('Nieuwe klant (demo)')">+ Klant</button></div>
+  return `<div class="row-between"><h1 class="title">Klanten</h1><div style="display:flex;gap:8px"><button class="btn ghost" onclick="go('klantbeheer')">⚙ Klantbeheer</button><button class="btn primary" onclick="clientNewModal()">+ Klant</button></div></div>
   <div class="sub">Actieve klanten verdeeld over de 3 medewerkers. Klik op een klant voor het volledige dossier. Bovenaan ziet u per taak hoeveel klanten al klaar zijn (aantal + percentage), per jaar gesplitst.</div>
   <div class="ftabs">${tab('alle','Alle',actief.length)}${MEDEWERKERS.map(m=>tab(m,m,actief.filter(c=>c.mw===m).length)).join('')}${tab('exit','🗄️ Exit',exit.length)}</div>
   ${summaryHTML}
   ${body}`;
+};
+
+/* ============ KLANTBEHEER — groepen + klanten beheren ============ */
+state.groups=[
+  {id:'alg',naam:'Algemeen',kleur:'#64748B'},
+  {id:'nieuw',naam:'Nieuwe klanten',kleur:'#16507F'},
+  {id:'holding',naam:'Holdings',kleur:'#7C3AED'},
+  {id:'loon',naam:'Alleen loon',kleur:'#0F6B45'},
+  {id:'btw',naam:'BTW-klanten',kleur:'#B45309'},
+  {id:'slapend',naam:'Slapend',kleur:'#94A3B8'},
+];
+const DEFGROUP='alg';
+let kbSearch='',kbGroep='alle',kbMw='alle',kbStatus='alle',kbSort='naam';
+function gEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function gJs(s){return String(s==null?'':s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
+function groupById(id){return state.groups.find(g=>g.id===id)||null;}
+function clientGroupId(c){return (c&&c.groep&&groupById(c.groep))?c.groep:DEFGROUP;}
+function groupName(id){const g=groupById(id);return g?g.naam:'Algemeen';}
+function groupColor(id){const g=groupById(id);return g?g.kleur:'#64748B';}
+function groupCount(id){return state.clients.filter(c=>clientGroupId(c)===id).length;}
+function genGroupId(){let i=1;while(groupById('g'+i))i++;return 'g'+i;}
+function selectFieldKV(label,id,pairs,sel){return `<div class="field"><label>${label}</label><select id="${id}">${pairs.map(p=>`<option value="${gEsc(p[0])}" ${p[0]===sel?'selected':''}>${gEsc(p[1])}</option>`).join('')}</select></div>`;}
+const GCOLORS=['#16507F','#2C77B8','#0E7490','#0F6B45','#1FA971','#B45309','#D71941','#7C3AED','#64748B','#94A3B8'];
+function colorPickerField(id,sel){return `<div class="field"><label>Kleur</label><div class="colorpick" id="${id}_wrap">${GCOLORS.map(c=>`<span class="cdot ${c===sel?'on':''}" style="background:${c}" data-c="${c}" onclick="pickColor('${id}','${c}')"></span>`).join('')}<input type="hidden" id="${id}" value="${sel}"></div></div>`;}
+function pickColor(id,c){const inp=document.getElementById(id);if(inp)inp.value=c;const wrap=document.getElementById(id+'_wrap');if(wrap)wrap.querySelectorAll('.cdot').forEach(d=>d.classList.toggle('on',d.dataset.c===c));}
+/* groep CRUD */
+function manageGroupsModal(){
+  const rows=state.groups.map(g=>`<div class="grp-mrow"><span class="grp-dot" style="background:${g.kleur}"></span><div class="grp-mn">${gEsc(g.naam)}<span class="grp-mc">${groupCount(g.id)} klant(en)</span></div><div class="grp-macts"><button class="btn ghost sm" onclick="renameGroupModal('${g.id}')">Bewerken</button><button class="btn ghost sm" onclick="deleteGroupModal('${g.id}')" ${g.id===DEFGROUP?'disabled title="Standaardgroep"':''}>Verwijderen</button></div></div>`).join('');
+  modal('Klantgroepen beheren',`<div class="sub" style="margin:-4px 0 12px">Beheer alle klantgroepen. Klanten blijven altijd behouden — bij verwijderen worden ze verplaatst.</div><div class="grp-mlist">${rows}</div><div style="margin-top:14px"><button class="btn primary sm" onclick="addGroupModal()">+ Nieuwe groep</button></div>`,'Sluiten',()=>{if(VIEW==='klantbeheer')renderView();return true;});
+}
+function addGroupModal(){modal('Nieuwe klantgroep',field('Groepsnaam','grNaam','text','')+colorPickerField('grKleur','#16507F'),'Aanmaken',()=>{const nm=val('grNaam').trim();if(!nm){toast('Geef een groepsnaam op');return false;}if(state.groups.some(g=>g.naam.toLowerCase()===nm.toLowerCase())){toast('Deze groep bestaat al');return false;}state.groups.push({id:genGroupId(),naam:nm,kleur:val('grKleur')||'#64748B'});toast('Groep "'+nm+'" aangemaakt ✓');manageGroupsModal();return false;});}
+function renameGroupModal(id){const g=groupById(id);if(!g)return;modal('Groep bewerken',field('Groepsnaam','grNaam','text',gEsc(g.naam))+colorPickerField('grKleur',g.kleur),'Opslaan',()=>{const nm=val('grNaam').trim();if(!nm){toast('Geef een groepsnaam op');return false;}if(state.groups.some(x=>x!==g&&x.naam.toLowerCase()===nm.toLowerCase())){toast('Deze groep bestaat al');return false;}g.naam=nm;g.kleur=val('grKleur')||g.kleur;toast('Groep bijgewerkt ✓');manageGroupsModal();return false;});}
+function deleteGroupModal(id){const g=groupById(id);if(!g)return;if(id===DEFGROUP){toast('De standaardgroep kan niet verwijderd worden');return;}if(state.groups.length<=1){toast('Minimaal één groep is vereist');return;}const cnt=groupCount(id);const others=state.groups.filter(x=>x.id!==id);modal('Groep verwijderen',`<div class="ai-note" style="margin:0 0 12px;border-left-color:var(--amber)">Groep <b>${gEsc(g.naam)}</b> bevat <b>${cnt} klant(en)</b>. De klanten worden NIET verwijderd — kies naar welke groep ze worden verplaatst.</div>`+selectFieldKV('Klanten verplaatsen naar','grMove',others.map(x=>[x.id,x.naam]),others[0].id),'Groep verwijderen',()=>{const to=val('grMove');state.clients.forEach(c=>{if(clientGroupId(c)===id)c.groep=to;});state.groups=state.groups.filter(x=>x.id!==id);toast('Groep "'+g.naam+'" verwijderd · klanten verplaatst naar '+groupName(to)+' ✓');manageGroupsModal();return false;});}
+/* klant bewerken / nieuw */
+function renameClientEverywhere(o,n){if(o===n)return;if(state.werk[o]){state.werk[n]=state.werk[o];delete state.werk[o];}if(DOSSIER[o]){DOSSIER[n]=DOSSIER[o];delete DOSSIER[o];}(state.dossierDocs||[]).forEach(x=>{if(x.client===o)x.client=n;});(state.employees||[]).forEach(x=>{if(x.client===o)x.client=n;});(state.signals||[]).forEach(x=>{if(x.client===o)x.client=n;});(state.inbox||[]).forEach(x=>{if(x.client===o)x.client=n;});(state.regelingen||[]).forEach(x=>{if(x.client===o)x.client=n;});const c=state.clients.find(x=>x.naam===o);if(c)c.naam=n;if(curClient===o)curClient=n;}
+function initClientWerk(c){const ob={};KWARTALEN.forEach(q=>{ob[q]={ingeleverd:'',ingelezen:'',ingediend:'',opm:''};});const ib={};IBJAREN.forEach(y=>{ib[y]={jaarrekening:'',ib:'',suppletie:'',ingediend:'',uitstel:'',opm:''};});const loon={'2026':{}};MAANDEN.forEach(m=>{loon['2026'][m]=false;});state.werk[c.naam]={ob,ib,loon,opmerking:'',logins:[]};}
+function nextClientNr(){let mx=0;state.clients.forEach(c=>{const n=parseInt(c.nr,10);if(!isNaN(n)&&n>mx)mx=n;});return String(mx+1).padStart(3,'0');}
+function clientEditModal(naam){const c=state.clients.find(x=>x.naam===naam);if(!c)return;const d=DOSSIER[naam]||{};const cp=d.contactpersoon||((d.contact||'').split('·')[0].trim());const em=d.email||((d.contact||'').split('·')[1]||'').trim();
+  const body=field('Bedrijfsnaam','clNaam','text',gEsc(c.naam))+field('Klantnummer','clNr','text',gEsc(c.nr))+field('KvK-nummer','clKvk','text',gEsc(d.kvk||''))+field('BTW-nummer','clBtw','text',gEsc(d.btw||''))+field('Contactpersoon','clContact','text',gEsc(cp))+field('E-mailadres','clEmail','text',gEsc(em))+field('Telefoon','clTel','text',gEsc(d.telefoon||''))+selectField('Beheerder','clMw',MEDEWERKERS,c.mw)+selectFieldKV('Klantgroep','clGroep',state.groups.map(g=>[g.id,g.naam]),clientGroupId(c))+selectField('Boekhoudpakket','clProg',['Exact Online','SnelStart'],c.prog==='sn'?'SnelStart':'Exact Online')+selectField('Status','clStatus',['Actief','Niet-actief'],c.actief===false?'Niet-actief':'Actief')+selectField('BTW automatisch verwerken','clBtwAuto',['Ja','Nee'],c.btwAuto?'Ja':'Nee');
+  modal('Klant bewerken — '+c.naam,body,'Wijzigingen opslaan',()=>saveClientEdit(naam));
+}
+function saveClientEdit(oldNaam){const c=state.clients.find(x=>x.naam===oldNaam);if(!c)return false;const newNaam=val('clNaam').trim(),nr=val('clNr').trim(),kvk=val('clKvk').trim();
+  if(!newNaam){toast('Bedrijfsnaam is verplicht');return false;}
+  if(!nr){toast('Klantnummer is verplicht');return false;}
+  if(state.clients.some(x=>x!==c&&x.nr===nr)){toast('Klantnummer '+nr+' is al in gebruik');return false;}
+  if(state.clients.some(x=>x!==c&&x.naam.toLowerCase()===newNaam.toLowerCase())){toast('Er bestaat al een klant met deze naam');return false;}
+  if(kvk&&state.clients.some(x=>x!==c&&((DOSSIER[x.naam]||{}).kvk||'')===kvk)){toast('KvK-nummer '+kvk+' is al in gebruik');return false;}
+  c.nr=nr;c.mw=val('clMw');c.groep=val('clGroep');c.prog=val('clProg')==='SnelStart'?'sn':'ex';c.actief=val('clStatus')==='Actief';c.btwAuto=val('clBtwAuto')==='Ja';
+  const cp=val('clContact').trim(),em=val('clEmail').trim(),tel=val('clTel').trim();
+  if(newNaam!==oldNaam)renameClientEverywhere(oldNaam,newNaam);
+  const dd=DOSSIER[newNaam]||(DOSSIER[newNaam]={});dd.kvk=kvk;dd.btw=val('clBtw').trim();dd.contactpersoon=cp;dd.email=em;dd.telefoon=tel;dd.contact=cp?(cp+(em?' · '+em:'')):(dd.contact||'—');
+  toast('Klant "'+newNaam+'" bijgewerkt ✓');renderNav();
+  if(VIEW==='klantbeheer')renderView();else if(curClient===newNaam)renderClient();
+  return true;
+}
+function clientNewModal(){const body=field('Bedrijfsnaam *','cnNaam','text','')+field('Klantnummer *','cnNr','text',nextClientNr())+field('KvK-nummer','cnKvk','text','')+field('Contactpersoon','cnContact','text','')+field('E-mailadres','cnEmail','text','')+field('Telefoon','cnTel','text','')+selectField('Beheerder *','cnMw',MEDEWERKERS,MEDEWERKERS[0])+selectFieldKV('Klantgroep *','cnGroep',state.groups.map(g=>[g.id,g.naam]),'nieuw')+selectField('Boekhoudpakket','cnProg',['Exact Online','SnelStart'],'Exact Online')+selectField('Status','cnStatus',['Actief','Niet-actief'],'Actief');
+  modal('Nieuwe klant aanmaken',body,'Klant aanmaken',saveClientNew);
+}
+function saveClientNew(){const naam=val('cnNaam').trim(),nr=val('cnNr').trim(),kvk=val('cnKvk').trim();
+  if(!naam){toast('Bedrijfsnaam is verplicht');return false;}
+  if(!nr){toast('Klantnummer is verplicht');return false;}
+  if(state.clients.some(c=>c.nr===nr)){toast('Klantnummer '+nr+' is al in gebruik');return false;}
+  if(state.clients.some(c=>c.naam.toLowerCase()===naam.toLowerCase())){toast('Er bestaat al een klant met deze naam');return false;}
+  if(kvk&&state.clients.some(c=>((DOSSIER[c.naam]||{}).kvk||'')===kvk)){toast('KvK-nummer '+kvk+' is al in gebruik');return false;}
+  const prog=val('cnProg')==='SnelStart'?'sn':'ex';const cp=val('cnContact').trim(),em=val('cnEmail').trim(),tel=val('cnTel').trim();
+  const c={nr,naam,prog,auto:85,mw:val('cnMw'),btwAuto:true,opmerking:'',actief:val('cnStatus')==='Actief',groep:val('cnGroep'),created:Date.now()};
+  state.clients.push(c);initClientWerk(c);
+  DOSSIER[naam]={kvk,btw:'',machtiging:'—',wwft:'—',ubo:'—',contact:cp?(cp+(em?' · '+em:'')):'—',contactpersoon:cp,email:em,telefoon:tel};
+  toast('Klant "'+naam+'" aangemaakt ✓');renderNav();
+  if(VIEW==='klantbeheer')renderView();else go('klantbeheer');
+  return true;
+}
+/* klantbeheer-scherm */
+function kbSelHTML(varName,pairs,sel){return `<select class="kb-sel" onchange="${varName}=this.value;kbRender()">${pairs.map(p=>`<option value="${gEsc(p[0])}" ${p[0]===sel?'selected':''}>${gEsc(p[1])}</option>`).join('')}</select>`;}
+function kbListHTML(){const q=(kbSearch||'').toLowerCase().trim();
+  let list=state.clients.filter(c=>{
+    if(kbGroep!=='alle'&&clientGroupId(c)!==kbGroep)return false;
+    if(kbMw!=='alle'&&c.mw!==kbMw)return false;
+    if(kbStatus==='actief'&&c.actief===false)return false;
+    if(kbStatus==='inactief'&&c.actief!==false)return false;
+    if(q){const d=DOSSIER[c.naam]||{};const hay=(c.naam+' '+c.nr+' '+(d.kvk||'')+' '+c.mw).toLowerCase();if(hay.indexOf(q)<0)return false;}
+    return true;});
+  const idx=c=>state.clients.indexOf(c);
+  list.sort((a,b)=>{if(kbSort==='nr')return (parseInt(a.nr,10)||0)-(parseInt(b.nr,10)||0);if(kbSort==='nieuw')return ((b.created||0)-(a.created||0))||(idx(b)-idx(a));return a.naam.localeCompare(b.naam);});
+  if(!list.length)return '<div class="empty"><div class="big">🔍</div>Geen klanten gevonden met deze filters.</div>';
+  const rows=list.map(c=>{const d=DOSSIER[c.naam]||{};const gid=clientGroupId(c);return `<div class="kb-row" onclick="openClient('${gJs(c.naam)}')"><div class="kb-cli"><span class="mono" style="background:${cpAvColor(c)}">${cpInitials(c.naam)}</span><div style="min-width:0"><div class="kb-nm">${gEsc(c.naam)}</div><div class="kb-sub">nr ${gEsc(c.nr)}${d.kvk?' · KvK '+gEsc(d.kvk):''}</div></div></div><div class="kb-c"><span class="grp-chip" style="--gc:${groupColor(gid)}">${gEsc(groupName(gid))}</span></div><div class="kb-c kb-hide">${gEsc(c.mw)}</div><div class="kb-c">${c.actief===false?'<span class="pill n">Niet-actief</span>':'<span class="pill g">Actief</span>'}</div><div class="kb-c kb-act"><button class="btn ghost sm" onclick="event.stopPropagation();clientEditModal('${gJs(c.naam)}')">Bewerken</button></div></div>`;}).join('');
+  return `<div class="kb-head"><div>Klant</div><div>Groep</div><div class="kb-hide">Beheerder</div><div>Status</div><div></div></div>${rows}`;
+}
+function kbRender(){const el=document.getElementById('kbList');if(el)el.innerHTML=kbListHTML();}
+VIEWS.kantoor.klantbeheer=()=>{
+  const chips=`<span class="grp-fchip ${kbGroep==='alle'?'on':''}" onclick="kbGroep='alle';renderView()">Alle <b>${state.clients.length}</b></span>`+state.groups.map(g=>`<span class="grp-fchip ${kbGroep===g.id?'on':''}" onclick="kbGroep='${g.id}';renderView()"><span class="d" style="background:${g.kleur}"></span>${gEsc(g.naam)} <b>${groupCount(g.id)}</b></span>`).join('');
+  return `<div class="row-between"><h1 class="title">Klantbeheer</h1><div style="display:flex;gap:8px"><button class="btn ghost" onclick="manageGroupsModal()">Groepen beheren</button><button class="btn primary" onclick="clientNewModal()">+ Nieuwe klant</button></div></div>
+  <div class="sub">Zoek, filter, bewerk en organiseer alle klanten en klantgroepen — zonder ontwikkelaar.</div>
+  <div class="kb-chips">${chips}</div>
+  <div class="kb-tools">
+    <input class="kb-search" id="kbSearchInp" placeholder="Zoek op naam, klantnummer, KvK of beheerder…" value="${gEsc(kbSearch)}" oninput="kbSearch=this.value;kbRender()">
+    ${kbSelHTML('kbMw',[['alle','Alle beheerders'],...MEDEWERKERS.map(m=>[m,m])],kbMw)}
+    ${kbSelHTML('kbStatus',[['alle','Alle statussen'],['actief','Actief'],['inactief','Niet-actief']],kbStatus)}
+    ${kbSelHTML('kbSort',[['naam','Sorteer: Naam (A–Z)'],['nr','Sorteer: Klantnummer'],['nieuw','Sorteer: Nieuwste eerst']],kbSort)}
+  </div>
+  <div id="kbList">${kbListHTML()}</div>`;
 };
 function setMwFilter(f){mwFilter=f;renderView();}
 function setClientActief(naam,actief){const c=state.clients.find(x=>x.naam===naam);if(!c)return;
