@@ -401,6 +401,44 @@
   .cc-meta .cc-mrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line-2);font-size:12.5px}
   .cc-meta .cc-mrow:last-child{border-bottom:0}
   .cc-meta .cc-mrow span{color:var(--grey)}.cc-meta .cc-mrow b{color:var(--ink);text-align:right}
+  /* ===== Client intelligence ===== */
+  .hs-card .hs-top{display:flex;align-items:center;gap:14px;margin-bottom:11px}
+  .hs-ring{border-radius:50%;display:grid;place-items:center;position:relative;flex-shrink:0;background:conic-gradient(var(--hsc) calc(var(--p,0)*1%),var(--line-2) 0)}
+  .hs-ring.g{--hsc:#22A565}.hs-ring.a{--hsc:var(--amber)}.hs-ring.r{--hsc:var(--red)}
+  .hs-ring::before{content:'';position:absolute;inset:5px;border-radius:50%;background:var(--card)}
+  .hs-ring span{position:relative;font-weight:800;color:var(--ink)}
+  .hs-status{font-size:14px;font-weight:800}
+  .hs-status.g{color:#22A565}.hs-status.a{color:var(--amber)}.hs-status.r{color:var(--red)}
+  .hs-sub{font-size:11.5px;color:var(--grey-2);margin-top:1px}
+  .hs-factors{display:flex;flex-direction:column;gap:5px}
+  .hs-f{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;color:var(--grey)}
+  .hs-f b{color:var(--red);font-variant-numeric:tabular-nums;flex-shrink:0}
+  .hs-ok{font-size:11.5px;color:#166534}
+  body.dark .hs-ok{color:var(--green)}
+  .hs-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:2px 8px;border-radius:7px;font-variant-numeric:tabular-nums}
+  .hs-badge .hs-dot{width:7px;height:7px;border-radius:50%}
+  .hs-badge.g{background:var(--green-soft);color:var(--green)}.hs-badge.g .hs-dot{background:#22A565}
+  .hs-badge.a{background:var(--amber-soft);color:var(--amber)}.hs-badge.a .hs-dot{background:var(--amber)}
+  .hs-badge.r{background:var(--danger-soft);color:var(--danger)}.hs-badge.r .hs-dot{background:var(--red)}
+  .seg-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+  .seg-chip{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:7px;border:1px solid var(--line);color:var(--grey);background:var(--card)}
+  .seg-chip.red{background:var(--danger-soft);color:var(--danger);border-color:var(--danger-soft)}
+  .seg-chip.amber{background:var(--amber-soft);color:var(--amber);border-color:var(--amber-soft)}
+  .seg-chip.green{background:var(--green-soft);color:var(--green);border-color:var(--green-soft)}
+  .seg-chip.navy{background:var(--brand-soft);color:var(--brand-2);border-color:var(--brand-soft)}
+  .seg-chip.grey{background:var(--hover);color:var(--grey)}
+  .dr{display:flex;flex-direction:column;gap:9px}
+  .dr-grp{border-left:3px solid var(--grey-2);padding-left:11px}
+  .dr-grp.red{border-color:var(--red)}.dr-grp.amber{border-color:var(--amber)}.dr-grp.navy{border-color:var(--brand-2)}
+  .dr-h{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2);margin-bottom:4px}
+  .dr-row{display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:2px 0}
+  .dr-l{color:var(--ink);font-weight:600}.dr-d{color:var(--grey);font-variant-numeric:tabular-nums;flex-shrink:0}
+  .cc-fdot.g{background:#22A565}.cc-fdot.navy{background:var(--brand-2)}.cc-fdot.a{background:var(--amber)}
+  .hsum{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .hsum-c{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:11px 12px;text-align:center}
+  .hsum-n{font-size:20px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+  .hsum-l{font-size:10.5px;font-weight:600;color:var(--grey);margin-top:2px}
+  @media(max-width:600px){.hsum{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
@@ -1857,6 +1895,40 @@ const I18N_ADD9={
  "Een brief van de Belastingdienst ontvangen? Upload hem en wij leggen uit wat het betekent.":{en:"Received a letter from the Tax Authority? Upload it and we explain what it means.",tr:"Vergi Dairesi'nden mektup mu aldınız? Yükleyin, ne anlama geldiğini açıklayalım.",bg:"Получихте писмо от данъчните? Качете го и обясняваме какво означава.",ar:"وصلتك رسالة من مصلحة الضرائب؟ ارفعها ونشرح معناها."}
 };
 Object.keys(I18N_ADD9).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD9[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD9[k][l];});});
+/* ===== Client intelligence (health/segmentatie/radar/timeline) ===== */
+const I18N_ADD10={
+ "Client Health":{en:"Client Health",tr:"Müşteri Sağlığı",bg:"Здраве на клиента",ar:"صحة العميل"},
+ "Client Health & risico":{en:"Client Health & risk",tr:"Müşteri Sağlığı & risk",bg:"Здраве и риск на клиента",ar:"صحة العميل والمخاطر"},
+ "Gezond":{en:"Healthy",tr:"Sağlıklı",bg:"Здрав",ar:"سليم"},
+ "Aandacht nodig":{en:"Needs attention",tr:"Dikkat gerekiyor",bg:"Изисква внимание",ar:"يحتاج انتباه"},
+ "Risico":{en:"Risk",tr:"Risk",bg:"Риск",ar:"خطر"},
+ "Aandacht":{en:"Attention",tr:"Dikkat",bg:"Внимание",ar:"انتباه"},
+ "Gem. health":{en:"Avg. health",tr:"Ort. sağlık",bg:"Ср. здраве",ar:"متوسط الصحة"},
+ "Deadline radar":{en:"Deadline radar",tr:"Son tarih radarı",bg:"Радар за срокове",ar:"رادار المواعيد"},
+ "Tijdlijn":{en:"Timeline",tr:"Zaman çizelgesi",bg:"Хронология",ar:"الجدول الزمني"},
+ "Deze week":{en:"This week",tr:"Bu hafta",bg:"Тази седмица",ar:"هذا الأسبوع"},
+ "Binnen 30 dagen":{en:"Within 30 days",tr:"30 gün içinde",bg:"До 30 дни",ar:"خلال 30 يومًا"},
+ "Up-to-date":{en:"Up to date",tr:"Güncel",bg:"Актуален",ar:"محدّث"},
+ "Documentenachterstand":{en:"Document backlog",tr:"Belge gecikmesi",bg:"Изоставане с документи",ar:"تراكم المستندات"},
+ "Loonklant":{en:"Payroll client",tr:"Bordro müşterisi",bg:"Клиент за заплати",ar:"عميل رواتب"},
+ "BTW-klant":{en:"VAT client",tr:"KDV müşterisi",bg:"ДДС клиент",ar:"عميل ض.ق.م"},
+ "Holding":{en:"Holding",tr:"Holding",bg:"Холдинг",ar:"قابضة"},
+ "Slapend":{en:"Dormant",tr:"Atıl",bg:"Спящ",ar:"خامل"},
+ "✓ Geen risicofactoren":{en:"✓ No risk factors",tr:"✓ Risk faktörü yok",bg:"✓ Няма рискови фактори",ar:"✓ لا عوامل خطر"},
+ "Alle klanten gezond 🎉":{en:"All clients healthy 🎉",tr:"Tüm müşteriler sağlıklı 🎉",bg:"Всички клиенти здрави 🎉",ar:"كل العملاء بصحة جيدة 🎉"},
+ "WWFT-onderzoek niet afgerond":{en:"WWFT check not completed",tr:"WWFT incelemesi tamamlanmadı",bg:"WWFT проверката не е завършена",ar:"لم يكتمل فحص WWFT"},
+ "UBO ontbreekt":{en:"UBO missing",tr:"UBO eksik",bg:"Липсва UBO",ar:"UBO مفقود"},
+ "Machtiging verloopt binnenkort":{en:"Authorization expiring soon",tr:"Yetki yakında sona eriyor",bg:"Пълномощното изтича скоро",ar:"التفويض ينتهي قريبًا"},
+ "Aangifte":{en:"Filing",tr:"Beyan",bg:"Декларация",ar:"إقرار"},
+ "Jaarwerk":{en:"Year-end work",tr:"Yıl sonu işi",bg:"Годишна работа",ar:"عمل سنوي"}
+};
+Object.keys(I18N_ADD10).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD10[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD10[k][l];});});
+(function(){const more={
+ en:[[" nog niet ingediend"," not yet filed"]," opgesteld".length?[" opgesteld"," prepared"]:null,["Rapport gedeeld: ","Report shared: "],[" ingediend"," filed"],[" betalingsregeling in behandeling"," payment arrangement in progress"]].filter(Boolean),
+ tr:[[" nog niet ingediend"," henüz beyan edilmedi"],[" opgesteld"," hazırlandı"],["Rapport gedeeld: ","Rapor paylaşıldı: "],[" ingediend"," beyan edildi"],[" betalingsregeling in behandeling"," ödeme planı işlemde"]],
+ bg:[[" nog niet ingediend"," още не е подадено"],[" opgesteld"," изготвено"],["Rapport gedeeld: ","Споделен отчет: "],[" ingediend"," подадено"],[" betalingsregeling in behandeling"," споразумение в процес"]],
+ ar:[[" nog niet ingediend"," لم يُقدَّم بعد"],[" opgesteld"," تم إعداده"],["Rapport gedeeld: ","تمت مشاركة تقرير: "],[" ingediend"," مُقدَّم"],[" betalingsregeling in behandeling"," ترتيب دفع قيد المعالجة"]]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[[" bijgewerkt ✓"," updated ✓"],[" aangemaakt ✓"," created ✓"],[" is verwijderd"," has been deleted"],[" verwijderd"," deleted"],[" is al in gebruik"," is already in use"],[" is verplicht"," is required"],["Verplaatst naar ","Moved to "],["Gedeeld met klant ✓","Shared with client ✓"],["Niet meer gedeeld","No longer shared"],["Gearchiveerd","Archived"],["Geheractiveerd","Reactivated"],["Opgeslagen","Saved"],["Download (demo)","Download (demo)"],["Geopend in Fiscaal Gemak (demo)","Opened in Fiscaal Gemak (demo)"]],
  tr:[[" bijgewerkt ✓"," güncellendi ✓"],[" aangemaakt ✓"," oluşturuldu ✓"],[" is verwijderd"," silindi"],[" verwijderd"," silindi"],[" is al in gebruik"," zaten kullanımda"],[" is verplicht"," zorunlu"],["Verplaatst naar ","Taşındı: "],["Gedeeld met klant ✓","Müşteriyle paylaşıldı ✓"],["Niet meer gedeeld","Artık paylaşılmıyor"],["Gearchiveerd","Arşivlendi"],["Geheractiveerd","Yeniden etkinleştirildi"],["Opgeslagen","Kaydedildi"],["Download (demo)","İndir (demo)"],["Geopend in Fiscaal Gemak (demo)","Fiscaal Gemak'ta açıldı (demo)"]],
@@ -3409,6 +3481,11 @@ VIEWS.kantoor.overzicht = ()=>{
   <div class="panel" style="margin-bottom:14px"><h3>Werklast per medewerker</h3>
     ${(()=>{const md=MEDEWERKERS.map(mw=>{const cs=base.filter(c=>c.mw===mw);const tv=cs.reduce((a,c)=>a+state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length,0);const lo=cs.reduce((a,c)=>a+(12-Object.values(state.werk[c.naam].loon['2026']).filter(Boolean).length),0);return {mw,n:cs.length,tv,lo,load:tv+lo};});const mx=Math.max(1,...md.map(x=>x.load));return md.map(x=>{const pct=Math.round(x.load/mx*100);const col=x.tv?'var(--red)':(x.lo?'var(--amber)':'#15803D');return `<div class="wkrow" onclick="mwFilter='${x.mw}';go('klanten')"><span class="av" style="background:${x.tv?'linear-gradient(150deg,#E0233C,#A20C24)':'linear-gradient(150deg,#1F5C90,#103B63)'}">${x.mw[0]}</span><div class="id"><b>${x.mw}</b><div class="t">${x.n} klanten · werklast</div><div class="pbar" style="margin-top:5px;height:5px"><div class="pfill" style="width:${pct}%;background:${col}"></div></div></div><div style="display:flex;gap:6px;flex-shrink:0">${x.tv?`<span class="ck red">${x.tv} te verwerken</span>`:'<span class="ck done">0 te verwerken</span>'}${x.lo?`<span class="ck amber">${x.lo} loon open</span>`:'<span class="ck done">loon bij</span>'}</div></div>`;}).join('');})()}
   </div>
+  <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Client Health &amp; risico</h3><span style="font-size:11.5px;color:var(--grey)">${base.length} actieve klanten</span></div>
+    ${(()=>{const hs=base.map(c=>({c,h:clientHealth(c.naam)}));const avg=Math.round(hs.reduce((a,x)=>a+x.h.score,0)/Math.max(1,hs.length));const risk=hs.filter(x=>x.h.tone==='r').length,att=hs.filter(x=>x.h.tone==='a').length;const top=hs.filter(x=>x.h.tone!=='g').sort((a,b)=>a.h.score-b.h.score).slice(0,5);
+      return `<div class="hsum"><div class="hsum-c"><div class="hsum-n">${avg}</div><div class="hsum-l">Gem. health</div></div><div class="hsum-c"><div class="hsum-n" style="color:var(--red)">${risk}</div><div class="hsum-l">Risico</div></div><div class="hsum-c"><div class="hsum-n" style="color:var(--amber)">${att}</div><div class="hsum-l">Aandacht</div></div><div class="hsum-c"><div class="hsum-n" style="color:#22A565">${hs.length-risk-att}</div><div class="hsum-l">Gezond</div></div></div>
+      <div style="margin-top:12px">${top.length?top.map(x=>`<div class="wkrow" onclick="openClient('${x.c.naam}','overzicht')"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div class="id"><b>${x.c.naam}</b><div class="t">${x.c.mw} · ${x.h.factors.length?x.h.factors[0].l:'—'}</div></div>${healthBadge(x.c.naam)}</div>`).join(''):'<div class="empty" style="padding:18px">Alle klanten gezond 🎉</div>'}</div>`;})()}
+  </div>
   <div class="panel" style="margin-bottom:14px"><h3>AI &amp; automatisering</h3>
     <div class="ai-grid">
       <div class="ai-tile"><div class="n">${monthlyDone}</div><div class="l">Verwerkt deze maand</div></div>
@@ -3442,7 +3519,7 @@ VIEWS.kantoor.klanten = ()=>{
     const tone=quiet?'quiet':(urgent?'red':'amber');
     const msg=quiet?'Geen open werk':(cnt===1?items[0].m:`${cnt} punten vragen aandacht`);
     const sub=exitMode?`${PROG[c.prog]} · nr ${c.nr} · ${c.mw} · tot ${c.eindDatum||'—'}`:`${PROG[c.prog]} · nr ${c.nr} · ${c.mw}`;
-    return `<div class="wsrow ${quiet?'quiet':''}" onclick="openClient('${c.naam}')"><span class="mono">${cpInitials(c.naam)}</span><div class="wsr-id"><div class="wsr-nm">${c.naam}</div><div class="wsr-sub">${sub}</div></div><div class="wsr-st ${tone}"><span class="wsr-st-t">${msg}</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>`;
+    return `<div class="wsrow ${quiet?'quiet':''}" onclick="openClient('${c.naam}')"><span class="mono">${cpInitials(c.naam)}</span><div class="wsr-id"><div class="wsr-nm">${c.naam}</div><div class="wsr-sub">${sub}</div></div><div class="wsr-st ${tone}">${healthBadge(c.naam)}<span class="wsr-st-t">${msg}</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>`;
   };
   const sortWork=(a,b)=>(hasWork(b)?1:0)-(hasWork(a)?1:0);
   let body='';
@@ -3557,7 +3634,7 @@ function kbListHTML(){const q=(kbSearch||'').toLowerCase().trim();
   const idx=c=>state.clients.indexOf(c);
   list.sort((a,b)=>{if(kbSort==='nr')return (parseInt(a.nr,10)||0)-(parseInt(b.nr,10)||0);if(kbSort==='nieuw')return ((b.created||0)-(a.created||0))||(idx(b)-idx(a));return a.naam.localeCompare(b.naam);});
   if(!list.length)return '<div class="empty"><div class="big">🔍</div>Geen klanten gevonden met deze filters.</div>';
-  const rows=list.map(c=>{const d=DOSSIER[c.naam]||{};const gid=clientGroupId(c);return `<div class="kb-row" onclick="openClient('${gJs(c.naam)}')"><div class="kb-cli"><span class="mono" style="background:${cpAvColor(c)}">${cpInitials(c.naam)}</span><div style="min-width:0"><div class="kb-nm">${gEsc(c.naam)}</div><div class="kb-sub">${d.kvk?'KvK '+gEsc(d.kvk):PROG[c.prog]}</div></div></div><div class="kb-c kb-hide2"><span class="kb-nr">${gEsc(c.nr)}</span></div><div class="kb-c"><span class="grp-chip" style="--gc:${groupColor(gid)}">${gEsc(groupName(gid))}</span></div><div class="kb-c kb-hide">${gEsc(c.mw)}</div><div class="kb-c">${c.actief===false?'<span class="pill n">Niet-actief</span>':'<span class="pill g">Actief</span>'}</div><div class="kb-c kb-act" style="display:flex;gap:6px;justify-content:flex-end"><button class="btn ghost sm" onclick="event.stopPropagation();clientEditModal('${gJs(c.naam)}')">Bewerken</button><button class="kb-kebab" title="Meer acties" onclick="event.stopPropagation();clientActions('${gJs(c.naam)}')">⋯</button></div></div>`;}).join('');
+  const rows=list.map(c=>{const d=DOSSIER[c.naam]||{};const gid=clientGroupId(c);return `<div class="kb-row" onclick="openClient('${gJs(c.naam)}')"><div class="kb-cli"><span class="mono" style="background:${cpAvColor(c)}">${cpInitials(c.naam)}</span><div style="min-width:0"><div class="kb-nm">${gEsc(c.naam)}</div><div class="kb-sub">${d.kvk?'KvK '+gEsc(d.kvk):PROG[c.prog]}</div></div></div><div class="kb-c kb-hide2"><span class="kb-nr">${gEsc(c.nr)}</span></div><div class="kb-c"><span class="grp-chip" style="--gc:${groupColor(gid)}">${gEsc(groupName(gid))}</span></div><div class="kb-c kb-hide">${gEsc(c.mw)}</div><div class="kb-c" style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${c.actief!==false?healthBadge(c.naam):''}${c.actief===false?'<span class="pill n">Niet-actief</span>':'<span class="pill g">Actief</span>'}</div><div class="kb-c kb-act" style="display:flex;gap:6px;justify-content:flex-end"><button class="btn ghost sm" onclick="event.stopPropagation();clientEditModal('${gJs(c.naam)}')">Bewerken</button><button class="kb-kebab" title="Meer acties" onclick="event.stopPropagation();clientActions('${gJs(c.naam)}')">⋯</button></div></div>`;}).join('');
   return `<div class="kb-head"><div>Klant</div><div class="kb-hide2">Klantnr</div><div>Groep</div><div class="kb-hide">Beheerder</div><div>Status</div><div></div></div>${rows}`;
 }
 function kbRender(){const el=document.getElementById('kbList');if(el)el.innerHTML=kbListHTML();}
@@ -3614,6 +3691,58 @@ function setIbDate(naam,y,f,v){state.werk[naam].ib[y][f]=v;}
 function toggleLoon(naam,m){state.werk[naam].loon['2026'][m]=!state.werk[naam].loon['2026'][m];renderClient();}
 function uploadDocKantoor(naam){modal('Document uploaden voor '+naam,`<div class="uploadbox">⤓ <b>Sleep een bestand hierheen</b></div><div style="height:14px"></div>`+selectField('Map','kdMap',MAPPEN,'Overig')+field('Omschrijving','kdNaam','text','Nieuw document')+selectField('Delen met klant?','kdShare',['Nee — alleen intern','Ja — delen met klant'])+`<div class="ai-note">Intern = alleen zichtbaar voor het kantoor. Gedeeld = ook zichtbaar in het klantportaal.</div>`,'Opslaan',()=>{const gedeeld=val('kdShare').startsWith('Ja');state.dossierDocs.unshift({client:naam,map:val('kdMap'),naam:val('kdNaam')||'Document',date:'17-06-2026',by:'kantoor',gedeeld});toast(gedeeld?'Document opgeslagen en gedeeld met klant':'Document opgeslagen (intern)');openClient(naam,'mappen');});}
 function toggleShare(i,naam){state.dossierDocs[i].gedeeld=!state.dossierDocs[i].gedeeld;toast(state.dossierDocs[i].gedeeld?'Gedeeld met klant ✓':'Niet meer gedeeld');renderClient();}
+/* ===== Client intelligence (health · segmentatie · deadlines) ===== */
+function daysUntil(d){return -docDays(d);}
+function clientHealth(naam){
+  const c=state.clients.find(x=>x.naam===naam),w=state.werk[naam];if(!c||!w)return{score:100,tone:'g',status:'Gezond',factors:[]};
+  const d=DOSSIER[naam]||{};let score=100;const F=[];
+  const tv=state.inbox.filter(x=>x.client===naam&&x.state!=='sent').length;
+  if(tv){const p=Math.min(16,tv*3);score-=p;F.push({l:`${tv} document(en) te verwerken`,p});}
+  const sg=state.signals.filter(s=>s.client===naam&&s.state!=='resolved');
+  let sp=0;sg.forEach(s=>sp+=s.ernst==='hoog'?8:s.ernst==='midden'?4:2);sp=Math.min(24,sp);
+  if(sp){score-=sp;F.push({l:`${sg.length} open signaal/signalen`,p:sp});}
+  const obc=w.ob['Q1 2026'];if(obc&&!obc.ingediend){const p=(obc.ingelezen||obc.ingeleverd)?5:10;score-=p;F.push({l:'OB Q1 2026 nog niet ingediend',p});}
+  const ibc=w.ib[IBYEAR];if(ibc&&!ibc.ingediend){const p=(ibc.ib||ibc.jaarrekening)?4:8;score-=p;F.push({l:`IB ${IBYEAR} nog niet ingediend`,p});}
+  const loonDone=Object.values(w.loon['2026']).filter(Boolean).length;const nowM=parseInt(TODAY.split('-')[1],10);const lp=Math.max(0,nowM-loonDone);
+  if(lp){const p=Math.min(12,lp*2);score-=p;F.push({l:`${lp} loonaangifte(n) openstaand`,p});}
+  if(!d.wwft||d.wwft==='Actie vereist'){score-=8;F.push({l:'WWFT-onderzoek niet afgerond',p:8});}
+  if(d.ubo==='Ontbreekt'){score-=6;F.push({l:'UBO ontbreekt',p:6});}
+  if((d.machtiging||'').indexOf('Verloopt')>=0){score-=4;F.push({l:'Machtiging verloopt binnenkort',p:4});}
+  const reg=state.regelingen.filter(r=>r.client===naam&&r.status!=='afgehandeld').length;
+  if(reg){score-=5;F.push({l:`${reg} betalingsregeling in behandeling`,p:5});}
+  score=Math.max(0,Math.min(100,Math.round(score)));
+  const tone=score>=80?'g':(score>=55?'a':'r');
+  const status=score>=80?'Gezond':(score>=55?'Aandacht nodig':'Risico');
+  F.sort((a,b)=>b.p-a.p);
+  return{score,tone,status,factors:F};
+}
+function clientLabels(naam){
+  const c=state.clients.find(x=>x.naam===naam),w=state.werk[naam];if(!c||!w)return[];
+  if(c.actief===false)return[['Slapend','grey']];
+  const h=clientHealth(naam),L=[];
+  const tv=state.inbox.filter(x=>x.client===naam&&x.state!=='sent').length;
+  const sg=state.signals.filter(s=>s.client===naam&&s.state!=='resolved').length;
+  const emps=state.employees.filter(e=>e.client===naam).length;
+  if(h.tone==='r')L.push(['Risico','red']);else if(h.tone==='a')L.push(['Aandacht nodig','amber']);else L.push(['Up-to-date','green']);
+  if(tv>=3)L.push(['Documentenachterstand','amber']);
+  if(emps>0)L.push(['Loonklant','navy']);
+  if(c.btwAuto)L.push(['BTW-klant','navy']);
+  if(/holding/i.test(c.naam)||(typeof clientGroupId==='function'&&clientGroupId(c)==='holding'))L.push(['Holding','navy']);
+  return L.slice(0,5);
+}
+function clientDeadlines(naam){
+  const w=state.werk[naam];if(!w)return[];const out=[];const obc=w.ob['Q1 2026'],ibc=w.ib[IBYEAR];
+  const loonDone=Object.values(w.loon['2026']).filter(Boolean).length;const nowM=parseInt(TODAY.split('-')[1],10);
+  if(obc&&!obc.ingediend)out.push({l:'OB Q1 2026',d:'31-07-2026',type:'OB'});
+  if(ibc&&!ibc.ingediend)out.push({l:`IB ${IBYEAR}`,d:ibc.uitstel?'01-05-2027':'01-05-2026',type:'IB'});
+  if(nowM-loonDone>0)out.push({l:'Loonaangifte',d:'30-06-2026',type:'Loon'});
+  state.regelingen.filter(r=>r.client===naam&&r.status!=='afgehandeld').forEach(r=>out.push({l:'Betalingsregeling',d:r.datum||'30-06-2026',type:'Regeling'}));
+  out.forEach(o=>{o.days=daysUntil(o.d);o.bucket=o.days<0?'overdue':(o.days===0?'today':(o.days<=7?'week':(o.days<=30?'month':'later')));});
+  return out;
+}
+function healthRing(h,size){const s=size||54;return `<div class="hs-ring ${h.tone}" style="--p:${h.score};width:${s}px;height:${s}px"><span style="font-size:${Math.round(s*0.28)}px">${h.score}</span></div>`;}
+function healthBadge(naam){const h=clientHealth(naam);return `<span class="hs-badge ${h.tone}" title="Client Health ${h.score}/100 · ${h.status}"><span class="hs-dot"></span>${h.score}</span>`;}
+function segChipsHTML(naam){const L=clientLabels(naam);if(!L.length)return '';return `<div class="seg-chips">${L.map(x=>`<span class="seg-chip ${x[1]}">${x[0]}</span>`).join('')}</div>`;}
 function renderClient(){
   const naam=curClient,c=state.clients.find(x=>x.naam===naam); if(!c)return; const w=state.werk[naam],d=DOSSIER[naam]||{};
   const tabBtn=(k,l)=>`<div class="tab ${clientTab===k?'active':''}" onclick="openClient('${naam}','${k}')">${l}</div>`;
@@ -3649,11 +3778,14 @@ function renderClient(){
     const pk=s=>{const p=(s||'01-01-2000').split('-');return p[2]+p[1]+p[0];};
     const tdy=pk(TODAY),ydk=pk('16-06-2026');
     const feed=[];
-    state.inbox.filter(x=>x.client===naam).forEach(x=>feed.push({d:x.date,k:pk(x.date),t:`Document ${x.state==='sent'?'verwerkt':'ontvangen'}: ${x.sup}`,s:money(x.amt)}));
-    state.regelingen.filter(r=>r.client===naam).forEach(r=>feed.push({d:r.datum,k:pk(r.datum),t:`Betalingsregeling ${r.status==='afgehandeld'?'ingediend':'aangevraagd'}`,s:r.kenmerk||''}));
+    state.inbox.filter(x=>x.client===naam).forEach(x=>feed.push({d:x.date,k:pk(x.date),t:`Document ${x.state==='sent'?'verwerkt':'ontvangen'}: ${x.sup}`,s:money(x.amt),tone:x.state==='sent'?'g':'navy'}));
+    KWARTALEN.forEach(q=>{const o=w.ob[q];if(o.ingediend)feed.push({d:o.ingediend,k:pk(o.ingediend),t:`OB ${q} ingediend`,s:'Aangifte',tone:'g'});});
+    IBJAREN.forEach(y=>{const o=w.ib[y];if(o.ingediend)feed.push({d:o.ingediend,k:pk(o.ingediend),t:`IB ${y} ingediend`,s:'Aangifte',tone:'g'});if(o.jaarrekening)feed.push({d:o.jaarrekening,k:pk(o.jaarrekening),t:`Jaarrekening ${y} opgesteld`,s:'Jaarwerk',tone:'navy'});});
+    state.dossierDocs.filter(x=>x.client===naam&&x.gedeeld&&x.by==='kantoor').forEach(x=>feed.push({d:x.date,k:pk(x.date),t:`Rapport gedeeld: ${x.naam}`,s:x.map,tone:'navy'}));
+    state.regelingen.filter(r=>r.client===naam).forEach(r=>feed.push({d:r.datum,k:pk(r.datum),t:`Betalingsregeling ${r.status==='afgehandeld'?'ingediend':'aangevraagd'}`,s:r.kenmerk||'',tone:'a'}));
     feed.sort((a,b)=>b.k.localeCompare(a.k));
-    const gT=feed.filter(f=>f.k===tdy),gY=feed.filter(f=>f.k===ydk),gE=feed.filter(f=>f.k!==tdy&&f.k!==ydk).slice(0,5);
-    const fRows=arr=>arr.map(f=>`<div class="cc-frow"><span class="cc-fdot"></span><div class="cc-ft">${f.t}</div><div class="cc-fs">${f.s?f.s+' · ':''}${f.d}</div></div>`).join('');
+    const gT=feed.filter(f=>f.k===tdy),gY=feed.filter(f=>f.k===ydk),gE=feed.filter(f=>f.k!==tdy&&f.k!==ydk).slice(0,6);
+    const fRows=arr=>arr.map(f=>`<div class="cc-frow"><span class="cc-fdot ${f.tone||''}"></span><div class="cc-ft">${f.t}</div><div class="cc-fs">${f.s?f.s+' · ':''}${f.d}</div></div>`).join('');
     const fGrp=(lbl,arr)=>arr.length?`<div class="cc-fglbl">${lbl}</div>${fRows(arr)}`:'';
     const lastAct=feed.length?feed[0].d:'—';
     const dls=[];
@@ -3662,6 +3794,9 @@ function renderClient(){
     if(ibOpen)dls.push({l:'Aangifte IB',d:ibc.uitstel?'01-05-2027':'01-05-2026'});
     dls.sort((a,b)=>pk(a.d).localeCompare(pk(b.d)));
     const nextDl=dls[0];
+    const _hlt=clientHealth(naam);const _segs=segChipsHTML(naam);const _dl=clientDeadlines(naam);
+    const drBuckets=[['Te laat','red','overdue'],['Vandaag','red','today'],['Deze week','amber','week'],['Binnen 30 dagen','navy','month']];
+    const drHTML=drBuckets.map(b=>{const it=_dl.filter(x=>x.bucket===b[2]);return it.length?`<div class="dr-grp ${b[1]}"><div class="dr-h">${b[0]} · ${it.length}</div>${it.map(x=>`<div class="dr-row"><span class="dr-l">${x.l}</span><span class="dr-d">${x.d}</span></div>`).join('')}</div>`:'';}).join('');
     content=`
     <div class="cc-grid">
       <div class="cc-main">
@@ -3670,18 +3805,25 @@ function renderClient(){
           <div class="cc-op"><div class="cc-opl">Laatste activiteit</div><div class="cc-opv">${lastAct}</div></div>
           <div class="cc-op"><div class="cc-opl">Volgende deadline</div><div class="cc-opv">${nextDl?nextDl.d:'—'}${nextDl?` <span class="cc-opx">${nextDl.l}</span>`:''}</div></div>
         </div>
+        ${_segs}
         <div class="cc-sec">
           <div class="cc-h">Wat vraagt vandaag aandacht?</div>
           ${acts.length?`<div class="cc-acts">${acts.map(a=>`<div class="cc-actrow ${a.sev}" onclick="openClient('${naam}','${a.tab}')"><span class="cc-bar"></span><div class="cc-atxt"><div class="cc-at">${a.t}</div><div class="cc-as">${a.s}</div></div><span class="cc-arrow">→</span></div>`).join('')}</div>`:`<div class="cc-clear"><span class="cc-ok">✓</span> Geen openstaande acties — alles is bij.</div>`}
         </div>
       </div>
       <div class="cc-side">
+        <div class="cc-sec hs-card">
+          <div class="cc-h">Client Health</div>
+          <div class="hs-top">${healthRing(_hlt)}<div><div class="hs-status ${_hlt.tone}">${_hlt.status}</div><div class="hs-sub">${_hlt.score} / 100</div></div></div>
+          <div class="hs-factors">${_hlt.factors.length?_hlt.factors.slice(0,3).map(f=>`<div class="hs-f"><span>${f.l}</span><b>−${f.p}</b></div>`).join(''):'<div class="hs-ok">✓ Geen risicofactoren</div>'}</div>
+        </div>
+        ${drHTML?`<div class="cc-sec"><div class="cc-h">Deadline radar</div><div class="dr">${drHTML}</div></div>`:''}
         <div class="cc-sec">
           <div class="cc-h">Statusoverzicht</div>
           <div class="cc-comp">${comp.map(r=>`<div class="cc-crow" onclick="openClient('${naam}','${r.tab}')"><span class="cc-cdot ${r.tone}"></span><div class="cc-cl"><div class="cc-cn">${r.l}<span class="cc-cad">${r.cad}</span></div><div class="cc-cs">${r.sub}</div></div><span class="pill ${r.tone}">${r.st}</span></div>`).join('')}</div>
         </div>
         <div class="cc-sec">
-          <div class="cc-h">Recente activiteit</div>
+          <div class="cc-h">Tijdlijn</div>
           <div class="cc-feed">${(gT.length||gY.length||gE.length)?`${fGrp('Vandaag',gT)}${fGrp('Gisteren',gY)}${fGrp('Eerder',gE)}`:'<div class="cc-empty">Nog geen recente activiteit.</div>'}</div>
         </div>
         <div class="cc-sec cc-meta">
