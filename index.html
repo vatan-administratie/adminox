@@ -510,6 +510,37 @@
   .jc-row .jc-box{transition:.12s}
   body.dark .jc-box.open{border-color:var(--line)}
   .hsum-c{transition:.12s}.panel .hsum-c:hover{border-color:var(--brand-2)}
+  /* AI Dagstart */
+  .ds{margin-bottom:14px;background:linear-gradient(180deg,var(--brand-tint),var(--card))}
+  .ds-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .ds-greet{font-size:18px;font-weight:800;color:var(--ink)}
+  .ds-sub{font-size:12.5px;color:var(--grey);margin-top:2px}
+  .ds-stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+  .ds-chip{font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--grey);cursor:pointer;transition:.12s}
+  .ds-chip:hover{border-color:var(--brand-2)}
+  .ds-chip.r{background:var(--danger-soft);color:var(--danger);border-color:var(--danger-soft)}
+  .ds-chip.a{background:var(--amber-soft);color:var(--amber);border-color:var(--amber-soft)}
+  .ds-chip.g{background:var(--green-soft);color:var(--green);border-color:var(--green-soft)}
+  .ds-list{display:flex;flex-direction:column;gap:7px}
+  .ds-row{display:flex;align-items:center;gap:11px;padding:10px 12px;background:var(--card);border:1px solid var(--line);border-radius:11px;cursor:pointer;transition:.12s}
+  .ds-row:hover{border-color:var(--brand-2);box-shadow:var(--sh-sm)}
+  .ds-num{width:22px;height:22px;border-radius:6px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0}
+  .ds-id{flex:1;min-width:0}.ds-nm{font-weight:700;color:var(--ink);font-size:13.5px}.ds-rsn{font-size:11.5px;color:var(--grey)}
+  .ds-mw{font-size:11.5px;color:var(--grey-2);flex-shrink:0}
+  .ds-row .chev{width:16px;height:16px;color:var(--grey-2);flex-shrink:0}
+  /* Werkdruk-voorspeller */
+  .wd-row{display:flex;align-items:center;gap:12px;padding:11px 6px;border-bottom:1px solid var(--line-2);cursor:pointer}
+  .wd-row:last-child{border-bottom:0}
+  .wd-row .av{width:38px;height:38px;border-radius:11px;color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;flex-shrink:0}
+  .wd-id{flex:1;min-width:0}
+  .wd-nm{font-weight:700;color:var(--ink);font-size:13.5px;display:flex;align-items:center;gap:8px}
+  .wd-pct{font-size:11px;font-weight:800;padding:1px 8px;border-radius:6px;font-variant-numeric:tabular-nums}
+  .wd-pct.r{background:var(--danger-soft);color:var(--danger)}.wd-pct.a{background:var(--amber-soft);color:var(--amber)}.wd-pct.g{background:var(--green-soft);color:var(--green)}
+  .wd-types{display:flex;gap:12px;font-size:11.5px;color:var(--grey);margin-top:4px;font-variant-numeric:tabular-nums}
+  .wd-sugg{margin-top:14px;background:var(--brand-tint);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .wd-sugg-h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--brand-2);margin-bottom:8px}
+  .wd-s{font-size:12.5px;color:var(--ink);padding:4px 0;border-bottom:1px solid var(--line-2)}
+  .wd-s:last-child{border-bottom:0}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
@@ -2087,6 +2118,28 @@ const I18N_ADD13={
  "Status per maand — boekjaar 2026":{en:"Status per month — book year 2026",tr:"Aylık durum — defter yılı 2026",bg:"Статус по месеци — 2026",ar:"الحالة الشهرية — 2026"}
 };
 Object.keys(I18N_ADD13).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD13[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD13[k][l];});});
+/* ===== AI Dagstart + Werkdruk-voorspeller ===== */
+const I18N_ADD14={
+ "Dit vraagt vandaag uw aandacht — start hier.":{en:"This needs your attention today — start here.",tr:"Bugün dikkatinizi gerektiren bunlar — buradan başlayın.",bg:"Това изисква вниманието ви днес — започнете оттук.",ar:"هذا يحتاج انتباهك اليوم — ابدأ من هنا."},
+ "Prioriteit vandaag":{en:"Priority today",tr:"Bugünün önceliği",bg:"Приоритет днес",ar:"أولوية اليوم"},
+ "Hele kantoor":{en:"Whole office",tr:"Tüm ofis",bg:"Целият офис",ar:"المكتب بأكمله"},
+ "Geen urgente klanten — alles is bij.":{en:"No urgent clients — everything is up to date.",tr:"Acil müşteri yok — her şey güncel.",bg:"Няма спешни клиенти — всичко е наред.",ar:"لا عملاء عاجلون — كل شيء محدّث."},
+ "Werkdruk-voorspeller":{en:"Workload forecast",tr:"İş yükü tahmini",bg:"Прогноза за натоварване",ar:"توقّع عبء العمل"},
+ "7 dagen":{en:"7 days",tr:"7 gün",bg:"7 дни",ar:"7 أيام"},
+ "30 dagen":{en:"30 days",tr:"30 gün",bg:"30 дни",ar:"30 يومًا"},
+ "Dit kwartaal":{en:"This quarter",tr:"Bu çeyrek",bg:"Това тримесечие",ar:"هذا الربع"},
+ "✨ AI-suggesties · werkverdeling":{en:"✨ AI suggestions · work distribution",tr:"✨ AI önerileri · iş dağılımı",bg:"✨ AI предложения · разпределение",ar:"✨ اقتراحات AI · توزيع العمل"},
+ "De werkdruk is gelijkmatig verdeeld over het team.":{en:"Workload is evenly distributed across the team.",tr:"İş yükü ekip arasında dengeli dağılmış.",bg:"Натоварването е равномерно разпределено в екипа.",ar:"عبء العمل موزّع بالتساوي على الفريق."},
+ "Loon":{en:"Payroll",tr:"Bordro",bg:"Заплати",ar:"الرواتب"},
+ "Docs":{en:"Docs",tr:"Belge",bg:"Документи",ar:"مستندات"}
+};
+Object.keys(I18N_ADD14).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD14[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD14[k][l];});});
+(function(){const more={
+ en:[[" documenten verwerken"," documents to process"],[" OB-controles"," VAT checks"],[" IB deadline(s)"," income-tax deadline(s)"],[" klanten met signalen"," clients with signals"],[" verstreken"," overdue"],["Wijs nieuwe klanten voorlopig toe aan ","Assign new clients for now to "],[" — laagste werkdruk."," — lowest workload."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," will get a peak in income-tax files — plan extra time."],[" heeft een achterstand in documentverwerking."," has a backlog in document processing."]],
+ tr:[[" documenten verwerken"," belge işlenecek"],[" OB-controles"," KDV kontrolü"],[" IB deadline(s)"," gelir vergisi son tarihi"],[" klanten met signalen"," sinyalli müşteri"],[" verstreken"," gecikti"],["Wijs nieuwe klanten voorlopig toe aan ","Yeni müşterileri şimdilik şuna atayın: "],[" — laagste werkdruk."," — en düşük iş yükü."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," gelir vergisi dosyalarında bir zirve yaşayacak — ekstra zaman planlayın."],[" heeft een achterstand in documentverwerking."," belge işlemede geride."]],
+ bg:[[" documenten verwerken"," документа за обработка"],[" OB-controles"," ДДС проверки"],[" IB deadline(s)"," срок данък доход"],[" klanten met signalen"," клиенти със сигнали"],[" verstreken"," просрочено"],["Wijs nieuwe klanten voorlopig toe aan ","Засега възлагайте нови клиенти на "],[" — laagste werkdruk."," — най-ниско натоварване."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," ще има пик в данъчни досиета — планирайте време."],[" heeft een achterstand in documentverwerking."," има изоставане в обработката."]],
+ ar:[[" documenten verwerken"," مستند للمعالجة"],[" OB-controles"," فحوصات ض.ق.م"],[" IB deadline(s)"," موعد ضريبة الدخل"],[" klanten met signalen"," عملاء بإشارات"],[" verstreken"," متأخر"],["Wijs nieuwe klanten voorlopig toe aan ","عيّن العملاء الجدد مؤقتًا إلى "],[" — laagste werkdruk."," — أقل عبء عمل."],[" krijgt een piek in IB-dossiers — plan extra tijd in."," سيشهد ذروة في ملفات ضريبة الدخل — خصّص وقتًا إضافيًا."],[" heeft een achterstand in documentverwerking."," لديه تراكم في معالجة المستندات."]]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[[" controlepunten"," control points"],["openstaande opvraging(en):","open request(s):"],["Compliance ontbreekt: ","Compliance missing: "],["De OB-aansluiting vergelijkt de ","The VAT reconciliation compares the "],["som van de kwartaalaangiften","sum of the quarterly returns"],["Het verschil — de ","The difference — the "],[" is verstreken ("," has passed ("],[" wachten op verwerking — boek deze eerst."," awaiting processing — book these first."],["Geen urgente acties — deze klant is bij.","No urgent actions — this client is up to date."],[" document(en) te laat aangeleverd"," document(s) delivered late"],["Huidige restschuld","Current remaining debt"]],
  tr:[[" controlepunten"," kontrol noktası"],["openstaande opvraging(en):","açık talep(ler):"],["Compliance ontbreekt: ","Uyum eksik: "],["De OB-aansluiting vergelijkt de ","KDV mutabakatı şunları karşılaştırır: "],["som van de kwartaalaangiften","çeyrek beyanların toplamı"],["Het verschil — de ","Fark — "],[" is verstreken ("," geçti ("],[" wachten op verwerking — boek deze eerst."," işlenmeyi bekliyor — önce bunları kaydedin."],["Geen urgente acties — deze klant is bij.","Acil işlem yok — bu müşteri güncel."],[" document(en) te laat aangeleverd"," belge geç teslim edildi"],["Huidige restschuld","Mevcut kalan borç"]],
@@ -3627,6 +3680,41 @@ function uploadBon(){modal('Bon / inkoopfactuur uploaden',uploadZone('bon','bonU
 function bonUpload(inp){const f=inp.files&&inp.files[0];if(!f)return;const id=++seqInbox;const nm=(f.name||'Bon').replace(/\.[^.]+$/,'');state.inbox.unshift({id,sup:nm,type:(f.type&&f.type.indexOf('image')===0)?'Foto':'PDF',no:'UP-'+id,date:TODAY,amt:0,excl:0,btwAmt:0,client:'Demo BV',prog:KLANT.prog,gl:'4990 · Algemene kosten',btw:'21%',conf:'mid',confTxt:'—',addr:'—',kvk:'—',lines:[[nm+' — aankoop','—']],note:'Nieuw geüpload door klant (foto/bestand) — AI doet eerste voorstel, controle door kantoor.',state:'new'});closeM();toast('Bon verstuurd naar Vatan Administratie ✓');renderNav();renderView();}
 
 /* ============ KANTOOR VIEWS ============ */
+let dagMw='alle', wdWindow=30;
+function dagstartHTML(){
+  const h=new Date().getHours();const greet=h<12?'Goedemorgen':(h<18?'Goedemiddag':'Goedenavond');const who=dagMw==='alle'?'Vatan-team':dagMw;
+  const base=state.clients.filter(c=>c.actief&&(dagMw==='alle'||c.mw===dagMw));
+  const docs=base.reduce((a,c)=>a+state.inbox.filter(x=>x.client===c.naam&&x.state==='new').length,0);
+  const obCtrl=base.filter(c=>!state.werk[c.naam].ob['Q1 2026'].ingediend).length;
+  const ibDl=base.filter(c=>!state.werk[c.naam].ib[IBYEAR].ingediend).length;
+  const sigCl=base.filter(c=>state.signals.filter(s=>s.client===c.naam&&s.state!=='resolved').length).length;
+  const pri=base.map(c=>{const hh=clientHealth(c.naam);const ov=clientDeadlines(c.naam).filter(d=>d.bucket==='overdue');return {c,h:hh,ov,urg:ov.length*100+(100-hh.score)};}).filter(x=>x.urg>0).sort((a,b)=>b.urg-a.urg).slice(0,5);
+  const sel=`<select class="kb-sel" style="height:34px" onchange="dagMw=this.value;renderView()"><option value="alle" ${dagMw==='alle'?'selected':''}>Hele kantoor</option>${MEDEWERKERS.map(m=>`<option ${dagMw===m?'selected':''}>${m}</option>`).join('')}</select>`;
+  return `<div class="panel ds"><div class="ds-top"><div><div class="ds-greet">${greet}, ${who}</div><div class="ds-sub">Dit vraagt vandaag uw aandacht — start hier.</div></div>${sel}</div>
+    <div class="ds-stats"><span class="ds-chip ${docs?'r':'g'}" onclick="go('verwerken')">${docs} documenten verwerken</span><span class="ds-chip ${obCtrl?'r':'g'}" onclick="go('obwerk')">${obCtrl} OB-controles</span><span class="ds-chip ${ibDl?'a':'g'}" onclick="go('ibwerk')">${ibDl} IB deadline(s)</span><span class="ds-chip ${sigCl?'a':'g'}" onclick="setMwFilter('alle');go('klanten')">${sigCl} klanten met signalen</span></div>
+    <div class="mod-sub" style="margin:15px 0 8px">Prioriteit vandaag</div>
+    ${pri.length?`<div class="ds-list">${pri.map((x,i)=>`<div class="ds-row" onclick="openClient('${gJs(x.c.naam)}','overzicht')"><span class="ds-num">${i+1}</span>${healthBadge(x.c.naam)}<div class="ds-id"><div class="ds-nm">${x.c.naam}</div><div class="ds-rsn">${x.ov.length?x.ov[0].l+' verstreken':(x.h.factors[0]?x.h.factors[0].l:'—')}</div></div><span class="ds-mw">${x.c.mw}</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>`).join('')}</div>`:'<div class="cc-clear"><span class="cc-ok">✓</span> Geen urgente klanten — alles is bij.</div>'}
+  </div>`;
+}
+function werkdruk(win){const nm=parseInt(TODAY.split('-')[1],10);
+  const md=MEDEWERKERS.map(mw=>{const cs=state.clients.filter(c=>c.actief&&c.mw===mw);let ob=0,ib=0,loon=0,docs=0,comp=0,reg=0;
+    cs.forEach(c=>{const w=state.werk[c.naam];const d=DOSSIER[c.naam]||{};docs+=state.inbox.filter(x=>x.client===c.naam&&x.state!=='sent').length;
+      if(!w.ob['Q1 2026'].ingediend&&daysUntil('31-07-2026')<=win)ob++;
+      if(!w.ib[IBYEAR].ingediend){const du=w.ib[IBYEAR].uitstel?daysUntil('01-05-2027'):daysUntil('01-05-2026');if(du<0||du<=win)ib++;}
+      const lp=Math.max(0,nm-Object.values(w.loon['2026']).filter(Boolean).length);if(lp&&daysUntil('30-06-2026')<=win)loon+=lp;
+      if((!d.wwft||d.wwft==='Actie vereist')||d.ubo==='Ontbreekt')comp++;
+      reg+=state.regelingen.filter(r=>r.client===c.naam&&r.status!=='afgehandeld').length;});
+    return {mw,n:cs.length,ob,ib,loon,docs,comp,reg,load:ob*3+ib*4+loon+docs+comp*2+reg*2};});
+  const mx=Math.max(1,...md.map(x=>x.load));md.forEach(x=>x.pct=Math.round(x.load/mx*100));return md;}
+function werkdrukSugg(md){const s=[];const sorted=[...md].sort((a,b)=>a.load-b.load);const low=sorted[0],high=sorted[sorted.length-1];
+  if(low&&high&&high.load>low.load*1.25+1)s.push(`Wijs nieuwe klanten voorlopig toe aan ${low.mw} — laagste werkdruk.`);
+  const ibMax=[...md].sort((a,b)=>b.ib-a.ib)[0];if(ibMax&&ibMax.ib>=2)s.push(`${ibMax.mw} krijgt een piek in IB-dossiers — plan extra tijd in.`);
+  const docMax=[...md].sort((a,b)=>b.docs-a.docs)[0];if(docMax&&docMax.docs>=3)s.push(`${docMax.mw} heeft een achterstand in documentverwerking.`);
+  return s.length?s:['De werkdruk is gelijkmatig verdeeld over het team.'];}
+function werkdrukHTML(){const wins=[[7,'7 dagen'],[30,'30 dagen'],[90,'Dit kwartaal']];const md=werkdruk(wdWindow);
+  return `<div class="row-between"><h3 style="margin:0">Werkdruk-voorspeller</h3><div class="ftabs" style="margin:0">${wins.map(w=>`<div class="ftab ${wdWindow===w[0]?'active':''}" onclick="wdWindow=${w[0]};renderView()">${w[1]}</div>`).join('')}</div></div>
+    <div style="margin-top:12px">${md.map(x=>{const lvl=x.pct>75?'r':(x.pct>45?'a':'g');return `<div class="wd-row" onclick="mwFilter='${x.mw}';go('klanten')"><span class="av" style="background:linear-gradient(150deg,#1F5C90,#103B63)">${x.mw[0]}</span><div class="wd-id"><div class="wd-nm">${x.mw} <span class="wd-pct ${lvl}">${x.pct}%</span></div><div class="wd-types"><span>OB ${x.ob}</span><span>IB ${x.ib}</span><span>Loon ${x.loon}</span><span>Docs ${x.docs}</span></div><div class="pbar" style="margin-top:6px;height:5px"><div class="pfill" style="width:${x.pct}%;background:${lvl==='r'?'var(--red)':lvl==='a'?'var(--amber)':'#22A565'}"></div></div></div></div>`;}).join('')}</div>
+    <div class="wd-sugg"><div class="wd-sugg-h">✨ AI-suggesties · werkverdeling</div>${werkdrukSugg(md).map(s=>`<div class="wd-s">${s}</div>`).join('')}</div>`;}
 VIEWS.kantoor.overzicht = ()=>{
   const base=state.clients.filter(c=>c.actief);
   const teVerwerken=state.inbox.filter(x=>x.state==='new').length, inQueue=state.inbox.filter(x=>x.state==='queue').length;
@@ -3643,11 +3731,7 @@ VIEWS.kantoor.overzicht = ()=>{
   ];
   const dl7=dls.filter(x=>x.tone==='red'||x.tone==='amber').length;
   return `<h1 class="title">Kantooroverzicht</h1><div class="sub">Vatan Administratie &amp; Advies — ${base.length} actieve klanten · ${MEDEWERKERS.length} medewerkers.</div>
-  ${(teVerwerken||openSig||obOpen||dl7)?`<div class="attn-band slim ${teVerwerken||openSig||obOpen?'danger':'warn'}">
-    <div class="ab-ic">${_svg('<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>')}</div>
-    <div class="ab-txt"><div class="ab-h">Vraagt vandaag aandacht</div><div class="ab-s">Open werk, signalen en naderende deadlines.</div></div>
-    <div class="attn-chips">${teVerwerken?`<span class="attn-chip red" onclick="go('verwerken')">${teVerwerken} te verwerken</span>`:''}${openSig?`<span class="attn-chip red" onclick="setMwFilter('alle');go('klanten')">${openSig} signalen</span>`:''}${dl7?`<span class="attn-chip amber" onclick="go('obwerk')">${dl7} deadlines deze week</span>`:''}${obOpen?`<span class="attn-chip red" onclick="go('obwerk')">${obOpen} OB te laat</span>`:''}</div>
-  </div>`:''}
+  ${dagstartHTML()}
   <div class="stats">
     <div class="stat ${teVerwerken?'t-red':''}" onclick="go('verwerken')" style="cursor:pointer" title="Open verwerkingswachtrij per klant"><div class="stat-top"><div class="lbl">Te verwerken</div><div class="stat-ic">${icon('verwerken')}</div></div><div class="val">${teVerwerken}</div><div class="delta">klik voor wachtrij per klant →</div></div>
     <div class="stat ${openSig?'t-red':''}" onclick="setMwFilter('alle');go('klanten')" style="cursor:pointer"><div class="stat-top"><div class="lbl">Open signalen</div><div class="stat-ic">${icon('watisdit')}</div></div><div class="val">${openSig}</div><div class="delta">aandachtspunten</div></div>
@@ -3663,6 +3747,7 @@ VIEWS.kantoor.overzicht = ()=>{
   </div>
   <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Workload-center · medewerkers</h3><span style="font-size:11.5px;color:var(--grey)">klanten · docs · signalen · deadlines · werkdruk</span></div>
     <div style="margin-top:12px">${workloadCenterHTML()}</div></div>
+  <div class="panel" style="margin-bottom:14px">${werkdrukHTML()}</div>
   <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Boekhoudkoppelingen — health</h3><button class="btn ghost sm" onclick="coachOffice()">✨ AI-coach</button></div>
     ${(()=>{const aff=base.map(c=>({c,iss:exactIssues(c.naam)})).filter(x=>x.iss.length).sort((a,b)=>b.iss.filter(i=>i.tone==='r').length-a.iss.filter(i=>i.tone==='r').length);return `<div class="hsum" style="margin-top:12px"><div class="hsum-c"><div class="hsum-n">${base.length-aff.length}</div><div class="hsum-l">Gezond</div></div><div class="hsum-c"><div class="hsum-n" style="color:var(--red)">${aff.filter(x=>x.iss.some(i=>i.tone==='r')).length}</div><div class="hsum-l">Probleem</div></div><div class="hsum-c"><div class="hsum-n" style="color:var(--amber)">${aff.filter(x=>!x.iss.some(i=>i.tone==='r')).length}</div><div class="hsum-l">Attentie</div></div><div class="hsum-c"><div class="hsum-n">${base.length}</div><div class="hsum-l">Koppelingen</div></div></div>
       <div style="margin-top:12px">${aff.length?aff.slice(0,5).map(x=>`<div class="wkrow" onclick="openClient('${x.c.naam}','overzicht')"><span class="av" style="background:${cpAvColor(x.c)}">${cpInitials(x.c.naam)}</span><div class="id"><b>${x.c.naam}</b><div class="t">${PROG[x.c.prog]} · ${x.iss[0].area}: ${x.iss[0].msg}</div></div><span class="ck ${x.iss.some(i=>i.tone==='r')?'red':'amber'}">${x.iss.length} ${x.iss.length>1?'issues':'issue'}</span></div>`).join(''):'<div class="empty" style="padding:18px">Alle koppelingen gezond 🎉</div>'}</div>`;})()}
