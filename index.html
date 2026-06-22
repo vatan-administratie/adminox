@@ -17,7 +17,7 @@
     /* Brand accent · red (restricted: logo, primary CTA, error, overdue, critical) */
     --red:#D71941; --red-dark:#B01334; --red-soft:#FEE2E2; --red-tint:#FDF2F4;
     /* Text */
-    --ink:#0F172A; --ink-2:#1E293B; --grey:#64748B; --grey-2:#94A3B8;
+    --ink:#0F172A; --ink-2:#1E293B; --grey:#52606E; --grey-2:#677484;
     /* Surfaces */
     --line:#E2E8F0; --line-2:#EEF2F7; --bg:#F7F9FC; --card:#FFFFFF; --hover:#F1F5F9;
     /* Status */
@@ -200,14 +200,14 @@
   .wf-grp .chev{width:13px;height:13px;color:var(--grey-2);transition:transform .15s;flex-shrink:0}
   .wf-grp.closed .chev{transform:rotate(-90deg)}
   .wf-grp .n{font-weight:500;text-transform:none;letter-spacing:0}
-  .wf-row{display:grid;grid-template-columns:18px minmax(0,1.5fr) minmax(0,1.25fr) auto minmax(0,.75fr) 22px;align-items:center;gap:14px;padding:6px 14px;border-bottom:1px solid var(--line-2);transition:background .12s,opacity .12s}
+  .wf-row{display:grid;grid-template-columns:18px minmax(0,1.5fr) minmax(0,1.25fr) auto minmax(0,.75fr) 22px;align-items:center;gap:14px;padding:4px 14px;border-bottom:1px solid var(--line-2);transition:background .12s,opacity .12s}
   .wf-row:last-child{border-bottom:0}
   .wf-row:hover{background:var(--hover)}
   .wf-l{display:flex;align-items:center;gap:9px;min-width:0;cursor:pointer}
   .wf-l .mono{width:24px;height:24px;font-size:10px;border-radius:6px}
   .wf-id{min-width:0}
-  .wf-nm{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
-  .wf-sub{font-size:10.5px;color:var(--grey-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
+  .wf-nm{font-size:12.5px;font-weight:700;color:var(--ink);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.15}
+  .wf-sub{font-size:10.5px;color:var(--grey);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.15}
   .wf-stat{display:flex;flex-direction:column;min-width:0;line-height:1.2}
   .wf-statt{font-size:12.5px;font-weight:700;letter-spacing:-.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .wf-statt.red{color:var(--danger)}.wf-statt.amber{color:#b07d18}.wf-statt.done{color:#15803D}
@@ -526,12 +526,12 @@
   .ds-chip.r{background:var(--danger-soft);color:var(--danger);border-color:var(--danger-soft)}
   .ds-chip.a{background:var(--amber-soft);color:var(--amber);border-color:var(--amber-soft)}
   .ds-chip.g{background:var(--green-soft);color:var(--green);border-color:var(--green-soft)}
-  .ds-list{display:flex;flex-direction:column;gap:7px}
-  .ds-row{display:flex;align-items:center;gap:11px;padding:10px 12px;background:var(--card);border:1px solid var(--line);border-radius:11px;cursor:pointer;transition:.12s}
-  .ds-row:hover{border-color:var(--brand-2);box-shadow:var(--sh-sm)}
-  .ds-num{width:22px;height:22px;border-radius:6px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0}
-  .ds-id{flex:1;min-width:0}.ds-nm{font-weight:700;color:var(--ink);font-size:13.5px}.ds-rsn{font-size:11.5px;color:var(--grey)}
-  .ds-mw{font-size:11.5px;color:var(--grey-2);flex-shrink:0}
+  .ds-list{display:flex;flex-direction:column;gap:5px}
+  .ds-row{display:flex;align-items:center;gap:10px;padding:6px 12px;background:var(--card);border:1px solid var(--line);border-radius:10px;cursor:pointer;transition:.12s}
+  .ds-row:hover{border-color:var(--brand-2);background:var(--hover);box-shadow:var(--sh-sm)}
+  .ds-num{width:20px;height:20px;border-radius:6px;background:var(--brand-soft);color:var(--brand-2);display:grid;place-items:center;font-size:11.5px;font-weight:800;flex-shrink:0}
+  .ds-id{flex:1;min-width:0}.ds-nm{font-weight:700;color:var(--ink);font-size:13px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ds-rsn{font-size:11px;color:var(--grey);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ds-mw{font-size:11.5px;color:var(--grey);flex-shrink:0}
   .ds-row .chev{width:16px;height:16px;color:var(--grey-2);flex-shrink:0}
   /* Werkdruk-voorspeller */
   .wd-row{display:flex;align-items:center;gap:12px;padding:11px 6px;border-bottom:1px solid var(--line-2);cursor:pointer}
@@ -986,8 +986,13 @@
   /* invoice: wat gebeurt er nu */
   .ink-now{margin-top:12px;background:var(--brand-tint);border:1px solid var(--brand-soft);border-radius:12px;padding:12px 14px}
   .ink-now-h{font-weight:700;color:var(--ink);font-size:13px;margin-bottom:8px}
-  .ink-now-row{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--ink);padding:3px 0;line-height:1.4}
-  .ink-now-dot{width:7px;height:7px;border-radius:50%;background:var(--brand-2);margin-top:5px;flex-shrink:0}
+  .ink-now-row{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink);padding:3.5px 0;line-height:1.35}
+  .ink-now-row.todo{color:var(--grey)}
+  .ink-now-mk{width:18px;text-align:center;font-size:12px;font-weight:800;flex-shrink:0}
+  .ink-now-mk.done{color:#15803D}.ink-now-mk.now{color:#b07d18}.ink-now-mk.todo{color:var(--grey-2)}
+  .ink-now-row.now{font-weight:700}
+  .ai-trust{display:flex;align-items:flex-start;gap:10px;background:var(--info-soft);border:1px solid color-mix(in srgb,var(--info) 28%,transparent);border-radius:11px;padding:10px 13px;margin:8px 0 4px;font-size:12px;line-height:1.45;color:var(--ink-2)}
+  .ai-trust-i{width:19px;height:19px;border-radius:50%;background:var(--info);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0;margin-top:1px}
   /* global polish: hover + density */
   .ic-card:hover,.lp-card.click:hover{transform:translateY(-2px)}
   .dcc:hover .dcc-arr,.ic-card:hover .ic-arr{color:var(--brand-2)}
@@ -1045,6 +1050,11 @@
   /* planning command center */
   .pl-grp{margin-top:16px}
   .pl-gh{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-2);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .pl-grp.r,.pl-grp.a,.pl-grp.i{border-left:3px solid var(--line);padding-left:12px;border-radius:0 8px 8px 0}
+  .pl-grp.r{border-left-color:var(--danger)}.pl-grp.a{border-left-color:var(--amber)}.pl-grp.i{border-left-color:var(--info)}
+  .pl-gh.r{color:var(--danger)}.pl-gh.a{color:#b07d18}.pl-gh.i{color:var(--info)}
+  body.dark .pl-gh.a{color:#e0a93a}
+  .pl-gh.r span,.pl-gh.a span,.pl-gh.i span{background:currentColor;color:#fff;border-radius:20px;padding:1px 7px;font-size:10px}
   .pl-gh span{background:var(--line-2);border-radius:20px;padding:1px 9px;font-size:11px}
   .pl-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;margin-bottom:8px;background:var(--card);cursor:pointer;transition:.12s}
   .pl-row:hover{border-color:var(--brand-2);box-shadow:var(--sh-sm)}
@@ -1705,7 +1715,7 @@
   .chatin input{flex:1;border:1px solid var(--line);border-radius:9px;padding:9px 10px;font-size:13px;font-family:inherit;background:#fff;color:#1c1f24}
   .chatin input:focus{outline:2px solid var(--brand-soft);border-color:var(--brand-2)}
   /* ===== DARK MODE ===== */
-  body.dark{--ink:#EAECEF;--ink-2:#c7ccd3;--grey:#98a1ad;--grey-2:#6c757f;--line:#2a313c;--line-2:#1f242d;--bg:#0c0f15;--card:#161c25;--hover:#1d2531;--brand-2:#4f93d6;--brand-soft:#16273c;--brand-tint:#111a27;--red-dark:#f58b8b;--red-soft:#2c151a;--red-tint:#1c1216;--danger:#f58b8b;--danger-soft:#2c151a;--green:#5bd08a;--green-soft:#10241a;--amber:#f2c078;--amber-soft:#261f0f;--info:#84b6ee;--info-soft:#122339;--ex:#f3a4ac;--ex-soft:#2a141a;--sn:#7fc6f0;--sn-soft:#0f2532;--sh-sm:0 1px 2px rgba(0,0,0,.4);--sh-md:0 6px 18px rgba(0,0,0,.45);--sh-lg:0 16px 44px rgba(0,0,0,.55);background:#0c0f15;color:#EAECEF}
+  body.dark{--ink:#EAECEF;--ink-2:#c7ccd3;--grey:#a8b1bd;--grey-2:#8b94a1;--line:#2a313c;--line-2:#1f242d;--bg:#0c0f15;--card:#161c25;--hover:#1d2531;--brand-2:#4f93d6;--brand-soft:#16273c;--brand-tint:#111a27;--red-dark:#f58b8b;--red-soft:#2c151a;--red-tint:#1c1216;--danger:#f58b8b;--danger-soft:#2c151a;--green:#5bd08a;--green-soft:#10241a;--amber:#f2c078;--amber-soft:#261f0f;--info:#84b6ee;--info-soft:#122339;--ex:#f3a4ac;--ex-soft:#2a141a;--sn:#7fc6f0;--sn-soft:#0f2532;--sh-sm:0 1px 2px rgba(0,0,0,.4);--sh-md:0 6px 18px rgba(0,0,0,.45);--sh-lg:0 16px 44px rgba(0,0,0,.55);background:#0c0f15;color:#EAECEF}
   body.dark .topbar{background:#0a0c0f}
   body.dark .side{background:#12151b}
   body.dark .btn.dark{background:#2a2f37;color:#fff}
@@ -4160,6 +4170,7 @@ VIEWS.klant.aihulp = ()=>`
   <h1 class="title">AI Assistent</h1>
   <div class="sub">Slimme hulp van Vatan Administratie &amp; Advies. Begrijpt u een brief, aanslag of factuur niet? Upload hem en krijg direct eenvoudige uitleg — of stel gewoon een vraag.</div>
   <div class="ai-askbox"><span class="ai-askic">✨</span><input id="aiAskInp" class="ai-askinp" type="text" placeholder="Stel uw vraag over een document, factuur of belastingbrief..." onkeydown="if(event.key==='Enter')askAIBox()"><button class="btn primary ai-askbtn" onclick="askAIBox()">Vraag AI</button></div>
+  <div class="ai-trust"><span class="ai-trust-i">ℹ</span><div>AI geeft een uitleg op basis van uw document. Bij belangrijke fiscale of juridische beslissingen controleert een medewerker van Vatan altijd mee.</div></div>
   <div class="lp-serv" style="margin-top:6px">
     <div class="lp-card click" onclick="go('watisdit')"><div class="ic">${_svg(ICONS.watisdit)}</div><h3>Wat is dit?</h3><p>Upload een brief, aanslag, factuur of document en ontvang direct een eenvoudige uitleg in uw eigen taal.</p></div>
     <div class="lp-card click" onclick="go('watisdit')"><div class="ic">${_svg('<path d="M20 7L10 17l-5-5"/><path d="M4 20h16"/>')}</div><h3>Wat moet ik doen?</h3><p>Laat de assistent uitleggen welke actie nodig is: betalen, bewaren, doorsturen of reageren.</p></div>
@@ -4337,6 +4348,7 @@ function inkStatusTone(i){const b=inkBucket(i);return b==='done'?'g':(b==='prog'
 function inkNextStep(i){const b=inkBucket(i),exc=inkException(i);if(b==='done')return 'Verwerking afgerond';if(b==='prog')return exc?'Aanvullende controle door Vatan':'Wordt verwerkt in '+PROG[i.prog];return exc?'Aanvullende controle door Vatan':'BTW-controle door Vatan';}
 function inkEta(i){const b=inkBucket(i),exc=inkException(i);if(b==='done')return 'Afgerond';if(exc)return 'Binnen 2 werkdagen';return b==='prog'?'Binnen 1 werkdag':'Binnen 1–2 werkdagen';}
 function inkNow(i){const b=inkBucket(i),exc=inkException(i);if(b==='done')return ['Deze factuur is volledig verwerkt in '+PROG[i.prog]+'.','De boeking is definitief afgerond.','U hoeft hier niets meer voor te doen.'];if(b==='prog')return [exc?'Vatan voert een aanvullende controle uit op deze factuur.':'Vatan verwerkt deze factuur in '+PROG[i.prog]+'.','Daarna wordt de boeking definitief afgerond.','U hoeft momenteel niets te doen.'];return [exc?'Vatan controleert deze factuur extra omdat deze afwijkt van eerdere facturen.':'Vatan controleert deze factuur.','Daarna wordt deze verwerkt in '+PROG[i.prog]+'.','U hoeft momenteel niets te doen.'];}
+function inkNowSteps(i){const b=inkBucket(i),exc=inkException(i);const lab3=exc?'Extra controle door Vatan':'Controle door Vatan';const lab4='Verwerken in '+PROG[i.prog];const s=[['done','Factuur ontvangen'],['done','Leverancier herkend']];if(b==='todo')s.push(['now',lab3],['todo',lab4],['todo','Afgerond']);else if(b==='prog')s.push(['done',lab3],['now',lab4],['todo','Afgerond']);else s.push(['done',lab3],['done',lab4],['done','Afgerond']);return s;}
 function openInkoop(id){const d=state.inbox.find(x=>x.id===id); if(!d)return;
   const st=d.state==='sent'?'Verwerkt':d.state==='queue'?'In verwerking':'Nieuw';
   const linesHtml=d.lines.map(l=>`<tr><td${d.messy?' class="handwrite"':''}>${l[0]}</td><td class="r">${l[1]}</td></tr>`).join('');
@@ -4357,7 +4369,7 @@ function openInkoop(id){const d=state.inbox.find(x=>x.id===id); if(!d)return;
           return `<div class="ink-detail">
             <div class="ink-statusrow"><span class="pill ${tn}">${lab}</span><span class="ink-prog2">${progPill(d.prog)} <span style="color:var(--grey);font-size:12px">${PROG[d.prog]}</span></span></div>
             <div class="ink-next"><div class="ink-next-i"><div class="ink-next-l">Volgende stap</div><div class="ink-next-v">${inkNextStep(d)}</div></div><div class="ink-next-i"><div class="ink-next-l">Verwachte verwerking</div><div class="ink-next-v">${inkEta(d)}</div></div></div>
-            <div class="ink-now"><div class="ink-now-h">💡 Wat gebeurt er nu?</div>${inkNow(d).map(l=>`<div class="ink-now-row"><span class="ink-now-dot"></span><span>${l}</span></div>`).join('')}</div>
+            <div class="ink-now"><div class="ink-now-h">💡 Wat gebeurt er nu?</div>${inkNowSteps(d).map(s=>`<div class="ink-now-row ${s[0]}"><span class="ink-now-mk ${s[0]}">${s[0]==='done'?'✓':s[0]==='now'?'⏳':'○'}</span><span>${s[1]}</span></div>`).join('')}</div>
             <div class="bk-sec" style="margin-top:12px">${inkStages(d)}</div>
             <div class="ink-sup-card"><div class="ink-sup-h">📇 Leverancier-inzicht</div><div class="ink-sup-grid">
               <div><div class="ink-sl2">Leverancier</div><div class="ink-sv2">${d.sup}</div></div>
@@ -5357,12 +5369,12 @@ VIEWS.kantoor.planning=()=>{
   const counts={today:allItems.filter(x=>x.period==='today').length,week:allItems.filter(x=>x.period==='week').length,next:allItems.filter(x=>x.period==='next').length,month:allItems.filter(x=>x.period==='month').length};
   const wl=MEDEWERKERS.map(mw=>{const its=allItems.filter(x=>x.mw===mw);return {mw,today:its.filter(x=>x.period==='today').length,week:its.filter(x=>x.period==='week').length,overdue:its.filter(x=>x.days<0).length,total:its.length};});
   const wlMax=Math.max(1,...wl.map(x=>x.today+x.week));
-  const wlHTML=`<div class="mod-sub" style="margin-top:4px">Werkdruk vandaag</div><div class="plw-grid">${wl.map(x=>{const pct=Math.min(100,Math.round(x.today/8*100));let st,tone;if(x.overdue>0||pct>75){st='Hoge druk';tone='r';}else if(pct>=40){st='Lichte druk';tone='a';}else{st='Op schema';tone='g';}const active=plMw===x.mw;return `<div class="plw-card ${active?'active':''}" onclick="plMw='${active?'alle':x.mw}';renderView()"><div class="plw-top"><span class="plw-av">${x.mw[0]}</span><div class="plw-id"><div class="plw-nm">${x.mw}</div><div class="plw-sub">${x.total} taken</div></div><span class="pill ${tone}">${st}</span></div><div class="plw-metr"><div class="plw-m"><div class="plw-mv">${x.today}</div><div class="plw-ml">Vandaag</div></div><div class="plw-m"><div class="plw-mv">${x.week}</div><div class="plw-ml">Deze week</div></div><div class="plw-m"><div class="plw-mv ${x.overdue?'r':''}">${x.overdue}</div><div class="plw-ml">Te laat</div></div></div><div class="plw-caprow"><span class="plw-capv">${pct}% capaciteit</span>${active?'<span class="plw-flt">● actief filter</span>':''}</div><div class="plw-bar"><div class="plw-fill ${tone}" style="width:${pct}%"></div></div></div>`;}).join('')}</div>`;
+  const wlHTML=`<div class="mod-sub" style="margin-top:4px">Werkdruk vandaag</div><div class="plw-grid">${wl.map(x=>{const pct=Math.round(x.today/8*100);let st,tone;if(pct>100){st='Overbelast';tone='r';}else if(pct>=80){st='Druk';tone='a';}else if(pct>=50){st='Normaal';tone='i';}else{st='Lage druk';tone='g';}const active=plMw===x.mw;return `<div class="plw-card ${active?'active':''}" onclick="plMw='${active?'alle':x.mw}';renderView()"><div class="plw-top"><span class="plw-av">${x.mw[0]}</span><div class="plw-id"><div class="plw-nm">${x.mw}</div><div class="plw-sub">${x.total} taken</div></div><span class="pill ${tone}">${st}</span></div><div class="plw-metr"><div class="plw-m"><div class="plw-mv">${x.today}</div><div class="plw-ml">Vandaag</div></div><div class="plw-m"><div class="plw-mv">${x.week}</div><div class="plw-ml">Deze week</div></div><div class="plw-m"><div class="plw-mv ${x.overdue?'r':''}">${x.overdue}</div><div class="plw-ml">Te laat</div></div></div><div class="plw-caprow"><span class="plw-capv">${pct}% capaciteit</span>${active?'<span class="plw-flt">● actief filter</span>':''}</div><div class="plw-bar"><div class="plw-fill ${tone}" style="width:${Math.min(100,pct)}%"></div></div></div>`;}).join('')}</div>`;
   let items=allItems.filter(x=>(plMw==='alle'||x.mw===plMw)&&(plType==='alle'||x.type===plType)&&(plUrg==='alle'||x.urg===plUrg)&&(plPeriod==='alle'||x.period===plPeriod));
   items.sort((a,b)=>a.days-b.days);
-  const PER=[['today','Vandaag'],['week','Deze week'],['next','Volgende week'],['month','Deze maand']];
+  const PER=[['today','Vandaag','r'],['week','Deze week','a'],['next','Volgende week','a'],['month','Deze maand','i']];
   const sel=(opts,cur,fn)=>`<select class="gl" style="width:auto" onchange="${fn}">${opts.map(o=>`<option value="${o[0]}" ${o[0]===cur?'selected':''}>${o[1]}</option>`).join('')}</select>`;
-  const grp=PER.map(p=>{const its=items.filter(x=>x.period===p[0]);if(!its.length)return '';return `<div class="pl-grp"><div class="pl-gh">${p[1]} <span>${its.length}</span></div>${its.map(x=>`<div class="pl-row ${x.urg}" onclick="openClient('${gJs(x.client)}','${x.tab}')"><span class="pl-dot ${x.urg}"></span><div class="pl-c"><div class="pl-t">${x.l}</div><div class="pl-s">${x.client} · ${x.mw}</div></div><div class="pl-meta"><span class="pl-type">${x.type}</span><div class="pl-d">${x.d}${x.d!=='—'?` · ${relTime(x.days)}`:''}</div></div></div>`).join('')}</div>`;}).join('');
+  const grp=PER.map(p=>{const its=items.filter(x=>x.period===p[0]);if(!its.length)return '';return `<div class="pl-grp ${p[2]}"><div class="pl-gh ${p[2]}">${p[1]} <span>${its.length}</span></div>${its.map(x=>`<div class="pl-row ${x.urg}" onclick="openClient('${gJs(x.client)}','${x.tab}')"><span class="pl-dot ${x.urg}"></span><div class="pl-c"><div class="pl-t">${x.l}</div><div class="pl-s">${x.client} · ${x.mw}</div></div><div class="pl-meta"><span class="pl-type">${x.type}</span><div class="pl-d">${x.d}${x.d!=='—'?` · ${relTime(x.days)}`:''}</div></div></div>`).join('')}</div>`;}).join('');
   return `<div class="row-between"><h1 class="title">Planning</h1><button class="btn ghost" onclick="go('overzicht')">← Dashboard</button></div>
   <div class="sub">Alle deadlines en taken over alle klanten — gegroepeerd op periode, voor de hele dagplanning.</div>
   <div class="sgrid c4"><div class="scard"><div class="sl">Vandaag</div><div class="sv r">${counts.today}</div></div><div class="scard"><div class="sl">Deze week</div><div class="sv a">${counts.week}</div></div><div class="scard"><div class="sl">Volgende week</div><div class="sv">${counts.next}</div></div><div class="scard"><div class="sl">Deze maand</div><div class="sv">${counts.month}</div></div></div>
