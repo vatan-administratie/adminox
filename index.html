@@ -946,6 +946,47 @@
   .ink-next-l{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--grey-2)}
   .ink-next-v{font-size:13px;font-weight:700;color:var(--ink);margin-top:2px}
   @media(max-width:600px){.plw-grid{grid-template-columns:1fr}.ink-next{grid-template-columns:1fr}}
+  /* polish: featured panel + subtitle + badge */
+  .panel.feat{border-color:var(--brand-2);box-shadow:0 6px 20px rgba(16,59,99,.10)}
+  body.dark .panel.feat{box-shadow:0 6px 20px rgba(0,0,0,.32)}
+  .panel-sub{font-size:11.5px;color:var(--grey);margin-top:2px}
+  .cnt-badge{background:var(--brand-soft);color:var(--brand-2);font-weight:800;font-size:11.5px;padding:3px 10px;border-radius:20px;white-space:nowrap}
+  .tightrows .wkrow{padding-top:7px;padding-bottom:7px}
+  /* planning workload extras */
+  .plw-card.active{border-color:var(--brand-2);box-shadow:0 0 0 2px var(--brand-2) inset,0 4px 14px rgba(16,59,99,.12);background:var(--brand-tint)}
+  .plw-caprow{display:flex;align-items:center;justify-content:space-between;margin:2px 0 7px}
+  .plw-capv{font-size:11px;font-weight:700;color:var(--grey-2)}
+  .plw-flt{font-size:10.5px;font-weight:700;color:var(--brand-2)}
+  .plw-bar{height:9px}
+  .plw-fill{transition:width .35s ease}
+  /* bulk bar animation */
+  .bulkbar{animation:bulkup .22s cubic-bezier(.2,.8,.2,1)}
+  @keyframes bulkup{from{transform:translateX(-50%) translateY(14px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+  @media(max-width:600px){.bulkbar{animation:bulkupm .22s cubic-bezier(.2,.8,.2,1)}@keyframes bulkupm{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}}
+  /* client: laatste activiteit */
+  .la-list{display:flex;flex-direction:column}
+  .la-row{display:flex;align-items:center;gap:11px;padding:8px 0;border-bottom:1px solid var(--line-2)}
+  .la-row:last-child{border-bottom:0}
+  .la-ic{width:28px;height:28px;border-radius:8px;background:var(--brand-soft);display:grid;place-items:center;font-size:14px;flex-shrink:0}
+  .la-t{flex:1;min-width:0;font-size:13px;color:var(--ink)}
+  .la-d{font-size:11.5px;color:var(--grey-2);white-space:nowrap}
+  /* AI ask box */
+  .ai-askbox{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--brand-2);border-radius:14px;padding:8px 8px 8px 14px;margin:14px 0 4px;box-shadow:0 4px 16px rgba(16,59,99,.08)}
+  body.dark .ai-askbox{box-shadow:0 4px 16px rgba(0,0,0,.28)}
+  .ai-askic{font-size:18px;flex-shrink:0}
+  .ai-askinp{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font-size:14px;font-family:inherit;outline:none}
+  .ai-askinp::placeholder{color:var(--grey-2)}
+  .ai-askbtn{flex-shrink:0}
+  @media(max-width:560px){.ai-askbox{flex-wrap:wrap}.ai-askinp{order:2;width:100%;border-top:1px solid var(--line-2);padding-top:8px}.ai-askbtn{order:3;width:100%}}
+  /* invoice: wat gebeurt er nu */
+  .ink-now{margin-top:12px;background:var(--brand-tint);border:1px solid var(--brand-soft);border-radius:12px;padding:12px 14px}
+  .ink-now-h{font-weight:700;color:var(--ink);font-size:13px;margin-bottom:8px}
+  .ink-now-row{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--ink);padding:3px 0;line-height:1.4}
+  .ink-now-dot{width:7px;height:7px;border-radius:50%;background:var(--brand-2);margin-top:5px;flex-shrink:0}
+  /* global polish: hover + density */
+  .ic-card:hover,.lp-card.click:hover{transform:translateY(-2px)}
+  .dcc:hover .dcc-arr,.ic-card:hover .ic-arr{color:var(--brand-2)}
+  .dash-grid{margin-bottom:14px}
   /* secure chat */
   .chatw{max-width:720px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--sh-sm)}
   .chatw-head{display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:var(--hover)}
@@ -3010,6 +3051,23 @@ const I18N_ADD29={
  "Afgerond":{en:"Completed",tr:"Tamamlandı",bg:"Завършено",ar:"مكتمل"}
 };
 Object.keys(I18N_ADD29).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD29[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD29[k][l];});});
+const I18N_ADD30={
+ "Cliënten die vandaag aandacht vragen.":{en:"Clients needing attention today.",tr:"Bugün ilgi bekleyen müşteriler.",bg:"Клиенти, изискващи внимание днес.",ar:"عملاء يحتاجون اهتمامًا اليوم."},
+ "Op schema":{en:"On schedule",tr:"Planlandığı gibi",bg:"По график",ar:"وفق الجدول"},
+ "Lichte druk":{en:"Light load",tr:"Hafif yük",bg:"Леко натоварване",ar:"حِمل خفيف"},
+ "Hoge druk":{en:"High load",tr:"Yüksek yük",bg:"Високо натоварване",ar:"حِمل مرتفع"},
+ "actief filter":{en:"active filter",tr:"aktif filtre",bg:"активен филтър",ar:"عامل تصفية نشط"},
+ "Wat gebeurt er nu?":{en:"What happens now?",tr:"Şimdi ne oluyor?",bg:"Какво се случва сега?",ar:"ماذا يحدث الآن؟"},
+ "Vraag AI":{en:"Ask AI",tr:"AI'ya sor",bg:"Попитай AI",ar:"اسأل الذكاء الاصطناعي"},
+ "documenten van":{en:"documents from",tr:"belge,",bg:"документа от",ar:"مستندات من"},
+ "klanten geselecteerd":{en:"clients selected",tr:"müşteriden seçildi",bg:"клиенти избрани",ar:"عملاء محدّدون"},
+ "Document verwerkt door Vatan":{en:"Document processed by Vatan",tr:"Belge Vatan tarafından işlendi",bg:"Документ обработен от Vatan",ar:"تمت معالجة المستند من Vatan"},
+ "Document aangeleverd":{en:"Document submitted",tr:"Belge gönderildi",bg:"Документ подаден",ar:"تم تقديم المستند"},
+ "BTW-concept klaar ter controle":{en:"VAT draft ready for review",tr:"KDV taslağı kontrol için hazır",bg:"ДДС чернова готова за преглед",ar:"مسودة ض.ق.م جاهزة للمراجعة"},
+ "Nieuw bericht van Vatan":{en:"New message from Vatan",tr:"Vatan'dan yeni mesaj",bg:"Ново съобщение от Vatan",ar:"رسالة جديدة من Vatan"},
+ "Document opgevraagd door Vatan":{en:"Document requested by Vatan",tr:"Vatan tarafından belge talep edildi",bg:"Документ заявен от Vatan",ar:"طلب Vatan مستندًا"}
+};
+Object.keys(I18N_ADD30).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD30[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD30[k][l];});});
 (function(){const more={en:[['dagen geleden','days ago'],['Verwerkt in','Processed in']],tr:[['dagen geleden','gün önce'],['Verwerkt in','İşlendi:']],bg:[['dagen geleden','дни преди'],['Verwerkt in','Обработено в']],ar:[['dagen geleden','منذ أيام'],['Verwerkt in','تمت المعالجة في']]};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>{if(!I18N_SUB[l].some(e=>e[0]===p[0]))I18N_SUB[l].push(p);});});})();
 (function(){const more={
  en:[['Medewerker','Employee'],['Bericht','Message'],['Herinnering','Reminder'],['Ontvangen','Received'],['Afronden','Complete'],['Gecontroleerd','Reviewed'],['Opvragen','Request'],['Export','Export']],
@@ -4092,9 +4150,11 @@ const AI_FAQ=[
 ];
 function aiHelp(i){const h=AI_HELP[i];if(!h)return;modal('✨ '+h[1],`<div class="aiq-card"><div class="aiq-ic">${h[0]}</div><div class="aiq-body">${h[2]}</div></div><div class="aiq-note">🔒 Eenvoudige uitleg in gewone taal.</div>`,'Openen →',()=>{closeM();go(h[3]);return true;});}
 function aiFaq(i){const q=AI_FAQ[i];if(!q)return;modal('✨ '+q[0],`<div class="aiq-card"><div class="aiq-ic">💬</div><div class="aiq-body">${q[1]}</div></div><div class="aiq-note">🔒 Algemene uitleg — voor uw specifieke situatie kijkt Vatan met u mee.</div>`,'Sluiten',()=>true);}
+function askAIBox(){const el=document.getElementById('aiAskInp');const q=el?el.value.trim():'';if(!q){toggleChat();return;}modal('✨ AI Assistent',`<div class="aiq-card"><div class="aiq-ic">💬</div><div class="aiq-body"><b>Uw vraag:</b> ${gEsc(q)}<br><br>Vatan AI helpt u graag op weg. Voor een concreet antwoord op uw situatie kunt u het betreffende document uploaden bij <b>Wat is dit?</b> — dan geeft de assistent direct uitleg in gewone taal. Voor persoonlijk advies kijkt uw vaste contactpersoon bij Vatan met u mee.</div></div><div class="aiq-note">🔒 Uw vraag wordt niet opgeslagen in uw administratie.</div>`,'Naar Wat is dit? →',()=>{closeM();go('watisdit');return true;});}
 VIEWS.klant.aihulp = ()=>`
   <h1 class="title">AI Assistent</h1>
   <div class="sub">Slimme hulp van Vatan Administratie &amp; Advies. Begrijpt u een brief, aanslag of factuur niet? Upload hem en krijg direct eenvoudige uitleg — of stel gewoon een vraag.</div>
+  <div class="ai-askbox"><span class="ai-askic">✨</span><input id="aiAskInp" class="ai-askinp" type="text" placeholder="Stel uw vraag over een document, factuur of belastingbrief..." onkeydown="if(event.key==='Enter')askAIBox()"><button class="btn primary ai-askbtn" onclick="askAIBox()">Vraag AI</button></div>
   <div class="lp-serv" style="margin-top:6px">
     <div class="lp-card click" onclick="go('watisdit')"><div class="ic">${_svg(ICONS.watisdit)}</div><h3>Wat is dit?</h3><p>Upload een brief, aanslag, factuur of document en ontvang direct een eenvoudige uitleg in uw eigen taal.</p></div>
     <div class="lp-card click" onclick="go('watisdit')"><div class="ic">${_svg('<path d="M20 7L10 17l-5-5"/><path d="M4 20h16"/>')}</div><h3>Wat moet ik doen?</h3><p>Laat de assistent uitleggen welke actie nodig is: betalen, bewaren, doorsturen of reageren.</p></div>
@@ -4147,6 +4207,13 @@ VIEWS.klant.overzicht = ()=>{
   kdl.forEach(x=>{x.days=(typeof daysUntil==='function')?daysUntil(x.d):0;x.tone=x.days<0?'r':(x.days<=7?'r':(x.days<=30?'a':'g'));});
   kdl.sort((a,b)=>a.days-b.days);
   const vw=[state.inbox.filter(x=>x.client==='Demo BV'&&x.state!=='sent').length?'Inkoopfacturen verwerken':null,(state.btwReturns||[]).some(b=>b.status!=='Ingediend')?'BTW-aangifte voorbereiden':null,'Loonadministratie controleren',drClient.length?'Aangeleverde documenten beoordelen':null,'Uw administratie up-to-date houden'].filter(Boolean);
+  const acts=[];
+  {const sd=state.inbox.filter(i=>i.client==='Demo BV'&&i.state==='sent');if(sd.length)acts.push(['📄','Document verwerkt door Vatan',sd.map(x=>x.date).sort((a,b)=>pkDate(b)-pkDate(a))[0]]);
+   const nd=state.inbox.filter(i=>i.client==='Demo BV'&&i.state==='new');if(nd.length)acts.push(['⬆','Document aangeleverd',nd.map(x=>x.date).sort((a,b)=>pkDate(b)-pkDate(a))[0]]);
+   if(btwConcept)acts.push(['🧾','BTW-concept klaar ter controle',TODAY]);
+   if(unread)acts.push(['✉','Nieuw bericht van Vatan',TODAY]);
+   if(drClient.length)acts.push(['📋','Document opgevraagd door Vatan',TODAY]);}
+  acts.sort((a,b)=>pkDate(b[2])-pkDate(a[2]));
   const needs=openCount||inkCount||docReq||unread||drClient.length||btwConcept;
   const apRows=[];
   drClient.forEach(r=>apRows.push({ic:icon('documenten'),cls:'warn',t:'Document aanleveren',s:gEsc(r.item),v:'Upload',oc:"go('documenten')"}));
@@ -4167,6 +4234,7 @@ VIEWS.klant.overzicht = ()=>{
     <div class="cwf-i navy"><div class="cwf-n">${inkCount+btwConcept}</div><div class="cwf-l">Vatan is bezig</div></div>
     <div class="cwf-i g"><div class="cwf-n">${state.inbox.filter(i=>i.client==='Demo BV'&&i.state==='sent').length}</div><div class="cwf-l">Afgerond</div></div>
   </div>
+  ${acts.length?`<div class="panel" style="margin-bottom:14px"><div class="cc-h" style="margin:0 0 9px">Laatste activiteit</div><div class="la-list">${acts.slice(0,4).map(a=>`<div class="la-row"><span class="la-ic">${a[0]}</span><span class="la-t">${a[1]}</span><span class="la-d">${docRel(Math.max(0,-daysUntil(a[2])))}</span></div>`).join('')}</div></div>`:''}
   <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Aankomende deadlines</h3><span style="font-size:11px;color:var(--grey-2)">🔴 binnen 7 dagen · 🟠 binnen 30 · 🟢 later</span></div>
     ${kdl.length?`<div class="kdl-list">${kdl.slice(0,6).map(x=>`<div class="kdl-row"><span class="kdl-dot ${x.tone}"></span><div class="kdl-c"><div class="kdl-l">${x.l}</div><div class="kdl-s">${x.cat}</div></div><div class="kdl-d"><div class="kdl-date">${x.d}</div><div class="kdl-rel ${x.tone}">${relTime(x.days)}</div></div></div>`).join('')}</div>`:'<div class="cc-empty" style="padding:18px">Geen aankomende deadlines — alles is op tijd.</div>'}
   </div>
@@ -4263,6 +4331,7 @@ function inkStatusLabel(i){const b=inkBucket(i),exc=inkException(i);if(b==='done
 function inkStatusTone(i){const b=inkBucket(i);return b==='done'?'g':(b==='prog'?'a':'r');}
 function inkNextStep(i){const b=inkBucket(i),exc=inkException(i);if(b==='done')return 'Verwerking afgerond';if(b==='prog')return exc?'Aanvullende controle door Vatan':'Wordt verwerkt in '+PROG[i.prog];return exc?'Aanvullende controle door Vatan':'BTW-controle door Vatan';}
 function inkEta(i){const b=inkBucket(i),exc=inkException(i);if(b==='done')return 'Afgerond';if(exc)return 'Binnen 2 werkdagen';return b==='prog'?'Binnen 1 werkdag':'Binnen 1–2 werkdagen';}
+function inkNow(i){const b=inkBucket(i),exc=inkException(i);if(b==='done')return ['Deze factuur is volledig verwerkt in '+PROG[i.prog]+'.','De boeking is definitief afgerond.','U hoeft hier niets meer voor te doen.'];if(b==='prog')return [exc?'Vatan voert een aanvullende controle uit op deze factuur.':'Vatan verwerkt deze factuur in '+PROG[i.prog]+'.','Daarna wordt de boeking definitief afgerond.','U hoeft momenteel niets te doen.'];return [exc?'Vatan controleert deze factuur extra omdat deze afwijkt van eerdere facturen.':'Vatan controleert deze factuur.','Daarna wordt deze verwerkt in '+PROG[i.prog]+'.','U hoeft momenteel niets te doen.'];}
 function openInkoop(id){const d=state.inbox.find(x=>x.id===id); if(!d)return;
   const st=d.state==='sent'?'Verwerkt':d.state==='queue'?'In verwerking':'Nieuw';
   const linesHtml=d.lines.map(l=>`<tr><td${d.messy?' class="handwrite"':''}>${l[0]}</td><td class="r">${l[1]}</td></tr>`).join('');
@@ -4283,6 +4352,7 @@ function openInkoop(id){const d=state.inbox.find(x=>x.id===id); if(!d)return;
           return `<div class="ink-detail">
             <div class="ink-statusrow"><span class="pill ${tn}">${lab}</span><span class="ink-prog2">${progPill(d.prog)} <span style="color:var(--grey);font-size:12px">${PROG[d.prog]}</span></span></div>
             <div class="ink-next"><div class="ink-next-i"><div class="ink-next-l">Volgende stap</div><div class="ink-next-v">${inkNextStep(d)}</div></div><div class="ink-next-i"><div class="ink-next-l">Verwachte verwerking</div><div class="ink-next-v">${inkEta(d)}</div></div></div>
+            <div class="ink-now"><div class="ink-now-h">💡 Wat gebeurt er nu?</div>${inkNow(d).map(l=>`<div class="ink-now-row"><span class="ink-now-dot"></span><span>${l}</span></div>`).join('')}</div>
             <div class="bk-sec" style="margin-top:12px">${inkStages(d)}</div>
             <div class="ink-sup-card"><div class="ink-sup-h">📇 Leverancier-inzicht</div><div class="ink-sup-grid">
               <div><div class="ink-sl2">Leverancier</div><div class="ink-sv2">${d.sup}</div></div>
@@ -4904,8 +4974,8 @@ VIEWS.kantoor.overzicht = ()=>{
     ${(()=>{const dr=allDocReqs();const w=dr.filter(x=>x.st==='requested').length;const o=dr.filter(x=>x.st==='overdue').length;const r=dr.filter(x=>x.st==='received').length;return `<div class="dcc" onclick="go('docreq')"><div class="dcc-h"><span class="dcc-ic">▣</span>Documentopvragingen<span class="dcc-arr">→</span></div><div class="dcc-m"><div><div class="dcc-v a">${w}</div><div class="dcc-l">Wacht op klant</div></div><div><div class="dcc-v ${o?'r':'g'}">${o}</div><div class="dcc-l">Te laat</div></div><div><div class="dcc-v">${r}</div><div class="dcc-l">Ontvangen</div></div></div></div>`;})()}
   </div>
   <div class="dash-grid">
-    <div class="panel"><div class="row-between"><h3 style="margin:0">Te verwerken per klant</h3><button class="btn ghost sm" onclick="go('verwerken')">Volledige wachtrij →</button></div>
-      <div style="margin-top:10px">${(()=>{const byC={};state.inbox.filter(x=>x.state==='new').forEach(d=>{byC[d.client]=(byC[d.client]||0)+1;});const ks=Object.keys(byC).sort((a,b)=>byC[b]-byC[a]);if(!ks.length)return '<div class="empty" style="padding:22px">Alles verwerkt 🎉</div>';return ks.slice(0,6).map(cn=>{const c=state.clients.find(x=>x.naam===cn)||{};const urgent=byC[cn]>=3;return `<div class="wkrow" onclick="openClient('${cn}','verwerken')"><span class="av" style="background:${c.prog?cpAvColor(c):'#94a3b8'}">${cpInitials(cn)}</span><div class="id"><b>${cn}</b><div class="t">${c.mw||'—'}</div></div><span class="ck ${urgent?'red':'amber'}">${byC[cn]} doc${byC[cn]>1?'en':''}</span></div>`;}).join('')+(ks.length>6?`<div style="text-align:center;margin-top:8px;font-size:11.5px;color:var(--grey)">+ ${ks.length-6} meer klanten in de wachtrij</div>`:'');})()}</div></div>
+    <div class="panel feat"><div class="row-between"><div><h3 style="margin:0">Te verwerken per klant</h3><div class="panel-sub">Cliënten die vandaag aandacht vragen.</div></div><div style="display:flex;align-items:center;gap:8px"><span class="cnt-badge">${new Set(state.inbox.filter(x=>x.state==='new').map(x=>x.client)).size} klanten</span><button class="btn ghost sm" onclick="go('verwerken')">Wachtrij →</button></div></div>
+      <div class="tightrows" style="margin-top:8px">${(()=>{const byC={};state.inbox.filter(x=>x.state==='new').forEach(d=>{byC[d.client]=(byC[d.client]||0)+1;});const ks=Object.keys(byC).sort((a,b)=>byC[b]-byC[a]);if(!ks.length)return '<div class="empty" style="padding:22px">Alles verwerkt 🎉</div>';return ks.slice(0,6).map(cn=>{const c=state.clients.find(x=>x.naam===cn)||{};const urgent=byC[cn]>=3;return `<div class="wkrow" onclick="openClient('${cn}','verwerken')"><span class="av" style="background:${c.prog?cpAvColor(c):'#94a3b8'}">${cpInitials(cn)}</span><div class="id"><b>${cn}</b><div class="t">${c.mw||'—'}</div></div><span class="ck ${urgent?'red':'amber'}">${byC[cn]} doc${byC[cn]>1?'en':''}</span></div>`;}).join('')+(ks.length>6?`<div style="text-align:center;margin-top:8px;font-size:11.5px;color:var(--grey)">+ ${ks.length-6} meer klanten in de wachtrij</div>`:'');})()}</div></div>
     <div class="panel"><h3>Aankomende deadlines</h3>
       <div>${dls.map(x=>`<div class="dl-row ${x.tone}"><span class="dl-dot ${x.tone}"></span><div style="min-width:0"><div class="l">${x.l}</div><div class="s">${x.sub}</div></div><div class="when">${x.d}</div></div>`).join('')}</div>
       <div style="font-size:11px;color:var(--grey-2);margin-top:10px;line-height:1.5">Status: <b style="color:var(--danger)">rood</b> te laat · <b style="color:var(--amber)">oranje</b> binnenkort · <b style="color:#15803D">groen</b> op schema.</div></div>
@@ -5282,7 +5352,7 @@ VIEWS.kantoor.planning=()=>{
   const counts={today:allItems.filter(x=>x.period==='today').length,week:allItems.filter(x=>x.period==='week').length,next:allItems.filter(x=>x.period==='next').length,month:allItems.filter(x=>x.period==='month').length};
   const wl=MEDEWERKERS.map(mw=>{const its=allItems.filter(x=>x.mw===mw);return {mw,today:its.filter(x=>x.period==='today').length,week:its.filter(x=>x.period==='week').length,overdue:its.filter(x=>x.days<0).length,total:its.length};});
   const wlMax=Math.max(1,...wl.map(x=>x.today+x.week));
-  const wlHTML=`<div class="mod-sub" style="margin-top:4px">Werkdruk vandaag</div><div class="plw-grid">${wl.map(x=>{const load=x.today+x.week;const pct=Math.round(load/wlMax*100);const tone=x.overdue>0?'r':(x.today>=6?'a':'g');return `<div class="plw-card" onclick="plMw='${x.mw}';renderView()"><div class="plw-top"><span class="plw-av">${x.mw[0]}</span><div class="plw-id"><div class="plw-nm">${x.mw}</div><div class="plw-sub">${x.total} taken</div></div>${x.overdue>0?`<span class="pill r">${x.overdue} te laat</span>`:'<span class="pill g">op schema</span>'}</div><div class="plw-metr"><div class="plw-m"><div class="plw-mv">${x.today}</div><div class="plw-ml">Vandaag</div></div><div class="plw-m"><div class="plw-mv">${x.week}</div><div class="plw-ml">Deze week</div></div><div class="plw-m"><div class="plw-mv ${x.overdue?'r':''}">${x.overdue}</div><div class="plw-ml">Te laat</div></div></div><div class="plw-bar"><div class="plw-fill ${tone}" style="width:${pct}%"></div></div></div>`;}).join('')}</div>`;
+  const wlHTML=`<div class="mod-sub" style="margin-top:4px">Werkdruk vandaag</div><div class="plw-grid">${wl.map(x=>{const pct=Math.min(100,Math.round(x.today/8*100));let st,tone;if(x.overdue>0||pct>75){st='Hoge druk';tone='r';}else if(pct>=40){st='Lichte druk';tone='a';}else{st='Op schema';tone='g';}const active=plMw===x.mw;return `<div class="plw-card ${active?'active':''}" onclick="plMw='${active?'alle':x.mw}';renderView()"><div class="plw-top"><span class="plw-av">${x.mw[0]}</span><div class="plw-id"><div class="plw-nm">${x.mw}</div><div class="plw-sub">${x.total} taken</div></div><span class="pill ${tone}">${st}</span></div><div class="plw-metr"><div class="plw-m"><div class="plw-mv">${x.today}</div><div class="plw-ml">Vandaag</div></div><div class="plw-m"><div class="plw-mv">${x.week}</div><div class="plw-ml">Deze week</div></div><div class="plw-m"><div class="plw-mv ${x.overdue?'r':''}">${x.overdue}</div><div class="plw-ml">Te laat</div></div></div><div class="plw-caprow"><span class="plw-capv">${pct}% capaciteit</span>${active?'<span class="plw-flt">● actief filter</span>':''}</div><div class="plw-bar"><div class="plw-fill ${tone}" style="width:${pct}%"></div></div></div>`;}).join('')}</div>`;
   let items=allItems.filter(x=>(plMw==='alle'||x.mw===plMw)&&(plType==='alle'||x.type===plType)&&(plUrg==='alle'||x.urg===plUrg)&&(plPeriod==='alle'||x.period===plPeriod));
   items.sort((a,b)=>a.days-b.days);
   const PER=[['today','Vandaag'],['week','Deze week'],['next','Volgende week'],['month','Deze maand']];
@@ -5302,6 +5372,7 @@ function bulkInit(ctx){if(bulkCtx!==ctx){bulkCtx=ctx;bulkSet=new Set();}}
 function bulkToggle(id){id=String(id);if(bulkSet.has(id))bulkSet.delete(id);else bulkSet.add(id);renderView();}
 function bulkSelAll(ids){const all=ids.map(String);const allSel=all.length&&all.every(x=>bulkSet.has(x));if(allSel)all.forEach(x=>bulkSet.delete(x));else all.forEach(x=>bulkSet.add(x));renderView();}
 function bulkClear(){bulkSet=new Set();renderView();}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&bulkSet&&bulkSet.size){const ov=document.getElementById('mOverlay');if(ov&&ov.classList.contains('show'))return;bulkClear();}});
 function bulkCb(id){return `<label class="bulk-cb" onclick="event.stopPropagation()"><input type="checkbox" ${bulkSet.has(String(id))?'checked':''} onchange="bulkToggle('${gJs(String(id))}')"></label>`;}
 function bulkAllBtn(ids){const all=ids.map(String);const allSel=all.length&&all.every(x=>bulkSet.has(x));return `<button class="btn ghost sm" onclick="bulkSelAll([${ids.map(x=>`'${gJs(String(x))}'`).join(',')}])">${allSel?'Selectie wissen':'Alles selecteren'}</button>`;}
 function bulkAssign(){if(!bulkSet.size)return;modal('Medewerker toewijzen aan '+bulkSet.size+' klant(en)',selectFieldKV('Medewerker','baMw',MEDEWERKERS.map(m=>[m,m]),MEDEWERKERS[0]),'Toewijzen',()=>{const mw=val('baMw');let n=0;[...bulkSet].forEach(naam=>{const c=state.clients.find(x=>x.naam===naam);if(c){c.mw=mw;n++;}});toast(n+' klant(en) toegewezen aan '+mw+' ✓');bulkClear();return true;});}
@@ -5318,7 +5389,8 @@ function bulkBar(){if(!bulkSet.size)return '';const isDr=bulkCtx==='docreq';
   const actions=isDr
     ?`<button class="btn ghost sm" onclick="bulkMsg()">✉ Bericht</button><button class="btn ghost sm" onclick="bulkDrRemind()">🔔 Herinnering</button><button class="btn ghost sm" onclick="bulkDrSet('received')">📥 Ontvangen</button><button class="btn ghost sm" onclick="bulkDrSet('completed')">✓ Afronden</button><button class="btn primary sm" onclick="bulkExport()">⬇ Export</button>`
     :`<button class="btn ghost sm" onclick="bulkAssign()">👤 Medewerker</button><button class="btn ghost sm" onclick="bulkDocReq()">📋 Opvragen</button><button class="btn ghost sm" onclick="bulkMsg()">✉ Bericht</button>${(bulkCtx==='ob'||bulkCtx==='ib')?`<button class="btn ghost sm" onclick="bulkReviewed()">✓ Gecontroleerd</button>`:''}<button class="btn primary sm" onclick="bulkExport()">⬇ Export</button>`;
-  return `<div class="bulkbar"><div class="bulkbar-l"><span class="bulkbar-n">${bulkSet.size}</span> ${tStr('geselecteerd')} <button class="bulkbar-x" title="Selectie wissen" onclick="bulkClear()">✕</button></div><div class="bulkbar-a">${actions}</div></div>`;}
+  const dets=isDr?`${tStr('documenten van')} ${new Set(allDocReqs().filter(r=>bulkSet.has(String(r.r.id))).map(r=>r.client)).size} ${tStr('klanten geselecteerd')}`:tStr('geselecteerd');
+  return `<div class="bulkbar"><div class="bulkbar-l"><span class="bulkbar-n">${bulkSet.size}</span> ${dets} <button class="bulkbar-x" title="Selectie wissen (Esc)" onclick="bulkClear()">✕</button></div><div class="bulkbar-a">${actions}</div></div>`;}
 function docReqAdd(naam){modal('Document opvragen bij klant',field('Welk document heeft u nodig?','drItem','text','')+`<div class="ai-note" style="margin-top:10px">De klant ziet dit verzoek in het klantportaal en bij Berichten en kan het document direct aanleveren.</div>`,'Verzoek versturen',()=>{const it=(val('drItem')||'').trim();if(!it){toast('Geef een document op');return false;}ensureDocReq().push({id:++seqDR,client:naam,item:it,status:'requested',requested:TODAY,reminder:false});toast('Verzoek verstuurd naar klant ✓');renderClient();return true;});}
 function docReqSet(id,s){const r=ensureDocReq().find(x=>x.id===id);if(r){r.status=s;toast('Status bijgewerkt ✓');renderClient();}}
 function docReqRemind(id){const r=ensureDocReq().find(x=>x.id===id);if(r){r.reminder=true;toast('Herinnering verstuurd naar klant ✓');renderClient();}}
