@@ -439,6 +439,35 @@
   .hsum-n{font-size:20px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
   .hsum-l{font-size:10.5px;font-weight:600;color:var(--grey);margin-top:2px}
   @media(max-width:600px){.hsum{grid-template-columns:repeat(2,1fr)}}
+  /* jaarafsluiting checklist */
+  .jc-list{display:flex;flex-direction:column}
+  .jc-row{display:flex;align-items:center;gap:11px;padding:9px 10px;border-bottom:1px solid var(--line-2);cursor:pointer;border-radius:8px;transition:.1s}
+  .jc-row:hover{background:var(--hover)}
+  .jc-box{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--line);display:grid;place-items:center;font-size:13px;font-weight:800;flex-shrink:0;color:#fff}
+  .jc-box.g{background:#22A565;border-color:#22A565}.jc-box.a{background:var(--amber);border-color:var(--amber)}.jc-box.grey{background:var(--grey-2);border-color:var(--grey-2)}.jc-box.open{background:transparent;color:transparent}
+  .jc-l{flex:1;font-size:13px;color:var(--ink);font-weight:600}
+  .jc-st{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;color:var(--grey-2);background:var(--bg)}
+  .jc-st.g{background:var(--green-soft);color:var(--green)}.jc-st.a{background:var(--amber-soft);color:var(--amber)}.jc-st.grey{background:var(--hover);color:var(--grey)}
+  .rc-row{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line-2)}
+  .rc-row:last-child{border-bottom:0}
+  .rc-cat{font-size:12.5px;font-weight:700;color:var(--ink)}
+  .rc-sup{font-size:11px;font-weight:600;color:var(--grey-2)}
+  .rc-sub{font-size:11px;color:var(--grey);margin-top:2px}
+  .rc-miss{color:var(--amber)}
+  .rc-row.gap{background:var(--amber-soft);margin:0 -10px;padding:10px;border-radius:9px;border-bottom:0}
+  .rc-acts{display:flex;gap:4px;flex-shrink:0}
+  .dr2{display:flex;flex-direction:column;gap:7px}
+  .dr2-row{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+  .dr2-st{font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;flex-shrink:0;white-space:nowrap}
+  .dr2-st.a{background:var(--amber-soft);color:var(--amber)}.dr2-st.r{background:var(--danger-soft);color:var(--danger)}.dr2-st.g{background:var(--green-soft);color:var(--green)}.dr2-st.navy{background:var(--brand-soft);color:var(--brand-2)}
+  .dr2-main{flex:1;min-width:0}
+  .dr2-l{font-size:12.5px;font-weight:700;color:var(--ink)}
+  .dr2-meta{font-size:11px;color:var(--grey-2)}
+  .dr2-acts{display:flex;gap:4px;flex-shrink:0}
+  .jcsum{display:flex;align-items:center;gap:13px}
+  .jcsum .hsum-n{font-size:22px}
+  .jcsum-r{flex:1;min-width:0}
+  .jcsum-s{font-size:11.5px;color:var(--grey);margin-top:6px}
   @media(max-width:760px){.wf-row{gap:12px;padding:12px 15px}.wf-noteic{opacity:.55}}
   tbody tr.wl-done td{color:var(--grey-2)}
   tbody tr.wl-done td b{color:var(--ink-2);font-weight:600}
@@ -1923,6 +1952,59 @@ const I18N_ADD10={
  "Jaarwerk":{en:"Year-end work",tr:"Yıl sonu işi",bg:"Годишна работа",ar:"عمل سنوي"}
 };
 Object.keys(I18N_ADD10).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD10[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD10[k][l];});});
+/* ===== Jaarafsluiting checklist + AI kosten + opvragingen ===== */
+const I18N_ADD11={
+ "Jaarafsluiting":{en:"Year-end closing",tr:"Yıl sonu kapanışı",bg:"Годишно приключване",ar:"الإقفال السنوي"},
+ "Checklist":{en:"Checklist",tr:"Kontrol listesi",bg:"Чеклист",ar:"قائمة التحقق"},
+ "Controlepunten jaarafsluiting":{en:"Year-end control points",tr:"Yıl sonu kontrol noktaları",bg:"Контролни точки",ar:"نقاط التحقق السنوية"},
+ "✨ AI-controle · terugkerende kosten":{en:"✨ AI check · recurring expenses",tr:"✨ AI kontrolü · tekrarlayan giderler",bg:"✨ AI проверка · повтарящи се разходи",ar:"✨ فحص AI · المصروفات المتكررة"},
+ "Documentopvragingen":{en:"Document requests",tr:"Belge talepleri",bg:"Заявки за документи",ar:"طلبات المستندات"},
+ "+ Opvragen":{en:"+ Request",tr:"+ Talep et",bg:"+ Заяви",ar:"+ طلب"},
+ "+ Document opvragen":{en:"+ Request document",tr:"+ Belge talep et",bg:"+ Заяви документ",ar:"+ طلب مستند"},
+ "Document opvragen bij klant":{en:"Request document from client",tr:"Müşteriden belge talep et",bg:"Заяви документ от клиента",ar:"طلب مستند من العميل"},
+ "Welk document heeft u nodig?":{en:"Which document do you need?",tr:"Hangi belgeye ihtiyacınız var?",bg:"Кой документ ви трябва?",ar:"أي مستند تحتاج؟"},
+ "Verzoek versturen":{en:"Send request",tr:"Talep gönder",bg:"Изпрати заявка",ar:"إرسال الطلب"},
+ "Geen openstaande opvragingen.":{en:"No open requests.",tr:"Açık talep yok.",bg:"Няма отворени заявки.",ar:"لا طلبات مفتوحة."},
+ "Aangevraagd":{en:"Requested",tr:"Talep edildi",bg:"Заявено",ar:"مطلوب"},
+ "Ontvangen":{en:"Received",tr:"Alındı",bg:"Получено",ar:"مُستلَم"},
+ "Afgerond":{en:"Completed",tr:"Tamamlandı",bg:"Завършено",ar:"مكتمل"},
+ "Open":{en:"Open",tr:"Açık",bg:"Отворено",ar:"مفتوح"},
+ "Aandacht":{en:"Attention",tr:"Dikkat",bg:"Внимание",ar:"انتباه"},
+ "N.v.t.":{en:"N/A",tr:"Yok",bg:"Не се прилага",ar:"لا ينطبق"},
+ "OK":{en:"OK",tr:"Tamam",bg:"ОК",ar:"تمام"},
+ "Opgelost":{en:"Resolved",tr:"Çözüldü",bg:"Решено",ar:"تم الحل"},
+ "Gecontroleerd":{en:"Checked",tr:"Kontrol edildi",bg:"Проверено",ar:"تم التحقق"},
+ "Bank gecontroleerd":{en:"Bank checked",tr:"Banka kontrol edildi",bg:"Банка проверена",ar:"تم فحص البنك"},
+ "OB gecontroleerd":{en:"VAT checked",tr:"KDV kontrol edildi",bg:"ДДС проверено",ar:"تم فحص ض.ق.م"},
+ "OB-aansluiting gecontroleerd":{en:"VAT reconciliation checked",tr:"KDV mutabakatı kontrol edildi",bg:"ДДС равнение проверено",ar:"تم فحص تسوية ض.ق.م"},
+ "IB / Jaarrekening status":{en:"Income tax / annual accounts status",tr:"Gelir vergisi / yıllık hesap durumu",bg:"Статус данък/отчет",ar:"حالة الضريبة/الحسابات"},
+ "Lease verwerkt":{en:"Lease processed",tr:"Leasing işlendi",bg:"Лизинг обработен",ar:"تمت معالجة الإيجار"},
+ "Loon gecontroleerd":{en:"Payroll checked",tr:"Bordro kontrol edildi",bg:"Заплати проверени",ar:"تم فحص الرواتب"},
+ "Afschrijvingen gecontroleerd":{en:"Depreciation checked",tr:"Amortisman kontrol edildi",bg:"Амортизации проверени",ar:"تم فحص الإهلاك"},
+ "Openstaande debiteuren":{en:"Open debtors",tr:"Açık alacaklılar",bg:"Отворени длъжници",ar:"المدينون المفتوحون"},
+ "Openstaande crediteuren":{en:"Open creditors",tr:"Açık borçlular",bg:"Отворени кредитори",ar:"الدائنون المفتوحون"},
+ "Balans beoordeeld":{en:"Balance sheet reviewed",tr:"Bilanço incelendi",bg:"Баланс прегледан",ar:"تمت مراجعة الميزانية"},
+ "Privé opnames/stortingen":{en:"Private withdrawals/deposits",tr:"Özel çekim/yatırımlar",bg:"Лични тегления/вноски",ar:"السحوبات/الإيداعات الخاصة"},
+ "Fiscale correcties":{en:"Fiscal corrections",tr:"Mali düzeltmeler",bg:"Фискални корекции",ar:"التصحيحات الضريبية"},
+ "Documenten compleet":{en:"Documents complete",tr:"Belgeler tamam",bg:"Документи пълни",ar:"المستندات مكتملة"},
+ "Rapport gereed":{en:"Report ready",tr:"Rapor hazır",bg:"Отчет готов",ar:"التقرير جاهز"},
+ "Akkoord klant ontvangen":{en:"Client approval received",tr:"Müşteri onayı alındı",bg:"Одобрение от клиента",ar:"تم استلام موافقة العميل"},
+ "Indiening voltooid":{en:"Filing completed",tr:"Beyan tamamlandı",bg:"Подаването завършено",ar:"اكتمل التقديم"},
+ "Huur":{en:"Rent",tr:"Kira",bg:"Наем",ar:"الإيجار"},
+ "Softwarekosten":{en:"Software costs",tr:"Yazılım giderleri",bg:"Софтуерни разходи",ar:"تكاليف البرمجيات"},
+ "Verzekering":{en:"Insurance",tr:"Sigorta",bg:"Застраховка",ar:"التأمين"},
+ "Telefoon/internet":{en:"Phone/internet",tr:"Telefon/internet",bg:"Телефон/интернет",ar:"الهاتف/الإنترنت"},
+ "Energie":{en:"Energy",tr:"Enerji",bg:"Енергия",ar:"الطاقة"},
+ "Bankkosten":{en:"Bank costs",tr:"Banka giderleri",bg:"Банкови разходи",ar:"رسوم البنك"},
+ "Accountantskosten":{en:"Accounting fees",tr:"Muhasebe ücretleri",bg:"Счетоводни такси",ar:"أتعاب المحاسبة"}
+};
+Object.keys(I18N_ADD11).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD11[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD11[k][l];});});
+(function(){const more={
+ en:[[" mnd gevonden"," mo found"],["ontbreekt: ","missing: "],["Mogelijk ontbrekende boeking in ","Possibly missing entry in "],["Geen afwijking gevonden","No deviation found"],[" controlepunten afgerond"," control points completed"],[" AI-signaal/signalen"," AI signal(s)"],[" open opvraging(en)"," open request(s)"],[" mogelijk ontbrekende terugkerende kosten"," possibly missing recurring expenses"]],
+ tr:[[" mnd gevonden"," ay bulundu"],["ontbreekt: ","eksik: "],["Mogelijk ontbrekende boeking in ","Olası eksik kayıt: "],["Geen afwijking gevonden","Sapma bulunamadı"],[" controlepunten afgerond"," kontrol noktası tamamlandı"],[" AI-signaal/signalen"," AI sinyali"],[" open opvraging(en)"," açık talep"],[" mogelijk ontbrekende terugkerende kosten"," olası eksik tekrarlayan gider"]],
+ bg:[[" mnd gevonden"," мес. намерени"],["ontbreekt: ","липсва: "],["Mogelijk ontbrekende boeking in ","Възможна липсваща операция в "],["Geen afwijking gevonden","Няма отклонение"],[" controlepunten afgerond"," контролни точки завършени"],[" AI-signaal/signalen"," AI сигнал(и)"],[" open opvraging(en)"," отворени заявки"],[" mogelijk ontbrekende terugkerende kosten"," възможно липсващи повтарящи се разходи"]],
+ ar:[[" mnd gevonden"," شهر موجود"],["ontbreekt: ","مفقود: "],["Mogelijk ontbrekende boeking in ","قيد محتمل مفقود في "],["Geen afwijking gevonden","لا انحراف"],[" controlepunten afgerond"," نقاط تحقق مكتملة"],[" AI-signaal/signalen"," إشارة AI"],[" open opvraging(en)"," طلب مفتوح"],[" mogelijk ontbrekende terugkerende kosten"," مصروفات متكررة قد تكون مفقودة"]]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[[" nog niet ingediend"," not yet filed"]," opgesteld".length?[" opgesteld"," prepared"]:null,["Rapport gedeeld: ","Report shared: "],[" ingediend"," filed"],[" betalingsregeling in behandeling"," payment arrangement in progress"]].filter(Boolean),
  tr:[[" nog niet ingediend"," henüz beyan edilmedi"],[" opgesteld"," hazırlandı"],["Rapport gedeeld: ","Rapor paylaşıldı: "],[" ingediend"," beyan edildi"],[" betalingsregeling in behandeling"," ödeme planı işlemde"]],
@@ -3691,6 +3773,50 @@ function setIbDate(naam,y,f,v){state.werk[naam].ib[y][f]=v;}
 function toggleLoon(naam,m){state.werk[naam].loon['2026'][m]=!state.werk[naam].loon['2026'][m];renderClient();}
 function uploadDocKantoor(naam){modal('Document uploaden voor '+naam,`<div class="uploadbox">⤓ <b>Sleep een bestand hierheen</b></div><div style="height:14px"></div>`+selectField('Map','kdMap',MAPPEN,'Overig')+field('Omschrijving','kdNaam','text','Nieuw document')+selectField('Delen met klant?','kdShare',['Nee — alleen intern','Ja — delen met klant'])+`<div class="ai-note">Intern = alleen zichtbaar voor het kantoor. Gedeeld = ook zichtbaar in het klantportaal.</div>`,'Opslaan',()=>{const gedeeld=val('kdShare').startsWith('Ja');state.dossierDocs.unshift({client:naam,map:val('kdMap'),naam:val('kdNaam')||'Document',date:'17-06-2026',by:'kantoor',gedeeld});toast(gedeeld?'Document opgeslagen en gedeeld met klant':'Document opgeslagen (intern)');openClient(naam,'mappen');});}
 function toggleShare(i,naam){state.dossierDocs[i].gedeeld=!state.dossierDocs[i].gedeeld;toast(state.dossierDocs[i].gedeeld?'Gedeeld met klant ✓':'Niet meer gedeeld');renderClient();}
+/* ===== Jaarafsluiting checklist + AI terugkerende kosten + documentopvraging ===== */
+const JAARCHECK=[['bank','Bank gecontroleerd'],['ob','OB gecontroleerd'],['obaansl','OB-aansluiting gecontroleerd'],['ibjr','IB / Jaarrekening status'],['lease','Lease verwerkt'],['loon','Loon gecontroleerd'],['afschr','Afschrijvingen gecontroleerd'],['deb','Openstaande debiteuren'],['cred','Openstaande crediteuren'],['balans','Balans beoordeeld'],['prive','Privé opnames/stortingen'],['fisccorr','Fiscale correcties'],['docs','Documenten compleet'],['rapport','Rapport gereed'],['akkoord','Akkoord klant ontvangen'],['indiening','Indiening voltooid']];
+const JC_TONE={done:'g',attention:'a',na:'grey',open:'open'};
+const JC_LBL={done:'Afgerond',attention:'Aandacht',na:'N.v.t.',open:'Open'};
+function jaarCheckSt(naam){const w=state.werk[naam];if(!w)return{};if(!w.jaarcheck)w.jaarcheck={};return w.jaarcheck;}
+function jcStatus(naam,key){return jaarCheckSt(naam)[key]||'open';}
+function jcCycle(naam,key){const st=jaarCheckSt(naam);const o=['open','done','attention','na'];st[key]=o[(o.indexOf(st[key]||'open')+1)%o.length];renderClient();}
+function jcCount(naam){const a=JAARCHECK.map(i=>jcStatus(naam,i[0]));return{done:a.filter(x=>x==='done').length,att:a.filter(x=>x==='attention').length,total:JAARCHECK.length};}
+function recurringCheck(naam){
+  const c=state.clients.find(x=>x.naam===naam)||{};const seed=parseInt(c.nr,10)||1;
+  const cats=[['Huur','Vastgoed Lijnden BV','Maandelijks'],['Softwarekosten','Exact Online','Maandelijks'],['Verzekering','Nationale-Nederlanden','Maandelijks'],['Telefoon/internet','KPN','Maandelijks'],['Energie','Greenchoice','Maandelijks'],['Bankkosten','ING','Maandelijks'],['Accountantskosten','Vatan Administratie','Per kwartaal']];
+  const M=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+  return cats.map((cat,i)=>{const found=[],miss=[];const gap=(seed+i*3)%12;const hasGap=((seed+i)%4===0);
+    M.forEach((m,mi)=>{if(cat[2]==='Per kwartaal'&&mi%3!==0)return;if(hasGap&&mi===gap)miss.push(m);else found.push(m);});
+    return{cat:cat[0],sup:cat[1],freq:cat[2],found,missing:miss,issue:miss.length?`Mogelijk ontbrekende boeking in ${miss.join(', ')}`:'Geen afwijking gevonden',ok:miss.length===0};});
+}
+function recurSt(naam,cat){const w=state.werk[naam];if(!w.recurCheck)w.recurCheck={};return w.recurCheck[cat]||'';}
+function recurSet(naam,cat,s){const w=state.werk[naam];if(!w.recurCheck)w.recurCheck={};w.recurCheck[cat]=s;toast(s==='checked'?'Gemarkeerd als gecontroleerd ✓':s==='resolved'?'Gemarkeerd als opgelost ✓':'Gemarkeerd als n.v.t. ✓');renderClient();}
+let seqDR=10;
+function ensureDocReq(){if(!state.docRequests)state.docRequests=[{id:1,client:'Demo BV',item:'Bankafschriften Q2 2026',status:'requested',requested:'10-06-2026',reminder:false},{id:2,client:'Demo BV',item:'Inkoopfacturen mei 2026',status:'received',requested:'01-06-2026',reminder:false},{id:3,client:'Yılmaz Horeca VOF',item:'Kasadministratie 2025',status:'overdue',requested:'20-05-2026',reminder:true}];return state.docRequests;}
+function docReqs(naam){return ensureDocReq().filter(r=>r.client===naam);}
+function docReqAdd(naam){modal('Document opvragen bij klant',field('Welk document heeft u nodig?','drItem','text','')+`<div class="ai-note" style="margin-top:10px">De klant ziet dit verzoek in het klantportaal en bij Berichten en kan het document direct aanleveren.</div>`,'Verzoek versturen',()=>{const it=(val('drItem')||'').trim();if(!it){toast('Geef een document op');return false;}ensureDocReq().push({id:++seqDR,client:naam,item:it,status:'requested',requested:TODAY,reminder:false});toast('Verzoek verstuurd naar klant ✓');renderClient();return true;});}
+function docReqSet(id,s){const r=ensureDocReq().find(x=>x.id===id);if(r){r.status=s;toast('Status bijgewerkt ✓');renderClient();}}
+function docReqRemind(id){const r=ensureDocReq().find(x=>x.id===id);if(r){r.reminder=true;toast('Herinnering verstuurd naar klant ✓');renderClient();}}
+const DR_TONE={requested:'a',received:'navy',overdue:'r',completed:'g'};
+const DR_LBL={requested:'Aangevraagd',received:'Ontvangen',overdue:'Te laat',completed:'Afgerond'};
+function jaarCheckContent(naam){
+  const jc=jcCount(naam);const pct=Math.round(jc.done/jc.total*100);const rc=recurringCheck(naam);const gaps=rc.filter(x=>!x.ok);const reqs=docReqs(naam);
+  const tone=jc.done===jc.total?'g':(jc.att||gaps.length?'a':'r');
+  return modHead({tone,status:jc.done===jc.total?'Jaarafsluiting compleet':`${jc.done}/${jc.total} controlepunten afgerond`,
+    kpis:[['Verantwoordelijke',(state.clients.find(x=>x.naam===naam)||{}).mw||'—'],['Voortgang',pct+'%'],['Aandachtspunten',jc.att+gaps.length],['AI-signalen',gaps.length]],
+    pct,missing:gaps.length?`AI vond <b>${gaps.length} mogelijk ontbrekende terugkerende kosten</b> — zie controle hieronder.`:'Geen AI-afwijkingen in terugkerende kosten.',action:jc.done<jc.total})
+  +`<div class="grid2" style="align-items:start;gap:16px"><div>
+    <div class="mod-sub">Controlepunten jaarafsluiting</div>
+    <div class="jc-list">${JAARCHECK.map(it=>{const s=jcStatus(naam,it[0]);const tn=JC_TONE[s];return `<div class="jc-row" onclick="jcCycle('${gJs(naam)}','${it[0]}')" title="Klik om status te wijzigen"><span class="jc-box ${tn}">${s==='done'?'✓':s==='attention'?'!':s==='na'?'–':''}</span><span class="jc-l">${it[1]}</span><span class="jc-st ${tn}">${JC_LBL[s]}</span></div>`;}).join('')}</div>
+    <div class="ai-note" style="margin-top:10px;font-size:11px">Klik op een punt om te wisselen: Open → Afgerond → Aandacht → N.v.t.</div>
+    </div><div>
+    <div class="mod-sub">✨ AI-controle · terugkerende kosten</div>
+    <div class="jcard">${rc.map(x=>`<div class="rc-row ${x.ok?'':'gap'}"><div class="rc-main"><div class="rc-cat">${x.cat} <span class="rc-sup">· ${x.sup}</span></div><div class="rc-sub">${x.freq} · ${x.found.length} mnd gevonden${x.missing.length?` · <b class="rc-miss">ontbreekt: ${x.missing.join(', ')}</b>`:''}</div></div>${x.missing.length?(recurSt(naam,x.cat)?`<span class="pill g">${recurSt(naam,x.cat)==='resolved'?'Opgelost':recurSt(naam,x.cat)==='na'?'N.v.t.':'Gecontroleerd'}</span>`:`<div class="rc-acts"><button class="dact" onclick="recurSet('${gJs(naam)}','${x.cat}','checked')" title="Gecontroleerd">✓</button><button class="dact" onclick="recurSet('${gJs(naam)}','${x.cat}','resolved')" title="Opgelost">↺</button><button class="dact" onclick="recurSet('${gJs(naam)}','${x.cat}','na')" title="N.v.t.">–</button></div>`):'<span class="pill g">OK</span>'}</div>`).join('')}</div>
+    <div class="ai-note" style="margin-top:8px;font-size:11px">De AI detecteert en signaleert alleen — er wordt niets automatisch geboekt of gewijzigd.</div>
+    <div class="row-between" style="margin:18px 0 8px"><div class="mod-sub" style="margin:0">Documentopvragingen</div><button class="btn ghost sm" onclick="docReqAdd('${gJs(naam)}')">+ Opvragen</button></div>
+    ${reqs.length?`<div class="dr2">${reqs.map(r=>`<div class="dr2-row"><span class="dr2-st ${DR_TONE[r.status]}">${DR_LBL[r.status]}</span><div class="dr2-main"><div class="dr2-l">${gEsc(r.item)}</div><div class="dr2-meta">Aangevraagd ${r.requested}${r.reminder?' · herinnerd':''}</div></div><div class="dr2-acts">${r.status!=='completed'?`<button class="dact" title="Ontvangen" onclick="docReqSet(${r.id},'received')">📥</button><button class="dact" title="Herinnering" onclick="docReqRemind(${r.id})">🔔</button><button class="dact" title="Afronden" onclick="docReqSet(${r.id},'completed')">✓</button>`:''}</div></div>`).join('')}</div>`:'<div class="cc-empty">Geen openstaande opvragingen.</div>'}
+    </div></div>`;
+}
 /* ===== Client intelligence (health · segmentatie · deadlines) ===== */
 function daysUntil(d){return -docDays(d);}
 function clientHealth(naam){
@@ -3797,6 +3923,7 @@ function renderClient(){
     const _hlt=clientHealth(naam);const _segs=segChipsHTML(naam);const _dl=clientDeadlines(naam);
     const drBuckets=[['Te laat','red','overdue'],['Vandaag','red','today'],['Deze week','amber','week'],['Binnen 30 dagen','navy','month']];
     const drHTML=drBuckets.map(b=>{const it=_dl.filter(x=>x.bucket===b[2]);return it.length?`<div class="dr-grp ${b[1]}"><div class="dr-h">${b[0]} · ${it.length}</div>${it.map(x=>`<div class="dr-row"><span class="dr-l">${x.l}</span><span class="dr-d">${x.d}</span></div>`).join('')}</div>`:'';}).join('');
+    const _jc=jcCount(naam);const _gaps=recurringCheck(naam).filter(x=>!x.ok).length;const _reqOpen=docReqs(naam).filter(r=>r.status!=='completed').length;const _jcTone=_jc.done===_jc.total?'g':((_jc.att||_gaps)?'a':'r');
     content=`
     <div class="cc-grid">
       <div class="cc-main">
@@ -3818,6 +3945,10 @@ function renderClient(){
           <div class="hs-factors">${_hlt.factors.length?_hlt.factors.slice(0,3).map(f=>`<div class="hs-f"><span>${f.l}</span><b>−${f.p}</b></div>`).join(''):'<div class="hs-ok">✓ Geen risicofactoren</div>'}</div>
         </div>
         ${drHTML?`<div class="cc-sec"><div class="cc-h">Deadline radar</div><div class="dr">${drHTML}</div></div>`:''}
+        <div class="cc-sec" onclick="openClient('${naam}','jaarcheck')" style="cursor:pointer">
+          <div class="cc-h">Jaarafsluiting</div>
+          <div class="jcsum"><div class="hsum-n ${_jcTone==='g'?'':''}">${_jc.done}/${_jc.total}</div><div class="jcsum-r"><div class="mh-bar" style="margin:0"><div class="mh-fill ${_jcTone}" style="width:${Math.round(_jc.done/_jc.total*100)}%"></div></div><div class="jcsum-s">${_gaps?`<b style="color:var(--amber)">${_gaps} AI-signaal/signalen</b> · `:''}${_reqOpen} open opvraging(en) →</div></div></div>
+        </div>
         <div class="cc-sec">
           <div class="cc-h">Statusoverzicht</div>
           <div class="cc-comp">${comp.map(r=>`<div class="cc-crow" onclick="openClient('${naam}','${r.tab}')"><span class="cc-cdot ${r.tone}"></span><div class="cc-cl"><div class="cc-cn">${r.l}<span class="cc-cad">${r.cad}</span></div><div class="cc-cs">${r.sub}</div></div><span class="pill ${r.tone}">${r.st}</span></div>`).join('')}</div>
@@ -3940,6 +4071,8 @@ function renderClient(){
     content=obAansluitingContent(naam);
   } else if(clientTab==='lease'){
     content=leaseContent(naam);
+  } else if(clientTab==='jaarcheck'){
+    content=jaarCheckContent(naam);
   } else {
     const ci=[['KvK-nummer','KvK',d.kvk],['BTW-nummer','BTW',d.btw],['Machtiging','Machtiging',d.machtiging],['WWFT-onderzoek','WWFT',d.wwft],['UBO-registratie','UBO',d.ubo],['Contactpersoon','Contact',d.contact]];
     const has=x=>!!(x[2]&&x[2]!=='—');
@@ -3973,8 +4106,8 @@ function renderClient(){
         </div>
         <button class="btn dark sm cl-imp" onclick="openAsKlant('${naam}')">↪ Klantportaal</button>
       </div>
-      <div class="tabs">${tabBtn('overzicht','Overzicht')}${tabBtn('verwerken','Verwerken')}${tabBtn('signalen','Controle')}<div class="tab ${['ob','obaansl','ib','lease'].includes(clientTab)?'active':''}" onclick="openClient('${naam}','ob')">Jaarafsluiting</div>${tabBtn('loon','Loonaangifte')}${tabBtn('personeel','Personeel')}${tabBtn('regeling','Betalingsregeling')}${tabBtn('mappen','Mappen')}${tabBtn('logins','Inloggegevens')}${tabBtn('compliance','Compliance')}</div>
-      ${['ob','obaansl','ib','lease'].includes(clientTab)?`<div class="tabs subtabs">${tabBtn('ob','OB-aangifte')}${tabBtn('ib','IB & Jaarrekening')}${tabBtn('obaansl','OB-aansluiting')}<div class="tab ${clientTab==='lease'?'active':''}" onclick="leaseOpen('${naam}')">Lease</div></div>`:''}
+      <div class="tabs">${tabBtn('overzicht','Overzicht')}${tabBtn('verwerken','Verwerken')}${tabBtn('signalen','Controle')}<div class="tab ${['ob','obaansl','ib','lease','jaarcheck'].includes(clientTab)?'active':''}" onclick="openClient('${naam}','ob')">Jaarafsluiting</div>${tabBtn('loon','Loonaangifte')}${tabBtn('personeel','Personeel')}${tabBtn('regeling','Betalingsregeling')}${tabBtn('mappen','Mappen')}${tabBtn('logins','Inloggegevens')}${tabBtn('compliance','Compliance')}</div>
+      ${['ob','obaansl','ib','lease','jaarcheck'].includes(clientTab)?`<div class="tabs subtabs">${tabBtn('ob','OB-aangifte')}${tabBtn('ib','IB & Jaarrekening')}${tabBtn('obaansl','OB-aansluiting')}<div class="tab ${clientTab==='lease'?'active':''}" onclick="leaseOpen('${naam}')">Lease</div>${tabBtn('jaarcheck','Checklist')}</div>`:''}
     </div>
     <div style="padding-top:16px">${content}</div>`;
   if(clientTab==='obaansl')aanslCalc();
