@@ -2790,7 +2790,7 @@ expDef('c_btw',()=>{const inv=state.invoices.filter(i=>effStatus(i)!=='Concept')
 function _docZip(naam,scope){const docs=(scope||state.dossierDocs.filter(d=>d.client===naam&&(_docOffice||d.gedeeld||d.by==='klant')));
   if(!docs.length){toast(tStr('Geen documenten om te exporteren'));return;}
   const root=_fname(naam);const files=docs.map(d=>{const folder=_fname(d.map||'Overig');const fn=_fname(d.naam||'document');
-    return {name:`${root}/${folder}/${fn}.txt`,data:`${d.naam}\nMap: ${d.map||'Overig'}\nDatum: ${d.date||'—'}\nBron: ${d.by==='klant'?'Klant':'Vatan'}\nKlant: ${d.client}\n\n(${tStr('Demobestand — in productie bevat dit het werkelijke document.')})\n`;};});
+    return {name:`${root}/${folder}/${fn}.txt`,data:`${d.naam}\nMap: ${d.map||'Overig'}\nDatum: ${d.date||'—'}\nBron: ${d.by==='klant'?'Klant':'Vatan'}\nKlant: ${d.client}\n\n(${tStr('Demobestand — in productie bevat dit het werkelijke document.')})\n`};});
   files.push({name:`${root}/_index.txt`,data:`${naam} — ${tStr('Documentenpakket')}\n${tStr('Geëxporteerd')}: ${_expStamp()}\n${docs.length} ${tStr('documenten')}\n\n`+docs.map(d=>`- ${d.map}/${d.naam} (${d.date})`).join('\n')});
   _dlBlob(_fname(naam+'_documenten')+'.zip',_zipBlob(files));toast(tStr('Export gereed')+' · ZIP ('+docs.length+')');}
 function cDocZipMap(){_docZip('Demo BV',state.dossierDocs.filter(d=>d.client==='Demo BV'&&d.map===docMap&&(d.gedeeld||d.by==='klant')));}
