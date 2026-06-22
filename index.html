@@ -2649,6 +2649,21 @@ const I18N_ADD22={
  "Te beoordelen":{en:"To review",tr:"İncelenecek",bg:"За преглед",ar:"للمراجعة"}
 };
 Object.keys(I18N_ADD22).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD22[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD22[k][l];});});
+/* ===== Dynamic relative-time + deadline/request labels ===== */
+const I18N_ADD23={
+ "{n} dagen te laat":{en:"{n} days overdue",tr:"{n} gün gecikmiş",bg:"{n} дни просрочено",ar:"متأخر {n} يومًا"},
+ "over {n} dagen":{en:"in {n} days",tr:"{n} gün içinde",bg:"след {n} дни",ar:"خلال {n} يومًا"},
+ "vandaag":{en:"today",tr:"bugün",bg:"днес",ar:"اليوم"},
+ "morgen":{en:"tomorrow",tr:"yarın",bg:"утре",ar:"غدًا"},
+ "U levert aan op verzoek van Vatan":{en:"You are providing this at Vatan's request",tr:"Bunu Vatan'ın talebi üzerine gönderiyorsunuz",bg:"Предоставяте това по искане на Vatan",ar:"أنت تقدّم هذا بناءً على طلب Vatan"}
+};
+Object.keys(I18N_ADD23).forEach(k=>{['en','tr','bg','ar'].forEach(l=>{if(I18N[l]&&I18N_ADD23[k][l]&&I18N[l][k]===undefined)I18N[l][k]=I18N_ADD23[k][l];});});
+(function(){const more={
+ en:[['BTW-aangifte','VAT return'],['Aangifte inkomstenbelasting','Income tax return'],['uiterlijk','due by'],['te laat','overdue']],
+ tr:[['BTW-aangifte','KDV beyanı'],['Aangifte inkomstenbelasting','Gelir vergisi beyanı'],['uiterlijk','son tarih'],['te laat','gecikmiş']],
+ bg:[['BTW-aangifte','ДДС декларация'],['Aangifte inkomstenbelasting','Декларация ДДФЛ'],['uiterlijk','краен срок'],['te laat','просрочено']],
+ ar:[['BTW-aangifte','إقرار ض.ق.م'],['Aangifte inkomstenbelasting','إقرار ضريبة الدخل'],['uiterlijk','الموعد النهائي'],['te laat','متأخر']]
+};['en','tr','bg','ar'].forEach(l=>{I18N_SUB[l]=I18N_SUB[l]||[];more[l].forEach(p=>I18N_SUB[l].push(p));});})();
 (function(){const more={
  en:[['Wat Vatan van u nodig heeft','What Vatan needs from you'],['U heeft alles aangeleverd — er staat niets open.','You have provided everything — nothing outstanding.'],['Aanleveren','Provide'],['recent geüpload','recently uploaded'],['mogelijk nog nodig','possibly still needed'],['dagen te laat','days overdue'],['Aangevraagd','Requested']],
  tr:[['Wat Vatan van u nodig heeft','Vatan sizden ne istiyor'],['U heeft alles aangeleverd — er staat niets open.','Her şeyi gönderdiniz — bekleyen yok.'],['Aanleveren','Gönder'],['recent geüpload','yakın zamanda yüklendi'],['mogelijk nog nodig','muhtemelen hâlâ gerekli'],['dagen te laat','gün gecikmiş'],['Aangevraagd','Talep edildi']],
@@ -3732,9 +3747,10 @@ VIEWS.klant.overzicht = ()=>{
   const btwConcept=(state.btwReturns||[]).filter(b=>b.status!=='Ingediend').length;
   const kdl=[];
   (state.btwReturns||[]).filter(b=>b.status!=='Ingediend').forEach(b=>kdl.push({l:'BTW-aangifte '+b.periode,d:b.deadline,cat:'Belasting'}));
-  kdl.push({l:'Aangifte inkomstenbelasting 2025',d:'01-05-2026',cat:'Belasting'});
-  drClient.forEach(r=>kdl.push({l:'Aanleveren: '+r.item,d:r.requested,cat:'Document'}));
-  kdl.forEach(x=>{x.days=(typeof daysUntil==='function')?daysUntil(x.d):0;x.tone=x.days<=7?'r':(x.days<=30?'a':'g');});
+  const _ibW=(state.werk&&state.werk['Demo BV'])?state.werk['Demo BV'].ib[IBYEAR]:null;
+  if(_ibW&&!_ibW.ingediend)kdl.push({l:'Aangifte inkomstenbelasting '+IBYEAR,d:_ibW.uitstel?('01-05-'+(parseInt(IBYEAR)+2)):('01-05-'+(parseInt(IBYEAR)+1)),cat:'Belasting'});
+  drClient.forEach(r=>kdl.push({l:'Aanleveren: '+r.item,d:(r.due||addDays(r.requested||TODAY,14)),cat:'Document'}));
+  kdl.forEach(x=>{x.days=(typeof daysUntil==='function')?daysUntil(x.d):0;x.tone=x.days<0?'r':(x.days<=7?'r':(x.days<=30?'a':'g'));});
   kdl.sort((a,b)=>a.days-b.days);
   const needs=openCount||inkCount||docReq||unread||drClient.length||btwConcept;
   const apRows=[];
@@ -3755,7 +3771,7 @@ VIEWS.klant.overzicht = ()=>{
     <div class="cwf-i g"><div class="cwf-n">${state.inbox.filter(i=>i.client==='Demo BV'&&i.state==='sent').length}</div><div class="cwf-l">Afgerond</div></div>
   </div>
   <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Aankomende deadlines</h3><span style="font-size:11px;color:var(--grey-2)">🔴 binnen 7 dagen · 🟠 binnen 30 · 🟢 later</span></div>
-    ${kdl.length?`<div class="kdl-list">${kdl.slice(0,6).map(x=>`<div class="kdl-row"><span class="kdl-dot ${x.tone}"></span><div class="kdl-c"><div class="kdl-l">${x.l}</div><div class="kdl-s">${x.cat}</div></div><div class="kdl-d"><div class="kdl-date">${x.d}</div><div class="kdl-rel ${x.tone}">${x.days<0?Math.abs(x.days)+' dagen te laat':x.days===0?'vandaag':'over '+x.days+' dagen'}</div></div></div>`).join('')}</div>`:'<div class="cc-empty" style="padding:18px">Geen aankomende deadlines — alles is op tijd.</div>'}
+    ${kdl.length?`<div class="kdl-list">${kdl.slice(0,6).map(x=>`<div class="kdl-row"><span class="kdl-dot ${x.tone}"></span><div class="kdl-c"><div class="kdl-l">${x.l}</div><div class="kdl-s">${x.cat}</div></div><div class="kdl-d"><div class="kdl-date">${x.d}</div><div class="kdl-rel ${x.tone}">${relTime(x.days)}</div></div></div>`).join('')}</div>`:'<div class="cc-empty" style="padding:18px">Geen aankomende deadlines — alles is op tijd.</div>'}
   </div>
   <div class="grid2">
     <div class="panel"><h3>Snel aan de slag</h3>
@@ -3941,7 +3957,7 @@ function docCenterHTML(office,naam,titleHtml){
   const fcards=MAPPEN.map(m=>{const arr=byMap[m];const cnt=arr.length;const days=cnt?Math.min.apply(null,arr.map(x=>docDays(x.d.date))):99999;const dot=cnt&&days<=7?'g':'q';const open=office?`openClient('${gJs(naam)}','map:${gJs(m)}')`:`openMap('${gJs(m)}')`;
     return `<div class="fcard" onclick="${open}"><div class="fcard-top"><div class="fcard-ic">${MAP_ICON[m]||'📁'}</div>${cnt?`<span class="fcard-dot ${dot}"></span>`:''}</div><div class="fcard-nm">${gEsc(m)}</div><div class="fcard-meta">${cnt} document(en)</div><div class="fcard-act">${cnt?'Laatste activiteit '+docRel(days):'Nog leeg'}</div></div>`;}).join('');
   const officeMeta=office?(()=>{const dates=scoped.map(x=>x.d.date).filter(Boolean);const last=dates.length?dates.slice().sort((a,b)=>pkDate(b)-pkDate(a))[0]:'—';const kDates=scoped.filter(x=>x.d.by==='kantoor').map(x=>x.d.date).filter(Boolean);const lastReview=kDates.length?kDates.slice().sort((a,b)=>pkDate(b)-pkDate(a))[0]:'—';const reviewer=(state.clients.find(cc=>cc.naam===naam)||{}).mw||'—';const expected=['Omzetbelasting (BTW)','Loonadministratie','Inkomstenbelasting','Jaarrekening'];const missing=expected.filter(m=>!byMap[m]||!byMap[m].length);const awaitReview=scoped.filter(x=>x.d.by==='klant'&&docDays(x.d.date)<14).length;const awaitClient=(state.docRequests||[]).filter(r=>r.client===naam&&r.status!=='completed').length;const classified=total?(total-((total%4===0)?0:1)):0;const aiPct=total?Math.round(classified/total*100):100;const intStatus=(missing.length||awaitClient)?'Achterstand':(awaitReview?'Te beoordelen':'Bijgewerkt');const it=(l,v,tn)=>`<div class="do-item"><div class="do-l">${l}</div><div class="do-v ${tn||''}">${v}</div></div>`;return `<div class="doc-office"><div class="do-h">🏢 Kantooroverzicht <span>alleen zichtbaar voor kantoor</span></div><div class="do-grid">${it('Laatste document',last)}${it('Laatst beoordeeld',lastReview)}${it('Beoordelaar',reviewer)}${it('Ontbrekende verwachte stukken',missing.length?missing.join(', '):'Compleet',missing.length?'r':'g')}${it('Wacht op beoordeling',awaitReview,awaitReview?'a':'')}${it('Wacht op klant',awaitClient,awaitClient?'a':'')}${it('AI-classificatie',aiPct+'% automatisch',aiPct>=90?'g':'a')}${it('Interne status',intStatus,intStatus==='Bijgewerkt'?'g':'a')}</div></div>`;})():'';
-  const clientReq=!office?(()=>{const reqs=(state.docRequests||[]).filter(r=>r.client==='Demo BV');const open=reqs.filter(r=>r.status!=='completed');const recent=scoped.filter(x=>x.d.by==='klant'&&docDays(x.d.date)<14).length;const expected=['Omzetbelasting (BTW)','Loonadministratie','Contracten'];const missing=expected.filter(m=>!byMap[m]||!byMap[m].length);return `<div class="creq"><div class="creq-h">📋 Wat Vatan van u nodig heeft</div>${open.length?`<div class="creq-list">${open.map(r=>`<div class="creq-row ${r.status==='overdue'?'r':'a'}"><span class="creq-dot ${r.status==='overdue'?'r':'a'}"></span><div class="creq-c"><div class="creq-t">${gEsc(r.item)}</div><div class="creq-s">Aangevraagd ${r.requested}${r.status==='overdue'?' · te laat':''}</div></div><button class="btn primary sm" onclick="uploadDoc()">⤓ Aanleveren</button></div>`).join('')}</div>`:'<div class="creq-ok"><span class="creq-okic">✓</span> U heeft alles aangeleverd — er staat niets open.</div>'}<div class="creq-meta">${recent} recent geüpload${missing.length?` · mogelijk nog nodig: <b>${missing.join(', ')}</b>`:''}</div></div>`;})():'';
+  const clientReq=!office?(()=>{const reqs=(state.docRequests||[]).filter(r=>r.client==='Demo BV');const open=reqs.filter(r=>r.status!=='completed');const recent=scoped.filter(x=>x.d.by==='klant'&&docDays(x.d.date)<14).length;const expected=['Omzetbelasting (BTW)','Loonadministratie','Contracten'];const missing=expected.filter(m=>!byMap[m]||!byMap[m].length);return `<div class="creq"><div class="creq-h">📋 Wat Vatan van u nodig heeft</div>${open.length?`<div class="creq-list">${open.map(r=>`<div class="creq-row ${r.status==='overdue'?'r':'a'}"><span class="creq-dot ${r.status==='overdue'?'r':'a'}"></span><div class="creq-c"><div class="creq-t">${gEsc(r.item)}</div><div class="creq-s">Aangevraagd ${r.requested} · uiterlijk ${r.due||addDays(r.requested||TODAY,14)}${r.status==='overdue'?' · te laat':''}</div></div><button class="btn primary sm" onclick="uploadDoc('${reqMap(r.item)}','${gJs(r.item)}')">⤓ Aanleveren</button></div>`).join('')}</div>`:'<div class="creq-ok"><span class="creq-okic">✓</span> U heeft alles aangeleverd — er staat niets open.</div>'}<div class="creq-meta">${recent} recent geüpload${missing.length?` · mogelijk nog nodig: <b>${missing.join(', ')}</b>`:''}</div></div>`;})():'';
   return `${titleHtml}
   <div class="sgrid c5">${sum.map(s=>`<div class="scard"><div class="sl">${s[0]}</div><div class="sv ${s[2]}">${s[1]}</div></div>`).join('')}</div>
   ${officeMeta}${clientReq}
@@ -4017,7 +4033,7 @@ function openBtw(periode){const b=state.btwReturns.find(x=>x.periode===periode);
     </div>
   </div>`;
 }
-function uploadDoc(map){modal('Document uploaden',selectField('Map','udMap',MAPPEN,map||docMap||'Overig')+`<div style="height:12px"></div>`+uploadZone('doc','docUpload','Maak een foto of upload een document','Foto, scan of PDF. Het document wordt veilig opgeslagen in de gekozen map.'),'Sluiten',()=>{});}
+function uploadDoc(map,reqLabel){modal('Document uploaden',(reqLabel?`<div class="ai-note" style="margin-bottom:12px">📋 ${tStr('U levert aan op verzoek van Vatan')}: <b>${gEsc(reqLabel)}</b></div>`:'')+selectField('Map','udMap',MAPPEN,map||docMap||'Overig')+`<div style="height:12px"></div>`+uploadZone('doc','docUpload','Maak een foto of upload een document','Foto, scan of PDF. Het document wordt veilig opgeslagen in de gekozen map.'),'Sluiten',()=>{});}
 function docUpload(inp){const f=inp.files&&inp.files[0];if(!f)return;const map=(typeof val==='function'&&val('udMap'))||'Overig';const nm=(f.name||'Document').replace(/\.[^.]+$/,'');state.dossierDocs.unshift({client:'Demo BV',map,naam:nm,date:TODAY,by:'klant'});closeM();toast('Document opgeslagen in '+map+' ✓');docMap=map;renderView();}
 
 VIEWS.klant.statistieken = ()=>{
@@ -4204,7 +4220,9 @@ function dupInvoice(nr){const inv=findInv(nr);const nn='F'+String(++seqF).padSta
 function quoteToInvoice(nr){const q=findQuote(nr);const nn='F'+String(++seqF).padStart(4,'0');state.invoices.unshift({nr:nn,rel:q.rel,date:'17-06-2026',vervaldatum:addDays('17-06-2026',14),referentie:q.referentie||q.nr,status:'Concept',lines:JSON.parse(JSON.stringify(q.lines)),notes:'Op basis van offerte '+q.nr,payments:[]});toast('Offerte omgezet naar factuur '+nn);openInvoice(nn);}
 
 /* builder */
-function addDays(dmy,n){const p=dmy.split('-');const d=new Date(+p[2],+p[1]-1,+p[0]);d.setDate(d.getDate()+(parseInt(n)||0));const z=x=>String(x).padStart(2,'0');return z(d.getDate())+'-'+z(d.getMonth()+1)+'-'+d.getFullYear();}
+function addDays(dmy,n){const p=String(dmy||'').split('-');if(p.length!==3)return dmy;const d=new Date(+p[2],+p[1]-1,+p[0]);d.setDate(d.getDate()+(parseInt(n)||0));const z=x=>String(x).padStart(2,'0');return z(d.getDate())+'-'+z(d.getMonth()+1)+'-'+d.getFullYear();}
+function relTime(days){if(days<0)return tStr('{n} dagen te laat').replace('{n}',Math.abs(days));if(days===0)return tStr('vandaag');if(days===1)return tStr('morgen');return tStr('over {n} dagen').replace('{n}',days);}
+function reqMap(item){item=(item||'').toLowerCase();if(/btw|omzet/.test(item))return 'Omzetbelasting (BTW)';if(/loon|salaris|personeel/.test(item))return 'Loonadministratie';if(/contract/.test(item))return 'Contracten';if(/jaarreken|jaarrek/.test(item))return 'Jaarrekening';if(/inkomst|\bib\b/.test(item))return 'Inkomstenbelasting';return 'Overig';}
 function newInvoice(prefill){const date='17-06-2026';draft={type:'factuur',nr:'F'+String(seqF+1).padStart(4,'0'),rel:(prefill&&prefill.rel)||state.relations.find(r=>r.type==='Debiteur').naam,date,termijn:14,vervaldatum:addDays(date,14),referentie:'',lines:(prefill&&prefill.lines)||[{desc:'',qty:1,eenheid:'stuk',price:0,btw:'21%'}],notes:'Gelieve te betalen binnen 14 dagen o.v.v. het factuurnummer.',fromTime:(prefill&&prefill.fromTime)||[]};renderBuilder();}
 function newQuote(){const date='17-06-2026';draft={type:'offerte',nr:'OFF-'+String(seqO+1).padStart(3,'0'),rel:state.relations.find(r=>r.type==='Debiteur').naam,date,termijn:30,vervaldatum:addDays(date,30),referentie:'',lines:[{desc:'',qty:1,eenheid:'stuk',price:0,btw:'21%'}],notes:'Deze offerte is 30 dagen geldig.',fromTime:[]};renderBuilder();}
 function editInvoice(nr){const inv=findInv(nr);draft={type:'factuur',edit:nr,nr,rel:inv.rel,date:inv.date,termijn:14,vervaldatum:inv.vervaldatum||addDays(inv.date,14),referentie:inv.referentie||'',lines:JSON.parse(JSON.stringify(inv.lines)).map(l=>Object.assign({eenheid:'stuk'},l)),notes:inv.notes,fromTime:[]};renderBuilder();}
