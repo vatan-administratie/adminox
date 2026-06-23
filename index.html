@@ -12,17 +12,18 @@
     /* ===== VATAN Administratie & Advies · Design System tokens ===== */
     /* Brand · navy */
     --navy:#103B63; --navy-dark:#082742;
-    --brand:#103B63; --brand-2:#16507F; --brand-ink:#082742;
-    --brand-soft:#EAF2FA; --brand-tint:#F4F8FC;
+    --brand:#103B63; --brand-2:#2563EB; --brand-ink:#082742;
+    --brand-soft:#E8EFFD; --brand-tint:#F5F8FE;
+    --accent:#2563EB; --accent-soft:#E8EFFD;
     /* Brand accent · red (restricted: logo, primary CTA, error, overdue, critical) */
-    --red:#D71941; --red-dark:#B01334; --red-soft:#FEE2E2; --red-tint:#FDF2F4;
+    --red:#DC2626; --red-dark:#B91C1C; --red-soft:#FEE2E2; --red-tint:#FEF2F2;
     /* Text */
-    --ink:#0F172A; --ink-2:#1E293B; --grey:#52606E; --grey-2:#677484;
+    --ink:#0F172A; --ink-2:#334155; --grey:#64748B; --grey-2:#94A3B8;
     /* Surfaces */
-    --line:#E2E8F0; --line-2:#EEF2F7; --bg:#F7F9FC; --card:#FFFFFF; --hover:#F1F5F9;
+    --line:#E6E9EE; --line-2:#F1F3F6; --bg:#F7F8FA; --card:#FFFFFF; --hover:#F4F6F9;
     /* Status */
-    --green:#166534; --green-soft:#DCFCE7; --amber:#92400E; --amber-soft:#FEF3C7;
-    --danger:#991B1B; --danger-soft:#FEE2E2; --info:#1E40AF; --info-soft:#DBEAFE;
+    --green:#15803D; --green-soft:#DCFCE7; --amber:#B45309; --amber-soft:#FEF3C7;
+    --danger:#DC2626; --danger-soft:#FEE2E2; --info:#2563EB; --info-soft:#E8EFFD;
     /* Program tints */
     --ex:#2E6FB5; --ex-soft:#E4EEF8; --sn:#1F8A5B; --sn-soft:#E2F3EB;
     /* Shadows · subtle only */
@@ -39,25 +40,40 @@
   body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:14px;background:var(--bg);color:#1c1f24;height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"cv02","cv03","cv04","cv11"}
   .app{display:none;grid-template-columns:230px 1fr;grid-template-rows:60px 1fr;height:100vh}
   .app.show{display:grid}
-  .topbar{grid-column:1/3;background:linear-gradient(180deg,#0E3358 0%,#082742 100%);color:#fff;display:flex;align-items:center;padding:0 22px;gap:15px;border-bottom:1px solid #ffffff12;box-shadow:0 1px 0 #0000001f}
+  .topbar{grid-column:1/3;background:var(--card);color:var(--ink);display:flex;align-items:center;padding:0 22px;gap:15px;border-bottom:1px solid var(--line);box-shadow:none}
   .brand{display:flex;align-items:center;gap:12px;flex-shrink:0;min-width:0}
   .vlogo{display:block;flex-shrink:0}
   .wm{display:flex;flex-direction:column;line-height:1.12;min-width:0}
-  .wm-main{font-size:15.5px;font-weight:800;color:#fff;letter-spacing:-.2px;white-space:nowrap}
-  .wm-main .wm-prod{color:#A9C6E6;font-weight:500}
-  .wm-sub{font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#8da3bd;margin-top:3px;white-space:nowrap}
-  .tb-div{width:1px;height:24px;background:#ffffff20;flex-shrink:0}
+  .wm-main{font-size:15.5px;font-weight:800;color:var(--ink);letter-spacing:-.2px;white-space:nowrap}
+  .wm-main .wm-prod{color:var(--grey);font-weight:500}
+  .wm-sub{font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--grey-2);margin-top:3px;white-space:nowrap}
+  .tb-div{width:1px;height:24px;background:var(--line);flex-shrink:0}
   .topbar .spacer{flex:1}
   .tb-ws{display:flex;flex-direction:column;justify-content:center;line-height:1.2;min-width:0}
-  .tb-ws-nm{font-size:13px;font-weight:700;color:#fff;white-space:nowrap;letter-spacing:-.1px;overflow:hidden;text-overflow:ellipsis}
+  .tb-ws-nm{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;letter-spacing:-.1px;overflow:hidden;text-overflow:ellipsis}
   .tb-ws-sub{display:flex;align-items:center;gap:7px;margin-top:2px;white-space:nowrap;overflow:hidden}
-  .role-chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#9fc7ef;letter-spacing:.2px;white-space:nowrap}
-  .role-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:#5fa8e0;flex-shrink:0}
-  .role-chip.kantoor{color:#8bd3ae}
-  .role-chip.kantoor::before{background:#39B57D}
-  .tb-ctx{font-size:11px;color:#7e93ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .tb-ctrls{display:flex;align-items:center;gap:14px;flex-shrink:0}
-  .topbar .who{font-size:13px;color:#cfd4da;display:flex;align-items:center;gap:10px}
+  .role-chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--brand-2);letter-spacing:.2px;white-space:nowrap}
+  .role-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand-2);flex-shrink:0}
+  .role-chip.kantoor{color:var(--green)}
+  .role-chip.kantoor::before{background:var(--green)}
+  .tb-ctx{font-size:11px;color:var(--grey-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tb-ctrls{display:flex;align-items:center;gap:11px;flex-shrink:0}
+  .tb-search{display:flex;align-items:center;gap:9px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 13px;width:300px;max-width:34vw;color:var(--grey-2)}
+  .tb-search svg{width:15px;height:15px;flex-shrink:0}
+  .tb-search input{flex:1;min-width:0;border:0;background:transparent;outline:none;font-family:inherit;font-size:13px;color:var(--ink)}
+  .tb-search input::placeholder{color:var(--grey-2)}
+  .tb-ic{position:relative;width:34px;height:34px;border-radius:9px;border:0;background:transparent;color:var(--grey);display:grid;place-items:center;cursor:pointer;transition:.12s}
+  .tb-ic:hover{background:var(--hover);color:var(--ink)}
+  .tb-ic svg{width:18px;height:18px}
+  .tb-badge{position:absolute;top:2px;right:2px;min-width:15px;height:15px;border-radius:8px;background:var(--red);color:#fff;font-size:9px;font-weight:800;display:grid;place-items:center;padding:0 3px;border:1.5px solid var(--card)}
+  @media(max-width:760px){.tb-search{display:none}}
+  .nav-help{margin:14px 6px 4px;background:var(--brand-tint);border-radius:13px;padding:14px}
+  .nav-help .nh-ic{width:32px;height:32px;border-radius:9px;background:#fff;color:var(--brand-2);display:grid;place-items:center;font-size:15px;margin-bottom:9px}
+  .nav-help .nh-tx b{display:block;font-size:13px;font-weight:700;color:var(--ink)}
+  .nav-help .nh-tx span{display:block;font-size:11.5px;color:var(--grey);margin-top:2px;line-height:1.4}
+  .nav-help .nh-btn{margin-top:11px;width:100%;font-family:inherit;font-size:12px;font-weight:700;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px;cursor:pointer;color:var(--brand-2)}
+  .nav-help .nh-btn:hover{border-color:var(--brand-2)}
+  .topbar .who{font-size:13px;color:var(--grey);display:flex;align-items:center;gap:10px}
   .avatar{width:32px;height:32px;border-radius:9px;background:linear-gradient(150deg,#16507F,#082742);color:#fff;display:grid;place-items:center;font-weight:800;font-size:12.5px;box-shadow:inset 0 1px 0 #ffffff2e}
   /* ===== Klant-switcher — minimal command palette (Linear/Attio) ===== */
   .cpick{position:relative;margin:2px 6px 12px;padding-bottom:11px;border-bottom:1px solid var(--line)}
@@ -116,11 +132,11 @@
   .ws-grp{display:flex;align-items:center;gap:7px;margin:16px 4px 7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-2)}
   .ws-grp .n{font-size:11px;color:var(--grey-2);font-weight:500;text-transform:none;letter-spacing:0}
   .ws-grp:first-of-type{margin-top:2px}
-  .langsel{background:#ffffff14;border:1px solid #ffffff33;color:#fff;border-radius:8px;padding:6px 8px;font-size:12px;font-family:inherit;cursor:pointer}
+  .langsel{background:var(--hover);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:6px 8px;font-size:12px;font-family:inherit;cursor:pointer}
   .langsel option{color:#1c1f24}
-  .login .langsel{background:#ffffff1a;border-color:#ffffff44;padding:8px 12px;font-size:13px}
-  .switch{color:#aeb4bb;font-size:12.5px;cursor:pointer;font-weight:600}
-  .switch:hover{color:#fff;text-decoration:underline}
+  .login .langsel{background:#ffffff1a;border-color:#ffffff44;color:#fff;padding:8px 12px;font-size:13px}
+  .switch{color:var(--grey);font-size:12.5px;cursor:pointer;font-weight:600}
+  .switch:hover{color:var(--ink);text-decoration:underline}
   .side{background:#fff;border-right:1px solid var(--line);padding:9px 11px;display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0;scrollbar-width:none}
   .side::-webkit-scrollbar{display:none}
   .side .grp{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--grey-2);padding:9px 11px 3px}
@@ -916,6 +932,92 @@
   .plw-bar{height:6px;border-radius:4px;background:var(--line-2);overflow:hidden}
   .plw-fill{height:100%;border-radius:4px}.plw-fill.g{background:#22A565}.plw-fill.a{background:var(--amber)}.plw-fill.r{background:var(--red)}
   /* dashboard compact summary cards */
+  /* ===== Next-gen calm workspace (nd-) ===== */
+  .nd-greet{margin:2px 0 24px}
+  .nd-greet h1{font-size:24px;font-weight:700;letter-spacing:-.5px;margin:0;color:var(--ink)}
+  .nd-greet .sub{font-size:13px;color:var(--grey);margin-top:6px}
+  .nd-brief{display:flex;align-items:flex-start;gap:16px;background:var(--brand-tint);border-radius:18px;padding:22px 24px;margin-bottom:30px}
+  .nd-brief .spark{width:38px;height:38px;border-radius:11px;background:linear-gradient(140deg,#3576BC,#0F3A60);color:#fff;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+  .nd-brief .bd{flex:1;min-width:0}
+  .nd-brief .kick{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--brand-2);margin-bottom:6px}
+  .nd-brief .line{font-size:15.5px;line-height:1.55;color:var(--ink-2)}.nd-brief .line b{color:var(--ink);font-weight:700}
+  .nd-cta{align-self:center;flex-shrink:0;white-space:nowrap}
+  .nd-metrics{display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:40px}
+  .nd-met{padding:4px 28px;cursor:pointer;border-left:1px solid var(--line)}
+  .nd-met:first-child{border-left:0;padding-left:2px}
+  .nd-met .v{font-size:30px;font-weight:800;letter-spacing:-1px;line-height:1;color:var(--ink)}
+  .nd-met .l{font-size:12.5px;color:var(--grey);font-weight:600;margin-top:8px}
+  .nd-met .x{font-size:11.5px;color:var(--grey-2);margin-top:3px}
+  .nd-met.r .v{color:var(--red)}.nd-met.a .v{color:var(--amber)}.nd-met.g .v{color:var(--green)}
+  .nd-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:42px;margin-bottom:40px}
+  .nd-col-h{font-size:13.5px;font-weight:700;color:var(--ink);margin:0 0 10px;display:flex;align-items:center;justify-content:space-between}
+  .nd-col-h .a{font-size:12px;font-weight:700;color:var(--brand-2);cursor:pointer}
+  .nd-line{display:flex;align-items:center;gap:12px;padding:13px 0;border-top:1px solid var(--line-2);cursor:pointer}
+  .nd-line:first-of-type{border-top:0}
+  .nd-line:hover .t{color:var(--brand-2)}
+  .nd-line .ic{width:32px;height:32px;border-radius:9px;background:var(--brand-tint);color:var(--brand-2);display:grid;place-items:center;flex-shrink:0;font-size:15px}
+  .nd-av{width:30px;height:30px;border-radius:9px;color:#fff;font-size:10.5px;font-weight:800;display:grid;place-items:center;flex-shrink:0}
+  .nd-line .m{flex:1;min-width:0}.nd-line .m .t{font-weight:600;font-size:13.5px;color:var(--ink);transition:color .12s}.nd-line .m .s{font-size:11.5px;color:var(--grey);margin-top:1px}
+  .nd-line .cnt{font-size:14px;font-weight:800;color:var(--ink);flex-shrink:0}
+  .nd-line .cnt.r{color:var(--red)}.nd-line .cnt.a{color:var(--amber)}
+  .nd-two{display:grid;grid-template-columns:1fr 1fr;gap:42px;margin-bottom:14px}
+  .nd-bar{display:flex;align-items:center;gap:13px;padding:9px 0}
+  .nd-bar .nm{width:90px;font-size:13px;font-weight:600;color:var(--ink);flex-shrink:0}
+  .nd-bar .track{flex:1;height:7px;border-radius:5px;background:var(--line-2);overflow:hidden}
+  .nd-bar .fill{height:100%;border-radius:5px}
+  .nd-bar .pct{width:42px;text-align:right;font-size:12px;font-weight:700;color:var(--grey);flex-shrink:0}
+  @media(max-width:1000px){.nd-metrics{grid-template-columns:1fr 1fr;gap:18px 0}.nd-met{border-left:0;padding-left:2px}.nd-cols{grid-template-columns:1fr;gap:30px}.nd-two{grid-template-columns:1fr;gap:30px}.nd-brief{flex-wrap:wrap}.nd-cta{align-self:flex-start}}
+  /* ===== Calm klantportaal (kp-) — referentie-stijl ===== */
+  .kp-greet{margin:2px 0 24px}
+  .kp-greet h1{font-size:24px;font-weight:700;letter-spacing:-.5px;margin:0;color:var(--ink)}
+  .kp-greet .sub{font-size:13px;color:var(--grey);margin-top:6px}
+  .kp-chip{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:17px;flex-shrink:0}
+  .kp-chip svg{width:18px;height:18px}
+  .chip-bl{background:#EFF4FF;color:#2563EB}.chip-gr{background:#ECFDF3;color:#16A34A}.chip-am{background:#FFF7ED;color:#D97706}.chip-pu{background:#F5F3FF;color:#7C3AED}.chip-rd{background:#FEF2F2;color:#DC2626}.chip-gy{background:#F3F4F6;color:#475569}
+  .kp-card{background:#fff;border-radius:18px;padding:24px;box-shadow:0 1px 3px rgba(16,24,40,.06),0 1px 2px rgba(16,24,40,.03)}
+  .kp-work{margin-bottom:22px}
+  .kp-work-h{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px}
+  .kp-work-h .t{font-size:16px;font-weight:700;color:var(--ink)}.kp-work-h .s{font-size:13px;color:var(--grey);margin-top:3px}
+  .kp-work-h .hb{margin-left:auto;flex-shrink:0}
+  .kp-wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+  .kp-prog .pt{font-size:13.5px;font-weight:700;color:var(--ink);margin-top:13px}
+  .kp-prog .ps{font-size:12px;color:var(--grey);margin-top:3px}
+  .kp-prog .pbar{height:5px;border-radius:4px;background:#EEF1F5;overflow:hidden;margin-top:13px}
+  .kp-prog .pfill{height:100%;border-radius:4px}
+  .kp-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:22px}
+  .kp-tile{background:#fff;border-radius:18px;padding:22px 24px;box-shadow:0 1px 3px rgba(16,24,40,.06),0 1px 2px rgba(16,24,40,.03)}
+  .kp-tile .lbl{font-size:13px;color:var(--grey);font-weight:600;margin-top:16px}
+  .kp-tile .v{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.6px;margin-top:7px}
+  .kp-tile .v.rd{color:var(--red)}
+  .kp-tile .lnk{display:inline-block;font-size:12.5px;font-weight:700;color:var(--brand-2);margin-top:14px;cursor:pointer}
+  .kp-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:22px}
+  .kp-card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .kp-card-h .t{font-size:15px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px}
+  .kp-card-h .cb{font-size:11px;font-weight:800;color:var(--brand-2);background:var(--brand-soft);border-radius:20px;padding:2px 8px}
+  .kp-card-h .a{font-size:12px;font-weight:700;color:var(--brand-2);cursor:pointer}
+  .kp-act{display:flex;align-items:center;gap:13px;padding:13px 0;border-top:1px solid #F2F4F7}
+  .kp-act:first-of-type{border-top:0;padding-top:2px}
+  .kp-act .m{flex:1;min-width:0}.kp-act .m .t{font-size:13.5px;font-weight:600;color:var(--ink)}.kp-act .m .s{font-size:12px;color:var(--grey);margin-top:1px}
+  .kp-act .go{font-size:12px;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 11px;cursor:pointer;color:var(--ink-2);white-space:nowrap;font-family:inherit}
+  .kp-act .go:hover{border-color:var(--brand-2);color:var(--brand-2)}
+  .kp-note{display:flex;align-items:center;gap:11px;background:#F8FAFC;border-radius:12px;padding:13px 14px;margin-top:16px}
+  .kp-note .m{flex:1}.kp-note .t{font-size:12.5px;font-weight:700;color:var(--ink)}.kp-note .s{font-size:11.5px;color:var(--grey);margin-top:1px}
+  .kp-ev{display:flex;align-items:center;gap:12px;padding:11px 0}
+  .kp-ev .m{flex:1;min-width:0}.kp-ev .t{font-size:13px;font-weight:600;color:var(--ink)}
+  .kp-ev .tm{font-size:11.5px;color:var(--grey-2);white-space:nowrap;flex-shrink:0}
+  .kp-msgrow{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-top:1px solid #F2F4F7}
+  .kp-msgrow:first-of-type{border-top:0;padding-top:2px}
+  .kp-msgrow .m{flex:1;min-width:0}.kp-msgrow .nm{font-size:12.5px;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;gap:8px}.kp-msgrow .nm .tm{font-size:11px;color:var(--grey-2);font-weight:500}
+  .kp-msgrow .pv{font-size:12px;color:var(--grey);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .kp-msgrow .ud{width:7px;height:7px;border-radius:50%;background:var(--red);margin-top:6px;flex-shrink:0}
+  .kp-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .kp-q{background:#fff;border-radius:18px;padding:22px;box-shadow:0 1px 3px rgba(16,24,40,.06),0 1px 2px rgba(16,24,40,.03);cursor:pointer;transition:.14s}
+  .kp-q:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(16,24,40,.08)}
+  .kp-q .t{font-size:14px;font-weight:700;color:var(--ink);margin-top:14px}.kp-q .s{font-size:12px;color:var(--grey);margin-top:3px}
+  .kp-foot{text-align:center;font-size:12px;color:var(--grey-2);margin-top:28px}
+  .kp-btn{display:inline-flex;align-items:center;gap:6px;font-family:inherit;font-size:12.5px;font-weight:700;border-radius:9px;padding:8px 13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink-2)}
+  .kp-btn:hover{border-color:var(--brand-2);color:var(--brand-2)}
+  @media(max-width:980px){.kp-wgrid{grid-template-columns:1fr 1fr;gap:22px}.kp-tiles{grid-template-columns:1fr 1fr}.kp-cols{grid-template-columns:1fr}.kp-quick{grid-template-columns:1fr 1fr}}
   .dcompact{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
   @media(max-width:680px){.dcompact{grid-template-columns:1fr}}
   .dcc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 16px;cursor:pointer;transition:.14s}
@@ -2318,15 +2420,17 @@
       </svg>
       <div class="wm"><div class="wm-main">VATAN <span class="wm-prod">Administratie</span></div><div class="wm-sub">Administratie &amp; Advies</div></div>
     </div>
-    <span class="tb-div"></span>
-    <div class="tb-ws">
+    <div class="tb-ws" style="display:none">
       <div class="tb-ws-nm" id="whoName">Demo BV</div>
       <div class="tb-ws-sub"><span class="role-chip" id="roleChip">Klantportaal</span><span class="tb-ctx" id="tbCtx"></span></div>
     </div>
+    <div class="tb-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4" stroke-linecap="round"/></svg><input type="text" placeholder="Zoeken…"></div>
     <div class="spacer"></div>
     <div class="tb-ctrls">
       <select id="langSel" class="langsel" title="Taal" onchange="setLang(this.value)"><option value="nl">NL</option><option value="en">EN</option><option value="tr">TR</option><option value="bg">BG</option><option value="ar">AR</option></select>
       <span class="switch" id="darkBtn" onclick="toggleDark()" title="Donkere modus" style="font-size:15px">🌙</span>
+      <button class="tb-ic" title="Meldingen" onclick="toast('Geen nieuwe meldingen ✨')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="tb-badge">2</span></button>
+      <button class="tb-ic" title="Berichten" onclick="toast('U heeft 1 nieuw bericht')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span class="tb-badge">1</span></button>
       <span class="switch" id="switchBtn" onclick="logout()" title="Wissel van portaal">↩ Wissel</span>
       <span class="avatar" id="whoAv">DB</span>
     </div>
@@ -4265,12 +4369,26 @@ function closeM(){document.getElementById('mOverlay').classList.remove('show');}
 /* ============ NAV ============ */
 const NAV = {
   klant:[
-    ['__g','WERKRUIMTE'],['overzicht','▦','Dashboard'],
-    ['__g','FACTUREN & KLANTEN'],['facturatie','▤','Facturen'],['offertes','▭','Offertes'],['inkoop','⤓','Inkoopfacturen'],['relaties','◑','Relaties'],['producten','◈','Producten'],
-    ['__g','DOCUMENTEN & CONTACT'],['documenten','▣','Documenten'],['berichten','✉','Berichten'],['aihulp','✨','AI Assistent'],
-    ['__g','BELASTING & GELD'],['belasting','§','Belastingzaken'],['betalingen','€','Betalingen'],['statistieken','▥','Rapportages'],
-    ['__g','REGISTRATIE'],['km','⌖','Kilometerregistratie'],['tijd','◴','Tijdregistratie'],['personeel','⚇','Personeel'],
-    ['__g','OVERIG'],['instellingen','⚙','Instellingen'],
+    ['__g','OVERZICHT'],
+    ['overzicht','▦','Dashboard'],
+    ['facturatie','▤','Facturen'],
+    ['documenten','▣','Documenten'],
+    ['berichten','✉','Berichten'],
+    ['aihulp','✨','AI Assistent'],
+    ['__g','ADMINISTRATIE'],
+    ['inkoop','⤓','Inkoopfacturen'],
+    ['offertes','▭','Offertes'],
+    ['betalingen','€','Bank & Betalingen'],
+    ['relaties','◑','Relaties'],
+    ['belasting','§','Belastingzaken'],
+    ['statistieken','▥','Rapportages'],
+    ['__g','MEER'],
+    ['km','⌖','Kilometers'],
+    ['tijd','◴','Uren'],
+    ['personeel','⚇','Personeel'],
+    ['producten','◈','Producten'],
+    ['instellingen','⚙','Instellingen'],
+    ['@kennismaken','☎','Contact opnemen'],
   ],
   kantoor:[
     ['__g','KANTOOR'],['overzicht','▦','Overzicht'],['klanten','◑','Klanten'],['obwerk','%','OB-werklijst'],['ibwerk','%','IB-werklijst'],
@@ -4452,7 +4570,8 @@ function renderNav(){
   if(ROLE==='kantoor'){const sw=document.createElement('div');sw.className='cpick';sw.id='cpickWrap';sw.innerHTML=`<button class="cp-trigger" id="cpTrigger" onclick="cpToggle()" aria-label="Klant wisselen"><span class="mono" id="cpAv">–</span><span class="cp-tx"><span class="cp-nm" id="cpNm">Selecteer klant</span><span class="cp-meta" id="cpMeta">Klant kiezen</span></span><svg class="cp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="cp-menu" id="cpMenu"><div class="cp-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input id="cpSearchInp" placeholder="Zoek klant…" autocomplete="off" oninput="cpRender()"></div><div class="cp-mwf" id="cpMwFilter"></div><div class="cp-list" id="cpList"></div></div>`;s.appendChild(sw);}
   NAV[ROLE].forEach(it=>{
     if(it[0]==='__g'){const d=document.createElement('div');d.className='grp';d.textContent=grpL(it[1]);s.appendChild(d);return;}
-    const d=document.createElement('div'); d.className='navitem'+((it[0]===VIEW||NAVPARENT[VIEW]===it[0])?' active':''); d.onclick=()=>go(it[0]);
+    const _act=it[0].charAt(0)==='@';
+    const d=document.createElement('div'); d.className='navitem'+((!_act&&(it[0]===VIEW||NAVPARENT[VIEW]===it[0]))?' active':''); d.onclick=_act?(()=>{const f=window[it[0].slice(1)];if(typeof f==='function')f();}):(()=>go(it[0]));
     let badge='';
     if(it[0]==='verwerken'){const c=state.inbox.filter(x=>x.state==='new').length; if(c)badge=`<span class="count">${c}</span>`;}
     if(it[0]==='goedkeuren'){const c=state.inbox.filter(x=>x.state==='queue').length; if(c)badge=`<span class="count">${c}</span>`;}
@@ -4462,6 +4581,7 @@ function renderNav(){
     d.innerHTML=`<span class="ic">${icon(it[0])||it[1]}</span> ${navL(it[0],it[2])} ${badge}`;
     s.appendChild(d);
   });
+  if(ROLE==='klant'){const hc=document.createElement('div');hc.className='nav-help';hc.innerHTML=`<div class="nh-ic">☎</div><div class="nh-tx"><b>Vragen?</b><span>Neem contact op met uw vaste contactpersoon.</span></div><button class="nh-btn" onclick="kennismaken()">Contact opnemen</button>`;s.appendChild(hc);}
   const u=document.createElement('div'); u.className='uinfo';
   u.innerHTML = ROLE==='klant'
     ? `<div class="av">DB</div><div><div class="nm">Demo Gebruiker</div><div class="sm">Demo BV · ${PROG[KLANT.prog]}</div></div>`
@@ -4612,41 +4732,49 @@ VIEWS.klant.overzicht = ()=>{
   if(unread) apRows.push({ic:icon('berichten'),cls:'warn',t:'Nieuwe berichten',s:'van Vatan Administratie',v:unread,oc:"go('berichten')"});
   if(openCount) apRows.push({ic:icon('facturatie'),cls:'',t:'Openstaande facturen',s:`${openCount} nog niet betaald door uw klanten`,v:money(open),oc:"go('facturatie')"});
   if(docReq) apRows.push({ic:icon('documenten'),cls:'warn',t:'Documenten gevraagd',s:'Vatan vraagt u iets aan te leveren',v:docReq,oc:"go('berichten')"});
-  return `<div class="row-between"><h1 class="title">Goedemiddag, Demo</h1><div style="display:flex;gap:8px;align-items:center">${expBar('c_omzet')}<button class="btn primary" onclick="newInvoice()">+ Nieuwe factuur</button></div></div>
-  <div class="sub">Welkom terug. Hieronder ziet u rustig wat er voor u open staat.</div>
-  ${needs?`<div class="panel ap" style="margin-bottom:14px"><h3>Uw aandacht nodig</h3>
-    ${apRows.map(r=>`<div class="ap-row" onclick="${r.oc}"><span class="ap-ic ${r.cls}">${r.ic}</span><div class="ap-id"><div class="ap-t">${r.t}</div><div class="ap-s">${r.s}</div></div><div class="ap-v">${r.v}</div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>`).join('')}
-  </div>`:`<div class="up-band"><span class="ic">${_svg('<path d="M20 6L9 17l-5-5"/>')}</span><div><div class="uh">Alles is up-to-date ✨</div><div class="us">Er is op dit moment niets dat uw aandacht nodig heeft — Vatan houdt uw administratie voor u bij.</div></div></div>`}
-  <div class="cwf">
-    <div class="cwf-i a"><div class="cwf-n">${drClient.length+docReq}</div><div class="cwf-l">Wacht op u</div></div>
-    <div class="cwf-i navy"><div class="cwf-n">${inkCount+btwConcept}</div><div class="cwf-l">Vatan is bezig</div></div>
-    <div class="cwf-i g"><div class="cwf-n">${state.inbox.filter(i=>i.client==='Demo BV'&&i.state==='sent').length}</div><div class="cwf-l">Afgerond</div></div>
-  </div>
-  ${acts.length?`<div class="panel" style="margin-bottom:14px"><div class="cc-h" style="margin:0 0 9px">Laatste activiteit</div><div class="la-list">${acts.slice(0,4).map(a=>`<div class="la-row"><span class="la-ic">${a[0]}</span><span class="la-t">${a[1]}</span><span class="la-d">${docRel(Math.max(0,-daysUntil(a[2])))}</span></div>`).join('')}</div></div>`:''}
-  <div class="panel" style="margin-bottom:14px"><div class="row-between"><h3 style="margin:0">Aankomende deadlines</h3><span style="font-size:11px;color:var(--grey-2)">🔴 binnen 7 dagen · 🟠 binnen 30 · 🟢 later</span></div>
-    ${kdl.length?`<div class="kdl-list">${kdl.slice(0,6).map(x=>`<div class="kdl-row"><span class="kdl-dot ${x.tone}"></span><div class="kdl-c"><div class="kdl-l">${x.l}</div><div class="kdl-s">${x.cat}</div></div><div class="kdl-d"><div class="kdl-date">${x.d}</div><div class="kdl-rel ${x.tone}">${relTime(x.days)}</div></div></div>`).join('')}</div>`:'<div class="cc-empty" style="padding:18px">Geen aankomende deadlines — alles is op tijd.</div>'}
-  </div>
-  <div class="panel vw-panel" style="margin-bottom:14px"><div class="cc-h" style="margin:0 0 10px">✨ Vatan werkt momenteel voor u aan</div><div class="vw-list">${vw.map(t=>`<div class="vw-row"><span class="vw-ic">✓</span><span>${t}</span></div>`).join('')}</div><div class="vw-foot">U hoeft hier niets voor te doen — Vatan houdt uw administratie voor u bij.</div></div>
-  <div class="grid2">
-    <div class="panel"><h3>Snel aan de slag</h3>
-      <div class="qact">
-        <button onclick="newInvoice()"><span class="i">${icon('facturatie')}</span> Factuur maken</button>
-        <button onclick="uploadBon()"><span class="i">${icon('inkoop')}</span> Bon uploaden</button>
-        <button onclick="addTime()"><span class="i">${icon('tijd')}</span> Uren boeken</button>
-        <button onclick="addKm()"><span class="i">${icon('km')}</span> Rit registreren</button>
-      </div>
+  const _msgs=(state.messages||[]).filter(m=>m.from==='kantoor').slice(-3).reverse();
+  const _docCount=state.inbox.filter(i=>i.client==='Demo BV').length||12;
+  const _hh=new Date().getHours();const _greet=_hh<12?'Goedemorgen':(_hh<18?'Goedemiddag':'Goedenavond');
+  const _aBtn=r=>r.cls==='warn'?'chip-am':(r.cls==='pay'?'chip-bl':'chip-gy');
+  return `<div class="kp-greet"><h1>${_greet}, Demo BV 👋</h1><div class="sub">Maandag 23 juni 2026 · een rustig overzicht van uw administratie</div></div>
+  <div class="kp-card kp-work">
+    <div class="kp-work-h"><span class="kp-chip chip-bl">✨</span><div><div class="t">Vatan werkt voor u</div><div class="s">Een overzicht van waar we mee bezig zijn en wat we van u nodig hebben.</div></div><button class="kp-btn hb" onclick="go('berichten')">Bekijk alle werkzaamheden →</button></div>
+    <div class="kp-wgrid">
+      <div class="kp-prog"><span class="kp-chip chip-bl">📄</span><div class="pt">BTW-aangifte Q2 2026</div><div class="ps">In behandeling · 75%</div><div class="pbar"><div class="pfill" style="width:75%;background:#2563EB"></div></div></div>
+      <div class="kp-prog"><span class="kp-chip chip-gr">📊</span><div class="pt">Jaarrekening 2025</div><div class="ps">In voorbereiding · 40%</div><div class="pbar"><div class="pfill" style="width:40%;background:#16A34A"></div></div></div>
+      <div class="kp-prog"><span class="kp-chip chip-am">🧾</span><div class="pt">Inkoopfacturen verwerken</div><div class="ps">Deze maand · 78%</div><div class="pbar"><div class="pfill" style="width:78%;background:#D97706"></div></div></div>
+      <div class="kp-prog"><span class="kp-chip ${drClient.length?'chip-rd':'chip-gr'}">📥</span><div class="pt">${drClient.length?drClient.length+' document(en) ontbreekt':'Documenten compleet'}</div><div class="ps">${drClient.length?'Van u ontvangen':'Niets nodig'}</div>${drClient.length?`<div class="lnk" style="display:inline-block;font-size:12.5px;font-weight:700;color:var(--brand-2);margin-top:13px;cursor:pointer" onclick="go('documenten')">Bekijk actie →</div>`:`<div class="pbar"><div class="pfill" style="width:100%;background:#16A34A"></div></div>`}</div>
     </div>
-    <div class="panel"><div class="row-between"><h3 style="margin:0">Recent door Vatan</h3><span class="btn text sm" onclick="go('berichten')">Alle activiteiten →</span></div>
-      <div style="margin-top:4px">
-        <div class="actrow"><span class="dot" style="background:#15803D;margin-top:5px"></span><div style="flex:1"><b>Bon verwerkt</b> — KPN-factuur automatisch geboekt<div class="t">vandaag</div></div></div>
-        <div class="actrow"><span class="dot" style="background:var(--brand-2);margin-top:5px"></span><div style="flex:1"><b>Factuur F0004</b> verstuurd<div class="t">12 jun 2026</div></div></div>
-        <div class="actrow"><span class="dot" style="background:#15803D;margin-top:5px"></span><div style="flex:1"><b>BTW-aangifte Q1</b> voorbereid<div class="t">28 apr 2026</div></div></div>
-      </div></div>
   </div>
-  <div class="ai-strip" style="margin-top:14px">
-    <div class="ai-strip-h"><span class="ic">${_svg(ICONS.aihulp)}</span><div><b>Slimme hulp van Vatan</b><div class="s">Een brief niet duidelijk of niet in één keer kunnen betalen? Wij helpen.</div></div></div>
-    <div class="ai-strip-links"><button class="btn ghost sm" onclick="go('watisdit')">Document uitleggen</button><button class="btn ghost sm" onclick="go('regeling')">Betalingsregeling</button><button class="btn ghost sm" onclick="toggleChat()">Vraag stellen</button></div>
-  </div>`;
+  <div class="kp-tiles">
+    <div class="kp-tile"><span class="kp-chip chip-bl">💶</span><div class="lbl">Openstaand saldo</div><div class="v">${money(open)}</div><div class="lnk" onclick="go('facturatie')">Bekijk openstaande posten →</div></div>
+    <div class="kp-tile"><span class="kp-chip chip-am">⏰</span><div class="lbl">Te betalen</div><div class="v ${inkCount?'rd':''}">${money(inkoopOpen)}</div><div class="lnk" onclick="go('inkoop')">Bekijk inkoopfacturen →</div></div>
+    <div class="kp-tile"><span class="kp-chip chip-gr">✓</span><div class="lbl">Betaald (dit jaar)</div><div class="v">${money(omzet)}</div><div class="lnk" onclick="go('facturatie')">Bekijk betaalde facturen →</div></div>
+    <div class="kp-tile"><span class="kp-chip chip-pu">📁</span><div class="lbl">Documenten</div><div class="v">${_docCount}</div><div class="lnk" onclick="go('documenten')">Naar documenten →</div></div>
+  </div>
+  <div class="kp-cols">
+    <div class="kp-card">
+      <div class="kp-card-h"><div class="t">Acties voor u ${apRows.length?`<span class="cb">${apRows.length}</span>`:''}</div><span class="a" onclick="go('berichten')">Alles →</span></div>
+      ${apRows.length?apRows.slice(0,3).map(r=>`<div class="kp-act"><span class="kp-chip ${_aBtn(r)}" style="width:36px;height:36px">${r.ic}</span><div class="m"><div class="t">${r.t}</div><div class="s">${r.s}</div></div><button class="go" onclick="${r.oc}">Openen</button></div>`).join(''):'<div style="padding:14px 0;color:var(--grey);font-size:13px">Geen acties — alles is bij ✨</div>'}
+      <div class="kp-note"><span class="kp-chip chip-bl" style="width:34px;height:34px;font-size:14px">ⓘ</span><div class="m"><div class="t">Wilt u iets aanleveren?</div><div class="s">Upload documenten via het documentenoverzicht.</div></div><button class="kp-btn" onclick="go('documenten')">Naar documenten</button></div>
+    </div>
+    <div class="kp-card">
+      <div class="kp-card-h"><div class="t">Recente activiteiten</div><span class="a" onclick="go('berichten')">Alles →</span></div>
+      ${acts.length?acts.slice(0,4).map(a=>`<div class="kp-ev"><span class="kp-chip chip-gy" style="width:34px;height:34px;font-size:15px">${a[0]}</span><div class="m"><div class="t">${a[1]}</div></div><span class="tm">${docRel(Math.max(0,-daysUntil(a[2])))}</span></div>`).join(''):'<div style="padding:14px 0;color:var(--grey);font-size:13px">Nog geen activiteit</div>'}
+    </div>
+    <div class="kp-card">
+      <div class="kp-card-h"><div class="t">Berichten</div><span class="a" onclick="go('berichten')">Alle berichten →</span></div>
+      ${_msgs.length?_msgs.map(m=>`<div class="kp-msgrow">${!m.read?'<span class="ud"></span>':'<span style="width:7px;flex-shrink:0"></span>'}<div class="m"><div class="nm">Vatan Administratie <span class="tm">${m.date||''}</span></div><div class="pv">${gEsc((m.text||'').slice(0,64))}</div></div></div>`).join(''):'<div style="padding:14px 0;color:var(--grey);font-size:13px">Geen berichten</div>'}
+      <button class="kp-btn" style="width:100%;justify-content:center;margin-top:14px" onclick="go('berichten')">Nieuw bericht</button>
+    </div>
+  </div>
+  <div class="kp-quick">
+    <div class="kp-q" onclick="go('documenten')"><span class="kp-chip chip-gr">⬆️</span><div class="t">Documenten aanleveren</div><div class="s">Upload hier uw documenten</div></div>
+    <div class="kp-q" onclick="go('facturatie')"><span class="kp-chip chip-bl">📄</span><div class="t">Facturen bekijken</div><div class="s">Bekijk al uw facturen</div></div>
+    <div class="kp-q" onclick="go('berichten')"><span class="kp-chip chip-pu">💬</span><div class="t">Contact opnemen</div><div class="s">Neem contact met ons op</div></div>
+    <div class="kp-q" onclick="go('aihulp')"><span class="kp-chip chip-am">❓</span><div class="t">Veelgestelde vragen</div><div class="s">Antwoorden op uw vragen</div></div>
+  </div>
+  <div class="kp-foot">🔒 Uw gegevens zijn veilig en vertrouwelijk. Vatan gaat zorgvuldig om met uw informatie.</div>`;
 };
 
 VIEWS.klant.facturatie = ()=>{
@@ -5350,46 +5478,53 @@ VIEWS.kantoor.overzicht = ()=>{
     {l:'Betalingsregelingen', d:'doorlopend', sub:regOpen?regOpen+' in behandeling bij Vatan':'geen open verzoeken', tone:regOpen?'blue':'green', urg:false}
   ];
   const dl7=dls.filter(x=>x.tone==='red'||x.tone==='amber').length;
-  return `<h1 class="title">Kantooroverzicht</h1><div class="sub">Vatan Administratie &amp; Advies — ${base.length} actieve klanten · ${MEDEWERKERS.length} medewerkers.</div>
-  ${dagstartHTML()}
-  <div class="stats">
-    <div class="stat ${teVerwerken?'t-red':''}" onclick="go('verwerken')" style="cursor:pointer" title="Open verwerkingswachtrij per klant"><div class="stat-top"><div class="lbl">Te verwerken</div><div class="stat-ic">${icon('verwerken')}</div></div><div class="val">${teVerwerken}</div><div class="delta">klik voor wachtrij per klant →</div></div>
-    <div class="stat ${openSig?'t-red':''}" onclick="setMwFilter('alle');go('klanten')" style="cursor:pointer"><div class="stat-top"><div class="lbl">Open signalen</div><div class="stat-ic">${icon('watisdit')}</div></div><div class="val">${openSig}</div><div class="delta">aandachtspunten</div></div>
-    <div class="stat ${dl7?'t-amber':''}" onclick="go('obwerk')" style="cursor:pointer"><div class="stat-top"><div class="lbl">Deadline binnen 7 dagen</div><div class="stat-ic">${icon('regeling')}</div></div><div class="val">${dl7}</div><div class="delta">OB · IB · loon</div></div>
-    <div class="stat t-green"><div class="stat-top"><div class="lbl">Geboekt deze maand</div><div class="stat-ic">${icon('statistieken')}</div></div><div class="val">${monthlyDone}</div><div class="delta up">verwerkt door AI + controle</div></div>
+  const _drAll=allDocReqs();const _drWait=_drAll.filter(x=>x.st==='requested').length;const _drOver=_drAll.filter(x=>x.st==='overdue').length;
+  const _pl=allPlanning();const _plToday=_pl.filter(x=>x.period==='today').length;const _plOver=_pl.filter(x=>x.days<0).length;
+  const _md=werkdruk(30);
+  const _byC={};state.inbox.filter(x=>x.state==='new').forEach(d=>{_byC[d.client]=(_byC[d.client]||0)+1;});
+  const _att=Object.keys(_byC).sort((a,b)=>_byC[b]-_byC[a]);
+  const _tot=teVerwerken+openSig+_drWait+_drOver;
+  const _hh=new Date().getHours();const _greet=_hh<12?'Goedemorgen':(_hh<18?'Goedemiddag':'Goedenavond');
+  return `<div class="nd-greet"><h1>${_greet}, Vatan-team</h1><div class="sub">Maandag 23 juni 2026 · ${base.length} actieve klanten · ${MEDEWERKERS.length} medewerkers</div></div>
+  <div class="nd-brief"><div class="spark">✨</div><div class="bd"><div class="kick">AI Executive Briefing</div><div class="line">Vandaag vragen <b>${_tot} items</b> uw aandacht: <b>${teVerwerken}</b> te verwerken, <b>${openSig}</b> open signalen en <b>${_drWait+_drOver}</b> documentopvragingen. Er zijn <b>${dl7}</b> deadlines binnen 7 dagen.</div></div><button class="btn primary nd-cta" onclick="go('verwerken')">Begin met verwerken →</button></div>
+  <div class="nd-metrics">
+    <div class="nd-met ${teVerwerken?'r':'g'}" onclick="go('verwerken')"><div class="v">${teVerwerken}</div><div class="l">Te verwerken</div><div class="x">documenten in wachtrij</div></div>
+    <div class="nd-met ${openSig?'a':'g'}" onclick="setMwFilter('alle');go('klanten')"><div class="v">${openSig}</div><div class="l">Open signalen</div><div class="x">aandachtspunten</div></div>
+    <div class="nd-met ${(_drWait+_drOver)?'a':'g'}" onclick="go('docreq')"><div class="v">${_drWait+_drOver}</div><div class="l">Opvragingen</div><div class="x">${_drOver} te laat</div></div>
+    <div class="nd-met ${_plToday?'r':'g'}" onclick="go('planning')"><div class="v">${_plToday}</div><div class="l">Planning vandaag</div><div class="x">${_plOver} te laat</div></div>
   </div>
-  <div class="dcompact">
-    ${(()=>{const pl=allPlanning();const td=pl.filter(x=>x.period==='today').length;const wk=pl.filter(x=>x.period==='week').length;const ov=pl.filter(x=>x.days<0).length;return `<div class="dcc" onclick="go('planning')"><div class="dcc-h"><span class="dcc-ic">◷</span>Planning vandaag<span class="dcc-arr">→</span></div><div class="dcc-m"><div><div class="dcc-v ${td?'r':'g'}">${td}</div><div class="dcc-l">Vandaag</div></div><div><div class="dcc-v a">${wk}</div><div class="dcc-l">Deze week</div></div><div><div class="dcc-v ${ov?'r':'g'}">${ov}</div><div class="dcc-l">Te laat</div></div></div></div>`;})()}
-    ${(()=>{const dr=allDocReqs();const w=dr.filter(x=>x.st==='requested').length;const o=dr.filter(x=>x.st==='overdue').length;const r=dr.filter(x=>x.st==='received').length;return `<div class="dcc" onclick="go('docreq')"><div class="dcc-h"><span class="dcc-ic">▣</span>Documentopvragingen<span class="dcc-arr">→</span></div><div class="dcc-m"><div><div class="dcc-v a">${w}</div><div class="dcc-l">Wacht op klant</div></div><div><div class="dcc-v ${o?'r':'g'}">${o}</div><div class="dcc-l">Te laat</div></div><div><div class="dcc-v">${r}</div><div class="dcc-l">Ontvangen</div></div></div></div>`;})()}
-  </div>
-  <div class="dash-grid">
-    <div class="panel feat"><div class="row-between"><div><h3 style="margin:0">Te verwerken per klant</h3><div class="panel-sub">Cliënten die vandaag aandacht vragen.</div></div><div style="display:flex;align-items:center;gap:8px"><span class="cnt-badge">${new Set(state.inbox.filter(x=>x.state==='new').map(x=>x.client)).size} klanten</span><button class="btn ghost sm" onclick="go('verwerken')">Wachtrij →</button></div></div>
-      <div class="tightrows" style="margin-top:8px">${(()=>{const byC={};state.inbox.filter(x=>x.state==='new').forEach(d=>{byC[d.client]=(byC[d.client]||0)+1;});const ks=Object.keys(byC).sort((a,b)=>byC[b]-byC[a]);if(!ks.length)return '<div class="empty" style="padding:22px">Alles verwerkt 🎉</div>';return ks.slice(0,6).map(cn=>{const c=state.clients.find(x=>x.naam===cn)||{};const urgent=byC[cn]>=3;return `<div class="wkrow" onclick="openClient('${cn}','verwerken')"><span class="av" style="background:${c.prog?cpAvColor(c):'#94a3b8'}">${cpInitials(cn)}</span><div class="id"><b>${cn}</b><div class="t">${c.mw||'—'}</div></div><span class="ck ${urgent?'red':'amber'}">${byC[cn]} doc${byC[cn]>1?'en':''}</span></div>`;}).join('')+(ks.length>6?`<div style="text-align:center;margin-top:8px;font-size:11.5px;color:var(--grey)">+ ${ks.length-6} meer klanten in de wachtrij</div>`:'');})()}</div></div>
-    <div class="panel"><h3>Aankomende deadlines</h3>
-      <div>${dls.map(x=>`<div class="dl-row ${x.tone}"><span class="dl-dot ${x.tone}"></span><div style="min-width:0"><div class="l">${x.l}</div><div class="s">${x.sub}</div></div><div class="when">${x.d}</div></div>`).join('')}</div>
-      <div style="font-size:11px;color:var(--grey-2);margin-top:10px;line-height:1.5">Status: <b style="color:var(--danger)">rood</b> te laat · <b style="color:var(--amber)">oranje</b> binnenkort · <b style="color:#15803D">groen</b> op schema.</div></div>
-  </div>
-  <div class="mod-sub">Inzicht & analyse</div>
-  <div class="ic-grid">
-    ${(()=>{const hs=base.map(c=>clientHealth(c.naam));const avg=Math.round(hs.reduce((a,x)=>a+x.score,0)/Math.max(1,hs.length));const risk=hs.filter(x=>x.tone==='r').length;const att=hs.filter(x=>x.tone==='a').length;return `<div class="ic-card" onclick="go('health')"><div class="ic-top"><span class="ic-ic">♥</span><span class="ic-arr">→</span></div><div class="ic-h">Client Health Center</div><div class="ic-m"><b>${avg}</b> gem. · <b class="r">${risk}</b> risico · <b class="a">${att}</b> aandacht</div></div>`;})()}
-    ${(()=>{const md=werkdruk(30);const hi=md.filter(x=>x.pct>75).length;const peak=[...md].sort((a,b)=>b.pct-a.pct)[0];return `<div class="ic-card" onclick="go('workload')"><div class="ic-top"><span class="ic-ic">▤</span><span class="ic-arr">→</span></div><div class="ic-h">Team & werkdruk</div><div class="ic-m">${peak?`piek <b>${peak.mw}</b> ${peak.pct}% · `:''}<b class="${hi?'r':'g'}">${hi}</b> onder druk</div></div>`;})()}
-    ${(()=>{const probl=base.filter(c=>exactIssues(c.naam).some(i=>i.tone==='r')).length;const aff=base.filter(c=>exactIssues(c.naam).length).length;return `<div class="ic-card" onclick="go('koppelingen')"><div class="ic-top"><span class="ic-ic">◇</span><span class="ic-arr">→</span></div><div class="ic-h">Koppelingen-monitoring</div><div class="ic-m"><b class="${probl?'r':'g'}">${probl}</b> probleem · <b class="a">${aff-probl}</b> attentie</div></div>`;})()}
-    ${(()=>{const pl=allPlanning();const tdy=pl.filter(x=>x.period==='today').length;const wk=pl.filter(x=>x.period==='week').length;const urg=pl.filter(x=>x.urg==='r').length;return `<div class="ic-card" onclick="go('planning')"><div class="ic-top"><span class="ic-ic">◷</span><span class="ic-arr">→</span></div><div class="ic-h">Planning</div><div class="ic-m"><b class="${tdy?'r':'g'}">${tdy}</b> vandaag · <b class="a">${wk}</b> deze week · <b class="${urg?'r':'g'}">${urg}</b> urgent</div></div>`;})()}
-    ${(()=>{const dr=allDocReqs();const wait=dr.filter(x=>x.st==='requested').length;const over=dr.filter(x=>x.st==='overdue').length;return `<div class="ic-card" onclick="go('docreq')"><div class="ic-top"><span class="ic-ic">▣</span><span class="ic-arr">→</span></div><div class="ic-h">Documentopvragingen</div><div class="ic-m"><b class="a">${wait}</b> wachtend · <b class="${over?'r':'g'}">${over}</b> te laat</div></div>`;})()}
-  </div>
-  <div class="panel" style="margin-bottom:14px"><h3>AI &amp; automatisering</h3>
-    <div class="ai-grid">
-      <div class="ai-tile"><div class="n">${monthlyDone}</div><div class="l">Verwerkt deze maand</div></div>
-      <div class="ai-tile"><div class="n">${Math.round(monthlyDone*0.88)}</div><div class="l">Automatisch door AI (~88%)</div></div>
-      <div class="ai-tile"><div class="n">41</div><div class="l">Correcties · leercyclus</div></div>
-      <div class="ai-tile green"><div class="n">+6%</div><div class="l">Nauwkeurigheid deze maand</div></div>
+  <div class="nd-cols">
+    <div>
+      <div class="nd-col-h">Mijn werk vandaag</div>
+      <div class="nd-line" onclick="go('verwerken')"><span class="ic">▤</span><div class="m"><div class="t">Documenten verwerken</div><div class="s">Verwerkingswachtrij per klant</div></div><span class="cnt ${teVerwerken?'r':''}">${teVerwerken}</span></div>
+      <div class="nd-line" onclick="setMwFilter('alle');go('klanten')"><span class="ic">◎</span><div class="m"><div class="t">Signalen &amp; controle</div><div class="s">Openstaande aandachtspunten</div></div><span class="cnt ${openSig?'a':''}">${openSig}</span></div>
+      <div class="nd-line" onclick="go('docreq')"><span class="ic">▣</span><div class="m"><div class="t">Documentopvragingen</div><div class="s">Wacht op klant</div></div><span class="cnt ${_drWait?'a':''}">${_drWait}</span></div>
+      <div class="nd-line" onclick="go('obwerk')"><span class="ic">◔</span><div class="m"><div class="t">OB-werklijst</div><div class="s">${obOpen} klanten nog open</div></div><span class="cnt ${obOpen?'a':''}">${obOpen}</span></div>
+      <div class="nd-line" onclick="go('planning')"><span class="ic">◷</span><div class="m"><div class="t">Planning</div><div class="s">Vandaag &amp; deze week</div></div><span class="cnt">${_plToday}</span></div>
     </div>
-    <div class="feedback" style="margin-top:12px"><span style="font-size:18px">↻</span><div><b>Leercyclus actief.</b> Elke goedkeuring en correctie traint de voorspelmodule; het grootboekvoorstel wordt per leverancier nauwkeuriger.</div></div></div>
-  <div class="panel"><h3>Gekoppelde programma's</h3>
-    <div class="intg"><div class="ico ex"><span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span></div><div><div class="nm">Exact Online</div><div class="ds">${base.filter(c=>c.prog==='ex').length} klanten · OAuth2-koppeling</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
-    <div class="intg"><div class="ico sn"><span class="pdot" style="width:9px;height:9px;background:#fff;border-radius:50%"></span></div><div><div class="nm">SnelStart</div><div class="ds">${base.filter(c=>c.prog==='sn').length} klanten · B2B API</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
-    <div class="intg"><div class="ico fg">FG</div><div><div class="nm">Fiscaal Gemak</div><div class="ds">Aangiften &amp; jaarwerk · kantoorbreed</div></div><span class="st"><span class="gd"></span>Verbonden</span></div>
-    <div style="font-size:11.5px;color:var(--grey);margin:8px 2px 0;line-height:1.5">Elke klant is aan precies één boekhoudprogramma gekoppeld; Fiscaal Gemak is kantoorbreed gekoppeld voor IB/VPB/jaarwerk en uitstel.</div></div>`;
+    <div>
+      <div class="nd-col-h">Vraagt aandacht <span class="a" onclick="go('verwerken')">Alles →</span></div>
+      ${_att.length?_att.slice(0,5).map(cn=>{const c=state.clients.find(x=>x.naam===cn)||{};const n=_byC[cn];return `<div class="nd-line" onclick="openClient('${gJs(cn)}','verwerken')"><span class="nd-av" style="background:${c.prog?cpAvColor(c):'#94a3b8'}">${cpInitials(cn)}</span><div class="m"><div class="t">${cn}</div><div class="s">${c.mw||'—'}</div></div><span class="cnt ${n>=3?'r':'a'}">${n} doc${n>1?'en':''}</span></div>`;}).join(''):'<div style="padding:18px 0;color:var(--grey);font-size:13px">Alles verwerkt 🎉</div>'}
+    </div>
+    <div>
+      <div class="nd-col-h">Recente activiteit</div>
+      <div class="nd-line"><span class="ic">📄</span><div class="m"><div class="t">BTW Q2 concept klaar</div><div class="s">2 uur geleden · Fatma</div></div></div>
+      <div class="nd-line"><span class="ic">🧾</span><div class="m"><div class="t">3 inkoopfacturen verwerkt</div><div class="s">vanochtend · AI + controle</div></div></div>
+      <div class="nd-line"><span class="ic">✓</span><div class="m"><div class="t">Loonadministratie juni afgerond</div><div class="s">gisteren · Loonteam</div></div></div>
+      <div class="nd-line"><span class="ic">↻</span><div class="m"><div class="t">Exact Online gesynchroniseerd</div><div class="s">gisteren · automatisch</div></div></div>
+    </div>
+  </div>
+  <div class="nd-two">
+    <div>
+      <div class="nd-col-h">Werkbelasting team <span class="a" onclick="go('workload')">Details →</span></div>
+      ${_md.map(x=>{const tone=x.pct>85?'var(--red)':(x.pct>65?'var(--amber)':'var(--green)');return `<div class="nd-bar"><span class="nm">${x.mw}</span><div class="track"><div class="fill" style="width:${Math.min(100,x.pct)}%;background:${tone}"></div></div><span class="pct">${x.pct}%</span></div>`;}).join('')}
+    </div>
+    <div>
+      <div class="nd-col-h">Aankomende deadlines <span class="a" onclick="go('planning')">Alle →</span></div>
+      ${dls.map(x=>`<div class="nd-line"><span class="ic" style="background:${x.tone==='red'?'var(--red-soft)':x.tone==='amber'?'var(--amber-soft)':'var(--green-soft)'};color:${x.tone==='red'?'var(--red)':x.tone==='amber'?'var(--amber)':'var(--green)'}">◷</span><div class="m"><div class="t">${x.l}</div><div class="s">${x.sub}</div></div><span style="font-size:12px;color:var(--grey);font-weight:600;flex-shrink:0">${x.d}</span></div>`).join('')}
+    </div>
+  </div>
+  `;
 };
 const EX_ACTION={Verbinding:'Koppeling opnieuw autoriseren in instellingen',Synchronisatie:'Handmatige sync starten en controleren',Boekjaar:'Mutaties bijwerken of klant herinneren',Grootboekmapping:'Ontbrekende rekeningen koppelen in rekeningschema',Saldi:'Tussenrekening uitzoeken en afboeken',Bankkoppeling:'Bankkoppeling herstellen of opnieuw koppelen','BTW-rekeningen':'BTW-grootboek aansluiten op de aangifte','Categorieën':'Ongecategoriseerde boekingen indelen'};
 let hcMw='alle',hcGroep='alle',hcTrend=6;
